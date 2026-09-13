@@ -2,6 +2,10 @@
 
 ## În dezvoltare
 
+- reconciliază cele patru centrale eGRID influente între tabelele oficiale de
+  centrală, unitate și generator; identifică discontinuități de acoperire a
+  generatoarelor și un numitor 2021 incompatibil între surse, fără modificarea
+  curbelor centrale;
 - atribuie erorile de persistență eGRID: două centrale explică 93,16% și
   82,45% din eroarea termică în cele două tranziții; păstrează toate observațiile
   și cere verificarea configurației și a limitelor de contabilizare înaintea

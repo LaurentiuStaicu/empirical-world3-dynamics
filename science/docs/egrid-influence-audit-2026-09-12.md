@@ -33,11 +33,14 @@ plant-years dominate the loss. This is not general evidence against plant-level
 models, nor validation of a constant global thermal-efficiency prior.
 
 No plants are removed, no errors are recomputed after outcome-based trimming,
-and no central-model parameters change. Before testing partial pooling or
-technology groups, check the influential plants against the official unit and
-generator sheets and reconcile the numerator and denominator. Any thresholds
-or shrinkage chosen after inspecting these years require new evaluation data;
-2021–2023 can no longer serve as untouched confirmation for that choice.
+and no central-model parameters change. The follow-up boundary reconciliation
+now checks the influential plants against the official unit and generator
+sheets. It identifies generator-coverage changes at the two California plants
+and cross-source numerator/denominator incompatibility for the two Louisiana
+plants in 2021. See `egrid-boundary-reconciliation-2026-09-13.md`. Any
+thresholds or shrinkage chosen after inspecting these years require new
+evaluation data; 2021–2023 can no longer serve as untouched confirmation for
+that choice.
 
 The JSON report includes total WMAPE, concentration at the top 1/2/5/10 plants,
 and the top ten contributors with generation, intensity and provenance in
