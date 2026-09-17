@@ -2,30 +2,34 @@
 <component type="desktop-application">
   <id>io.github.laurentiustaicu.World3Empirical</id>
   <name>World3 Empirical</name>
-  <summary>Compară BAU, BAU2 și BAU Hibrid 2026 cu datele observate</summary>
+  <summary>Compare BAU, BAU2 and BAU Hybrid 2026 with observed global data</summary>
+  <summary xml:lang="ro">Compară BAU, BAU2 și BAU Hibrid 2026 cu datele observate</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>MIT</project_license>
   <description>
     <p>
-      World3 Empirical compară offline observații globale recente cu scenariile
-      World3-03 BAU și BAU2 originale și cu scenariul condițional BAU Hibrid 2026.
+      World3 Empirical is an offline application that compares recent global observations
+      with the original World3-03 BAU and BAU2 scenarios and with the conditional
+      BAU Hybrid 2026 scenario.
     </p>
     <p>
-      BAU Hibrid 2026 pornește structural din BAU2 și folosește un singur vector
-      de parametri pentru toate ieșirile. Observațiile, reconstrucția retrospectivă
-      și proiecția sunt afișate separat.
+      BAU Hybrid 2026 is structurally derived from BAU2 and uses one shared parameter
+      vector for all outputs. Observations, retrospective reconstruction and projection
+      remain explicitly separated.
     </p>
-    <p>Aplicația include:</p>
+    <p>The application includes:</p>
     <ul>
-      <li>Opt grafice globale interactive</li>
-      <li>Grilă la cinci ani și valori afișate sub pointer</li>
-      <li>Backtesting recent și validare multi-origin</li>
-      <li>Plajă de sensibilitate structurală care poate fi ascunsă</li>
-      <li>Funcționare complet offline după instalare</li>
+      <li>Eight interactive global indicator and latent-state views</li>
+      <li>A responsive InfoClar Model Suite v1.1 workspace with model, theory, dashboard and evidence panels</li>
+      <li>English as the default interface language with an EN/RO switch</li>
+      <li>Five-year chart grids and exact values under the pointer</li>
+      <li>Recent backtesting and multi-origin validation diagnostics</li>
+      <li>An optional structural-sensitivity range</li>
+      <li>Fully offline operation after installation</li>
     </ul>
     <p>
-      Proiecțiile sunt scenarii experimentale și condiționale, nu predicții
-      garantate sau estimări ale probabilității unui colaps.
+      Projections are experimental conditional scenarios, not guaranteed predictions or
+      estimates of the probability of collapse.
     </p>
   </description>
   <launchable type="desktop-id">io.github.laurentiustaicu.World3Empirical.desktop</launchable>
@@ -37,7 +41,8 @@
   <url type="vcs-browser">https://github.com/LaurentiuStaicu/world3-empirical-flatpak</url>
   <screenshots>
     <screenshot type="default">
-      <caption>Populația globală: observații, BAU, BAU2 și BAU Hibrid 2026</caption>
+      <caption>Global population: observations, BAU, BAU2 and BAU Hybrid 2026</caption>
+      <caption xml:lang="ro">Populația globală: observații, BAU, BAU2 și BAU Hibrid 2026</caption>
       <image>https://raw.githubusercontent.com/LaurentiuStaicu/world3-empirical-flatpak/main/data/screenshots/world3-empirical-population-cropped.jpg</image>
     </screenshot>
   </screenshots>
