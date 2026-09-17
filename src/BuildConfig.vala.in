@@ -1,3 +1,0 @@
-namespace World3Empirical.BuildConfig {
-    public const string VERSION = "@PROJECT_VERSION@";
-}
