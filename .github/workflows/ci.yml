@@ -1,6 +1,9 @@
 name: Validate pull request
 
 on:
+  push:
+    branches:
+      - main
   pull_request:
     paths-ignore:
       - 'web/**'
@@ -34,6 +37,7 @@ jobs:
           python3 scripts/generate_science_input_manifest.py
           git diff --exit-code -- science/data/input_manifest.json
           uv run --project science --extra world3-03 python scripts/reproduce_scientific_results.py
+          uv run --project science --extra world3-03 python science/scripts/evaluate_direct_emissions_prospective.py --check
           uv run --project science --extra world3-03 python scripts/generate_science_test_artifacts.py
           uv run --project science --extra world3-03 python -m unittest discover -s science/tests -v
 

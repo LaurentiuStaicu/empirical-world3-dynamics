@@ -1,0 +1,98 @@
+{
+  "all_gates_pass": false,
+  "boundary": {
+    "energy_input": "Energy Institute Total World coal, oil and gas energy supply, EJ/year",
+    "excluded_mechanisms": [
+      "upstream methane",
+      "lifecycle construction emissions",
+      "carbon capture",
+      "carbon-cycle sinks",
+      "temperature response",
+      "World3 persistent-pollution substitution",
+      "world3_resource_fraction_to_fossil_eroi"
+    ],
+    "excluded_target_categories": [
+      "cement",
+      "gas_flaring",
+      "other"
+    ],
+    "target": "Global Carbon Budget coal + oil + natural-gas fossil CO2, MtCO2/year"
+  },
+  "central_model_promotion": false,
+  "development_scale": 0.9373506494829146,
+  "evaluation_date": "2026-09-17",
+  "experiment": "energy_accounting_to_direct_emissions",
+  "factors": {
+    "defaults_kg_per_tj": {
+      "coal": 94600.0,
+      "gas": 56100.0,
+      "oil": 73300.0
+    },
+    "ranges_kg_per_tj": {
+      "coal": [89500.0, 99700.0],
+      "gas": [54300.0, 58300.0],
+      "oil": [71100.0, 75500.0]
+    },
+    "source": "IPCC 2006 Guidelines Vol.2 Ch.2 Table 2.2, NCV kg CO2/TJ"
+  },
+  "gates": {
+    "S1": {"evidence": "Coal+oil+gas EI energy is matched only to GCB coal+oil+gas CO2; cement, flaring and other are excluded.", "requirement": "boundary adequacy", "status": "PASS"},
+    "S10": {"evidence": "Nominal holdout WMAPE is 0.003013 versus 0.003367; the candidate is inactive and changes no World3/BAU/BAU2/BAU Hybrid 2026 outputs.", "requirement": "incremental value with no baseline regression", "status": "PASS"},
+    "S2": {"evidence": "Transparent accounting identity plus one development-only multiplicative correction; no World3 feedback.", "requirement": "structure assessment", "status": "PASS"},
+    "S3": {"evidence": "EJ -> TJ and kg/TJ -> Mt conversion is explicit and unit-tested.", "requirement": "dimensional consistency", "status": "PASS"},
+    "S4": {"evidence": "Candidate emissions are exactly the sum of fuel-specific contributions; source fuel components are retained separately.", "requirement": "accounting / conservation", "status": "PASS"},
+    "S5": {"evidence": "Zero fuel gives zero CO2; negative/non-finite energy or factors are rejected.", "requirement": "extreme-condition behavior", "status": "PASS"},
+    "S6": {"evidence": "Closed-form deterministic calculation; all evaluated values are finite and reproducible.", "requirement": "numerical robustness", "status": "PASS"},
+    "S7": {"evidence": "Parameter fitting is time-separated, but the historical EI/GCB observations are current revised vintages rather than archived as-of-origin releases. This is pseudo-prospective, not a strict real-time vintage backtest.", "requirement": "temporal provenance; no future information", "status": "FAIL"},
+    "S8": {"evidence": "2018-2024 holdout skill versus the declared baseline is 0.105041, below the project-level 0.30 acceptance criterion.", "requirement": "prospective out-of-sample skill", "status": "FAIL"},
+    "S9": {"evidence": "Across IPCC lower/upper factor corners, holdout skill ranges from -0.206268 to 0.142091; ranking reverses in at least one admissible corner.", "requirement": "uncertainty and sensitivity robustness", "status": "FAIL"}
+  },
+  "metrics": {
+    "holdout_2018_2024": {
+      "calibrated_candidate_mt": {"bias_fraction": 0.0005145624449977765, "mape": 0.003012510183160164, "n": 7, "rmse_mt": 121.18137626676494, "wmape": 0.003012912856474859},
+      "fixed_ipcc_mt": {"bias_fraction": 0.06738557550147031, "mape": 0.06745333563142854, "n": 7, "rmse_mt": 2342.767458141913, "wmape": 0.06738557550147031},
+      "persistence_intensity_baseline_mt": {"bias_fraction": -0.0006960523714102567, "mape": 0.003399502704561426, "n": 7, "rmse_mt": 141.2182780367977, "wmape": 0.003366536706223163}
+    },
+    "holdout_skill_vs_baseline": 0.10504084185228635,
+    "minimum_skill_required": 0.3,
+    "validation_2010_2017": {
+      "calibrated_candidate_mt": {"bias_fraction": -0.0008906845334230564, "mape": 0.003701913272538083, "n": 8, "rmse_mt": 148.41523842295055, "wmape": 0.0036991008701191333},
+      "fixed_ipcc_mt": {"bias_fraction": 0.06588640656272146, "mape": 0.06583574175524314, "n": 8, "rmse_mt": 2171.913784810652, "wmape": 0.06588640656272146},
+      "persistence_intensity_baseline_mt": {"bias_fraction": 0.001118732605294001, "mape": 0.004853113242200547, "n": 8, "rmse_mt": 179.96752809476638, "wmape": 0.004820462069494776}
+    }
+  },
+  "next_stage_not_started": "Acquire/reconstruct release-as-of-origin EI and GCB vintages (or wait for realized 2025 fuel-level GCB data), then rerun a strict prospective vintage-locked confirmation before reconsidering S7-S9.",
+  "prospective_2025_unscored": {
+    "calibrated_candidate_mt": 36455.3432677097,
+    "fixed_ipcc_mt": 38891.8952452,
+    "observed_target_available": false,
+    "persistence_intensity_baseline_mt": 36609.85942873191
+  },
+  "repository_stage": "R2 prospective candidate validation",
+  "sensitivity": {
+    "best_holdout_wmape": 0.002888180676039447,
+    "best_skill_vs_baseline": 0.1420914345889822,
+    "cases": [
+      {"development_scale": 0.9761207048712822, "factors_kg_per_tj": {"coal": 89500.0, "gas": 54300.0, "oil": 71100.0}, "holdout_wmape": 0.0030605424563642527, "skill_vs_baseline": 0.09089288980371701},
+      {"development_scale": 0.9629777750261395, "factors_kg_per_tj": {"coal": 89500.0, "gas": 58300.0, "oil": 71100.0}, "holdout_wmape": 0.0029959990894948157, "skill_vs_baseline": 0.11006492697477366},
+      {"development_scale": 0.9508003376646418, "factors_kg_per_tj": {"coal": 89500.0, "gas": 54300.0, "oil": 75500.0}, "holdout_wmape": 0.004014030774989415, "skill_vs_baseline": -0.19233239535732238},
+      {"development_scale": 0.9383260571798254, "factors_kg_per_tj": {"coal": 89500.0, "gas": 58300.0, "oil": 75500.0}, "holdout_wmape": 0.003110887387832569, "skill_vs_baseline": 0.07593837248767166},
+      {"development_scale": 0.9351529167161398, "factors_kg_per_tj": {"coal": 99700.0, "gas": 54300.0, "oil": 71100.0}, "holdout_wmape": 0.002888180676039447, "skill_vs_baseline": 0.1420914345889822},
+      {"development_scale": 0.9230832328230619, "factors_kg_per_tj": {"coal": 99700.0, "gas": 58300.0, "oil": 71100.0}, "holdout_wmape": 0.004060944789903352, "skill_vs_baseline": -0.20626778920798672},
+      {"development_scale": 0.9118880115560222, "factors_kg_per_tj": {"coal": 99700.0, "gas": 54300.0, "oil": 75500.0}, "holdout_wmape": 0.003290417723005428, "skill_vs_baseline": 0.02261047178752762},
+      {"development_scale": 0.9004077147973264, "factors_kg_per_tj": {"coal": 99700.0, "gas": 58300.0, "oil": 75500.0}, "holdout_wmape": 0.002942895164719573, "skill_vs_baseline": 0.1258389788890385}
+    ],
+    "factor_ranges_source": "IPCC 2006 Guidelines Vol.2 Ch.2 Table 2.2 lower/upper bounds",
+    "ranking_reversal": true,
+    "worst_holdout_wmape": 0.004060944789903352,
+    "worst_skill_vs_baseline": -0.20626778920798672
+  },
+  "temporal_design": {
+    "development": [1990, 2009],
+    "locked_holdout": [2018, 2024],
+    "prospective_unscored_year": 2025,
+    "strict_real_time_vintage": false,
+    "validation": [2010, 2017]
+  },
+  "verdict": "RETAIN AS DIAGNOSTIC"
+}

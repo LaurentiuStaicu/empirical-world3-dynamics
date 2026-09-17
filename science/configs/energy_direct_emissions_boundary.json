@@ -1,0 +1,84 @@
+{
+  "accounting": {
+    "calibration": "single multiplicative scale fitted on 1990-2009 only",
+    "default_factors_kg_per_tj_ncv": {
+      "coal": 94600,
+      "gas": 56100,
+      "oil": 73300
+    },
+    "emission_factor_source": "IPCC 2006 Guidelines Vol.2 Ch.2 Table 2.2",
+    "factor_ranges_kg_per_tj_ncv": {
+      "coal": [
+        89500,
+        99700
+      ],
+      "gas": [
+        54300,
+        58300
+      ],
+      "oil": [
+        71100,
+        75500
+      ]
+    },
+    "formula": "MtCO2=sum(EJ_fuel * kgCO2_per_TJ_fuel / 1000)"
+  },
+  "baseline": "prior-year observed direct-CO2 intensity times current-year fossil energy",
+  "candidate_id": "energy_accounting_emissions",
+  "central": false,
+  "contract_version": "1.0",
+  "energy_input": {
+    "dataset": "Energy Institute Statistical Review of World Energy 2026",
+    "fuels": [
+      "coal",
+      "oil",
+      "gas"
+    ],
+    "geography": "Total World",
+    "heating_value_basis": "net for fossil primary energy per EI methodology",
+    "unit": "EJ/year"
+  },
+  "forbidden": [
+    "world3_resource_fraction_to_fossil_eroi",
+    "central_world3_coupling",
+    "World3 persistent pollution as CO2"
+  ],
+  "frozen_comparators": [
+    "World3-03",
+    "BAU",
+    "BAU2",
+    "BAU Hybrid 2026"
+  ],
+  "minimum_skill_vs_baseline": 0.3,
+  "observed_target": {
+    "dataset": "Global Carbon Budget 2025 v1.0",
+    "excluded_categories": [
+      "Cement",
+      "Gas Flaring",
+      "Other"
+    ],
+    "included_categories": [
+      "Solid Fuel",
+      "Liquid Fuel",
+      "Gas Fuel"
+    ],
+    "unit": "MtCO2/year"
+  },
+  "promotion_rule": "All S1-S10 must PASS; otherwise no central promotion.",
+  "status": "diagnostic_experiment",
+  "temporal_design": {
+    "development": [
+      1990,
+      2009
+    ],
+    "holdout": [
+      2018,
+      2024
+    ],
+    "prospective_unscored": 2025,
+    "validation": [
+      2010,
+      2017
+    ]
+  }
+}
