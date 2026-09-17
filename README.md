@@ -13,7 +13,7 @@
 </p>
 
 <p align="center">
-  <img width="220" alt="Open Web App — Planned" src="https://img.shields.io/badge/Open_Web_App-Planned-9ca3af?style=for-the-badge">
+  <a href="https://laurentiustaicu.github.io/world3-empirical-flatpak/"><img width="220" alt="Open Web App" src="https://img.shields.io/badge/Open_Web_App-Live-4e9a06?style=for-the-badge"></a>
   <a href="https://github.com/LaurentiuStaicu/world3-empirical-flatpak/releases/download/v0.10.2/World3-Empirical-0.10.2-x86_64.flatpak"><img width="220" alt="Download Flatpak v0.10.2" src="https://img.shields.io/badge/Download_Flatpak-v0.10.2-087F73?style=for-the-badge"></a>
 </p>
 
