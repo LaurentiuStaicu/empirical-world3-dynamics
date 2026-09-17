@@ -1,172 +1,29 @@
 import './style.css';
-import { dashboardOrder, indicatorOrder, indicators, type IndicatorKey } from './catalog';
-import { findDiagnostic, latestObserved, loadAppData, rowAt, type AppData, type DiagnosticRow } from './data';
-import { renderChart } from './chart';
-import { ui, type Language } from './i18n';
-
-interface State {
-  language: Language;
-  indicator: IndicatorKey;
-  horizon: number;
-  uncertainty: boolean;
-}
-
-const app = document.querySelector<HTMLDivElement>('#app')!;
-let data: AppData | null = null;
-let state: State = readState();
-
-function readState(): State {
-  const query = new URLSearchParams(location.search);
-  const indicator = query.get('indicator') as IndicatorKey | null;
-  const horizon = Number(query.get('horizon'));
-  return {
-    language: query.get('lang') === 'ro' ? 'ro' : 'en',
-    indicator: indicator && indicatorOrder.includes(indicator) ? indicator : 'population',
-    horizon: [2035, 2050, 2100].includes(horizon) ? horizon : 2050,
-    uncertainty: query.get('uncertainty') !== '0',
-  };
-}
-
-function syncUrl(): void {
-  const query = new URLSearchParams();
-  if (state.language === 'ro') query.set('lang', 'ro');
-  if (state.indicator !== 'population') query.set('indicator', state.indicator);
-  if (state.horizon !== 2050) query.set('horizon', String(state.horizon));
-  if (!state.uncertainty) query.set('uncertainty', '0');
-  history.replaceState(null, '', `${location.pathname}${query.size ? `?${query}` : ''}${location.hash}`);
-}
-
-function fmt(value: number | null | undefined, digits = 2): string {
-  if (value === null || value === undefined || !Number.isFinite(value)) return '—';
-  return value.toLocaleString(state.language === 'ro' ? 'ro-RO' : 'en-US', { maximumFractionDigits: digits });
-}
-
-function pct(value: string | undefined): string {
-  const number = Number(value);
-  return Number.isFinite(number) ? `${number.toLocaleString(state.language === 'ro' ? 'ro-RO' : 'en-US', { maximumFractionDigits: 2 })}%` : '—';
-}
-
-function roleLabel(role: string): string {
-  const labels: Record<string, [string, string]> = { observed: ['observed', 'observat'], derived_observed_diagnostic: ['derived diagnostic', 'diagnostic derivat'], latent: ['latent', 'latent'] };
-  const pair = labels[role];
-  return pair ? pair[state.language === 'ro' ? 1 : 0] : role.replaceAll('_', ' ');
-}
-
-function diagnosticMetric(row: DiagnosticRow | undefined, key: string): string {
-  return row ? pct(row[key]) : '—';
-}
-
-function renderShell(): void {
-  const t = ui[state.language];
-  document.documentElement.lang = state.language;
-  app.innerHTML = `
-    <header class="suite-header">
-      <div class="brand">
-        <img src="./world3.svg" alt="" class="brand-icon" />
-        <div><h1>World3 Empirical</h1><p>${t.subtitle}</p></div>
-      </div>
-      <div class="header-meta" id="header-meta"></div>
-      <div class="language-switch" role="group" aria-label="Language">
-        <button type="button" data-lang="en" aria-pressed="${state.language === 'en'}">EN</button>
-        <button type="button" data-lang="ro" aria-pressed="${state.language === 'ro'}">RO</button>
-      </div>
-    </header>
-    <main id="workspace" class="workspace" tabindex="-1">
-      <section class="panel model-panel" aria-labelledby="model-heading">
-        <div class="panel-heading"><div><p class="eyebrow">01</p><h2 id="model-heading">${t.modelPanel}</h2></div><span class="status-chip">BAU · BAU2 · Hybrid 2026</span></div>
-        <div class="controls">
-          <label><span>${t.indicator}</span><select id="indicator-select"></select></label>
-          <label><span>${t.horizon}</span><select id="horizon-select"><option>2035</option><option>2050</option><option>2100</option></select></label>
-          <label class="check-control"><input id="uncertainty-toggle" type="checkbox" ${state.uncertainty ? 'checked' : ''}/><span>${t.uncertainty}</span></label>
-        </div>
-        <div class="legend" aria-label="Chart legend"><span class="legend-dot observed"></span>${t.observed}<span class="legend-line bau"></span>${t.bau}<span class="legend-line bau2"></span>${t.bau2}<span class="legend-line hybrid"></span>${t.hybrid}</div>
-        <div id="chart-wrap" class="chart-wrap"></div>
-        <p class="unit-line" id="unit-line"></p>
-      </section>
-      <section class="panel theory-panel" aria-labelledby="theory-heading">
-        <div class="panel-heading"><div><p class="eyebrow">02</p><h2 id="theory-heading">${t.theoryPanel}</h2></div></div>
-        <div id="theory-content"></div>
-      </section>
-      <section class="panel dashboard-panel" aria-labelledby="dashboard-heading">
-        <div class="panel-heading"><div><p class="eyebrow">03</p><h2 id="dashboard-heading">${t.dashboardPanel}</h2></div></div>
-        <p class="panel-intro">${t.dashboardHelp}</p>
-        <div id="dashboard-grid" class="dashboard-grid"></div>
-      </section>
-      <section class="panel evidence-panel" aria-labelledby="evidence-heading">
-        <div class="panel-heading"><div><p class="eyebrow">04</p><h2 id="evidence-heading">${t.evidencePanel}</h2></div></div>
-        <div id="evidence-content"></div>
-      </section>
-    </main>
-    <footer><span>InfoClar Model Suite Design Standard v1.1</span><span id="data-integrity"></span></footer>`;
-
-  const select = document.querySelector<HTMLSelectElement>('#indicator-select')!;
-  for (const key of indicatorOrder) {
-    const option = document.createElement('option'); option.value = key; option.textContent = indicators[key].label[state.language]; option.selected = key === state.indicator; select.append(option);
-  }
-  document.querySelector<HTMLSelectElement>('#horizon-select')!.value = String(state.horizon);
-
-  document.querySelectorAll<HTMLButtonElement>('[data-lang]').forEach((button) => button.addEventListener('click', () => {
-    state.language = button.dataset.lang as Language; syncUrl(); render();
-  }));
-  select.addEventListener('change', () => { state.indicator = select.value as IndicatorKey; syncUrl(); renderDynamic(); });
-  document.querySelector<HTMLSelectElement>('#horizon-select')!.addEventListener('change', (event) => { state.horizon = Number((event.target as HTMLSelectElement).value); syncUrl(); renderDynamic(); });
-  document.querySelector<HTMLInputElement>('#uncertainty-toggle')!.addEventListener('change', (event) => { state.uncertainty = (event.target as HTMLInputElement).checked; syncUrl(); renderDynamic(); });
-}
-
-function renderDynamic(): void {
-  if (!data) return;
-  const t = ui[state.language];
-  const meta = indicators[state.indicator];
-  const rows = data.scenarios[state.indicator];
-  const chartWrap = document.querySelector<HTMLElement>('#chart-wrap')!;
-  renderChart(chartWrap, { rows, horizon: state.horizon, showUncertainty: state.uncertainty, unit: meta.unit[state.language], language: state.language, label: meta.label[state.language] });
-  document.querySelector<HTMLElement>('#unit-line')!.textContent = `${meta.label[state.language]} · ${meta.unit[state.language]}`;
-
-  document.querySelector<HTMLElement>('#header-meta')!.innerHTML = `<span>${t.appVersion} 1.0.0</span><span>${t.modelVersion} ${data.schema.model_version}</span><span>${t.dataSnapshot} ${data.schema.data_snapshot}</span>`;
-  document.querySelector<HTMLElement>('#data-integrity')!.textContent = `${Object.keys(data.hashes).length} ${t.copiedData}`;
-
-  const structure = data.structure;
-  const candidates = structure.candidate_interfaces.map((candidate) => `<li><strong>${candidate.id.replaceAll('_', ' ')}</strong><span>${candidate.active_by_default ? t.central : t.inactive} · ${candidate.central ? t.central : t.nonCentral}</span></li>`).join('');
-  document.querySelector<HTMLElement>('#theory-content')!.innerHTML = `
-    <h3>${meta.label[state.language]}</h3><p>${meta.theory[state.language]}</p>
-    <div class="learn-block"><h4>${t.stockFlowRole}</h4><p>${meta.role[state.language]}</p></div>
-    <div class="learn-block boundary"><h4>${t.boundary}</h4><p>${meta.interpretationBoundary[state.language]}</p></div>
-    <details><summary>${t.structure}</summary>
-      <dl class="compact-dl"><div><dt>${t.referenceCore}</dt><dd>${structure.architecture.reference_model.name} · ${structure.modules.length} modules · ${t.immutableEquations}</dd></div><div><dt>${t.gates}</dt><dd>${structure.promotion_gates.map((gate) => gate.id).join('–')}</dd></div></dl>
-      <h4>${t.candidates}</h4><ul class="candidate-list">${candidates}</ul>
-    </details>`;
-
-  const dashboard = dashboardOrder.map((key) => {
-    const cardMeta = indicators[key]; const cardRows = data!.scenarios[key]; const year2035 = rowAt(cardRows, 2035); const latest = latestObserved(cardRows);
-    const range = year2035?.p10 !== null && year2035?.p90 !== null ? `${fmt(year2035?.p10)}–${fmt(year2035?.p90)}` : '—';
-    return `<article class="kpi-card"><h3>${cardMeta.shortLabel[state.language]}</h3><div class="kpi-primary">${fmt(year2035?.hybrid_2026)}</div><p>${t.value2035} · ${cardMeta.unit[state.language]}</p><dl><div><dt>${t.latestObserved}</dt><dd>${latest ? `${fmt(latest.observed)} <small>${latest.year}</small>` : t.noObservation}</dd></div><div><dt>${t.sensitivity2035}</dt><dd>${range}</dd></div></dl></article>`;
-  }).join('');
-  document.querySelector<HTMLElement>('#dashboard-grid')!.innerHTML = dashboard;
-
-  const backtest = findDiagnostic(data.backtest, state.indicator);
-  const multi = findDiagnostic(data.multiOrigin, state.indicator);
-  const fit = findDiagnostic(data.fit, state.indicator);
-  const role = data.schema.indicator_files[`${state.indicator}.csv`] ?? '—';
-  document.querySelector<HTMLElement>('#evidence-content')!.innerHTML = `
-    <div class="evidence-source"><span class="role-chip">${roleLabel(role)}</span><h3>${t.provenance}</h3><p>${meta.status[state.language]}</p><a href="${meta.sourceUrl}" target="_blank" rel="noreferrer">${meta.source[state.language]} ↗</a></div>
-    <div class="validation-grid">
-      <article><h4>${t.frozenBacktest}</h4><dl><div><dt>${t.hybridMape}</dt><dd>${diagnosticMetric(backtest, 'bau2_e2026_mape_pct')}</dd></div><div><dt>${t.referenceMape}</dt><dd>${diagnosticMetric(backtest, 'bau2_level_anchored_mape_pct')}</dd></div><div><dt>${t.improvement}</dt><dd>${diagnosticMetric(backtest, 'improvement_pct')}</dd></div></dl></article>
-      <article><h4>${t.multiOrigin}</h4><dl><div><dt>${t.origins}</dt><dd>${multi?.origins ?? '—'}</dd></div><div><dt>${t.hybridMape}</dt><dd>${diagnosticMetric(multi, 'bau2_e2026_mape_pct')}</dd></div><div><dt>${t.improvement}</dt><dd>${diagnosticMetric(multi, 'improvement_pct')}</dd></div></dl></article>
-      <article><h4>${t.descriptiveFit}</h4><dl><div><dt>${t.historicalMape}</dt><dd>${diagnosticMetric(fit, 'historical_mape_pct')}</dd></div><div><dt>${t.bias}</dt><dd>${diagnosticMetric(fit, 'historical_bias_pct')}</dd></div><div><dt>n</dt><dd>${fit?.n ?? '—'}</dd></div></dl></article>
-    </div>
-    <div class="limits"><h3>${t.limitations}</h3><p>${t.centralCurvesNote}</p><p>${t.structuralSensitivityNote}</p><p>${t.latentNote}</p><p>${t.inactiveNote}</p></div>`;
-
-  const select = document.querySelector<HTMLSelectElement>('#indicator-select');
-  if (select) select.value = state.indicator;
-}
-
-function render(): void {
-  renderShell();
-  if (data) renderDynamic(); else document.querySelector<HTMLElement>('#chart-wrap')!.innerHTML = `<div class="loading">${ui[state.language].loading}</div>`;
-}
-
-render();
-loadAppData(indicatorOrder).then((loaded) => { data = loaded; render(); }).catch((error: unknown) => {
-  console.error(error);
-  document.querySelector<HTMLElement>('#chart-wrap')!.innerHTML = `<div class="error"><strong>${ui[state.language].error}</strong><span>${error instanceof Error ? error.message : String(error)}</span></div>`;
-});
+import {indicatorOrder,indicators,type IndicatorMeta} from './catalog';
+import {loadAppData,latestObserved,type AppData,type IndicatorKey,type ScenarioKey} from './data';
+import {renderChart} from './chart';
+import {buildModelSummary,SCENARIOS,SCENARIO_LABELS,trajectoryInsight,type ModelSummary} from './insights';
+import type {Language} from './i18n';
+interface TheoryChapter{id:string;title:{en:string;ro:string};summary:{en:string;ro:string};paragraphs:{en:string[];ro:string[]};sources:Array<{label:string;url:string}>}
+interface TheoryManual{version:string;chapters:TheoryChapter[]}
+interface State{language:Language;indicator:IndicatorKey;enabled:Record<ScenarioKey,boolean>;showObserved:boolean;showSensitivity:boolean;minYear:number;maxYear:number;}
+const app=document.querySelector<HTMLDivElement>('#app')!;let data:AppData|null=null;let summary:ModelSummary|null=null;let manual:TheoryManual|null=null;
+const copy={en:{subtitle:'Global trajectories, scenarios and turning points',question:'What trajectories does World3 indicate, when do important changes occur, how robust are they, and what difference do alternative scenarios make?',variable:'Variable',scenarios:'Scenarios & layers',observations:'Observed data',sensitivity:'Structural P10–P90',zoomIn:'Zoom in',zoomOut:'Zoom out',reset:'Full range',learn:'Theory / Learn',evidence:'Evidence & limits',what:'WHAT DOES THE MODEL SAY?',alignment:'Scenario alignment',events:'Turning points',interventions:'Intervention / Preparedness',bestAlign:'Lowest descriptive alignment error',notProbability:'Empirical alignment only — not scenario probability and not forecast skill.',firstStress:'First sustained stress signal',systemic:'Systemic deterioration window',operationalCollapse:'Operational collapse window',timing:'Timing sensitivity',timingUnavailable:'Event-time uncertainty is not identified from pointwise P10–P90 envelopes.',mechanism:'Mechanism for selected variable',peak:'Peak',decline:'Sustained decline',severe:'Severe decline',change:'Change from peak by 2100',recovery:'Recovery / stabilization',scenario:'Scenario',smape:'Observed-overlap sMAPE',overlap:'Observed overlap',observed:'Observed',historical:'Modelled historical',projection:'Scenario projection',valueBand:'P10–P90 = structural value sensitivity',manualTitle:'World3 manual',close:'Close',allChapters:'All chapters',evidenceTitle:'Evidence & limits',source:'Source / provenance',latest:'Latest observation',fit:'Fit & backtesting',limits:'Interpretation limits',mitigation:'MITIGATION / PREVENTION',preparedness:'PREPAREDNESS / RESILIENCE',runnerLocked:'Validated numeric intervention runner: not available in the current scientific release.',runnerWhy:'No intervention operator or authoritative intervention trajectories have passed the project promotion gates. The interface therefore does not fabricate counterfactual peak shifts or timing windows.',classicLevers:'World3 scenario levers documented in the literature',preparednessText:'World3 is global. Preparedness categories below are external resilience domains to investigate, not country-specific prescriptions from World3.',noEvent:'not identified',definitionSensitivity:'definition sensitivity',modelOnly:'Scenario projection',openRelevant:'Open relevant theory',robust:'Across-scenario timing span'},ro:{subtitle:'Traiectorii globale, scenarii și momente de schimbare',question:'Ce traiectorii indică World3, când apar schimbările importante, cât de robuste sunt și ce diferență fac scenariile alternative?',variable:'Variabilă',scenarios:'Scenarii și straturi',observations:'Date observate',sensitivity:'P10–P90 structural',zoomIn:'Mărește',zoomOut:'Micșorează',reset:'Interval complet',learn:'Teorie / Învață',evidence:'Dovezi și limite',what:'CE SPUNE MODELUL?',alignment:'Alinierea scenariilor',events:'Momente de schimbare',interventions:'Intervenții / Pregătire',bestAlign:'Cea mai mică eroare descriptivă de aliniere',notProbability:'Doar aliniere empirică — nu probabilitate a scenariului și nu skill de forecast.',firstStress:'Primul semnal susținut de stres',systemic:'Fereastră de deteriorare sistemică',operationalCollapse:'Fereastră operațională de colaps',timing:'Sensibilitatea timingului',timingUnavailable:'Incertitudinea anului evenimentului nu este identificată din benzile punctuale P10–P90.',mechanism:'Mecanism pentru variabila selectată',peak:'Vârf',decline:'Început declin susținut',severe:'Declin sever',change:'Schimbare față de vârf până în 2100',recovery:'Recuperare / stabilizare',scenario:'Scenariu',smape:'sMAPE pe observații',overlap:'Suprapunere observată',observed:'Observat',historical:'Simulare istorică',projection:'Proiecție scenariu',valueBand:'P10–P90 = sensibilitate structurală a valorii',manualTitle:'Manual World3',close:'Închide',allChapters:'Toate capitolele',evidenceTitle:'Dovezi și limite',source:'Sursă / proveniență',latest:'Ultima observație',fit:'Fit și backtesting',limits:'Limite de interpretare',mitigation:'MITIGARE / PREVENȚIE',preparedness:'PREGĂTIRE / REZILIENȚĂ',runnerLocked:'Runner numeric validat pentru intervenții: indisponibil în versiunea științifică actuală.',runnerWhy:'Niciun operator de intervenție sau set de traiectorii autoritative de intervenție nu a trecut porțile de promovare ale proiectului. Interfața nu fabrică deci schimbări contrafactuale ale vârfurilor sau ferestre de timing.',classicLevers:'Pârghii ale scenariilor World3 documentate în literatură',preparednessText:'World3 este global. Categoriile de pregătire de mai jos sunt domenii externe de reziliență de investigat, nu prescripții World3 pentru o țară.',noEvent:'neidentificat',definitionSensitivity:'sensibilitate la definiție',modelOnly:'Proiecție de scenariu',openRelevant:'Deschide teoria relevantă',robust:'Interval timing între scenarii'}} as const;
+function readState():State{const q=new URLSearchParams(location.search);const indicator=q.get('indicator') as IndicatorKey|null;return{language:q.get('lang')==='ro'?'ro':'en',indicator:indicator&&indicatorOrder.includes(indicator)?indicator:'population',enabled:{original_bau:true,original_bau2:true,hybrid_2026:true},showObserved:true,showSensitivity:true,minYear:1970,maxYear:2100};}
+let state=readState();function t(){return copy[state.language];}function fmt(v:number|null|undefined,digits=2){return v===null||v===undefined||!Number.isFinite(v)?'—':v.toLocaleString(state.language==='ro'?'ro-RO':'en-US',{maximumFractionDigits:digits});}function fmtPct(v:number|null|undefined){return v===null||v===undefined?'—':`${v>0?'+':''}${fmt(v,1)}%`;}
+function syncUrl(){const q=new URLSearchParams();if(state.language==='ro')q.set('lang','ro');if(state.indicator!=='population')q.set('indicator',state.indicator);history.replaceState(null,'',`${location.pathname}${q.size?`?${q}`:''}`);}
+function fullRange(){if(!data)return;const rows=data.scenarios[state.indicator];state.minYear=rows[0]?.year??1970;state.maxYear=rows[rows.length-1]?.year??2100;}
+function renderShell(){const c=t();document.documentElement.lang=state.language;app.innerHTML=`<a class="skip-link" href="#trajectory">Skip to trajectories</a><header class="product-header"><div class="brand"><img src="./world3.svg" alt=""/><div><h1>World3 Empirical</h1><p>${c.subtitle}</p></div></div><nav><button class="quiet" id="open-theory">${c.learn}</button><button class="quiet" id="open-evidence">${c.evidence}</button><div class="lang" role="group" aria-label="Language"><button data-lang="en" aria-pressed="${state.language==='en'}">EN</button><button data-lang="ro" aria-pressed="${state.language==='ro'}">RO</button></div></nav></header><main><section class="question-band"><p>${c.question}</p></section><section class="trajectory-stage" id="trajectory"><div class="chart-product"><div class="chart-title"><div><span class="eyebrow">WORLD3 TRAJECTORIES</span><h2 id="variable-title"></h2><p id="variable-status"></p></div><button class="link-button" id="learn-variable">${c.openRelevant} →</button></div><div id="chart-wrap" class="chart-wrap"><div class="loading">Loading…</div></div><div class="chart-reading-key"><span><i class="dot"></i>${c.observed}</span><span><i class="solid"></i>${c.historical}</span><span><i class="dash"></i>${c.projection}</span><span class="semantic-note">${c.valueBand}</span></div></div><aside class="control-rail"><div class="control-group"><label>${c.variable}<select id="indicator"></select></label></div><div class="control-group"><h3>${c.scenarios}</h3><label class="toggle"><input type="checkbox" data-scenario="original_bau" ${state.enabled.original_bau?'checked':''}/>${SCENARIO_LABELS.original_bau[state.language]}</label><label class="toggle"><input type="checkbox" data-scenario="original_bau2" ${state.enabled.original_bau2?'checked':''}/>${SCENARIO_LABELS.original_bau2[state.language]}</label><label class="toggle"><input type="checkbox" data-scenario="hybrid_2026" ${state.enabled.hybrid_2026?'checked':''}/>${SCENARIO_LABELS.hybrid_2026[state.language]}</label><label class="toggle"><input type="checkbox" id="observed-toggle" ${state.showObserved?'checked':''}/>${c.observations}</label><label class="toggle"><input type="checkbox" id="sensitivity-toggle" ${state.showSensitivity?'checked':''}/>${c.sensitivity}</label></div><div class="zoom-controls" role="group" aria-label="Zoom"><button id="zoom-in">${c.zoomIn}</button><button id="zoom-out">${c.zoomOut}</button><button id="zoom-reset">${c.reset}</button></div><section class="model-says"><span class="eyebrow">${c.what}</span><div id="model-says-content"></div></section></aside></section><section class="analysis-section"><div class="section-heading"><div><span class="eyebrow">EMPIRICAL COMPARISON</span><h2>${c.alignment}</h2></div><p>${c.notProbability}</p></div><div id="alignment-view"></div></section><section class="analysis-section"><div class="section-heading"><div><span class="eyebrow">ALGORITHMIC INSIGHTS</span><h2>${c.events}</h2></div><a href="./product-recovery-contract.json" target="_blank">Machine-readable definitions ↗</a></div><div id="event-view"></div></section><section class="analysis-section intervention"><div class="section-heading"><div><span class="eyebrow">BOUNDARIES OF ACTION</span><h2>${c.interventions}</h2></div></div><div id="intervention-view"></div></section></main><dialog id="theory-dialog"><div class="dialog-shell"><header><div><span class="eyebrow">${c.allChapters}</span><h2>${c.manualTitle}</h2></div><button data-close="theory">${c.close}</button></header><div id="manual-view"></div></div></dialog><dialog id="evidence-dialog"><div class="dialog-shell"><header><h2>${c.evidenceTitle}</h2><button data-close="evidence">${c.close}</button></header><div id="evidence-view"></div></div></dialog><footer><span>Scenario ≠ forecast ≠ probability</span><span>InfoClar · World3 product recovery</span></footer>`;
+const select=document.querySelector<HTMLSelectElement>('#indicator')!;for(const key of indicatorOrder){const opt=document.createElement('option');opt.value=key;opt.textContent=indicators[key].label[state.language];opt.selected=key===state.indicator;select.append(opt);}select.addEventListener('change',()=>{state.indicator=select.value as IndicatorKey;fullRange();syncUrl();renderDynamic();});document.querySelectorAll<HTMLButtonElement>('[data-lang]').forEach(b=>b.addEventListener('click',()=>{state.language=b.dataset.lang as Language;syncUrl();render();}));document.querySelectorAll<HTMLInputElement>('[data-scenario]').forEach(input=>input.addEventListener('change',()=>{state.enabled[input.dataset.scenario as ScenarioKey]=input.checked;renderDynamic();}));document.querySelector<HTMLInputElement>('#observed-toggle')!.addEventListener('change',e=>{state.showObserved=(e.target as HTMLInputElement).checked;renderDynamic();});document.querySelector<HTMLInputElement>('#sensitivity-toggle')!.addEventListener('change',e=>{state.showSensitivity=(e.target as HTMLInputElement).checked;renderDynamic();});document.querySelector('#zoom-reset')!.addEventListener('click',()=>{fullRange();renderDynamic();});document.querySelector('#zoom-in')!.addEventListener('click',()=>zoom(.7));document.querySelector('#zoom-out')!.addEventListener('click',()=>zoom(1.4));document.querySelector('#open-theory')!.addEventListener('click',()=>openTheory());document.querySelector('#learn-variable')!.addEventListener('click',()=>openTheory(indicators[state.indicator].manualChapter));document.querySelector('#open-evidence')!.addEventListener('click',()=>openEvidence());document.querySelector('[data-close="theory"]')!.addEventListener('click',()=>document.querySelector<HTMLDialogElement>('#theory-dialog')!.close());document.querySelector('[data-close="evidence"]')!.addEventListener('click',()=>document.querySelector<HTMLDialogElement>('#evidence-dialog')!.close());}
+function zoom(factor:number){if(!data)return;const rows=data.scenarios[state.indicator],fullMin=rows[0]?.year??1970,fullMax=rows[rows.length-1]?.year??2100;const center=(state.minYear+state.maxYear)/2;const half=Math.max(8,((state.maxYear-state.minYear)*factor)/2);state.minYear=Math.max(fullMin,Math.floor(center-half));state.maxYear=Math.min(fullMax,Math.ceil(center+half));renderDynamic();}
+function renderModelSays(meta:IndicatorMeta){if(!summary||!data)return;const c=t(),m=summary.hybrid[state.indicator],best=summary.alignment.best;const first=summary.stressOrder[0];const systemic=summary.systemicDecline.primary,sysSens=summary.systemicDecline.sensitivity;const collapse=summary.collapse.primary;const scenarioMetrics=SCENARIOS.map(s=>trajectoryInsight(data!.scenarios[state.indicator],s));const peaks=scenarioMetrics.map(x=>x.peakYear).filter((x):x is number=>x!==null),declines=scenarioMetrics.map(x=>x.declineOnsetYear).filter((x):x is number=>x!==null);const span=(xs:number[])=>xs.length?`${Math.min(...xs)}–${Math.max(...xs)}`:'—';document.querySelector('#model-says-content')!.innerHTML=`<article><small>${c.bestAlign}</small><strong>${best?SCENARIO_LABELS[best][state.language]:'—'}</strong><span>${best?fmt(summary.alignment.aggregate[best],1)+'% sMAPE':'—'}</span></article><article><small>${c.firstStress}</small><strong>${first?indicators[first.indicator].shortLabel[state.language]:'—'}</strong><span>${first?.year??c.noEvent}</span></article><article><small>${c.systemic}</small><strong>${systemic?`${systemic[0]}–${systemic[1]}`:c.noEvent}</strong><span>${sysSens?`${c.definitionSensitivity}: ${sysSens[0]}–${sysSens[1]}`:`${summary.systemicDecline.qualifyingDefinitions}/${summary.systemicDecline.totalDefinitions} definitions`}</span></article><article><small>${c.operationalCollapse}</small><strong>${collapse?`${collapse[0]}–${collapse[1]}`:c.noEvent}</strong><span>${collapse?'≥3 core variables cross persistent 20% decline':'Primary severe-decline quorum not met'}</span></article><article><small>${c.timing}</small><strong>${c.robust}: ${span(peaks)}</strong><span>${c.decline}: ${span(declines)}. ${c.timingUnavailable}</span></article><article class="mechanism-card"><small>${c.mechanism}</small><strong>${meta.role[state.language]}</strong><span>${meta.theory[state.language]}</span></article>`;}
+function renderAlignment(){if(!summary)return;const c=t();const selected=summary.alignment.cells.filter(x=>x.indicator===state.indicator);const aggregate=SCENARIOS.map(s=>`<article class="alignment-card ${summary!.alignment.best===s?'best':''}"><h3>${SCENARIO_LABELS[s][state.language]}</h3><div>${fmt(summary!.alignment.aggregate[s],1)}%</div><span>aggregate sMAPE</span></article>`).join('');const rows=selected.map(x=>`<tr><th>${SCENARIO_LABELS[x.scenario][state.language]}</th><td>${fmt(x.smape,1)}%</td><td>${x.firstYear??'—'}–${x.lastYear??'—'} · n=${x.n}</td></tr>`).join('');document.querySelector('#alignment-view')!.innerHTML=`<div class="alignment-summary">${aggregate}</div><div class="table-wrap"><table><thead><tr><th>${c.scenario}</th><th>${c.smape}</th><th>${c.overlap}</th></tr></thead><tbody>${rows}</tbody></table></div><p class="method-note">sMAPE is calculated only where an observation and the scenario value overlap. Indicators are equally weighted in the aggregate. Hybrid alignment includes calibration/bridging choices and must not be read as out-of-sample forecast skill.</p>`;}
+function eventCell(v:number|null){return v===null?`<span class="muted">${t().noEvent}</span>`:String(v);}function renderEvents(){if(!data||!summary)return;const c=t();const rows=SCENARIOS.map(s=>{const m=trajectoryInsight(data!.scenarios[state.indicator],s);return`<tr><th>${SCENARIO_LABELS[s][state.language]}</th><td>${eventCell(m.peakYear)}</td><td>${eventCell(m.declineOnsetYear)}</td><td>${eventCell(m.severeDeclineYear)}</td><td>${fmtPct(m.changeFromPeakPct)}</td><td>${m.recoveryOrStabilization?`${m.recoveryOrStabilization.kind} ${m.recoveryOrStabilization.year}`:`<span class="muted">${c.noEvent}</span>`}</td></tr>`;}).join('');const order=(items:Array<{indicator:IndicatorKey;year:number}>)=>items.map(x=>`<li><strong>${x.year}</strong><span>${indicators[x.indicator].shortLabel[state.language]}</span></li>`).join('')||`<li>${c.noEvent}</li>`;document.querySelector('#event-view')!.innerHTML=`<div class="table-wrap"><table><thead><tr><th>${c.scenario}</th><th>${c.peak}</th><th>${c.decline}</th><th>${c.severe}</th><th>${c.change}</th><th>${c.recovery}</th></tr></thead><tbody>${rows}</tbody></table></div><div class="order-grid"><article><h3>${c.peak} — Hybrid</h3><ol>${order(summary.peakOrder)}</ol></article><article><h3>${c.decline} — Hybrid</h3><ol>${order(summary.declineOrder)}</ol></article></div><p class="method-note">Event years are computed from the packaged curves using the preregistered definitions. P10–P90 is not converted into an event-time probability distribution.</p>`;}
+function renderInterventions(){const c=t();document.querySelector('#intervention-view')!.innerHTML=`<div class="intervention-grid"><article><span class="mode mitigation">${c.mitigation}</span><h3>${c.runnerLocked}</h3><p>${c.runnerWhy}</p><h4>${c.classicLevers}</h4><ul><li>resource-use efficiency / resource availability assumptions</li><li>pollution-control and pollution-generation assumptions</li><li>agricultural productivity and land/input assumptions</li><li>fertility, desired family size and service allocation</li><li>combined stabilization policies in classic World3 experiments</li></ul><p class="method-note">These are documented model levers, not numerically re-simulated interventions in this release. Start-year effects and intervention windows are therefore not quantified.</p></article><article><span class="mode preparedness">${c.preparedness}</span><h3>${c.preparednessText}</h3><div class="resilience-tags"><span>Energy</span><span>Food</span><span>Water</span><span>Critical infrastructure</span><span>Industry</span><span>Health</span><span>Social protection</span><span>Supply chains</span></div><p>External basis: UNDRR resilient-infrastructure principles and OECD work on supply-chain interdependencies. These domains translate global stress into questions for country-level resilience analysis; they are not policy prescriptions produced by World3.</p><p><a href="https://www.undrr.org/publication/principles-resilient-infrastructure" target="_blank">UNDRR ↗</a> · <a href="https://www.oecd.org/en/topics/sub-issues/supply-chain-interdependencies.html" target="_blank">OECD ↗</a></p></article></div>`;}
+function renderEvidence(){if(!data)return;const c=t(),meta=indicators[state.indicator],latest=latestObserved(data.scenarios[state.indicator]);const back=data.backtest.find(x=>x.key===state.indicator),multi=data.multiOrigin.find(x=>x.key===state.indicator),fit=data.fit.find(x=>x.key===state.indicator);const d=(row:Record<string,string>|undefined,key:string)=>row?.[key]??'—';document.querySelector('#evidence-view')!.innerHTML=`<section><h3>${c.source}</h3><p>${meta.status[state.language]}</p><p><a href="${meta.sourceUrl}" target="_blank">${meta.source[state.language]} ↗</a></p><dl><div><dt>${c.latest}</dt><dd>${latest?latest.year:'—'}</dd></div><div><dt>Evidence role</dt><dd>${data.schema.indicator_files[`${state.indicator}.csv`]??'—'}</dd></div></dl></section><section><h3>${c.fit}</h3><dl><div><dt>Frozen-2018 Hybrid MAPE</dt><dd>${d(back,'bau2_e2026_mape_pct')}%</dd></div><div><dt>Frozen-2018 BAU2 anchored MAPE</dt><dd>${d(back,'bau2_level_anchored_mape_pct')}%</dd></div><div><dt>Multi-origin Hybrid MAPE</dt><dd>${d(multi,'bau2_e2026_mape_pct')}%</dd></div><div><dt>Historical descriptive MAPE</dt><dd>${d(fit,'historical_mape_pct')}%</dd></div></dl></section><section><h3>${c.limits}</h3><p>${meta.boundary[state.language]}</p><p>P10–P90 is a pointwise structural-sensitivity envelope, not a probabilistic confidence interval and not a probability distribution over futures.</p><p>BAU, BAU2 and BAU Hybrid 2026 are scenario/model trajectories. Descriptive fit does not assign probabilities. A forecast label requires an explicitly prospective calibrated framework.</p><p>The Energy accounting → direct emissions experiment remains <strong>RETAIN AS DIAGNOSTIC</strong>; it is not promoted into central World3 feedbacks.</p></section>`;}
+function renderManual(){const view=document.querySelector('#manual-view');if(!view)return;if(!manual){view.innerHTML='<p>Loading manual…</p>';return;}view.innerHTML=`<nav class="manual-toc">${manual.chapters.map(ch=>`<a href="#manual-${ch.id}">${ch.title[state.language]}</a>`).join('')}</nav><article class="manual-reader">${manual.chapters.map(ch=>`<section id="manual-${ch.id}"><span class="eyebrow">${ch.id.replaceAll('-',' ')}</span><h3>${ch.title[state.language]}</h3><p class="lead">${ch.summary[state.language]}</p>${ch.paragraphs[state.language].map(p=>`<p>${p}</p>`).join('')}<p class="sources">${ch.sources.map(s=>`<a href="${s.url}" target="_blank">${s.label} ↗</a>`).join(' · ')}</p></section>`).join('')}</article>`;}
+function openTheory(chapter?:string){renderManual();const dialog=document.querySelector<HTMLDialogElement>('#theory-dialog')!;dialog.showModal();if(chapter)requestAnimationFrame(()=>document.querySelector(`#manual-${chapter}`)?.scrollIntoView({block:'start'}));}
+function openEvidence(){renderEvidence();document.querySelector<HTMLDialogElement>('#evidence-dialog')!.showModal();}
+function renderDynamic(){if(!data||!summary)return;const meta=indicators[state.indicator],rows=data.scenarios[state.indicator];document.querySelector('#variable-title')!.textContent=`${meta.label[state.language]} · ${meta.unit[state.language]}`;document.querySelector('#variable-status')!.textContent=meta.status[state.language];renderChart(document.querySelector<HTMLElement>('#chart-wrap')!,{rows,language:state.language,variableLabel:meta.label[state.language],unit:meta.unit[state.language],enabled:state.enabled,showObserved:state.showObserved,showSensitivity:state.showSensitivity,minYear:state.minYear,maxYear:state.maxYear});renderModelSays(meta);renderAlignment();renderEvents();renderInterventions();}
+function render(){renderShell();if(data){summary=buildModelSummary(data);renderDynamic();}renderManual();}
+render();Promise.all([loadAppData(indicatorOrder),fetch('./theory-manual.json').then(r=>{if(!r.ok)throw new Error('Manual unavailable');return r.json() as Promise<TheoryManual>;})]).then(([loaded,theory])=>{data=loaded;manual=theory;summary=buildModelSummary(loaded);fullRange();render();}).catch(err=>{console.error(err);const wrap=document.querySelector('#chart-wrap');if(wrap)wrap.innerHTML=`<div class="error"><strong>Validated data package could not be loaded.</strong><span>${String(err)}</span></div>`;});
