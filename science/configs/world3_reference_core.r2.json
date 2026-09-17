@@ -1,0 +1,165 @@
+{
+  "schema_version": "r2.1",
+  "model_id": "world3-compatible-real-model-scaffold",
+  "reference_core": {
+    "engine": "World3-03 via PySD adapter",
+    "source_path": "science/vendor/world3_03/World3_03_Scenarios.mdl",
+    "adapter_path": "science/src/world3_empirical/world3_03.py",
+    "equation_policy": "preserve_authoritative_equations",
+    "baseline_scenarios": ["BAU", "BAU2", "BAU Hybrid 2026"],
+    "candidate_activation_policy": "dormant_until_separate_S1_S10_promotion",
+    "notes": "This file is a semantic inventory and interface contract. The authoritative World3 equations remain in the vendored Vensim model and are not reimplemented here."
+  },
+  "modules": [
+    {
+      "id": "population",
+      "evidence_role": "reference",
+      "equation_source": "science/vendor/world3_03/World3_03_Scenarios.mdl",
+      "boundary": {
+        "endogenous": ["population cohorts", "births", "deaths", "maturation"],
+        "exogenous": ["reference scenario switches and inherited lookup assumptions"],
+        "excluded": ["new demographic policy feedbacks"]
+      },
+      "quantities": [
+        {"id": "population", "role": "stock", "unit": "person", "dimension": {"person": 1}, "evidence_role": "reference", "source_binding": "population"},
+        {"id": "births", "role": "flow", "unit": "person/year", "dimension": {"person": 1, "year": -1}, "evidence_role": "reference", "changes_stock": "population", "direction": "in"},
+        {"id": "deaths", "role": "flow", "unit": "person/year", "dimension": {"person": 1, "year": -1}, "evidence_role": "reference", "changes_stock": "population", "direction": "out"},
+        {"id": "life_expectancy", "role": "auxiliary", "unit": "year", "dimension": {"year": 1}, "evidence_role": "reference", "source_binding": "life_expectancy"}
+      ]
+    },
+    {
+      "id": "industrial_and_service_capital",
+      "evidence_role": "reference",
+      "equation_source": "science/vendor/world3_03/World3_03_Scenarios.mdl",
+      "boundary": {
+        "endogenous": ["industrial capital", "service capital", "investment allocation", "depreciation"],
+        "exogenous": ["inherited World3 allocation and lifetime assumptions"],
+        "excluded": ["energy reinvestment burden candidate", "debt and financial stress feedbacks"]
+      },
+      "quantities": [
+        {"id": "industrial_capital", "role": "stock", "unit": "world3_currency", "dimension": {"currency": 1}, "evidence_role": "reference"},
+        {"id": "industrial_investment", "role": "flow", "unit": "world3_currency/year", "dimension": {"currency": 1, "year": -1}, "evidence_role": "reference", "changes_stock": "industrial_capital", "direction": "in"},
+        {"id": "industrial_depreciation", "role": "flow", "unit": "world3_currency/year", "dimension": {"currency": 1, "year": -1}, "evidence_role": "reference", "changes_stock": "industrial_capital", "direction": "out"},
+        {"id": "service_capital", "role": "stock", "unit": "world3_currency", "dimension": {"currency": 1}, "evidence_role": "reference"},
+        {"id": "service_investment", "role": "flow", "unit": "world3_currency/year", "dimension": {"currency": 1, "year": -1}, "evidence_role": "reference", "changes_stock": "service_capital", "direction": "in"},
+        {"id": "service_depreciation", "role": "flow", "unit": "world3_currency/year", "dimension": {"currency": 1, "year": -1}, "evidence_role": "reference", "changes_stock": "service_capital", "direction": "out"},
+        {"id": "industrial_output", "role": "auxiliary", "unit": "world3_currency/year", "dimension": {"currency": 1, "year": -1}, "evidence_role": "reference", "source_binding": "industrial_output"}
+      ]
+    },
+    {
+      "id": "food_land_agricultural_capacity",
+      "evidence_role": "reference",
+      "equation_source": "science/vendor/world3_03/World3_03_Scenarios.mdl",
+      "boundary": {
+        "endogenous": ["agricultural capital", "arable land", "land development", "land erosion", "food production"],
+        "exogenous": ["inherited World3 yield and allocation assumptions"],
+        "excluded": ["temperature-only yield multiplier", "annual-national climate stress shortcut"]
+      },
+      "quantities": [
+        {"id": "agricultural_capital", "role": "stock", "unit": "world3_currency", "dimension": {"currency": 1}, "evidence_role": "reference"},
+        {"id": "agricultural_investment", "role": "flow", "unit": "world3_currency/year", "dimension": {"currency": 1, "year": -1}, "evidence_role": "reference", "changes_stock": "agricultural_capital", "direction": "in"},
+        {"id": "agricultural_depreciation", "role": "flow", "unit": "world3_currency/year", "dimension": {"currency": 1, "year": -1}, "evidence_role": "reference", "changes_stock": "agricultural_capital", "direction": "out"},
+        {"id": "arable_land", "role": "stock", "unit": "hectare", "dimension": {"hectare": 1}, "evidence_role": "reference"},
+        {"id": "land_development", "role": "flow", "unit": "hectare/year", "dimension": {"hectare": 1, "year": -1}, "evidence_role": "reference", "changes_stock": "arable_land", "direction": "in"},
+        {"id": "land_erosion", "role": "flow", "unit": "hectare/year", "dimension": {"hectare": 1, "year": -1}, "evidence_role": "reference", "changes_stock": "arable_land", "direction": "out"},
+        {"id": "food", "role": "auxiliary", "unit": "world3_food_unit/year", "dimension": {"food": 1, "year": -1}, "evidence_role": "reference", "source_binding": "food"}
+      ]
+    },
+    {
+      "id": "nonrenewable_resources",
+      "evidence_role": "reference",
+      "equation_source": "science/vendor/world3_03/World3_03_Scenarios.mdl",
+      "boundary": {
+        "endogenous": ["latent nonrenewable resource stock", "resource use and depletion burden"],
+        "exogenous": ["initial inherited World3 resource endowment"],
+        "excluded": ["direct substitution of mining production for remaining stock", "technology-mineral aggregate index"]
+      },
+      "quantities": [
+        {"id": "nonrenewable_resources", "role": "stock", "unit": "world3_resource_unit", "dimension": {"resource": 1}, "evidence_role": "reference", "source_binding": "nonrenewable_resources"},
+        {"id": "resource_extraction", "role": "flow", "unit": "world3_resource_unit/year", "dimension": {"resource": 1, "year": -1}, "evidence_role": "reference", "changes_stock": "nonrenewable_resources", "direction": "out"},
+        {"id": "fraction_of_resources_remaining", "role": "auxiliary", "unit": "dimensionless", "dimension": {}, "evidence_role": "reference", "source_binding": "nonrenewable_resource_fraction"}
+      ]
+    },
+    {
+      "id": "persistent_pollution",
+      "evidence_role": "reference",
+      "equation_source": "science/vendor/world3_03/World3_03_Scenarios.mdl",
+      "boundary": {
+        "endogenous": ["persistent pollution stock", "generation", "assimilation delay"],
+        "exogenous": ["inherited World3 pollution coefficients and lookups"],
+        "excluded": ["annual CO2 flow treated as pollution stock"]
+      },
+      "quantities": [
+        {"id": "persistent_pollution", "role": "stock", "unit": "world3_pollution_unit", "dimension": {"pollution": 1}, "evidence_role": "reference", "source_binding": "persistent_pollution"},
+        {"id": "pollution_generation", "role": "flow", "unit": "world3_pollution_unit/year", "dimension": {"pollution": 1, "year": -1}, "evidence_role": "reference", "changes_stock": "persistent_pollution", "direction": "in", "source_binding": "persistent_pollution_generation_rate"},
+        {"id": "pollution_assimilation", "role": "flow", "unit": "world3_pollution_unit/year", "dimension": {"pollution": 1, "year": -1}, "evidence_role": "reference", "changes_stock": "persistent_pollution", "direction": "out"},
+        {"id": "persistent_pollution_index", "role": "auxiliary", "unit": "dimensionless", "dimension": {}, "evidence_role": "reference", "source_binding": "persistent_pollution_index"}
+      ]
+    }
+  ],
+  "candidate_interfaces": [
+    {
+      "id": "energy_reinvestment_to_industrial_investment_burden",
+      "evidence_role": "candidate_feedback",
+      "active": false,
+      "central": false,
+      "status": "selected_for_prospective_experiment",
+      "inputs": ["observed gross energy by source", "boundary-specific EROI observations", "measurable energy-sector reinvestment or capital requirement"],
+      "outputs": ["candidate industrial investment burden"],
+      "forbidden_links": ["World3 fraction of resources remaining -> fossil EROI"],
+      "double_counting_risks": ["World3 already allocates industrial capital to resource acquisition; overlapping energy/resource burdens must not be added twice"]
+    },
+    {
+      "id": "climate_water_soil_food_stress",
+      "evidence_role": "candidate_feedback",
+      "active": false,
+      "central": false,
+      "status": "dormant",
+      "inputs": ["crop-season climate and hydrology observations"],
+      "outputs": ["candidate crop-specific yield/input effects"],
+      "forbidden_links": ["global annual temperature -> global food multiplier"]
+    },
+    {
+      "id": "technology_minerals",
+      "evidence_role": "diagnostic",
+      "active": false,
+      "central": false,
+      "status": "dormant_observed_risk_module",
+      "inputs": ["mineral-specific extraction, reserves/resources, refining and recycling evidence"],
+      "outputs": ["mineral-specific diagnostics"],
+      "forbidden_links": ["single technology-mineral index -> World3 latent resource stock"]
+    },
+    {
+      "id": "ai_infrastructure",
+      "evidence_role": "diagnostic",
+      "active": false,
+      "central": false,
+      "status": "design_only",
+      "inputs": ["realized connected and utilized compute/data-centre capacity"],
+      "outputs": ["infrastructure diagnostics"],
+      "forbidden_links": ["announced compute capacity -> realized electricity demand"]
+    },
+    {
+      "id": "institutions_debt_geopolitics",
+      "evidence_role": "stress",
+      "active": false,
+      "central": false,
+      "status": "stress_only",
+      "inputs": ["explicit shock definitions"],
+      "outputs": ["conditional stress paths"],
+      "forbidden_links": ["joint fitted global central feedback without identification"]
+    }
+  ],
+  "validation_gates": [
+    {"id": "S1", "name": "boundary adequacy"},
+    {"id": "S2", "name": "structural correspondence and accounting"},
+    {"id": "S3", "name": "dimensional consistency"},
+    {"id": "S4", "name": "parameter assessment"},
+    {"id": "S5", "name": "extreme-condition behavior"},
+    {"id": "S6", "name": "numerical robustness"},
+    {"id": "S7", "name": "historical behavior reproduction"},
+    {"id": "S8", "name": "time-respecting predictive validation"},
+    {"id": "S9", "name": "incremental skill against simpler model"},
+    {"id": "S10", "name": "identification and uncertainty"}
+  ]
+}
