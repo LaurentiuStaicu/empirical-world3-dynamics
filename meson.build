@@ -26,6 +26,7 @@ executable(
   meson.project_name(),
   'src/Application.vala',
   'src/MainWindow.vala',
+  'src/SuiteWindow.vala',
   'src/ScenarioData.vala',
   'src/ChartView.vala',
   build_config,
