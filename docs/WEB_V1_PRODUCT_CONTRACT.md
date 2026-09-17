@@ -1,50 +1,57 @@
-# World3 Empirical — web-first product contract v1.0
+# World3 Empirical — web-first product contract v1.1
 
 Date: 17 September 2026
 
-## Direction
+## Product identity
 
-Until product v1, World3 Empirical is developed **web-first**. The GTK/Flatpak application is a frozen prior delivery surface and is not the active product target. It may be reconciled or rebuilt from the mature web product at or very near v1. Web work must not require equivalent Flatpak UI work during this phase.
+World3 Empirical is web-first. The GTK/Flatpak application remains frozen and is not part of this recovery. Web product versioning is separate from scientific model versioning and must never imply an unperformed recalibration.
 
-The web product version is separate from the scientific model version. `web/package.json` may reach `1.0.0` while `data/scenarios/scenario_schema.json` continues to report the validated scientific release and model version. Product versioning must never imply an unperformed scientific recalibration.
+The primary product question is:
 
-## InfoClar v1.1 mapping
+> What trajectories does World3 indicate for the global system, when do important changes occur, how robust are these results, and what difference do alternative scenarios make?
 
-The web product implements the shared asymmetric adaptive 2×2 workspace:
+World3 is therefore a **time-series, scenario and projection product first**. InfoClar identity, EN/RO, accessibility, evidence semantics and progressive disclosure remain binding, but the earlier 2×2 layout is superseded for World3 because it obstructs the domain task.
 
-1. **Model & trajectories** — dominant interactive World3 trajectory chart with indicator, horizon and P10–P90 structural-sensitivity controls. Only original BAU, original BAU2 and BAU Hybrid 2026 are model curves; observed data remain points.
-2. **Theory / Learn** — selected-variable theory, stock/flow role, measurement boundary and the machine-readable R2 structural contract.
-3. **Core indicators** — population, food per capita, industrial output per capita, annual CO₂ activity proxy and human development, in stable priority order.
-4. **Evidence & limits** — provenance, frozen-2018 backtest, multi-origin validation, descriptive fit and explicit interpretation limits.
+## Primary surface
 
-English is the default language. Romanian changes all user-facing interface text while preserving selected indicator, horizon and uncertainty state. The layout stacks semantically on narrower screens.
+The interactive temporal chart is the dominant element and targets roughly 70–80% of the desktop trajectory-stage width. It must expose original BAU, original BAU2, BAU Hybrid 2026, observations, and structural sensitivity where scientifically available. Additional classic scenarios may be added only when authoritative versioned trajectories and provenance are packaged.
+
+The chart differentiates observations, modelled historical trajectory and scenario projection; it shows the variable, unit, year, value and scenario on inspection; it permits scenario/layer toggles, keyboard/pointer yearly inspection and zoom.
+
+Software metadata, registry codes, CI/test counts and internal scientific-development state do not belong on the primary surface.
+
+## Algorithmic insights
+
+Insight definitions are preregistered in `web/public/product-recovery-contract.json` before application to curves. The UI computes peak, sustained decline, severe decline, end-of-horizon change, recovery/stabilisation, systemic deterioration and the stricter operational collapse condition from packaged trajectories.
+
+The primary systemic-deterioration definition requires at least three of four preregistered core variables — industrial output per capita, food per capita, population and human welfare — to enter sustained decline within 15 years. Definition sensitivity is evaluated over quorum 2/3/4 and windows 10/15/20 years. The stricter operational-collapse label requires persistent severe decline in at least three core variables within 20 years; it is not emitted merely because one curve peaks.
+
+Pointwise P10–P90 is not converted into an event-time uncertainty distribution. Timing intervals require coherent ensemble trajectories or another explicitly calibrated event-time distribution.
+
+## Scenario alignment
+
+Scenario Alignment uses descriptive sMAPE only over years where observations and model values overlap. The aggregate gives equal weight to five preregistered empirical comparators: population, industrial output per capita, food per capita, annual CO₂ activity proxy and human welfare. Derived total industrial output and latent World3 stocks are excluded from the aggregate.
+
+Scenario alignment is not scenario probability, forecast probability or prospective skill. Frozen-origin and multi-origin backtests remain separate evidence.
+
+## Theory / Learn
+
+Theory is a complete EN/RO reader rather than a permanent small card. It includes Club of Rome, MIT, Forrester, the 1972 authors, System Dynamics, World3 structure, stocks/flows/feedbacks/delays, five domains, overshoot and operational collapse semantics, BAU/BAU2, Comprehensive Technology, Stabilized World, 1972/1992/2004, Turner, Herrington, later recalibration work, BAU Hybrid 2026, observations/scenarios/forecasts/probability, backtesting/uncertainty, interventions and model limits.
+
+The selected variable links directly to its relevant chapter while the complete manual remains independently readable.
+
+## Intervention and preparedness boundary
+
+A numeric intervention runner is not enabled until an intervention has an explicit baseline, documented parameter mapping, start year, reproducible simulation, effect metrics and sensitivity analysis under the project's scientific gates. No counterfactual peak shift or intervention window is fabricated in this recovery.
+
+Preparedness/resilience is a separate external-evidence layer. The application points to energy, food, water, critical infrastructure, industry, health, social protection and supply chains as systems for country-level resilience analysis; World3 itself does not prescribe a national policy.
 
 ## Scientific non-regression
 
-The browser does not execute or reimplement World3 equations. Before development and production builds, `web/scripts/sync-data.mjs` copies the existing validated scenario and diagnostic artifacts byte-for-byte into generated static assets. `web/scripts/verify-contract.mjs` verifies source/copy SHA-256 identity and the R2 architecture constraints.
+The web browser still does not reimplement central World3 equations. Validated scenario/data artifacts are copied byte-for-byte at build time and hash checked. BAU, BAU2, BAU Hybrid 2026 and the scientific result of the energy-accounting → direct-emissions experiment remain unchanged. The latter remains **RETAIN AS DIAGNOSTIC**.
 
-The web layer must not:
+## Usefulness Gate
 
-- modify BAU, BAU2 or BAU Hybrid 2026 values;
-- read `forecast_median` as the displayed central trajectory;
-- reinterpret P10–P90 as a confidence or probability interval;
-- fabricate observations for latent World3 states;
-- promote R1 energy, EROI, mineral or other diagnostics into central feedbacks;
-- reactivate the rejected `world3_resource_fraction_to_fossil_eroi` coupling;
-- activate any R2 candidate interface by default;
-- bypass the S1–S10 promotion gates.
+Integration requires software CI **and** visual/product usefulness closure. CI renders 1440×900, 1366×768 and mobile views; it verifies that the temporal chart occupies the intended dominant share on desktop/laptop, that the manual and Evidence & Limits are reachable, that scenario toggles work and that mobile has no horizontal overflow. The screenshot artifact must be inspected before merge.
 
-## Definition of product v1.0.0
-
-Product v1.0.0 is reached when the static web application:
-
-- loads the eight existing indicator views from the validated package;
-- displays the three baseline trajectories, observed points and optional structural P10–P90 band;
-- provides pointer and keyboard inspection of annual chart values;
-- exposes the five-indicator dashboard and current validation diagnostics;
-- explains theory and evidence roles without merging observation proxies with latent mechanisms;
-- provides full EN/RO UI, responsive desktop/mobile behaviour and basic keyboard/accessibility support;
-- preserves UI state in shareable URL parameters;
-- passes TypeScript checking, scientific-copy hash verification and a production Vite build in dedicated web CI.
-
-A public hosting target is operational deployment, not a scientific gate. The CI build artifact is the authoritative deployable static bundle until a hosting surface is enabled.
+A new user must be able to answer, without README: what World3 is; what BAU/BAU2/Hybrid mean; observations versus scenarios; main peaks and sustained-decline onsets; what timing uncertainty is and is not available; mechanisms associated with results; which intervention outputs are scientifically available; whether intervention timing can currently be quantified; and what the model cannot claim.
