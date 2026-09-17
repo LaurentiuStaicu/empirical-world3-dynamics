@@ -2,6 +2,10 @@ name: Validate pull request
 
 on:
   pull_request:
+    paths-ignore:
+      - 'web/**'
+      - 'docs/WEB_V1_PRODUCT_CONTRACT.md'
+      - 'README.md'
   workflow_dispatch:
 
 permissions:
