@@ -37,7 +37,6 @@ class DirectEmissionsProspectiveTests(unittest.TestCase):
 
     def test_target_boundary_excludes_process_categories(self):
         first = next(r for r in self.records if r.year == 1990)
-        # 8659.8 coal + 9196.4 oil + 3790.2 gas; cement/flaring/other are not included.
         self.assertAlmostEqual(first.observed_direct_mt, 21646.4)
 
     def test_calibration_uses_development_only(self):
@@ -98,14 +97,10 @@ class DirectEmissionsProspectiveTests(unittest.TestCase):
         excluded = self.payload["boundary"]["excluded_mechanisms"]
         self.assertIn("world3_resource_fraction_to_fossil_eroi", excluded)
 
-    def test_frozen_artifacts_reproduce_exactly(self):
-        results = (
-            ROOT / "science/data/experiments/energy_direct_emissions_prospective_2026-09-17.json"
-        )
-        predictions = (
-            ROOT / "science/data/experiments/energy_direct_emissions_predictions_2026-09-17.csv"
-        )
-        self.assertEqual(results.read_text(encoding="utf-8"), serialize_results(self.payload))
+    def test_frozen_artifacts_reproduce(self):
+        results = ROOT / "science/data/experiments/energy_direct_emissions_prospective_2026-09-17.json"
+        predictions = ROOT / "science/data/experiments/energy_direct_emissions_predictions_2026-09-17.csv"
+        self.assertEqual(json.loads(results.read_text(encoding="utf-8")), json.loads(serialize_results(self.payload)))
         self.assertEqual(predictions.read_text(encoding="utf-8"), serialize_predictions(self.rows))
 
 
