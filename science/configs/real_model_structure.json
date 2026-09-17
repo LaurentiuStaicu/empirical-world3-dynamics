@@ -1,0 +1,186 @@
+{
+  "contract_version": "R2.0",
+  "stage": "R2 — Real Model",
+  "decision_gate": "G-R2-1",
+  "architecture": {
+    "strategy": "world3_reference_core_with_inactive_typed_extensions",
+    "clean_room_topology": false,
+    "reference_core_mutable": false,
+    "reference_model": {
+      "name": "World3-03",
+      "source": "science/vendor/world3_03/World3_03_Scenarios.mdl",
+      "adapter": "science/src/world3_empirical/world3_03.py",
+      "equation_policy": "preserve_authoritative_equations",
+      "supported_scenarios": {
+        "1": "BAU",
+        "2": "BAU2"
+      }
+    },
+    "comparison_baselines": [
+      {"id": "bau", "status": "frozen_comparator"},
+      {"id": "bau2", "status": "frozen_comparator"},
+      {"id": "bau_hybrid_2026", "status": "frozen_comparator"}
+    ]
+  },
+  "evidence_roles": [
+    "reference_equation",
+    "observed_input",
+    "calibration_candidate",
+    "diagnostic",
+    "benchmark",
+    "sensitivity_only",
+    "prospective_validation",
+    "excluded_from_coupling"
+  ],
+  "variable_kinds": ["stock", "flow", "auxiliary"],
+  "modules": [
+    {
+      "id": "population",
+      "source": "World3-03",
+      "role": "reference_core",
+      "variables": [
+        {"id": "population_age_0_14", "kind": "stock", "unit": "person", "dimension": "population", "evidence_role": "reference_equation", "inflows": ["births"], "outflows": ["deaths_0_14", "maturation_15"]},
+        {"id": "population_age_15_44", "kind": "stock", "unit": "person", "dimension": "population", "evidence_role": "reference_equation", "inflows": ["maturation_15"], "outflows": ["deaths_15_44", "maturation_45"]},
+        {"id": "population_age_45_64", "kind": "stock", "unit": "person", "dimension": "population", "evidence_role": "reference_equation", "inflows": ["maturation_45"], "outflows": ["deaths_45_64", "maturation_65"]},
+        {"id": "population_age_65_plus", "kind": "stock", "unit": "person", "dimension": "population", "evidence_role": "reference_equation", "inflows": ["maturation_65"], "outflows": ["deaths_65_plus"]},
+        {"id": "births", "kind": "flow", "unit": "person/year", "dimension": "population_rate", "evidence_role": "reference_equation"},
+        {"id": "maturation_15", "kind": "flow", "unit": "person/year", "dimension": "population_rate", "evidence_role": "reference_equation"},
+        {"id": "maturation_45", "kind": "flow", "unit": "person/year", "dimension": "population_rate", "evidence_role": "reference_equation"},
+        {"id": "maturation_65", "kind": "flow", "unit": "person/year", "dimension": "population_rate", "evidence_role": "reference_equation"},
+        {"id": "deaths_0_14", "kind": "flow", "unit": "person/year", "dimension": "population_rate", "evidence_role": "reference_equation"},
+        {"id": "deaths_15_44", "kind": "flow", "unit": "person/year", "dimension": "population_rate", "evidence_role": "reference_equation"},
+        {"id": "deaths_45_64", "kind": "flow", "unit": "person/year", "dimension": "population_rate", "evidence_role": "reference_equation"},
+        {"id": "deaths_65_plus", "kind": "flow", "unit": "person/year", "dimension": "population_rate", "evidence_role": "reference_equation"},
+        {"id": "population", "kind": "auxiliary", "unit": "person", "dimension": "population", "evidence_role": "reference_equation", "source_output": "population"},
+        {"id": "life_expectancy", "kind": "auxiliary", "unit": "year", "dimension": "time", "evidence_role": "reference_equation", "source_output": "life_expectancy"}
+      ]
+    },
+    {
+      "id": "capital_services",
+      "source": "World3-03",
+      "role": "reference_core",
+      "variables": [
+        {"id": "industrial_capital", "kind": "stock", "unit": "currency", "dimension": "capital", "evidence_role": "reference_equation", "inflows": ["industrial_investment"], "outflows": ["industrial_depreciation"]},
+        {"id": "service_capital", "kind": "stock", "unit": "currency", "dimension": "capital", "evidence_role": "reference_equation", "inflows": ["service_investment"], "outflows": ["service_depreciation"]},
+        {"id": "industrial_investment", "kind": "flow", "unit": "currency/year", "dimension": "capital_rate", "evidence_role": "reference_equation"},
+        {"id": "industrial_depreciation", "kind": "flow", "unit": "currency/year", "dimension": "capital_rate", "evidence_role": "reference_equation"},
+        {"id": "service_investment", "kind": "flow", "unit": "currency/year", "dimension": "capital_rate", "evidence_role": "reference_equation"},
+        {"id": "service_depreciation", "kind": "flow", "unit": "currency/year", "dimension": "capital_rate", "evidence_role": "reference_equation"},
+        {"id": "industrial_output", "kind": "auxiliary", "unit": "currency/year", "dimension": "capital_rate", "evidence_role": "reference_equation", "source_output": "industrial_output"},
+        {"id": "industrial_output_per_capita", "kind": "auxiliary", "unit": "currency/person/year", "dimension": "capital_per_capita_rate", "evidence_role": "reference_equation", "source_output": "industrial_output_per_capita"},
+        {"id": "services_per_capita", "kind": "auxiliary", "unit": "currency/person/year", "dimension": "capital_per_capita_rate", "evidence_role": "reference_equation", "source_output": "services_per_capita"}
+      ]
+    },
+    {
+      "id": "agriculture",
+      "source": "World3-03",
+      "role": "reference_core",
+      "variables": [
+        {"id": "arable_land", "kind": "stock", "unit": "hectare", "dimension": "land", "evidence_role": "reference_equation", "inflows": ["land_development"], "outflows": ["land_erosion", "urban_land_conversion"]},
+        {"id": "land_fertility", "kind": "stock", "unit": "fertility_unit", "dimension": "fertility", "evidence_role": "reference_equation", "inflows": ["fertility_regeneration"], "outflows": ["fertility_degradation"]},
+        {"id": "land_development", "kind": "flow", "unit": "hectare/year", "dimension": "land_rate", "evidence_role": "reference_equation"},
+        {"id": "land_erosion", "kind": "flow", "unit": "hectare/year", "dimension": "land_rate", "evidence_role": "reference_equation"},
+        {"id": "urban_land_conversion", "kind": "flow", "unit": "hectare/year", "dimension": "land_rate", "evidence_role": "reference_equation"},
+        {"id": "fertility_regeneration", "kind": "flow", "unit": "fertility_unit/year", "dimension": "fertility_rate", "evidence_role": "reference_equation"},
+        {"id": "fertility_degradation", "kind": "flow", "unit": "fertility_unit/year", "dimension": "fertility_rate", "evidence_role": "reference_equation"},
+        {"id": "food", "kind": "auxiliary", "unit": "food_unit/year", "dimension": "food_rate", "evidence_role": "reference_equation", "source_output": "food"},
+        {"id": "food_per_capita", "kind": "auxiliary", "unit": "food_unit/person/year", "dimension": "food_per_capita_rate", "evidence_role": "reference_equation", "source_output": "food_per_capita"}
+      ]
+    },
+    {
+      "id": "nonrenewable_resources",
+      "source": "World3-03",
+      "role": "reference_core",
+      "variables": [
+        {"id": "nonrenewable_resources", "kind": "stock", "unit": "resource_unit", "dimension": "resource", "evidence_role": "reference_equation", "inflows": [], "outflows": ["resource_usage_rate"], "source_output": "nonrenewable_resources"},
+        {"id": "resource_usage_rate", "kind": "flow", "unit": "resource_unit/year", "dimension": "resource_rate", "evidence_role": "reference_equation"},
+        {"id": "nonrenewable_resource_fraction", "kind": "auxiliary", "unit": "1", "dimension": "dimensionless", "evidence_role": "reference_equation", "source_output": "nonrenewable_resource_fraction"}
+      ]
+    },
+    {
+      "id": "persistent_pollution",
+      "source": "World3-03",
+      "role": "reference_core",
+      "variables": [
+        {"id": "persistent_pollution", "kind": "stock", "unit": "pollution_unit", "dimension": "pollution", "evidence_role": "reference_equation", "inflows": ["persistent_pollution_generation_rate"], "outflows": ["persistent_pollution_assimilation_rate"], "source_output": "persistent_pollution"},
+        {"id": "persistent_pollution_generation_rate", "kind": "flow", "unit": "pollution_unit/year", "dimension": "pollution_rate", "evidence_role": "reference_equation", "source_output": "persistent_pollution_generation_rate"},
+        {"id": "persistent_pollution_assimilation_rate", "kind": "flow", "unit": "pollution_unit/year", "dimension": "pollution_rate", "evidence_role": "reference_equation"},
+        {"id": "persistent_pollution_index", "kind": "auxiliary", "unit": "1", "dimension": "dimensionless", "evidence_role": "reference_equation", "source_output": "persistent_pollution_index"}
+      ]
+    }
+  ],
+  "candidate_interfaces": [
+    {
+      "id": "energy_accounting_emissions",
+      "active_by_default": false,
+      "central": false,
+      "evidence_role": "diagnostic",
+      "maturity": "candidate_for_prospective_experiment",
+      "forbidden_couplings": ["world3_resource_fraction_to_fossil_eroi"],
+      "inputs": [
+        {"id": "observed_primary_energy", "unit": "PJ/year", "dimension": "energy_rate", "evidence_role": "observed_input"},
+        {"id": "observed_generation", "unit": "TWh/year", "dimension": "electricity_rate", "evidence_role": "observed_input"},
+        {"id": "observed_direct_co2", "unit": "MtCO2/year", "dimension": "emissions_rate", "evidence_role": "observed_input"}
+      ],
+      "outputs": [
+        {"id": "accounting_residual", "unit": "1", "dimension": "dimensionless", "evidence_role": "diagnostic"}
+      ]
+    },
+    {
+      "id": "net_energy",
+      "active_by_default": false,
+      "central": false,
+      "evidence_role": "sensitivity_only",
+      "maturity": "not_promotable",
+      "forbidden_couplings": ["world3_resource_fraction_to_fossil_eroi"],
+      "inputs": [{"id": "eroi_observation", "unit": "1", "dimension": "dimensionless", "evidence_role": "observed_input"}],
+      "outputs": [{"id": "net_energy_sensitivity", "unit": "1", "dimension": "dimensionless", "evidence_role": "sensitivity_only"}]
+    },
+    {
+      "id": "technology_minerals",
+      "active_by_default": false,
+      "central": false,
+      "evidence_role": "diagnostic",
+      "maturity": "needs_dynamic_stock_flow_structure",
+      "inputs": [{"id": "material_specific_production", "unit": "mass/year", "dimension": "material_rate", "evidence_role": "observed_input"}],
+      "outputs": [{"id": "material_risk_register", "unit": "1", "dimension": "dimensionless", "evidence_role": "diagnostic"}]
+    },
+    {
+      "id": "climate_food",
+      "active_by_default": false,
+      "central": false,
+      "evidence_role": "diagnostic",
+      "maturity": "prospective_gate_failed",
+      "inputs": [{"id": "regional_growing_season_stress", "unit": "1", "dimension": "dimensionless", "evidence_role": "calibration_candidate"}],
+      "outputs": [{"id": "food_stress_candidate", "unit": "1", "dimension": "dimensionless", "evidence_role": "diagnostic"}]
+    },
+    {
+      "id": "industry_proxy",
+      "active_by_default": false,
+      "central": false,
+      "evidence_role": "benchmark",
+      "maturity": "no_incremental_predictive_gain",
+      "inputs": [{"id": "unido_iip", "unit": "index", "dimension": "index", "evidence_role": "benchmark"}],
+      "outputs": [{"id": "industry_proxy_comparison", "unit": "1", "dimension": "dimensionless", "evidence_role": "benchmark"}]
+    }
+  ],
+  "promotion_gates": [
+    {"id": "S1", "name": "boundary_adequacy", "class": "structural"},
+    {"id": "S2", "name": "structure_assessment", "class": "structural"},
+    {"id": "S3", "name": "dimensional_consistency", "class": "structural"},
+    {"id": "S4", "name": "accounting_conservation", "class": "structural"},
+    {"id": "S5", "name": "extreme_conditions", "class": "structural"},
+    {"id": "S6", "name": "numerical_robustness", "class": "structural"},
+    {"id": "S7", "name": "temporal_provenance_no_future_information", "class": "predictive"},
+    {"id": "S8", "name": "prospective_out_of_sample_skill", "class": "predictive"},
+    {"id": "S9", "name": "uncertainty_and_sensitivity_robustness", "class": "predictive"},
+    {"id": "S10", "name": "incremental_value_and_no_baseline_regression", "class": "predictive"}
+  ],
+  "selected_prospective_candidate": {
+    "id": "energy_accounting_emissions",
+    "decision": "selected_for_experiment_only",
+    "central_promotion": false,
+    "reason": "best current accounting, unit and boundary maturity; experiment must not use the rejected World3-resource-fraction-to-EROI coupling"
+  },
+  "forbidden_couplings": ["world3_resource_fraction_to_fossil_eroi"]
+}
