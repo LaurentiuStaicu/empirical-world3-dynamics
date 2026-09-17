@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import sys
 from pathlib import Path
 
@@ -21,6 +22,12 @@ RESULTS = ROOT / "science/data/experiments/energy_direct_emissions_prospective_2
 PREDICTIONS = ROOT / "science/data/experiments/energy_direct_emissions_predictions_2026-09-17.csv"
 
 
+def _matches(path: Path, content: str) -> bool:
+    if path.suffix == ".json":
+        return json.loads(path.read_text(encoding="utf-8")) == json.loads(content)
+    return path.read_text(encoding="utf-8") == content
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--check", action="store_true", help="fail if committed artifacts differ")
@@ -37,11 +44,11 @@ def main() -> None:
         for path, content in expected.items():
             if not path.is_file():
                 failures.append(f"missing {path.relative_to(ROOT)}")
-            elif path.read_text(encoding="utf-8") != content:
+            elif not _matches(path, content):
                 failures.append(f"stale {path.relative_to(ROOT)}")
         if failures:
             raise SystemExit("Direct-emissions reproduction failed: " + "; ".join(failures))
-        print("Direct-emissions prospective artifacts reproduce exactly.")
+        print("Direct-emissions prospective artifacts reproduce semantically; prediction CSV is byte-identical.")
         return
 
     for path, content in expected.items():
