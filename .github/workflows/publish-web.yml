@@ -1,0 +1,79 @@
+name: Publish web application
+
+on:
+  pull_request:
+    paths:
+      - 'web/**'
+      - 'data/scenarios/**'
+      - 'science/configs/real_model_structure.json'
+      - 'docs/INFOCLAR_MODEL_SUITE_DESIGN_STANDARD_V1_1.md'
+      - 'docs/WEB_V1_PRODUCT_CONTRACT.md'
+      - 'README.md'
+      - '.github/workflows/publish-web.yml'
+  push:
+    branches:
+      - main
+    paths:
+      - 'web/**'
+      - 'data/scenarios/**'
+      - 'science/configs/real_model_structure.json'
+      - 'docs/INFOCLAR_MODEL_SUITE_DESIGN_STANDARD_V1_1.md'
+      - 'docs/WEB_V1_PRODUCT_CONTRACT.md'
+      - 'README.md'
+      - '.github/workflows/publish-web.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: world3-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Verify and package web application
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v6
+
+      - name: Set up Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+
+      - name: Install pinned web toolchain
+        working-directory: web
+        run: npm install --no-audit --no-fund
+
+      - name: Verify scientific non-regression contract
+        working-directory: web
+        run: npm run check
+
+      - name: Build static web product
+        working-directory: web
+        run: npm run build
+
+      - name: Upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: web/dist
+
+  deploy:
+    name: Deploy verified web application
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
