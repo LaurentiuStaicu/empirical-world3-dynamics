@@ -1,0 +1,48 @@
+{
+  "protocol_version": "r2.1",
+  "experiment_id": "energy-reinvestment-industrial-investment-bridge",
+  "candidate_interface": "energy_reinvestment_to_industrial_investment_burden",
+  "status": "predeclared_selected_not_activated",
+  "central_model_change_authorized": false,
+  "hypothesis": "A directly observed, boundary-consistent increase in the energy system's reinvestment/capital requirement may explain incremental industrial investment burden beyond the unchanged World3 reference mechanism, if the bridge is measurable and improves time-respecting prediction.",
+  "null_model": "unchanged World3-compatible reference core with no new energy feedback",
+  "explicitly_rejected_reuse": "World3 fraction of resources remaining -> fossil EROI",
+  "measurement_boundaries": {
+    "gross_energy": "Energy Institute Total Energy Supply / source-specific physical energy accounting, vintage preserved",
+    "eroi": ["primary", "final", "useful"],
+    "eroi_rule": "Never mix EROI boundaries in one calibration target. Treat each boundary as a separate observational/diagnostic series.",
+    "industrial_target": "independent industrial/manufacturing output diagnostic at a consistent real-volume boundary",
+    "bridge_required_before_estimation": "direct or defensible observed energy-sector reinvestment/capital-requirement share mapped to the same economic investment boundary used by the industrial-capital interface"
+  },
+  "existing_inputs": [
+    "science/data/processed/energy_institute_global_2026.csv",
+    "science/data/processed/aramendia_global_fossil_eroi_2024.csv",
+    "science/data/processed/unido_iip_world_public_2026-09-08.csv",
+    "science/data/processed/world_bank_global_snapshot_2026-08-28.csv"
+  ],
+  "missing_precondition": "No currently registered series directly identifies the global translation from energy reinvestment requirement to World3-compatible industrial investment burden. This bridge must be sourced and audited before S4 estimation or S7-S10 behavioral testing.",
+  "structural_gates": {
+    "S1": "specified: energy accounting remains outside the reference core until the bridge is identified; no hidden resource-to-EROI proxy",
+    "S2": "specified: gross energy, energy reinvestment and industrial investment burden must be distinct quantities with double-counting audit",
+    "S3": "specified: the bridge must map dimensionless reinvestment share or currency/year capital requirement to a dimensionally compatible industrial allocation quantity",
+    "S4": "blocked_pending_bridge_observation",
+    "S5": "predeclared: zero energy burden must leave reference output unchanged; finite burdens may not create negative stocks or allocations",
+    "S6": "predeclared: conclusions must be stable under stricter integration/numerical settings",
+    "S7": "not_run",
+    "S8": "not_run",
+    "S9": "not_run",
+    "S10": "not_run"
+  },
+  "temporal_validation": {
+    "rule": "Use only vintages available at each forecast origin. Select origins after the bridge series is registered, before inspecting evaluation outcomes.",
+    "minimum_horizon_years": 5,
+    "baseline_comparison": "same World3 reference core, observations, origins and loss functions with candidate interface dormant",
+    "holdout_rule": "Previously inspected holdouts cannot be relabelled as untouched confirmation. Preserve failed attempts in the audit trail."
+  },
+  "decision_rule": {
+    "r2": "selection only; no promotion is possible in R2",
+    "future_experiment": "The candidate can advance only if S1-S10 are all explicitly passed using a predeclared metric-specific acceptance rule and the simpler reference model on the same information set.",
+    "failure": "Return the mechanism to diagnostic/stress status; do not retune against the same holdout."
+  },
+  "double_counting_guard": "Do not add an energy-derived industrial-capital burden to the inherited World3 resource-acquisition burden unless the two empirical cost boundaries are demonstrated to be non-overlapping or an explicit reconciliation rule is validated."
+}
