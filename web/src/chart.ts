@@ -1,161 +1,22 @@
-import type { ScenarioRow } from './data';
-import type { Language } from './i18n';
-import { ui } from './i18n';
-
-const NS = 'http://www.w3.org/2000/svg';
-const W = 920;
-const H = 480;
-const M = { left: 72, right: 24, top: 30, bottom: 54 };
-
-interface ChartOptions {
-  rows: ScenarioRow[];
-  horizon: number;
-  showUncertainty: boolean;
-  unit: string;
-  language: Language;
-  label: string;
-}
-
-function svgEl<K extends keyof SVGElementTagNameMap>(name: K, attrs: Record<string, string | number> = {}): SVGElementTagNameMap[K] {
-  const element = document.createElementNS(NS, name);
-  Object.entries(attrs).forEach(([key, value]) => element.setAttribute(key, String(value)));
-  return element;
-}
-
-function values(rows: ScenarioRow[], showUncertainty: boolean): number[] {
-  const list: number[] = [];
-  for (const row of rows) {
-    for (const value of [row.observed, row.original_bau, row.original_bau2, row.hybrid_2026]) if (value !== null) list.push(value);
-    if (showUncertainty) for (const value of [row.p10, row.p90]) if (value !== null) list.push(value);
-  }
-  return list;
-}
-
-function linePath(rows: ScenarioRow[], accessor: (row: ScenarioRow) => number | null, x: (year: number) => number, y: (value: number) => number): string {
-  let path = '';
-  let open = false;
-  for (const row of rows) {
-    const value = accessor(row);
-    if (value === null) { open = false; continue; }
-    path += `${open ? 'L' : 'M'}${x(row.year).toFixed(2)},${y(value).toFixed(2)} `;
-    open = true;
-  }
-  return path.trim();
-}
-
-function formatValue(value: number | null, language: Language): string {
-  if (value === null) return '—';
-  const abs = Math.abs(value);
-  const digits = abs >= 100 ? 1 : abs >= 10 ? 2 : 3;
-  return value.toLocaleString(language === 'ro' ? 'ro-RO' : 'en-US', { maximumFractionDigits: digits });
-}
-
-export function renderChart(container: HTMLElement, options: ChartOptions): void {
-  const t = ui[options.language];
-  const rows = options.rows.filter((row) => row.year <= options.horizon);
-  container.innerHTML = '';
-  if (!rows.length) return;
-
-  const minYear = rows[0]!.year;
-  const maxYear = rows[rows.length - 1]!.year;
-  const numeric = values(rows, options.showUncertainty);
-  const minRaw = Math.min(...numeric);
-  const maxRaw = Math.max(...numeric);
-  const padding = Math.max((maxRaw - minRaw) * 0.08, Math.abs(maxRaw) * 0.02, 0.01);
-  const minValue = minRaw - padding;
-  const maxValue = maxRaw + padding;
-  const x = (year: number) => M.left + ((year - minYear) / Math.max(1, maxYear - minYear)) * (W - M.left - M.right);
-  const y = (value: number) => H - M.bottom - ((value - minValue) / Math.max(1e-12, maxValue - minValue)) * (H - M.top - M.bottom);
-
-  const svg = svgEl('svg', { viewBox: `0 0 ${W} ${H}`, role: 'img', tabindex: '0', 'aria-label': `${options.label}, ${options.unit}. ${t.keyboardHint}` });
-  svg.classList.add('trajectory-chart');
-
-  const grid = svgEl('g', { class: 'chart-grid' });
-  const yTicks = 5;
-  for (let index = 0; index <= yTicks; index++) {
-    const value = minValue + (index / yTicks) * (maxValue - minValue);
-    const yy = y(value);
-    grid.append(svgEl('line', { x1: M.left, x2: W - M.right, y1: yy, y2: yy }));
-    const label = svgEl('text', { x: M.left - 10, y: yy + 4, 'text-anchor': 'end' });
-    label.textContent = formatValue(value, options.language);
-    grid.append(label);
-  }
-  const xStep = maxYear - minYear > 100 ? 25 : maxYear - minYear > 60 ? 20 : 10;
-  for (let year = Math.ceil(minYear / xStep) * xStep; year <= maxYear; year += xStep) {
-    const xx = x(year);
-    const label = svgEl('text', { x: xx, y: H - 20, 'text-anchor': 'middle' });
-    label.textContent = String(year);
-    grid.append(label);
-  }
-  svg.append(grid);
-
-  if (options.showUncertainty) {
-    const bandRows = rows.filter((row) => row.p10 !== null && row.p90 !== null);
-    if (bandRows.length > 1) {
-      const upper = bandRows.map((row) => `${x(row.year).toFixed(2)},${y(row.p90!).toFixed(2)}`);
-      const lower = [...bandRows].reverse().map((row) => `${x(row.year).toFixed(2)},${y(row.p10!).toFixed(2)}`);
-      svg.append(svgEl('polygon', { points: [...upper, ...lower].join(' '), class: 'uncertainty-band' }));
-    }
-  }
-
-  const series: Array<[(row: ScenarioRow) => number | null, string]> = [
-    [(row) => row.original_bau, 'series-bau'],
-    [(row) => row.original_bau2, 'series-bau2'],
-    [(row) => row.hybrid_2026, 'series-hybrid'],
-  ];
-  for (const [accessor, className] of series) {
-    svg.append(svgEl('path', { d: linePath(rows, accessor, x, y), class: `series-line ${className}` }));
-  }
-
-  const observations = svgEl('g', { class: 'observations' });
-  for (const row of rows) {
-    if (row.observed === null) continue;
-    observations.append(svgEl('circle', { cx: x(row.year), cy: y(row.observed), r: 3.2 }));
-  }
-  svg.append(observations);
-
-  if (minYear <= 2025 && maxYear >= 2025) {
-    const xx = x(2025);
-    svg.append(svgEl('line', { x1: xx, x2: xx, y1: M.top, y2: H - M.bottom, class: 'cutoff-line' }));
-    const cutoff = svgEl('text', { x: xx + 7, y: M.top + 13, class: 'cutoff-label' });
-    cutoff.textContent = t.observedCutoff;
-    svg.append(cutoff);
-  }
-
-  const guide = svgEl('line', { y1: M.top, y2: H - M.bottom, class: 'hover-guide' });
-  guide.style.display = 'none';
-  svg.append(guide);
-
-  const tooltip = document.createElement('div');
-  tooltip.className = 'chart-tooltip';
-  tooltip.hidden = true;
-  container.append(svg, tooltip);
-
-  const inspect = (clientX: number) => {
-    const rect = svg.getBoundingClientRect();
-    const relative = ((clientX - rect.left) / rect.width) * W;
-    const year = minYear + ((relative - M.left) / (W - M.left - M.right)) * (maxYear - minYear);
-    const row = rows.reduce((best, current) => Math.abs(current.year - year) < Math.abs(best.year - year) ? current : best, rows[0]!);
-    const xx = x(row.year);
-    guide.setAttribute('x1', String(xx)); guide.setAttribute('x2', String(xx)); guide.style.display = '';
-    const screenX = (xx / W) * rect.width;
-    tooltip.style.left = `${Math.min(Math.max(screenX, 92), rect.width - 92)}px`;
-    tooltip.style.top = '42px';
-    tooltip.innerHTML = `<strong>${row.year}</strong><span>${t.observed}: ${formatValue(row.observed, options.language)}</span><span>${t.bau}: ${formatValue(row.original_bau, options.language)}</span><span>${t.bau2}: ${formatValue(row.original_bau2, options.language)}</span><span>${t.hybrid}: ${formatValue(row.hybrid_2026, options.language)}</span>${options.showUncertainty && row.p10 !== null && row.p90 !== null ? `<span>P10–P90: ${formatValue(row.p10, options.language)}–${formatValue(row.p90, options.language)}</span>` : ''}`;
-    tooltip.hidden = false;
-  };
-
-  svg.addEventListener('pointermove', (event) => inspect(event.clientX));
-  svg.addEventListener('pointerleave', () => { guide.style.display = 'none'; tooltip.hidden = true; });
-  svg.addEventListener('keydown', (event) => {
-    if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
-    event.preventDefault();
-    const current = Number(svg.dataset.inspectYear ?? rows.find((row) => row.observed !== null)?.year ?? rows[0]!.year);
-    const index = Math.max(0, rows.findIndex((row) => row.year >= current));
-    const next = Math.min(rows.length - 1, Math.max(0, index + (event.key === 'ArrowRight' ? 1 : -1)));
-    const row = rows[next]!;
-    svg.dataset.inspectYear = String(row.year);
-    const rect = svg.getBoundingClientRect();
-    inspect(rect.left + (x(row.year) / W) * rect.width);
-  });
-}
+import type {Language} from './i18n';
+import type {ScenarioKey,ScenarioRow} from './data';
+import {latestObserved} from './data';
+import {SCENARIO_LABELS} from './insights';
+const NS='http://www.w3.org/2000/svg';const W=1200,H=650,M={left:76,right:28,top:34,bottom:58};
+export interface ChartOptions{rows:ScenarioRow[];language:Language;variableLabel:string;unit:string;enabled:Record<ScenarioKey,boolean>;showObserved:boolean;showSensitivity:boolean;minYear:number;maxYear:number;}
+function svgEl<K extends keyof SVGElementTagNameMap>(name:K,attrs:Record<string,string|number>={}):SVGElementTagNameMap[K]{const el=document.createElementNS(NS,name);for(const[k,v]of Object.entries(attrs))el.setAttribute(k,String(v));return el;}
+function fmt(v:number|null,language:Language){if(v===null)return'—';const abs=Math.abs(v);return v.toLocaleString(language==='ro'?'ro-RO':'en-US',{maximumFractionDigits:abs>=100?1:abs>=10?2:3});}
+function path(rows:ScenarioRow[],scenario:ScenarioKey,x:(y:number)=>number,y:(v:number)=>number,predicate:(r:ScenarioRow)=>boolean){let d='',open=false;for(const r of rows){const v=r[scenario];if(v===null||!predicate(r)){open=false;continue;}d+=`${open?'L':'M'}${x(r.year).toFixed(2)},${y(v).toFixed(2)} `;open=true;}return d.trim();}
+function labels(language:Language){return language==='ro'?{observed:'Observat',historical:'simulare istorică',projection:'proiecție de scenariu',future:'Începutul perioadei viitoare',sensitivity:'sensibilitate structurală P10–P90',hint:'Folosește săgețile stânga/dreapta pentru inspecție anuală.'}:{observed:'Observed',historical:'modelled historical',projection:'scenario projection',future:'Future period begins',sensitivity:'structural P10–P90 sensitivity',hint:'Use left/right arrow keys for annual inspection.'};}
+export function renderChart(container:HTMLElement,o:ChartOptions):void{const t=labels(o.language);const rows=o.rows.filter(r=>r.year>=o.minYear&&r.year<=o.maxYear);container.innerHTML='';if(!rows.length)return;const cutoff=latestObserved(o.rows)?.year??null;const vals:number[]=[];for(const r of rows){if(o.showObserved&&r.observed!==null)vals.push(r.observed);for(const s of Object.keys(o.enabled) as ScenarioKey[])if(o.enabled[s]&&r[s]!==null)vals.push(r[s]!);if(o.showSensitivity&&o.enabled.hybrid_2026){if(r.p10!==null)vals.push(r.p10);if(r.p90!==null)vals.push(r.p90);}}
+if(!vals.length)return;const minRaw=Math.min(...vals),maxRaw=Math.max(...vals),pad=Math.max((maxRaw-minRaw)*.08,Math.abs(maxRaw)*.02,.01);const minV=minRaw-pad,maxV=maxRaw+pad;const x=(year:number)=>M.left+((year-o.minYear)/Math.max(1,o.maxYear-o.minYear))*(W-M.left-M.right);const y=(v:number)=>H-M.bottom-((v-minV)/Math.max(1e-12,maxV-minV))*(H-M.top-M.bottom);
+const svg=svgEl('svg',{viewBox:`0 0 ${W} ${H}`,role:'img',tabindex:'0','aria-label':`${o.variableLabel}, ${o.unit}. ${t.hint}`});svg.classList.add('trajectory-chart');
+const grid=svgEl('g',{class:'chart-grid'});for(let i=0;i<=5;i++){const v=minV+(i/5)*(maxV-minV),yy=y(v);grid.append(svgEl('line',{x1:M.left,x2:W-M.right,y1:yy,y2:yy}));const tx=svgEl('text',{x:M.left-10,y:yy+4,'text-anchor':'end'});tx.textContent=fmt(v,o.language);grid.append(tx);}const span=o.maxYear-o.minYear;const step=span>100?25:span>60?20:span>30?10:5;for(let yr=Math.ceil(o.minYear/step)*step;yr<=o.maxYear;yr+=step){const tx=svgEl('text',{x:x(yr),y:H-22,'text-anchor':'middle'});tx.textContent=String(yr);grid.append(tx);}svg.append(grid);
+if(cutoff!==null&&cutoff>=o.minYear&&cutoff<o.maxYear){const future=svgEl('rect',{x:x(cutoff),y:M.top,width:Math.max(0,W-M.right-x(cutoff)),height:H-M.top-M.bottom,class:'future-zone'});svg.append(future);}
+if(o.showSensitivity&&o.enabled.hybrid_2026){const band=rows.filter(r=>r.p10!==null&&r.p90!==null);if(band.length>1){const upper=band.map(r=>`${x(r.year)},${y(r.p90!)}`),lower=[...band].reverse().map(r=>`${x(r.year)},${y(r.p10!)}`);svg.append(svgEl('polygon',{points:[...upper,...lower].join(' '),class:'uncertainty-band'}));}}
+for(const s of Object.keys(o.enabled) as ScenarioKey[]){if(!o.enabled[s])continue;const cls=s==='original_bau'?'bau':s==='original_bau2'?'bau2':'hybrid';const historical=path(rows,s,x,y,r=>cutoff===null||r.year<=cutoff);const future=path(rows,s,x,y,r=>cutoff!==null&&r.year>=cutoff);if(historical)svg.append(svgEl('path',{d:historical,class:`series-line series-${cls} series-history`}));if(future)svg.append(svgEl('path',{d:future,class:`series-line series-${cls} series-future`}));}
+if(o.showObserved){const g=svgEl('g',{class:'observations'});for(const r of rows)if(r.observed!==null)g.append(svgEl('circle',{cx:x(r.year),cy:y(r.observed),r:3.7}));svg.append(g);}
+if(cutoff!==null&&cutoff>=o.minYear&&cutoff<=o.maxYear){const xx=x(cutoff);svg.append(svgEl('line',{x1:xx,x2:xx,y1:M.top,y2:H-M.bottom,class:'cutoff-line'}));const tx=svgEl('text',{x:xx+8,y:M.top+16,class:'cutoff-label'});tx.textContent=`${t.future}: ${cutoff+1}`;svg.append(tx);}
+const guide=svgEl('line',{y1:M.top,y2:H-M.bottom,class:'hover-guide'});guide.style.display='none';svg.append(guide);const tip=document.createElement('div');tip.className='chart-tooltip';tip.hidden=true;container.append(svg,tip);
+const inspect=(clientX:number)=>{const rect=svg.getBoundingClientRect();const rel=((clientX-rect.left)/rect.width)*W;const approx=o.minYear+((rel-M.left)/(W-M.left-M.right))*(o.maxYear-o.minYear);const r=rows.reduce((best,c)=>Math.abs(c.year-approx)<Math.abs(best.year-approx)?c:best,rows[0]!);svg.dataset.inspectYear=String(r.year);const xx=x(r.year);guide.setAttribute('x1',String(xx));guide.setAttribute('x2',String(xx));guide.style.display='';const screenX=(xx/W)*rect.width;tip.style.left=`${Math.min(Math.max(screenX,130),rect.width-130)}px`;tip.style.top='52px';const parts=[`<div class="tip-head"><strong>${r.year}</strong><span>${o.variableLabel}</span></div>`];if(o.showObserved&&r.observed!==null)parts.push(`<div><b>${t.observed}</b><span>${fmt(r.observed,o.language)} ${o.unit}</span><em>${t.observed}</em></div>`);for(const s of Object.keys(o.enabled) as ScenarioKey[]){if(!o.enabled[s]||r[s]===null)continue;parts.push(`<div><b>${SCENARIO_LABELS[s][o.language]}</b><span>${fmt(r[s],o.language)} ${o.unit}</span><em>${cutoff!==null&&r.year>cutoff?t.projection:t.historical}</em></div>`);}if(o.showSensitivity&&o.enabled.hybrid_2026&&r.p10!==null&&r.p90!==null)parts.push(`<div><b>P10–P90</b><span>${fmt(r.p10,o.language)}–${fmt(r.p90,o.language)}</span><em>${t.sensitivity}</em></div>`);tip.innerHTML=parts.join('');tip.hidden=false;};
+svg.addEventListener('pointermove',e=>inspect(e.clientX));svg.addEventListener('pointerleave',()=>{guide.style.display='none';tip.hidden=true;});svg.addEventListener('keydown',e=>{if(e.key!=='ArrowLeft'&&e.key!=='ArrowRight')return;e.preventDefault();const current=Number(svg.dataset.inspectYear??cutoff??rows[0]!.year);let idx=rows.findIndex(r=>r.year>=current);if(idx<0)idx=rows.length-1;idx=Math.max(0,Math.min(rows.length-1,idx+(e.key==='ArrowRight'?1:-1)));const rect=svg.getBoundingClientRect();inspect(rect.left+(x(rows[idx]!.year)/W)*rect.width);});}
