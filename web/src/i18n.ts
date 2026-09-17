@@ -1,0 +1,38 @@
+export type Language = 'en' | 'ro';
+
+export const ui = {
+  en: {
+    subtitle: 'InfoClar Model Suite · web product v1.0.0',
+    modelPanel: 'Model & trajectories', theoryPanel: 'Theory / Learn', dashboardPanel: 'Core indicators', evidencePanel: 'Evidence & limits',
+    indicator: 'Indicator', horizon: 'Horizon', uncertainty: 'Structural P10–P90 sensitivity', observed: 'Observed', bau: 'Original BAU', bau2: 'Original BAU2', hybrid: 'BAU Hybrid 2026',
+    observedCutoff: 'Observed data / conditional continuation', howToRead: 'How to read this variable', stockFlowRole: 'Role in the model', boundary: 'Interpretation boundary', structure: 'Structural contract',
+    dashboardHelp: 'Five empirically calibrated indicators in stable priority order. Values below are read directly from the validated packaged scenario files.',
+    value2035: 'Hybrid 2035', latestObserved: 'Latest observed', sensitivity2035: 'P10–P90 2035', noObservation: 'No direct observation',
+    provenance: 'Provenance', validation: 'Validation', limitations: 'Limitations', source: 'Source', observationStatus: 'Observation status', frozenBacktest: 'Frozen-2018 backtest', multiOrigin: 'Multi-origin validation', descriptiveFit: 'Descriptive historical fit',
+    hybridMape: 'Hybrid MAPE', referenceMape: 'BAU2 anchored MAPE', improvement: 'Improvement', origins: 'Origins', historicalMape: 'Historical MAPE', bias: 'Bias',
+    structuralSensitivityNote: 'P10–P90 is the pointwise range of the admitted structural sensitivity ensemble. It is not a probabilistic confidence interval.',
+    centralCurvesNote: 'The web application reads the same packaged BAU, BAU2 and BAU Hybrid 2026 trajectories as the validated desktop release. It does not recalculate or modify scientific results.',
+    latentNote: 'Latent World3 variables remain explicitly labelled latent and are not assigned fabricated empirical validation.',
+    inactiveNote: 'Candidate mechanisms remain inactive by default and non-central until they pass the structural and predictive S1–S10 gates.',
+    referenceCore: 'Reference core', immutableEquations: 'immutable equations', candidates: 'Candidate interfaces', gates: 'Promotion gates', inactive: 'inactive', central: 'central', nonCentral: 'non-central',
+    dataSnapshot: 'Data snapshot', modelVersion: 'model', appVersion: 'web', loading: 'Loading validated data…', error: 'The web application could not load its validated data package.',
+    openSource: 'Open source', copiedData: 'data package copied byte-for-byte at build time', keyboardHint: 'Move across the chart to inspect yearly values.',
+  },
+  ro: {
+    subtitle: 'InfoClar Model Suite · produs web v1.0.0',
+    modelPanel: 'Model și traiectorii', theoryPanel: 'Teorie / Învățare', dashboardPanel: 'Indicatori principali', evidencePanel: 'Dovezi și limite',
+    indicator: 'Indicator', horizon: 'Orizont', uncertainty: 'Sensibilitate structurală P10–P90', observed: 'Observat', bau: 'BAU original', bau2: 'BAU2 original', hybrid: 'BAU Hibrid 2026',
+    observedCutoff: 'Date observate / continuare condițională', howToRead: 'Cum se citește această variabilă', stockFlowRole: 'Rol în model', boundary: 'Limită de interpretare', structure: 'Contract structural',
+    dashboardHelp: 'Cei cinci indicatori calibrați empiric, în ordine stabilă de prioritate. Valorile sunt citite direct din fișierele validate ale scenariilor împachetate.',
+    value2035: 'Hibrid 2035', latestObserved: 'Ultima observație', sensitivity2035: 'P10–P90 2035', noObservation: 'Fără observație directă',
+    provenance: 'Proveniență', validation: 'Validare', limitations: 'Limitări', source: 'Sursă', observationStatus: 'Starea observațiilor', frozenBacktest: 'Backtest înghețat la 2018', multiOrigin: 'Validare multi-origine', descriptiveFit: 'Potrivire istorică descriptivă',
+    hybridMape: 'MAPE Hibrid', referenceMape: 'MAPE BAU2 ancorat', improvement: 'Îmbunătățire', origins: 'Origini', historicalMape: 'MAPE istoric', bias: 'Bias',
+    structuralSensitivityNote: 'P10–P90 este intervalul punctual al ansamblului admis de sensibilitate structurală. Nu este un interval probabilistic de încredere.',
+    centralCurvesNote: 'Aplicația web citește aceleași traiectorii împachetate BAU, BAU2 și BAU Hibrid 2026 ca versiunea desktop validată. Nu recalculează și nu modifică rezultatele științifice.',
+    latentNote: 'Variabilele World3 latente rămân etichetate explicit ca latente și nu primesc validare empirică fabricată.',
+    inactiveNote: 'Mecanismele candidate rămân inactive implicit și necentrale până când trec porțile structurale și predictive S1–S10.',
+    referenceCore: 'Nucleu de referință', immutableEquations: 'ecuații imuabile', candidates: 'Interfețe candidate', gates: 'Porți de promovare', inactive: 'inactiv', central: 'central', nonCentral: 'necentral',
+    dataSnapshot: 'Snapshot date', modelVersion: 'model', appVersion: 'web', loading: 'Se încarcă datele validate…', error: 'Aplicația web nu a putut încărca pachetul de date validate.',
+    openSource: 'Deschide sursa', copiedData: 'pachet de date copiat byte-for-byte la build', keyboardHint: 'Deplasează-te pe grafic pentru valorile anuale.',
+  },
+} as const;
