@@ -1,64 +1,119 @@
 {
-  "contract_version": "world3-product-recovery-1.0.0",
+  "contract_version": "world3-product-recovery-final-2.0.0",
+  "preregistered_before_final_ui_calculation": true,
   "scientific_non_regression": {
     "central_scenarios_immutable": ["original_bau", "original_bau2", "hybrid_2026"],
     "energy_direct_emissions_verdict": "RETAIN AS DIAGNOSTIC",
     "probability_language_for_scenario_fit": "forbidden",
-    "p10_p90_semantics": "pointwise structural sensitivity; not confidence interval; not future probability"
+    "science_may_not_be_changed_to_make_ui_more_dramatic": true
   },
   "metrics": {
-    "peak": {"definition": "first global maximum of the selected scenario series", "tie_break": "earliest year"},
-    "sustained_decline": {"search_start": "peak year", "window_years": 10, "minimum_non_increasing_annual_steps": 8, "minimum_net_decline_from_window_start_fraction": 0.05},
-    "severe_decline": {"threshold_fraction_of_peak": 0.8, "persistence_window_years": 5, "persistence_threshold_fraction_of_peak": 0.85, "minimum_persistence_hits": 4},
-    "stabilization": {"after": "sustained decline onset", "window_years": 10, "maximum_window_range_fraction_of_peak": 0.05, "maximum_net_change_fraction_of_peak": 0.02},
-    "recovery": {"requires_prior_severe_decline": true, "threshold_fraction_of_peak": 0.9, "persistence_years": 5},
-    "systemic_decline": {
+    "peak": {
+      "definition": "first global maximum of the selected scenario series over the packaged model horizon",
+      "tie_break": "earliest year"
+    },
+    "sustained_decline": {
+      "search_start": "peak year",
+      "lookahead_years": 10,
+      "minimum_non_increasing_annual_steps": 8,
+      "minimum_net_decline_from_window_start_fraction": 0.05
+    },
+    "severe_deterioration": {
+      "threshold_fraction_of_peak": 0.80,
+      "persistence_window_years": 5,
+      "persistence_threshold_fraction_of_peak": 0.85,
+      "minimum_persistence_hits": 4,
+      "default_ui_label": "severe deterioration",
+      "collapse_label_for_single_indicator": "forbidden unless a domain-specific scientific definition separately justifies it"
+    },
+    "stabilization": {
+      "after": "sustained decline onset",
+      "window_years": 10,
+      "maximum_window_range_fraction_of_peak": 0.05,
+      "maximum_net_change_fraction_of_peak": 0.02
+    },
+    "recovery": {
+      "requires_prior_severe_deterioration": true,
+      "threshold_fraction_of_peak": 0.90,
+      "persistence_years": 5
+    },
+    "systemic_deterioration_window": {
       "preregistered_indicators": ["industry_per_capita", "food_per_capita", "population", "human_welfare"],
-      "event": "sustained_decline", "primary_quorum": 3, "primary_clustering_window_years": 15,
+      "event": "sustained_decline",
+      "primary_quorum": 3,
+      "primary_clustering_window_years": 15,
       "definition_sensitivity": {"quorums": [2,3,4], "clustering_windows_years": [10,15,20]}
     },
-    "collapse_window": {
+    "systemic_collapse_window": {
       "preregistered_indicators": ["industry_per_capita", "food_per_capita", "population", "human_welfare"],
-      "event": "persistent severe_decline", "primary_quorum": 3, "primary_clustering_window_years": 20,
+      "event": "persistent severe_deterioration",
+      "primary_quorum": 3,
+      "primary_clustering_window_years": 20,
       "definition_sensitivity": {"quorums": [2,3,4], "clustering_windows_years": [15,20,25]},
-      "label_rule": "do not emit 'collapse window' unless the primary severe-decline quorum is satisfied"
+      "label_rule": "emit systemic collapse window only when the primary quorum is satisfied",
+      "no_event_text": "No collapse within model horizon."
     },
     "scenario_alignment": {
-      "metric": "sMAPE", "evaluation_period": "years with both observation and scenario value",
-      "aggregate": "equal-weight mean of per-indicator sMAPE", "interpretation": "descriptive empirical alignment only",
-      "not": ["scenario probability", "forecast probability", "out-of-sample forecast skill unless separately demonstrated"],
+      "metric": "sMAPE",
+      "evaluation_period": "years with both observation and scenario value",
+      "aggregate": "equal-weight mean of per-indicator sMAPE",
       "preregistered_indicators": ["population", "industry_per_capita", "food_per_capita", "pollution_pressure", "human_welfare"],
-      "excludes_from_aggregate": ["industry_total (derived diagnostic)", "persistent_pollution_stock (latent)", "resources_remaining_pct (latent)"]
+      "excludes_from_aggregate": ["industry_total", "persistent_pollution_stock", "resources_remaining_pct"],
+      "interpretation": "descriptive empirical alignment only",
+      "not": ["scenario probability", "forecast probability", "prospective forecast skill unless separately demonstrated"]
     },
-    "event_timing_uncertainty": {
-      "from_pointwise_p10_p90": "not permitted",
-      "reason": "pointwise quantile/envelope series are not coherent ensemble trajectories and do not identify a distribution of event times",
-      "required_for_timing_interval": "versioned coherent ensemble trajectories or an explicitly calibrated event-time distribution"
+    "event_timing_sensitivity": {
+      "scenario_range": "minimum to maximum identified event year across original BAU, original BAU2 and BAU Hybrid 2026",
+      "interpretation": "scenario sensitivity, not probability",
+      "classification": {"robust_max_span_years": 10, "moderate_max_span_years": 20, "sensitive_above_years": 20},
+      "pointwise_p10_p90_event_timing": "not permitted",
+      "required_for_parameter_event_time_interval": "versioned coherent ensemble-member trajectories or an explicitly calibrated event-time distribution"
     }
   },
+  "p10_p90_audit": {
+    "public_label_en": "Show model sensitivity range (P10–P90)",
+    "public_label_ro": "Afișează intervalul de sensibilitate al modelului (P10–P90)",
+    "structural_model": "World3-03 scenario 2 (BAU2)",
+    "candidate_count": 128,
+    "candidate_design": "one baseline plus 127 Latin Hypercube samples",
+    "sampling_seed": 20260829,
+    "sampling_method": "scipy.stats.qmc.LatinHypercube scaled independently across the seven declared dimensions; no explicit parameter-correlation matrix is imposed by the sampling code",
+    "varied_parameters": [
+      {"key":"resources","model_name":"initial nonrenewable resources","baseline":2000000000000,"lower":1500000000000,"upper":3500000000000},
+      {"key":"industrial_output_ratio","model_name":"industrial capital output ratio 1","baseline":3.0,"lower":2.55,"upper":3.45},
+      {"key":"industrial_capital_life","model_name":"average life of industrial capital 1","baseline":14.0,"lower":11.0,"upper":18.0},
+      {"key":"land_yield","model_name":"land yield factor 1","baseline":1.0,"lower":0.82,"upper":1.18},
+      {"key":"pollution_generation","model_name":"persistent pollution generation factor 1","baseline":1.0,"lower":0.65,"upper":1.35},
+      {"key":"pollution_assimilation","model_name":"assimilation half life in 1970","baseline":1.5,"lower":1.0,"upper":2.3},
+      {"key":"family_size","model_name":"desired completed family size normal","baseline":3.8,"lower":3.1,"upper":4.4}
+    ],
+    "fixed_parameters": "all other structural parameters of the packaged World3-03 scenario-2 run remain at their scenario values; a custom switch permits the initial-resource parameter above to vary",
+    "production_ensemble_size": 12,
+    "ensemble_selection": "12 best production candidates satisfying mapping and declared near-term plausibility guardrails",
+    "published_band": "actual pointwise 10th and 90th percentiles across those accepted candidates at every year",
+    "sensitivity_type": "parameter/model sensitivity within the admitted calibrated candidate design",
+    "not_probability": "the candidate ensemble is not a calibrated posterior or predictive distribution, so P10–P90 is not an 80% future-probability interval",
+    "event_timing_limit": "pointwise P10/P90 curves are not coherent ensemble-member trajectories and cannot supply peak/decline-year probability intervals"
+  },
   "product_surface": {
+    "primary_question": "What do World3 and its scenarios say about global trajectories, peaks, decline onsets, systemic deterioration, sensitivity and scenario differences?",
     "dominant_element": "interactive temporal trajectory chart",
-    "desktop_chart_share_target": "70–80% of main trajectory-stage width",
-    "primary_user_question": "What trajectories does World3 indicate, when do important changes occur, how robust are they, and what difference do alternative scenarios make?",
-    "software_metadata_on_primary_surface": "forbidden",
-    "theory_manual": "full EN/RO reader",
-    "evidence_and_limits": "secondary on-demand surface"
+    "desktop_chart_share_target": "approximately 70–80% of the trajectory stage",
+    "normal_ui_forbidden": ["internal registry codes", "promotion-gate codes", "candidate-interface status", "hashes", "test counts", "software-development metadata"],
+    "information_order": ["what can I learn", "why does it happen", "how sensitive/uncertain is it", "how does the model work", "methodological/technical provenance"]
   },
   "intervention_gate": {
     "numeric_intervention_results_currently_enabled": false,
-    "reason": "No intervention operator or authoritative intervention trajectory package has passed the scientific promotion gates.",
+    "reason": "No intervention operator or authoritative intervention trajectory package has passed the project's scientific validation for this release.",
     "must_have_before_enable": ["explicit baseline", "documented parameter/intervention mapping", "start year", "reproducible simulation", "effect metrics", "sensitivity analysis"],
-    "preparedness_semantics": "external resilience domains; not country policy prescriptions produced by World3"
+    "preparedness_semantics": "external resilience domains; not country-specific policy prescriptions produced by World3"
   },
-  "usefulness_gate": [
-    "new user can explain what World3 is",
-    "new user can distinguish BAU, BAU2 and BAU Hybrid 2026",
-    "new user can explain observations versus scenarios",
-    "new user can find principal peaks and sustained-decline onsets without README",
-    "new user can see what timing uncertainty is and is not identified",
-    "new user can identify the model mechanism associated with the selected variable",
-    "new user can see which intervention results are scientifically available and which are not",
-    "new user can determine whether intervention timing is currently quantifiable",
-    "new user can state the interpretation limits"
+  "visual_gate": {
+    "viewports": [[1920,1080],[1600,900],[1440,900],[1366,768],[820,1180],[390,844]],
+    "maximum_horizontal_overflow_px": 2,
+    "requirements": ["no intersecting primary panels", "cards remain within their container", "tooltips stay inside viewport", "no horizontal page scrollbar", "chart is visually dominant on desktop/laptop", "System Outlook follows chart", "timing cards are readable without README"]
+  },
+  "usefulness_gate_questions": [
+    "What is The Limits to Growth?", "What is World3?", "Who created it and why?", "What is BAU?", "What is BAU2 and how does it differ?", "What is BAU Hybrid 2026 and what did this project change?", "What do observations show relative to scenarios?", "When does industry peak?", "When does industrial decline begin?", "When does food per capita decline begin?", "When does population peak?", "Is there an estimated systemic deterioration/collapse window?", "How scenario-sensitive is timing?", "What does P10–P90 mean?", "What changes when the P10–P90 control is enabled?", "Why is P10–P90 not automatically an 80% probability statement?", "Why do BAU, BAU2 and Hybrid differ?", "Which results are relatively robust?", "What can World3 not claim?"
   ]
 }

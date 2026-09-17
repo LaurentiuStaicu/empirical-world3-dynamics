@@ -9,6 +9,7 @@ on:
       - 'docs/INFOCLAR_MODEL_SUITE_DESIGN_STANDARD_V1_1.md'
       - 'docs/WEB_V1_PRODUCT_CONTRACT.md'
       - 'docs/WORLD3_PRODUCT_RECOVERY.md'
+      - 'docs/PRODUCT_DESIGN_PRINCIPLES.md'
       - '.github/workflows/web-ci.yml'
   push:
     branches: [main]
@@ -19,6 +20,7 @@ on:
       - 'docs/INFOCLAR_MODEL_SUITE_DESIGN_STANDARD_V1_1.md'
       - 'docs/WEB_V1_PRODUCT_CONTRACT.md'
       - 'docs/WORLD3_PRODUCT_RECOVERY.md'
+      - 'docs/PRODUCT_DESIGN_PRINCIPLES.md'
       - '.github/workflows/web-ci.yml'
   workflow_dispatch:
 
@@ -48,7 +50,7 @@ jobs:
       - name: Install Chromium for visual gate
         working-directory: web
         run: npx playwright install --with-deps chromium
-      - name: Render and inspect 1440×900, 1366×768 and mobile gates
+      - name: Render and inspect six required responsive viewports
         working-directory: web
         run: npm run visual:gate
       - name: Upload product-recovery screenshots

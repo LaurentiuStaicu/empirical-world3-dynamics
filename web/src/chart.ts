@@ -1,22 +1,127 @@
 import type {Language} from './i18n';
 import type {ScenarioKey,ScenarioRow} from './data';
 import {latestObserved} from './data';
-import {SCENARIO_LABELS} from './insights';
-const NS='http://www.w3.org/2000/svg';const W=1200,H=650,M={left:76,right:28,top:34,bottom:58};
-export interface ChartOptions{rows:ScenarioRow[];language:Language;variableLabel:string;unit:string;enabled:Record<ScenarioKey,boolean>;showObserved:boolean;showSensitivity:boolean;minYear:number;maxYear:number;}
-function svgEl<K extends keyof SVGElementTagNameMap>(name:K,attrs:Record<string,string|number>={}):SVGElementTagNameMap[K]{const el=document.createElementNS(NS,name);for(const[k,v]of Object.entries(attrs))el.setAttribute(k,String(v));return el;}
-function fmt(v:number|null,language:Language){if(v===null)return'—';const abs=Math.abs(v);return v.toLocaleString(language==='ro'?'ro-RO':'en-US',{maximumFractionDigits:abs>=100?1:abs>=10?2:3});}
-function path(rows:ScenarioRow[],scenario:ScenarioKey,x:(y:number)=>number,y:(v:number)=>number,predicate:(r:ScenarioRow)=>boolean){let d='',open=false;for(const r of rows){const v=r[scenario];if(v===null||!predicate(r)){open=false;continue;}d+=`${open?'L':'M'}${x(r.year).toFixed(2)},${y(v).toFixed(2)} `;open=true;}return d.trim();}
-function labels(language:Language){return language==='ro'?{observed:'Observat',historical:'simulare istorică',projection:'proiecție de scenariu',future:'Începutul perioadei viitoare',sensitivity:'sensibilitate structurală P10–P90',hint:'Folosește săgețile stânga/dreapta pentru inspecție anuală.'}:{observed:'Observed',historical:'modelled historical',projection:'scenario projection',future:'Future period begins',sensitivity:'structural P10–P90 sensitivity',hint:'Use left/right arrow keys for annual inspection.'};}
-export function renderChart(container:HTMLElement,o:ChartOptions):void{const t=labels(o.language);const rows=o.rows.filter(r=>r.year>=o.minYear&&r.year<=o.maxYear);container.innerHTML='';if(!rows.length)return;const cutoff=latestObserved(o.rows)?.year??null;const vals:number[]=[];for(const r of rows){if(o.showObserved&&r.observed!==null)vals.push(r.observed);for(const s of Object.keys(o.enabled) as ScenarioKey[])if(o.enabled[s]&&r[s]!==null)vals.push(r[s]!);if(o.showSensitivity&&o.enabled.hybrid_2026){if(r.p10!==null)vals.push(r.p10);if(r.p90!==null)vals.push(r.p90);}}
-if(!vals.length)return;const minRaw=Math.min(...vals),maxRaw=Math.max(...vals),pad=Math.max((maxRaw-minRaw)*.08,Math.abs(maxRaw)*.02,.01);const minV=minRaw-pad,maxV=maxRaw+pad;const x=(year:number)=>M.left+((year-o.minYear)/Math.max(1,o.maxYear-o.minYear))*(W-M.left-M.right);const y=(v:number)=>H-M.bottom-((v-minV)/Math.max(1e-12,maxV-minV))*(H-M.top-M.bottom);
-const svg=svgEl('svg',{viewBox:`0 0 ${W} ${H}`,role:'img',tabindex:'0','aria-label':`${o.variableLabel}, ${o.unit}. ${t.hint}`});svg.classList.add('trajectory-chart');
-const grid=svgEl('g',{class:'chart-grid'});for(let i=0;i<=5;i++){const v=minV+(i/5)*(maxV-minV),yy=y(v);grid.append(svgEl('line',{x1:M.left,x2:W-M.right,y1:yy,y2:yy}));const tx=svgEl('text',{x:M.left-10,y:yy+4,'text-anchor':'end'});tx.textContent=fmt(v,o.language);grid.append(tx);}const span=o.maxYear-o.minYear;const step=span>100?25:span>60?20:span>30?10:5;for(let yr=Math.ceil(o.minYear/step)*step;yr<=o.maxYear;yr+=step){const tx=svgEl('text',{x:x(yr),y:H-22,'text-anchor':'middle'});tx.textContent=String(yr);grid.append(tx);}svg.append(grid);
-if(cutoff!==null&&cutoff>=o.minYear&&cutoff<o.maxYear){const future=svgEl('rect',{x:x(cutoff),y:M.top,width:Math.max(0,W-M.right-x(cutoff)),height:H-M.top-M.bottom,class:'future-zone'});svg.append(future);}
-if(o.showSensitivity&&o.enabled.hybrid_2026){const band=rows.filter(r=>r.p10!==null&&r.p90!==null);if(band.length>1){const upper=band.map(r=>`${x(r.year)},${y(r.p90!)}`),lower=[...band].reverse().map(r=>`${x(r.year)},${y(r.p10!)}`);svg.append(svgEl('polygon',{points:[...upper,...lower].join(' '),class:'uncertainty-band'}));}}
-for(const s of Object.keys(o.enabled) as ScenarioKey[]){if(!o.enabled[s])continue;const cls=s==='original_bau'?'bau':s==='original_bau2'?'bau2':'hybrid';const historical=path(rows,s,x,y,r=>cutoff===null||r.year<=cutoff);const future=path(rows,s,x,y,r=>cutoff!==null&&r.year>=cutoff);if(historical)svg.append(svgEl('path',{d:historical,class:`series-line series-${cls} series-history`}));if(future)svg.append(svgEl('path',{d:future,class:`series-line series-${cls} series-future`}));}
-if(o.showObserved){const g=svgEl('g',{class:'observations'});for(const r of rows)if(r.observed!==null)g.append(svgEl('circle',{cx:x(r.year),cy:y(r.observed),r:3.7}));svg.append(g);}
-if(cutoff!==null&&cutoff>=o.minYear&&cutoff<=o.maxYear){const xx=x(cutoff);svg.append(svgEl('line',{x1:xx,x2:xx,y1:M.top,y2:H-M.bottom,class:'cutoff-line'}));const tx=svgEl('text',{x:xx+8,y:M.top+16,class:'cutoff-label'});tx.textContent=`${t.future}: ${cutoff+1}`;svg.append(tx);}
-const guide=svgEl('line',{y1:M.top,y2:H-M.bottom,class:'hover-guide'});guide.style.display='none';svg.append(guide);const tip=document.createElement('div');tip.className='chart-tooltip';tip.hidden=true;container.append(svg,tip);
-const inspect=(clientX:number)=>{const rect=svg.getBoundingClientRect();const rel=((clientX-rect.left)/rect.width)*W;const approx=o.minYear+((rel-M.left)/(W-M.left-M.right))*(o.maxYear-o.minYear);const r=rows.reduce((best,c)=>Math.abs(c.year-approx)<Math.abs(best.year-approx)?c:best,rows[0]!);svg.dataset.inspectYear=String(r.year);const xx=x(r.year);guide.setAttribute('x1',String(xx));guide.setAttribute('x2',String(xx));guide.style.display='';const screenX=(xx/W)*rect.width;tip.style.left=`${Math.min(Math.max(screenX,130),rect.width-130)}px`;tip.style.top='52px';const parts=[`<div class="tip-head"><strong>${r.year}</strong><span>${o.variableLabel}</span></div>`];if(o.showObserved&&r.observed!==null)parts.push(`<div><b>${t.observed}</b><span>${fmt(r.observed,o.language)} ${o.unit}</span><em>${t.observed}</em></div>`);for(const s of Object.keys(o.enabled) as ScenarioKey[]){if(!o.enabled[s]||r[s]===null)continue;parts.push(`<div><b>${SCENARIO_LABELS[s][o.language]}</b><span>${fmt(r[s],o.language)} ${o.unit}</span><em>${cutoff!==null&&r.year>cutoff?t.projection:t.historical}</em></div>`);}if(o.showSensitivity&&o.enabled.hybrid_2026&&r.p10!==null&&r.p90!==null)parts.push(`<div><b>P10–P90</b><span>${fmt(r.p10,o.language)}–${fmt(r.p90,o.language)}</span><em>${t.sensitivity}</em></div>`);tip.innerHTML=parts.join('');tip.hidden=false;};
-svg.addEventListener('pointermove',e=>inspect(e.clientX));svg.addEventListener('pointerleave',()=>{guide.style.display='none';tip.hidden=true;});svg.addEventListener('keydown',e=>{if(e.key!=='ArrowLeft'&&e.key!=='ArrowRight')return;e.preventDefault();const current=Number(svg.dataset.inspectYear??cutoff??rows[0]!.year);let idx=rows.findIndex(r=>r.year>=current);if(idx<0)idx=rows.length-1;idx=Math.max(0,Math.min(rows.length-1,idx+(e.key==='ArrowRight'?1:-1)));const rect=svg.getBoundingClientRect();inspect(rect.left+(x(rows[idx]!.year)/W)*rect.width);});}
+import {SCENARIO_LABELS,trajectoryInsight} from './insights';
+
+const NS='http://www.w3.org/2000/svg';
+const W=1200,H=650,M={left:76,right:28,top:34,bottom:58};
+export interface ChartOptions{
+  rows:ScenarioRow[];
+  language:Language;
+  variableLabel:string;
+  unit:string;
+  enabled:Record<ScenarioKey,boolean>;
+  focusScenario:ScenarioKey;
+  showObserved:boolean;
+  showSensitivity:boolean;
+  minYear:number;
+  maxYear:number;
+}
+function svgEl<K extends keyof SVGElementTagNameMap>(name:K,attrs:Record<string,string|number>={}):SVGElementTagNameMap[K]{
+  const el=document.createElementNS(NS,name);
+  for(const[k,v]of Object.entries(attrs))el.setAttribute(k,String(v));
+  return el;
+}
+function fmt(v:number|null,language:Language){
+  if(v===null)return'—';
+  const abs=Math.abs(v);
+  return v.toLocaleString(language==='ro'?'ro-RO':'en-US',{maximumFractionDigits:abs>=100?1:abs>=10?2:3});
+}
+function path(rows:ScenarioRow[],scenario:ScenarioKey,x:(y:number)=>number,y:(v:number)=>number,predicate:(r:ScenarioRow)=>boolean){
+  let d='',open=false;
+  for(const r of rows){
+    const v=r[scenario];
+    if(v===null||!predicate(r)){open=false;continue;}
+    d+=`${open?'L':'M'}${x(r.year).toFixed(2)},${y(v).toFixed(2)} `;open=true;
+  }
+  return d.trim();
+}
+function labels(language:Language){
+  return language==='ro'?{
+    observed:'Observat',historical:'simulare istorică',projection:'proiecție de scenariu',future:'Perioada viitoare începe',
+    sensitivity:'interval de sensibilitate al modelului P10–P90',hint:'Folosește săgețile stânga/dreapta pentru inspecție anuală.',
+    peak:'Vârf',decline:'Început declin susținut',severe:'Deteriorare severă'
+  }:{
+    observed:'Observed',historical:'modelled historical',projection:'scenario projection',future:'Future period begins',
+    sensitivity:'model sensitivity range P10–P90',hint:'Use left/right arrow keys for annual inspection.',
+    peak:'Peak',decline:'Sustained decline onset',severe:'Severe deterioration'
+  };
+}
+function markerShape(kind:'peak'|'decline'|'severe',cx:number,cy:number):string{
+  if(kind==='peak')return `${cx},${cy-9} ${cx-8},${cy+6} ${cx+8},${cy+6}`;
+  if(kind==='decline')return `${cx},${cy+9} ${cx-8},${cy-6} ${cx+8},${cy-6}`;
+  return `${cx},${cy-9} ${cx+9},${cy} ${cx},${cy+9} ${cx-9},${cy}`;
+}
+
+export function renderChart(container:HTMLElement,o:ChartOptions):void{
+  const t=labels(o.language),rows=o.rows.filter(r=>r.year>=o.minYear&&r.year<=o.maxYear);
+  container.innerHTML='';if(!rows.length)return;
+  const cutoff=latestObserved(o.rows)?.year??null;
+  const vals:number[]=[];
+  for(const r of rows){
+    if(o.showObserved&&r.observed!==null)vals.push(r.observed);
+    for(const s of Object.keys(o.enabled) as ScenarioKey[])if(o.enabled[s]&&r[s]!==null)vals.push(r[s]!);
+    if(o.showSensitivity&&o.enabled.hybrid_2026){if(r.p10!==null)vals.push(r.p10);if(r.p90!==null)vals.push(r.p90);}
+  }
+  if(!vals.length)return;
+  const minRaw=Math.min(...vals),maxRaw=Math.max(...vals),pad=Math.max((maxRaw-minRaw)*.08,Math.abs(maxRaw)*.02,.01),minV=minRaw-pad,maxV=maxRaw+pad;
+  const x=(year:number)=>M.left+((year-o.minYear)/Math.max(1,o.maxYear-o.minYear))*(W-M.left-M.right);
+  const y=(v:number)=>H-M.bottom-((v-minV)/Math.max(1e-12,maxV-minV))*(H-M.top-M.bottom);
+  const svg=svgEl('svg',{viewBox:`0 0 ${W} ${H}`,role:'img',tabindex:'0','aria-label':`${o.variableLabel}, ${o.unit}. ${t.hint}`});svg.classList.add('trajectory-chart');
+
+  const grid=svgEl('g',{class:'chart-grid'});
+  for(let i=0;i<=5;i++){
+    const v=minV+(i/5)*(maxV-minV),yy=y(v);grid.append(svgEl('line',{x1:M.left,x2:W-M.right,y1:yy,y2:yy}));
+    const tx=svgEl('text',{x:M.left-10,y:yy+4,'text-anchor':'end'});tx.textContent=fmt(v,o.language);grid.append(tx);
+  }
+  const span=o.maxYear-o.minYear,step=span>100?25:span>60?20:span>30?10:5;
+  for(let yr=Math.ceil(o.minYear/step)*step;yr<=o.maxYear;yr+=step){const tx=svgEl('text',{x:x(yr),y:H-22,'text-anchor':'middle'});tx.textContent=String(yr);grid.append(tx);}svg.append(grid);
+
+  if(cutoff!==null&&cutoff>=o.minYear&&cutoff<o.maxYear)svg.append(svgEl('rect',{x:x(cutoff),y:M.top,width:Math.max(0,W-M.right-x(cutoff)),height:H-M.top-M.bottom,class:'future-zone'}));
+  if(o.showSensitivity&&o.enabled.hybrid_2026){
+    const band=rows.filter(r=>r.p10!==null&&r.p90!==null);
+    if(band.length>1){const upper=band.map(r=>`${x(r.year)},${y(r.p90!)}`),lower=[...band].reverse().map(r=>`${x(r.year)},${y(r.p10!)}`);svg.append(svgEl('polygon',{points:[...upper,...lower].join(' '),class:'uncertainty-band'}));}
+  }
+  for(const s of Object.keys(o.enabled) as ScenarioKey[]){
+    if(!o.enabled[s])continue;const cls=s==='original_bau'?'bau':s==='original_bau2'?'bau2':'hybrid';
+    const historical=path(rows,s,x,y,r=>cutoff===null||r.year<=cutoff),future=path(rows,s,x,y,r=>cutoff!==null&&r.year>=cutoff);
+    if(historical)svg.append(svgEl('path',{d:historical,class:`series-line series-${cls} series-history`}));
+    if(future)svg.append(svgEl('path',{d:future,class:`series-line series-${cls} series-future`}));
+  }
+  if(o.showObserved){const g=svgEl('g',{class:'observations'});for(const r of rows)if(r.observed!==null)g.append(svgEl('circle',{cx:x(r.year),cy:y(r.observed),r:3.7}));svg.append(g);}
+  if(cutoff!==null&&cutoff>=o.minYear&&cutoff<=o.maxYear){const xx=x(cutoff);svg.append(svgEl('line',{x1:xx,x2:xx,y1:M.top,y2:H-M.bottom,class:'cutoff-line'}));const tx=svgEl('text',{x:xx+8,y:M.top+16,class:'cutoff-label'});tx.textContent=`${t.future}: ${cutoff+1}`;svg.append(tx);}
+
+  if(o.enabled[o.focusScenario]){
+    const insight=trajectoryInsight(o.rows,o.focusScenario);
+    const events:Array<{kind:'peak'|'decline'|'severe';year:number|null;label:string}>=[
+      {kind:'peak',year:insight.peakYear,label:t.peak},
+      {kind:'decline',year:insight.declineOnsetYear,label:t.decline},
+      {kind:'severe',year:insight.severeDeclineYear,label:t.severe},
+    ];
+    const markerGroup=svgEl('g',{class:'event-markers'});
+    for(const event of events){
+      if(event.year===null||event.year<o.minYear||event.year>o.maxYear)continue;
+      const row=o.rows.find(r=>r.year===event.year),v=row?.[o.focusScenario]??null;if(v===null)continue;
+      const polygon=svgEl('polygon',{points:markerShape(event.kind,x(event.year),y(v)),class:`event-marker marker-${event.kind}`});
+      const title=svgEl('title');title.textContent=`${event.label}: ${event.year} · ${SCENARIO_LABELS[o.focusScenario][o.language]}`;polygon.append(title);markerGroup.append(polygon);
+    }
+    svg.append(markerGroup);
+  }
+
+  const guide=svgEl('line',{y1:M.top,y2:H-M.bottom,class:'hover-guide'});guide.style.display='none';svg.append(guide);
+  const tip=document.createElement('div');tip.className='chart-tooltip';tip.hidden=true;container.append(svg,tip);
+  const inspect=(clientX:number)=>{
+    const rect=svg.getBoundingClientRect(),rel=((clientX-rect.left)/rect.width)*W,approx=o.minYear+((rel-M.left)/(W-M.left-M.right))*(o.maxYear-o.minYear);
+    const r=rows.reduce((best,c)=>Math.abs(c.year-approx)<Math.abs(best.year-approx)?c:best,rows[0]!);svg.dataset.inspectYear=String(r.year);
+    const xx=x(r.year);guide.setAttribute('x1',String(xx));guide.setAttribute('x2',String(xx));guide.style.display='';
+    const screenX=(xx/W)*rect.width;tip.style.left=`${Math.min(Math.max(screenX,130),Math.max(130,rect.width-130))}px`;tip.style.top='52px';
+    const parts=[`<div class="tip-head"><strong>${r.year}</strong><span>${o.variableLabel}</span></div>`];
+    if(o.showObserved&&r.observed!==null)parts.push(`<div><b>${t.observed}</b><span>${fmt(r.observed,o.language)} ${o.unit}</span><em>${t.observed}</em></div>`);
+    for(const s of Object.keys(o.enabled) as ScenarioKey[]){if(!o.enabled[s]||r[s]===null)continue;parts.push(`<div><b>${SCENARIO_LABELS[s][o.language]}</b><span>${fmt(r[s],o.language)} ${o.unit}</span><em>${cutoff!==null&&r.year>cutoff?t.projection:t.historical}</em></div>`);}
+    if(o.showSensitivity&&o.enabled.hybrid_2026&&r.p10!==null&&r.p90!==null)parts.push(`<div><b>P10–P90</b><span>${fmt(r.p10,o.language)}–${fmt(r.p90,o.language)}</span><em>${t.sensitivity}</em></div>`);
+    tip.innerHTML=parts.join('');tip.hidden=false;
+  };
+  svg.addEventListener('pointermove',e=>inspect(e.clientX));
+  svg.addEventListener('pointerleave',()=>{guide.style.display='none';tip.hidden=true;});
+  svg.addEventListener('keydown',e=>{if(e.key!=='ArrowLeft'&&e.key!=='ArrowRight')return;e.preventDefault();const current=Number(svg.dataset.inspectYear??cutoff??rows[0]!.year);let idx=rows.findIndex(r=>r.year>=current);if(idx<0)idx=rows.length-1;idx=Math.max(0,Math.min(rows.length-1,idx+(e.key==='ArrowRight'?1:-1)));const rect=svg.getBoundingClientRect();inspect(rect.left+(x(rows[idx]!.year)/W)*rect.width);});
+}
