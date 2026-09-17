@@ -1,0 +1,1021 @@
+{
+  "status": "post_hoc_boundary_reconciliation",
+  "central_model_changed": false,
+  "source_sha256": {
+    "2021": "0bab3376509c79168ba19dff111e8a5ca7724043229af47af5cb5b6f71465644",
+    "2022": "c73fdc561aa402d0f6ed3cc35e5d961bee6af6e003c9c035b40f757f8480b76b",
+    "2023": "895cd81dd8662406189ad8adf5a2578dcb362cdb5cff7cca81b10ee6bd2447c6"
+  },
+  "plant_years": [
+    {
+      "plant_id": 315,
+      "plant_name": "AES Alamitos",
+      "year": 2021,
+      "plant_nameplate_capacity_mw": 1115,
+      "plant_net_generation_mwh": 536845,
+      "generator_net_generation_sum_mwh": 536845.0,
+      "plant_unadjusted_heat_input_mmbtu": 27920000.333,
+      "unit_heat_input_sum_mmbtu": 27920000.333,
+      "plant_unadjusted_co2_short_tons": 1659248.712,
+      "unit_co2_sum_short_tons": 1659248.712,
+      "reported_heat_rate_btu_per_net_kwh": 52007.563324609524,
+      "plant_generation_matches_generator_sum": true,
+      "plant_heat_matches_unit_sum": true,
+      "plant_co2_matches_unit_sum": true,
+      "plant_heat_source": "EPA/CAMD",
+      "plant_generation_sources": [
+        "EIA-923 Generator File"
+      ],
+      "units": [
+        {
+          "unit_id": "3",
+          "prime_mover": "ST",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "associated_generators": 1,
+          "heat_input_mmbtu": 2209739.4,
+          "heat_source": "EPA/CAMD"
+        },
+        {
+          "unit_id": "4",
+          "prime_mover": "ST",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "associated_generators": 1,
+          "heat_input_mmbtu": 2557780,
+          "heat_source": "EPA/CAMD"
+        },
+        {
+          "unit_id": "5",
+          "prime_mover": "ST",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "associated_generators": 1,
+          "heat_input_mmbtu": 2413404.1,
+          "heat_source": "EPA/CAMD"
+        },
+        {
+          "unit_id": "CT1",
+          "prime_mover": "CT",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "associated_generators": null,
+          "heat_input_mmbtu": 10134971.374,
+          "heat_source": "EPA/CAMD"
+        },
+        {
+          "unit_id": "CT2",
+          "prime_mover": "CT",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "associated_generators": null,
+          "heat_input_mmbtu": 10604105.459,
+          "heat_source": "EPA/CAMD"
+        }
+      ],
+      "generators": [
+        {
+          "generator_id": "3",
+          "prime_mover": "ST",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "nameplate_capacity_mw": 310,
+          "net_generation_mwh": 159250,
+          "generation_source": "EIA-923 Generator File",
+          "online_year": 1961
+        },
+        {
+          "generator_id": "4",
+          "prime_mover": "ST",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "nameplate_capacity_mw": 310,
+          "net_generation_mwh": 180910,
+          "generation_source": "EIA-923 Generator File",
+          "online_year": 1962
+        },
+        {
+          "generator_id": "5",
+          "prime_mover": "ST",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "nameplate_capacity_mw": 495,
+          "net_generation_mwh": 196685,
+          "generation_source": "EIA-923 Generator File",
+          "online_year": 1964
+        }
+      ]
+    },
+    {
+      "plant_id": 335,
+      "plant_name": "AES Huntington Beach",
+      "year": 2021,
+      "plant_nameplate_capacity_mw": 218,
+      "plant_net_generation_mwh": 83905,
+      "generator_net_generation_sum_mwh": 83905.0,
+      "plant_unadjusted_heat_input_mmbtu": 27725472.882,
+      "unit_heat_input_sum_mmbtu": 27725472.882,
+      "plant_unadjusted_co2_short_tons": 1647683.028,
+      "unit_co2_sum_short_tons": 1647683.0280000002,
+      "reported_heat_rate_btu_per_net_kwh": 330438.863977117,
+      "plant_generation_matches_generator_sum": true,
+      "plant_heat_matches_unit_sum": true,
+      "plant_co2_matches_unit_sum": true,
+      "plant_heat_source": "EPA/CAMD",
+      "plant_generation_sources": [
+        "EIA-923 Generator File"
+      ],
+      "units": [
+        {
+          "unit_id": "2",
+          "prime_mover": "ST",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "associated_generators": 1,
+          "heat_input_mmbtu": 1011180.2,
+          "heat_source": "EPA/CAMD"
+        },
+        {
+          "unit_id": "CT1",
+          "prime_mover": "CT",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "associated_generators": null,
+          "heat_input_mmbtu": 13416463.959,
+          "heat_source": "EPA/CAMD"
+        },
+        {
+          "unit_id": "CT2",
+          "prime_mover": "CT",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "associated_generators": null,
+          "heat_input_mmbtu": 13297828.723,
+          "heat_source": "EPA/CAMD"
+        }
+      ],
+      "generators": [
+        {
+          "generator_id": "2",
+          "prime_mover": "ST",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "nameplate_capacity_mw": 218,
+          "net_generation_mwh": 83905,
+          "generation_source": "EIA-923 Generator File",
+          "online_year": 1958
+        }
+      ]
+    },
+    {
+      "plant_id": 56108,
+      "plant_name": "T J Labbe Electric Generating Station",
+      "year": 2021,
+      "plant_nameplate_capacity_mw": 100.8,
+      "plant_net_generation_mwh": 22,
+      "generator_net_generation_sum_mwh": 22.0,
+      "plant_unadjusted_heat_input_mmbtu": 276526.471,
+      "unit_heat_input_sum_mmbtu": 276526.471,
+      "plant_unadjusted_co2_short_tons": 16434.047,
+      "unit_co2_sum_short_tons": 16434.047,
+      "reported_heat_rate_btu_per_net_kwh": 12569385.045454545,
+      "plant_generation_matches_generator_sum": true,
+      "plant_heat_matches_unit_sum": true,
+      "plant_co2_matches_unit_sum": true,
+      "plant_heat_source": "EPA/CAMD",
+      "plant_generation_sources": [
+        "Distributed from 923 Generation And Fuel"
+      ],
+      "units": [
+        {
+          "unit_id": "U-1",
+          "prime_mover": "GT",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "associated_generators": null,
+          "heat_input_mmbtu": 136017.176,
+          "heat_source": "EPA/CAMD"
+        },
+        {
+          "unit_id": "U-2",
+          "prime_mover": "GT",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "associated_generators": null,
+          "heat_input_mmbtu": 140509.295,
+          "heat_source": "EPA/CAMD"
+        }
+      ],
+      "generators": [
+        {
+          "generator_id": "U-1",
+          "prime_mover": "GT",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "nameplate_capacity_mw": 50.4,
+          "net_generation_mwh": 11,
+          "generation_source": "Distributed from 923 Generation And Fuel",
+          "online_year": 2005
+        },
+        {
+          "generator_id": "U-2",
+          "prime_mover": "GT",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "nameplate_capacity_mw": 50.4,
+          "net_generation_mwh": 11,
+          "generation_source": "Distributed from 923 Generation And Fuel",
+          "online_year": 2005
+        }
+      ]
+    },
+    {
+      "plant_id": 56283,
+      "plant_name": "Hargis-Hebert Electric Generating Statio",
+      "year": 2021,
+      "plant_nameplate_capacity_mw": 100.8,
+      "plant_net_generation_mwh": 30,
+      "generator_net_generation_sum_mwh": 30.0,
+      "plant_unadjusted_heat_input_mmbtu": 370831.2,
+      "unit_heat_input_sum_mmbtu": 370831.2,
+      "plant_unadjusted_co2_short_tons": 22036.404,
+      "unit_co2_sum_short_tons": 22036.404000000002,
+      "reported_heat_rate_btu_per_net_kwh": 12361040.0,
+      "plant_generation_matches_generator_sum": true,
+      "plant_heat_matches_unit_sum": true,
+      "plant_co2_matches_unit_sum": true,
+      "plant_heat_source": "EPA/CAMD",
+      "plant_generation_sources": [
+        "Distributed from 923 Generation And Fuel"
+      ],
+      "units": [
+        {
+          "unit_id": "U-1",
+          "prime_mover": "GT",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "associated_generators": null,
+          "heat_input_mmbtu": 188128.76,
+          "heat_source": "EPA/CAMD"
+        },
+        {
+          "unit_id": "U-2",
+          "prime_mover": "GT",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "associated_generators": null,
+          "heat_input_mmbtu": 182702.44,
+          "heat_source": "EPA/CAMD"
+        }
+      ],
+      "generators": [
+        {
+          "generator_id": "U-1",
+          "prime_mover": "GT",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "nameplate_capacity_mw": 50.4,
+          "net_generation_mwh": 15,
+          "generation_source": "Distributed from 923 Generation And Fuel",
+          "online_year": 2006
+        },
+        {
+          "generator_id": "U-2",
+          "prime_mover": "GT",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "nameplate_capacity_mw": 50.4,
+          "net_generation_mwh": 15,
+          "generation_source": "Distributed from 923 Generation And Fuel",
+          "online_year": 2006
+        }
+      ]
+    },
+    {
+      "plant_id": 315,
+      "plant_name": "AES Alamitos",
+      "year": 2022,
+      "plant_nameplate_capacity_mw": 1115,
+      "plant_net_generation_mwh": 630475,
+      "generator_net_generation_sum_mwh": 630475.0,
+      "plant_unadjusted_heat_input_mmbtu": 32573933.857,
+      "unit_heat_input_sum_mmbtu": 32573933.857,
+      "plant_unadjusted_co2_short_tons": 1935817.492,
+      "unit_co2_sum_short_tons": 1935817.492,
+      "reported_heat_rate_btu_per_net_kwh": 51665.70261628138,
+      "plant_generation_matches_generator_sum": true,
+      "plant_heat_matches_unit_sum": true,
+      "plant_co2_matches_unit_sum": true,
+      "plant_heat_source": "EPA/CAMD",
+      "plant_generation_sources": [
+        "EIA-923 Generator File"
+      ],
+      "units": [
+        {
+          "unit_id": "3",
+          "prime_mover": "ST",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "associated_generators": 1,
+          "heat_input_mmbtu": 3365585.6,
+          "heat_source": "EPA/CAMD"
+        },
+        {
+          "unit_id": "4",
+          "prime_mover": "ST",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "associated_generators": 1,
+          "heat_input_mmbtu": 3584156.4,
+          "heat_source": "EPA/CAMD"
+        },
+        {
+          "unit_id": "5",
+          "prime_mover": "ST",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "associated_generators": 1,
+          "heat_input_mmbtu": 1313354.1,
+          "heat_source": "EPA/CAMD"
+        },
+        {
+          "unit_id": "CT1",
+          "prime_mover": "CT",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "associated_generators": null,
+          "heat_input_mmbtu": 11909665.653,
+          "heat_source": "EPA/CAMD"
+        },
+        {
+          "unit_id": "CT2",
+          "prime_mover": "CT",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "associated_generators": null,
+          "heat_input_mmbtu": 12401172.104,
+          "heat_source": "EPA/CAMD"
+        }
+      ],
+      "generators": [
+        {
+          "generator_id": "3",
+          "prime_mover": "ST",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "nameplate_capacity_mw": 310,
+          "net_generation_mwh": 267469,
+          "generation_source": "EIA-923 Generator File",
+          "online_year": 1961
+        },
+        {
+          "generator_id": "4",
+          "prime_mover": "ST",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "nameplate_capacity_mw": 310,
+          "net_generation_mwh": 254622,
+          "generation_source": "EIA-923 Generator File",
+          "online_year": 1962
+        },
+        {
+          "generator_id": "5",
+          "prime_mover": "ST",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "nameplate_capacity_mw": 495,
+          "net_generation_mwh": 108384,
+          "generation_source": "EIA-923 Generator File",
+          "online_year": 1964
+        }
+      ]
+    },
+    {
+      "plant_id": 335,
+      "plant_name": "AES Huntington Beach",
+      "year": 2022,
+      "plant_nameplate_capacity_mw": 218,
+      "plant_net_generation_mwh": 106269,
+      "generator_net_generation_sum_mwh": 106269.0,
+      "plant_unadjusted_heat_input_mmbtu": 28481531.934,
+      "unit_heat_input_sum_mmbtu": 28481531.934,
+      "plant_unadjusted_co2_short_tons": 1692618.932,
+      "unit_co2_sum_short_tons": 1692618.932,
+      "reported_heat_rate_btu_per_net_kwh": 268013.5498969596,
+      "plant_generation_matches_generator_sum": true,
+      "plant_heat_matches_unit_sum": true,
+      "plant_co2_matches_unit_sum": true,
+      "plant_heat_source": "EPA/CAMD",
+      "plant_generation_sources": [
+        "EIA-923 Generator File"
+      ],
+      "units": [
+        {
+          "unit_id": "2",
+          "prime_mover": "ST",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "associated_generators": 1,
+          "heat_input_mmbtu": 1242383.4,
+          "heat_source": "EPA/CAMD"
+        },
+        {
+          "unit_id": "CT1",
+          "prime_mover": "CT",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "associated_generators": null,
+          "heat_input_mmbtu": 13809808.834,
+          "heat_source": "EPA/CAMD"
+        },
+        {
+          "unit_id": "CT2",
+          "prime_mover": "CT",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "associated_generators": null,
+          "heat_input_mmbtu": 13429339.7,
+          "heat_source": "EPA/CAMD"
+        }
+      ],
+      "generators": [
+        {
+          "generator_id": "2",
+          "prime_mover": "ST",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "nameplate_capacity_mw": 218,
+          "net_generation_mwh": 106269,
+          "generation_source": "EIA-923 Generator File",
+          "online_year": 1958
+        }
+      ]
+    },
+    {
+      "plant_id": 56108,
+      "plant_name": "T J Labbe Electric Generating Station",
+      "year": 2022,
+      "plant_nameplate_capacity_mw": 100.8,
+      "plant_net_generation_mwh": 95973,
+      "generator_net_generation_sum_mwh": 95973.0,
+      "plant_unadjusted_heat_input_mmbtu": 1041927.034,
+      "unit_heat_input_sum_mmbtu": 1041927.034,
+      "plant_unadjusted_co2_short_tons": 61918.539,
+      "unit_co2_sum_short_tons": 61918.539000000004,
+      "reported_heat_rate_btu_per_net_kwh": 10856.459983537037,
+      "plant_generation_matches_generator_sum": true,
+      "plant_heat_matches_unit_sum": true,
+      "plant_co2_matches_unit_sum": true,
+      "plant_heat_source": "EPA/CAMD",
+      "plant_generation_sources": [
+        "Distributed from 923 Generation And Fuel"
+      ],
+      "units": [
+        {
+          "unit_id": "U-1",
+          "prime_mover": "GT",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "associated_generators": null,
+          "heat_input_mmbtu": 511714.01,
+          "heat_source": "EPA/CAMD"
+        },
+        {
+          "unit_id": "U-2",
+          "prime_mover": "GT",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "associated_generators": null,
+          "heat_input_mmbtu": 530213.024,
+          "heat_source": "EPA/CAMD"
+        }
+      ],
+      "generators": [
+        {
+          "generator_id": "U-1",
+          "prime_mover": "GT",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "nameplate_capacity_mw": 50.4,
+          "net_generation_mwh": 47986.5,
+          "generation_source": "Distributed from 923 Generation And Fuel",
+          "online_year": 2005
+        },
+        {
+          "generator_id": "U-2",
+          "prime_mover": "GT",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "nameplate_capacity_mw": 50.4,
+          "net_generation_mwh": 47986.5,
+          "generation_source": "Distributed from 923 Generation And Fuel",
+          "online_year": 2005
+        }
+      ]
+    },
+    {
+      "plant_id": 56283,
+      "plant_name": "Hargis-Hebert Electric Generating Statio",
+      "year": 2022,
+      "plant_nameplate_capacity_mw": 100.8,
+      "plant_net_generation_mwh": 84246,
+      "generator_net_generation_sum_mwh": 84246.0,
+      "plant_unadjusted_heat_input_mmbtu": 927836.155,
+      "unit_heat_input_sum_mmbtu": 927836.155,
+      "plant_unadjusted_co2_short_tons": 55139.266,
+      "unit_co2_sum_short_tons": 55139.266,
+      "reported_heat_rate_btu_per_net_kwh": 11013.4149395817,
+      "plant_generation_matches_generator_sum": true,
+      "plant_heat_matches_unit_sum": true,
+      "plant_co2_matches_unit_sum": true,
+      "plant_heat_source": "EPA/CAMD",
+      "plant_generation_sources": [
+        "Distributed from 923 Generation And Fuel"
+      ],
+      "units": [
+        {
+          "unit_id": "U-1",
+          "prime_mover": "GT",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "associated_generators": null,
+          "heat_input_mmbtu": 464469.699,
+          "heat_source": "EPA/CAMD"
+        },
+        {
+          "unit_id": "U-2",
+          "prime_mover": "GT",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "associated_generators": null,
+          "heat_input_mmbtu": 463366.456,
+          "heat_source": "EPA/CAMD"
+        }
+      ],
+      "generators": [
+        {
+          "generator_id": "U-1",
+          "prime_mover": "GT",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "nameplate_capacity_mw": 50.4,
+          "net_generation_mwh": 42123,
+          "generation_source": "Distributed from 923 Generation And Fuel",
+          "online_year": 2006
+        },
+        {
+          "generator_id": "U-2",
+          "prime_mover": "GT",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "nameplate_capacity_mw": 50.4,
+          "net_generation_mwh": 42123,
+          "generation_source": "Distributed from 923 Generation And Fuel",
+          "online_year": 2006
+        }
+      ]
+    },
+    {
+      "plant_id": 315,
+      "plant_name": "AES Alamitos",
+      "year": 2023,
+      "plant_nameplate_capacity_mw": 1793,
+      "plant_net_generation_mwh": 3302287,
+      "generator_net_generation_sum_mwh": 3302287.0,
+      "plant_unadjusted_heat_input_mmbtu": 28045609.789,
+      "unit_heat_input_sum_mmbtu": 28045609.789,
+      "plant_unadjusted_co2_short_tons": 1666706.279,
+      "unit_co2_sum_short_tons": 1666706.2789999999,
+      "reported_heat_rate_btu_per_net_kwh": 8492.783876446838,
+      "plant_generation_matches_generator_sum": true,
+      "plant_heat_matches_unit_sum": true,
+      "plant_co2_matches_unit_sum": true,
+      "plant_heat_source": "EPA/CAPD",
+      "plant_generation_sources": [
+        "EIA-923 Generator File"
+      ],
+      "units": [
+        {
+          "unit_id": "3",
+          "prime_mover": "ST",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "associated_generators": 1,
+          "heat_input_mmbtu": 3526965.2,
+          "heat_source": "EPA/CAPD"
+        },
+        {
+          "unit_id": "4",
+          "prime_mover": "ST",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "associated_generators": 1,
+          "heat_input_mmbtu": 3272986.9,
+          "heat_source": "EPA/CAPD"
+        },
+        {
+          "unit_id": "5",
+          "prime_mover": "ST",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "associated_generators": 1,
+          "heat_input_mmbtu": 1658232.2,
+          "heat_source": "EPA/CAPD"
+        },
+        {
+          "unit_id": "CT1",
+          "prime_mover": "CT",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "associated_generators": null,
+          "heat_input_mmbtu": 9991321.469,
+          "heat_source": "EPA/CAPD"
+        },
+        {
+          "unit_id": "CT2",
+          "prime_mover": "CT",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "associated_generators": null,
+          "heat_input_mmbtu": 9596104.02,
+          "heat_source": "EPA/CAPD"
+        }
+      ],
+      "generators": [
+        {
+          "generator_id": "1A",
+          "prime_mover": "CT",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "nameplate_capacity_mw": 231,
+          "net_generation_mwh": 865430,
+          "generation_source": "EIA-923 Generator File",
+          "online_year": 2020
+        },
+        {
+          "generator_id": "1B",
+          "prime_mover": "CT",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "nameplate_capacity_mw": 231,
+          "net_generation_mwh": 840820,
+          "generation_source": "EIA-923 Generator File",
+          "online_year": 2020
+        },
+        {
+          "generator_id": "1S",
+          "prime_mover": "CA",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "nameplate_capacity_mw": 216,
+          "net_generation_mwh": 997783,
+          "generation_source": "EIA-923 Generator File",
+          "online_year": 2020
+        },
+        {
+          "generator_id": "3",
+          "prime_mover": "ST",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "nameplate_capacity_mw": 310,
+          "net_generation_mwh": 244532,
+          "generation_source": "EIA-923 Generator File",
+          "online_year": 1961
+        },
+        {
+          "generator_id": "4",
+          "prime_mover": "ST",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "nameplate_capacity_mw": 310,
+          "net_generation_mwh": 211851,
+          "generation_source": "EIA-923 Generator File",
+          "online_year": 1962
+        },
+        {
+          "generator_id": "5",
+          "prime_mover": "ST",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "nameplate_capacity_mw": 495,
+          "net_generation_mwh": 141871,
+          "generation_source": "EIA-923 Generator File",
+          "online_year": 1964
+        }
+      ]
+    },
+    {
+      "plant_id": 335,
+      "plant_name": "AES Huntington Beach",
+      "year": 2023,
+      "plant_nameplate_capacity_mw": 917.2,
+      "plant_net_generation_mwh": 3212590,
+      "generator_net_generation_sum_mwh": 3212590.0,
+      "plant_unadjusted_heat_input_mmbtu": 23538426.625,
+      "unit_heat_input_sum_mmbtu": 23538426.625,
+      "plant_unadjusted_co2_short_tons": 1398861.101,
+      "unit_co2_sum_short_tons": 1398861.101,
+      "reported_heat_rate_btu_per_net_kwh": 7326.931424489275,
+      "plant_generation_matches_generator_sum": true,
+      "plant_heat_matches_unit_sum": true,
+      "plant_co2_matches_unit_sum": true,
+      "plant_heat_source": "EPA/CAPD",
+      "plant_generation_sources": [
+        "EIA-923 Generator File"
+      ],
+      "units": [
+        {
+          "unit_id": "2",
+          "prime_mover": "ST",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "associated_generators": 1,
+          "heat_input_mmbtu": 1923821.5,
+          "heat_source": "EPA/CAPD"
+        },
+        {
+          "unit_id": "CT1",
+          "prime_mover": "CT",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "associated_generators": null,
+          "heat_input_mmbtu": 10834798.303,
+          "heat_source": "EPA/CAPD"
+        },
+        {
+          "unit_id": "CT2",
+          "prime_mover": "CT",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "associated_generators": null,
+          "heat_input_mmbtu": 10779806.822,
+          "heat_source": "EPA/CAPD"
+        }
+      ],
+      "generators": [
+        {
+          "generator_id": "1A",
+          "prime_mover": "CT",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "nameplate_capacity_mw": 231,
+          "net_generation_mwh": 965551,
+          "generation_source": "EIA-923 Generator File",
+          "online_year": 2020
+        },
+        {
+          "generator_id": "1B",
+          "prime_mover": "CT",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "nameplate_capacity_mw": 231,
+          "net_generation_mwh": 979904,
+          "generation_source": "EIA-923 Generator File",
+          "online_year": 2020
+        },
+        {
+          "generator_id": "1S",
+          "prime_mover": "CA",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "nameplate_capacity_mw": 237.2,
+          "net_generation_mwh": 1099765,
+          "generation_source": "EIA-923 Generator File",
+          "online_year": 2020
+        },
+        {
+          "generator_id": "2",
+          "prime_mover": "ST",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "nameplate_capacity_mw": 218,
+          "net_generation_mwh": 167370,
+          "generation_source": "EIA-923 Generator File",
+          "online_year": 1958
+        }
+      ]
+    },
+    {
+      "plant_id": 56108,
+      "plant_name": "T J Labbe Electric Generating Station",
+      "year": 2023,
+      "plant_nameplate_capacity_mw": 100.8,
+      "plant_net_generation_mwh": 46525,
+      "generator_net_generation_sum_mwh": 46525.0,
+      "plant_unadjusted_heat_input_mmbtu": 517957.459,
+      "unit_heat_input_sum_mmbtu": 517957.45900000003,
+      "plant_unadjusted_co2_short_tons": 30779.719,
+      "unit_co2_sum_short_tons": 30779.718999999997,
+      "reported_heat_rate_btu_per_net_kwh": 11132.884664159054,
+      "plant_generation_matches_generator_sum": true,
+      "plant_heat_matches_unit_sum": true,
+      "plant_co2_matches_unit_sum": true,
+      "plant_heat_source": "EPA/CAPD",
+      "plant_generation_sources": [
+        "Distributed from EIA-923 Generation and Fuel"
+      ],
+      "units": [
+        {
+          "unit_id": "U-1",
+          "prime_mover": "GT",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "associated_generators": null,
+          "heat_input_mmbtu": 264364.972,
+          "heat_source": "EPA/CAPD"
+        },
+        {
+          "unit_id": "U-2",
+          "prime_mover": "GT",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "associated_generators": null,
+          "heat_input_mmbtu": 253592.487,
+          "heat_source": "EPA/CAPD"
+        }
+      ],
+      "generators": [
+        {
+          "generator_id": "U-1",
+          "prime_mover": "GT",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "nameplate_capacity_mw": 50.4,
+          "net_generation_mwh": 23262.5,
+          "generation_source": "Distributed from EIA-923 Generation and Fuel",
+          "online_year": 2005
+        },
+        {
+          "generator_id": "U-2",
+          "prime_mover": "GT",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "nameplate_capacity_mw": 50.4,
+          "net_generation_mwh": 23262.5,
+          "generation_source": "Distributed from EIA-923 Generation and Fuel",
+          "online_year": 2005
+        }
+      ]
+    },
+    {
+      "plant_id": 56283,
+      "plant_name": "Hargis-Hebert Electric Generating Statio",
+      "year": 2023,
+      "plant_nameplate_capacity_mw": 100.8,
+      "plant_net_generation_mwh": 45956,
+      "generator_net_generation_sum_mwh": 45956.0,
+      "plant_unadjusted_heat_input_mmbtu": 515945.151,
+      "unit_heat_input_sum_mmbtu": 515945.151,
+      "plant_unadjusted_co2_short_tons": 30663.27,
+      "unit_co2_sum_short_tons": 30663.269999999997,
+      "reported_heat_rate_btu_per_net_kwh": 11226.937744799374,
+      "plant_generation_matches_generator_sum": true,
+      "plant_heat_matches_unit_sum": true,
+      "plant_co2_matches_unit_sum": true,
+      "plant_heat_source": "EPA/CAPD",
+      "plant_generation_sources": [
+        "Distributed from EIA-923 Generation and Fuel"
+      ],
+      "units": [
+        {
+          "unit_id": "U-1",
+          "prime_mover": "GT",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "associated_generators": null,
+          "heat_input_mmbtu": 266177.107,
+          "heat_source": "EPA/CAPD"
+        },
+        {
+          "unit_id": "U-2",
+          "prime_mover": "GT",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "associated_generators": null,
+          "heat_input_mmbtu": 249768.044,
+          "heat_source": "EPA/CAPD"
+        }
+      ],
+      "generators": [
+        {
+          "generator_id": "U-1",
+          "prime_mover": "GT",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "nameplate_capacity_mw": 50.4,
+          "net_generation_mwh": 22978,
+          "generation_source": "Distributed from EIA-923 Generation and Fuel",
+          "online_year": 2006
+        },
+        {
+          "generator_id": "U-2",
+          "prime_mover": "GT",
+          "status": "OP",
+          "primary_fuel": "NG",
+          "nameplate_capacity_mw": 50.4,
+          "net_generation_mwh": 22978,
+          "generation_source": "Distributed from EIA-923 Generation and Fuel",
+          "online_year": 2006
+        }
+      ]
+    }
+  ],
+  "transitions": [
+    {
+      "plant_id": 315,
+      "from_year": 2021,
+      "to_year": 2022,
+      "added_generator_ids": [],
+      "removed_generator_ids": [],
+      "nameplate_capacity_ratio": 1.0,
+      "net_generation_ratio": 1.174407883094748,
+      "heat_input_ratio": 1.16668816147897,
+      "reported_heat_rate_ratio": 0.9934267116843296
+    },
+    {
+      "plant_id": 315,
+      "from_year": 2022,
+      "to_year": 2023,
+      "added_generator_ids": [
+        "1A",
+        "1B",
+        "1S"
+      ],
+      "removed_generator_ids": [],
+      "nameplate_capacity_ratio": 1.6080717488789238,
+      "net_generation_ratio": 5.237776279789048,
+      "heat_input_ratio": 0.8609831993925142,
+      "reported_heat_rate_ratio": 0.1643795292889429
+    },
+    {
+      "plant_id": 335,
+      "from_year": 2021,
+      "to_year": 2022,
+      "added_generator_ids": [],
+      "removed_generator_ids": [],
+      "nameplate_capacity_ratio": 1.0,
+      "net_generation_ratio": 1.2665395387640783,
+      "heat_input_ratio": 1.0272694736431656,
+      "reported_heat_rate_ratio": 0.8110836197388684
+    },
+    {
+      "plant_id": 335,
+      "from_year": 2022,
+      "to_year": 2023,
+      "added_generator_ids": [
+        "1A",
+        "1B",
+        "1S"
+      ],
+      "removed_generator_ids": [],
+      "nameplate_capacity_ratio": 4.207339449541284,
+      "net_generation_ratio": 30.230735209703678,
+      "heat_input_ratio": 0.8264452445727072,
+      "reported_heat_rate_ratio": 0.027337914173765406
+    },
+    {
+      "plant_id": 56108,
+      "from_year": 2021,
+      "to_year": 2022,
+      "added_generator_ids": [],
+      "removed_generator_ids": [],
+      "nameplate_capacity_ratio": 1.0,
+      "net_generation_ratio": 4362.409090909091,
+      "heat_input_ratio": 3.7679106460661407,
+      "reported_heat_rate_ratio": 0.0008637224449944788
+    },
+    {
+      "plant_id": 56108,
+      "from_year": 2022,
+      "to_year": 2023,
+      "added_generator_ids": [],
+      "removed_generator_ids": [],
+      "nameplate_capacity_ratio": 1.0,
+      "net_generation_ratio": 0.48477175872380773,
+      "heat_input_ratio": 0.49711490545699766,
+      "reported_heat_rate_ratio": 1.0254617694019221
+    },
+    {
+      "plant_id": 56283,
+      "from_year": 2021,
+      "to_year": 2022,
+      "added_generator_ids": [],
+      "removed_generator_ids": [],
+      "nameplate_capacity_ratio": 1.0,
+      "net_generation_ratio": 2808.2,
+      "heat_input_ratio": 2.5020444746828208,
+      "reported_heat_rate_ratio": 0.000890978019614992
+    },
+    {
+      "plant_id": 56283,
+      "from_year": 2022,
+      "to_year": 2023,
+      "added_generator_ids": [],
+      "removed_generator_ids": [],
+      "nameplate_capacity_ratio": 1.0,
+      "net_generation_ratio": 0.5454977090900458,
+      "heat_input_ratio": 0.5560735569740759,
+      "reported_heat_rate_ratio": 1.0193875202549831
+    }
+  ]
+}
