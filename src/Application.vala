@@ -13,7 +13,7 @@ public class World3Empirical.Application : Gtk.Application {
             return;
         }
 
-        var window = new MainWindow (this);
+        var window = new SuiteWindow (this);
         window.present ();
     }
 
@@ -21,4 +21,3 @@ public class World3Empirical.Application : Gtk.Application {
         return new Application ().run (args);
     }
 }
-
