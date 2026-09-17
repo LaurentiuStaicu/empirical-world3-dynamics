@@ -1,0 +1,31 @@
+{
+  "authority": "Global Carbon Project",
+  "columns": {
+    "cement_mt": "GCB Cement",
+    "coal_mt": "GCB Solid Fuel",
+    "flaring_mt": "GCB Gas Flaring",
+    "gas_mt": "GCB Gas Fuel",
+    "oil_mt": "GCB Liquid Fuel",
+    "other_mt": "GCB Other"
+  },
+  "coverage": {
+    "end_year": 2024,
+    "start_year": 1990
+  },
+  "dataset": "Global Carbon Budget 2025 v1.0 / fossil CO2 by fuel",
+  "geography": "World",
+  "official_data_page": "https://globalcarbonbudget.org/datahub/the-latest-gcb-data-2025/",
+  "paper": "Friedlingstein et al., Global Carbon Budget 2025, Earth System Science Data, 2026",
+  "paper_url": "https://essd.copernicus.org/articles/18/3211/2026/",
+  "snapshot_output": "science/data/experiments/gcb_direct_fossil_1990_2024.csv",
+  "snapshot_sha256": "41c6acd64c6b9d53a2d6848d8e5d942d1c880744abec3c3b42209fc4b8afae8f",
+  "target_boundary": "Only coal_mt + oil_mt + gas_mt is used as observed direct-combustion target. Cement, flaring, and other remain explicit but excluded.",
+  "transport": {
+    "blob_sha": "eae66274101af7d15056e25a7bdec7bda5145bc4",
+    "note": "Transport copy used to materialize the compact audit snapshot; values are checked against the GCB 2025 fuel-category definition and coverage described by the official paper.",
+    "path": "data/fuel-breakdown.csv",
+    "repository": "datasets/co2-fossil-global"
+  },
+  "units": "MtCO2/year",
+  "vintage_limitation": "This is a current GCB 2025 vintage snapshot. It is not an archived release-as-of-origin series for the 2010-2024 validation origins."
+}
