@@ -4,13 +4,17 @@
 
 <h1 align="center">World3 Empirical</h1>
 
-<p align="center">Explore observed global indicators alongside the original World3 BAU and BAU2 trajectories and the conditional BAU Hybrid 2026 scenario.</p>
+<p align="center">Compare observed global indicators with World3 BAU, BAU2 and BAU Hybrid 2026 in an evidence-aware InfoClar interface.</p>
 
 <p align="center">
-  <img alt="Web product 1.0.0" src="https://img.shields.io/badge/web_product-1.0.0-3689e6">
-  <img alt="Scientific model 0.10.0" src="https://img.shields.io/badge/scientific_model-0.10.0-4e9a06">
-  <img alt="InfoClar Model Suite v1.1" src="https://img.shields.io/badge/InfoClar%20Model%20Suite-v1.1-3689e6">
-  <img alt="MIT license" src="https://img.shields.io/badge/license-MIT-blue">
+  <img alt="Version 1.0.0" src="https://img.shields.io/badge/Version-1.0.0-4e9a06">
+  <img alt="elementary OS 8" src="https://img.shields.io/badge/elementary_OS-8-64baff">
+  <a href="LICENSE"><img alt="License MIT" src="https://img.shields.io/badge/License-MIT-blue"></a>
+</p>
+
+<p align="center">
+  <img width="220" alt="Open Web App — Planned" src="https://img.shields.io/badge/Open_Web_App-Planned-9ca3af?style=for-the-badge">
+  <a href="https://github.com/LaurentiuStaicu/world3-empirical-flatpak/releases/download/v0.10.2/World3-Empirical-0.10.2-x86_64.flatpak"><img width="220" alt="Download Flatpak v0.10.2" src="https://img.shields.io/badge/Download_Flatpak-v0.10.2-087F73?style=for-the-badge"></a>
 </p>
 
 ## Current product direction — web first
