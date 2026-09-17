@@ -9,6 +9,7 @@ public class World3Empirical.ChartView : Gtk.DrawingArea {
     private string unit_label = "";
     private int projection_cutoff = 2025;
     private bool has_observations = true;
+    private bool romanian = false;
 
     private const double LEFT = 68;
     private const double RIGHT = 26;
@@ -22,7 +23,7 @@ public class World3Empirical.ChartView : Gtk.DrawingArea {
         set_vexpand (true);
         set_draw_func (draw_chart);
         add_css_class ("card");
-        tooltip_text = "Deplasează pointerul pentru anul și valorile celor trei modele";
+        refresh_tooltip ();
 
         var motion = new Gtk.EventControllerMotion ();
         motion.motion.connect ((x, y) => {
@@ -36,6 +37,22 @@ public class World3Empirical.ChartView : Gtk.DrawingArea {
             queue_draw ();
         });
         add_controller (motion);
+    }
+
+    public void set_romanian (bool enabled) {
+        romanian = enabled;
+        refresh_tooltip ();
+        queue_draw ();
+    }
+
+    private void refresh_tooltip () {
+        tooltip_text = romanian
+            ? "Deplasează pointerul pentru anul și valorile celor trei modele"
+            : "Move the pointer to inspect the year and all model values";
+    }
+
+    private string tr (string english, string ro) {
+        return romanian ? ro : english;
     }
 
     public void set_series (ScenarioData selected, string unit, int cutoff, bool observed) {
@@ -186,7 +203,7 @@ public class World3Empirical.ChartView : Gtk.DrawingArea {
         context.set_font_size (10);
         set_color (context, rgba ("#65737e", 0.95));
         context.move_to (LEFT + 8, 52);
-        context.show_text ("Unitate: " + unit_label);
+        context.show_text (tr ("Unit: ", "Unitate: ") + unit_label);
     }
 
     private void draw_year_grid (Cairo.Context context, double chart_width, double chart_height) {
@@ -293,20 +310,20 @@ public class World3Empirical.ChartView : Gtk.DrawingArea {
         set_color (context, rgba ("#c0392b", 0.95));
         context.move_to (x + 5, TOP + 12);
         context.show_text (has_observations
-            ? "observații până în %d".printf (cutoff)
-            : "proiecție după %d".printf (cutoff));
+            ? tr ("observations through %d", "observații până în %d").printf (cutoff)
+            : tr ("projection after %d", "proiecție după %d").printf (cutoff));
     }
 
     private void draw_legend (Cairo.Context context, double x, double y) {
         context.set_font_size (10.5);
         double offset = 0;
         if (has_observations) {
-            draw_point_legend (context, x, y, "date observate");
+            draw_point_legend (context, x, y, tr ("observed data", "date observate"));
             offset = 122;
         }
         legend_item (context, x + offset, y, rgba ("#7f8c8d", 0.95), "BAU original", true);
         legend_item (context, x + offset + 122, y, rgba ("#e67e22", 0.95), "BAU2 original", true);
-        hybrid_legend_item (context, x + offset + 252, y, "BAU Hibrid 2026");
+        hybrid_legend_item (context, x + offset + 252, y, tr ("BAU Hybrid 2026", "BAU Hibrid 2026"));
         if (show_uncertainty) {
             set_color (context, rgba ("#3689e6", 0.14));
             context.rectangle (x + offset + 406, y - 8, 18, 10);
@@ -393,19 +410,21 @@ public class World3Empirical.ChartView : Gtk.DrawingArea {
         context.set_font_size (12);
         set_color (context, rgba ("#17202a", 1));
         context.move_to (panel_x + 11, panel_y + 18);
-        string phase = year <= projection_cutoff ? "retrospectiv" : "proiecție";
-        context.show_text ("Anul %d · %s".printf (year, phase));
+        string phase = year <= projection_cutoff
+            ? tr ("retrospective", "retrospectiv")
+            : tr ("projection", "proiecție");
+        context.show_text (tr ("Year %d · %s", "Anul %d · %s").printf (year, phase));
         context.select_font_face ("Sans", Cairo.FontSlant.NORMAL, Cairo.FontWeight.NORMAL);
         context.set_font_size (9.5);
         set_color (context, rgba ("#65737e", 1));
         context.move_to (panel_x + 11, panel_y + 35);
-        context.show_text ("Unitate: " + unit_label);
+        context.show_text (tr ("Unit: ", "Unitate: ") + unit_label);
         context.set_font_size (10.5);
 
         double line_y = panel_y + 56;
         if (has_observations) {
             hover_line (context, panel_x + 11, line_y, rgba ("#17202a", 1),
-                        "Observat", data.value_at (ScenarioData.OBSERVED, year));
+                        tr ("Observed", "Observat"), data.value_at (ScenarioData.OBSERVED, year));
             line_y += 19;
         }
         hover_line (context, panel_x + 11, line_y, rgba ("#7f8c8d", 1),
@@ -415,7 +434,7 @@ public class World3Empirical.ChartView : Gtk.DrawingArea {
                     "BAU2 original", data.value_at (ScenarioData.ORIGINAL_BAU2, year));
         line_y += 19;
         hover_line (context, panel_x + 11, line_y, rgba ("#3689e6", 1),
-                    "BAU Hibrid 2026", data.value_at (ScenarioData.HYBRID_2026, year));
+                    tr ("BAU Hybrid 2026", "BAU Hibrid 2026"), data.value_at (ScenarioData.HYBRID_2026, year));
         if (show_uncertainty) {
             line_y += 19;
             double low = data.value_at (ScenarioData.P10, year);
