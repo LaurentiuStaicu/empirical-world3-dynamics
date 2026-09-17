@@ -1,4 +1,5 @@
 import dataclasses
+import hashlib
 import json
 import unittest
 
@@ -92,6 +93,14 @@ class DirectEmissionsProspectiveTests(unittest.TestCase):
         self.assertIn("BAU2", contract["frozen_comparators"])
         self.assertIn("BAU Hybrid 2026", contract["frozen_comparators"])
         self.assertIn("world3_resource_fraction_to_fossil_eroi", contract["forbidden"])
+
+    def test_gcb_snapshot_matches_declared_provenance_hash(self):
+        snapshot = ROOT / "science/data/experiments/gcb_direct_fossil_1990_2024.csv"
+        provenance = json.loads(
+            (ROOT / "science/data/experiments/gcb_direct_fossil_1990_2024.provenance.json").read_text(encoding="utf-8")
+        )
+        self.assertEqual(hashlib.sha256(snapshot.read_bytes()).hexdigest(), provenance["snapshot_sha256"])
+        self.assertIn("current GCB 2025 vintage", provenance["vintage_limitation"])
 
     def test_forbidden_coupling_remains_excluded(self):
         excluded = self.payload["boundary"]["excluded_mechanisms"]
