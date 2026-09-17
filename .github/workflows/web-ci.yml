@@ -8,16 +8,17 @@ on:
       - 'science/configs/real_model_structure.json'
       - 'docs/INFOCLAR_MODEL_SUITE_DESIGN_STANDARD_V1_1.md'
       - 'docs/WEB_V1_PRODUCT_CONTRACT.md'
+      - 'docs/WORLD3_PRODUCT_RECOVERY.md'
       - '.github/workflows/web-ci.yml'
   push:
-    branches:
-      - main
+    branches: [main]
     paths:
       - 'web/**'
       - 'data/scenarios/**'
       - 'science/configs/real_model_structure.json'
       - 'docs/INFOCLAR_MODEL_SUITE_DESIGN_STANDARD_V1_1.md'
       - 'docs/WEB_V1_PRODUCT_CONTRACT.md'
+      - 'docs/WORLD3_PRODUCT_RECOVERY.md'
       - '.github/workflows/web-ci.yml'
   workflow_dispatch:
 
@@ -26,29 +27,36 @@ permissions:
 
 jobs:
   web:
-    name: Type-check and build web v1
+    name: Product recovery, type-check, build and visual usefulness gate
     runs-on: ubuntu-latest
     steps:
       - name: Check out source
         uses: actions/checkout@v6
-
       - name: Set up Node
         uses: actions/setup-node@v6
         with:
           node-version: '22'
-
       - name: Install pinned web toolchain
         working-directory: web
         run: npm install --no-audit --no-fund
-
-      - name: Verify scientific non-regression contract
+      - name: Verify scientific and product contracts
         working-directory: web
         run: npm run check
-
       - name: Build static web product
         working-directory: web
         run: npm run build
-
+      - name: Install Chromium for visual gate
+        working-directory: web
+        run: npx playwright install --with-deps chromium
+      - name: Render and inspect 1440×900, 1366×768 and mobile gates
+        working-directory: web
+        run: npm run visual:gate
+      - name: Upload product-recovery screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: world3-product-recovery-visual-gate
+          path: web/visual-artifacts
+          if-no-files-found: error
       - name: Upload web build
         uses: actions/upload-artifact@v4
         with:
