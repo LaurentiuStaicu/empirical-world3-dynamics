@@ -1,0 +1,64 @@
+{
+  "contract_version": "world3-product-recovery-1.0.0",
+  "scientific_non_regression": {
+    "central_scenarios_immutable": ["original_bau", "original_bau2", "hybrid_2026"],
+    "energy_direct_emissions_verdict": "RETAIN AS DIAGNOSTIC",
+    "probability_language_for_scenario_fit": "forbidden",
+    "p10_p90_semantics": "pointwise structural sensitivity; not confidence interval; not future probability"
+  },
+  "metrics": {
+    "peak": {"definition": "first global maximum of the selected scenario series", "tie_break": "earliest year"},
+    "sustained_decline": {"search_start": "peak year", "window_years": 10, "minimum_non_increasing_annual_steps": 8, "minimum_net_decline_from_window_start_fraction": 0.05},
+    "severe_decline": {"threshold_fraction_of_peak": 0.8, "persistence_window_years": 5, "persistence_threshold_fraction_of_peak": 0.85, "minimum_persistence_hits": 4},
+    "stabilization": {"after": "sustained decline onset", "window_years": 10, "maximum_window_range_fraction_of_peak": 0.05, "maximum_net_change_fraction_of_peak": 0.02},
+    "recovery": {"requires_prior_severe_decline": true, "threshold_fraction_of_peak": 0.9, "persistence_years": 5},
+    "systemic_decline": {
+      "preregistered_indicators": ["industry_per_capita", "food_per_capita", "population", "human_welfare"],
+      "event": "sustained_decline", "primary_quorum": 3, "primary_clustering_window_years": 15,
+      "definition_sensitivity": {"quorums": [2,3,4], "clustering_windows_years": [10,15,20]}
+    },
+    "collapse_window": {
+      "preregistered_indicators": ["industry_per_capita", "food_per_capita", "population", "human_welfare"],
+      "event": "persistent severe_decline", "primary_quorum": 3, "primary_clustering_window_years": 20,
+      "definition_sensitivity": {"quorums": [2,3,4], "clustering_windows_years": [15,20,25]},
+      "label_rule": "do not emit 'collapse window' unless the primary severe-decline quorum is satisfied"
+    },
+    "scenario_alignment": {
+      "metric": "sMAPE", "evaluation_period": "years with both observation and scenario value",
+      "aggregate": "equal-weight mean of per-indicator sMAPE", "interpretation": "descriptive empirical alignment only",
+      "not": ["scenario probability", "forecast probability", "out-of-sample forecast skill unless separately demonstrated"],
+      "preregistered_indicators": ["population", "industry_per_capita", "food_per_capita", "pollution_pressure", "human_welfare"],
+      "excludes_from_aggregate": ["industry_total (derived diagnostic)", "persistent_pollution_stock (latent)", "resources_remaining_pct (latent)"]
+    },
+    "event_timing_uncertainty": {
+      "from_pointwise_p10_p90": "not permitted",
+      "reason": "pointwise quantile/envelope series are not coherent ensemble trajectories and do not identify a distribution of event times",
+      "required_for_timing_interval": "versioned coherent ensemble trajectories or an explicitly calibrated event-time distribution"
+    }
+  },
+  "product_surface": {
+    "dominant_element": "interactive temporal trajectory chart",
+    "desktop_chart_share_target": "70–80% of main trajectory-stage width",
+    "primary_user_question": "What trajectories does World3 indicate, when do important changes occur, how robust are they, and what difference do alternative scenarios make?",
+    "software_metadata_on_primary_surface": "forbidden",
+    "theory_manual": "full EN/RO reader",
+    "evidence_and_limits": "secondary on-demand surface"
+  },
+  "intervention_gate": {
+    "numeric_intervention_results_currently_enabled": false,
+    "reason": "No intervention operator or authoritative intervention trajectory package has passed the scientific promotion gates.",
+    "must_have_before_enable": ["explicit baseline", "documented parameter/intervention mapping", "start year", "reproducible simulation", "effect metrics", "sensitivity analysis"],
+    "preparedness_semantics": "external resilience domains; not country policy prescriptions produced by World3"
+  },
+  "usefulness_gate": [
+    "new user can explain what World3 is",
+    "new user can distinguish BAU, BAU2 and BAU Hybrid 2026",
+    "new user can explain observations versus scenarios",
+    "new user can find principal peaks and sustained-decline onsets without README",
+    "new user can see what timing uncertainty is and is not identified",
+    "new user can identify the model mechanism associated with the selected variable",
+    "new user can see which intervention results are scientifically available and which are not",
+    "new user can determine whether intervention timing is currently quantifiable",
+    "new user can state the interpretation limits"
+  ]
+}
