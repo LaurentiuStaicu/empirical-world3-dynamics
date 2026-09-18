@@ -10,7 +10,7 @@ from .scenarios import load_scenarios
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(prog="ewd")
+    parser = argparse.ArgumentParser(prog="world3-empirical")
     subparsers = parser.add_subparsers(dest="command", required=True)
     simulate = subparsers.add_parser("simulate", help="Run a declared scenario")
     simulate.add_argument("--scenario", choices=sorted(load_scenarios()), default="world3_standard")
