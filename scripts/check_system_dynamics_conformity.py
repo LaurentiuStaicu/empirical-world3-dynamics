@@ -120,17 +120,30 @@ def main() -> None:
         "existing S1-S10 promotion gate set changed",
     )
 
-    for candidate in structure["candidate_interfaces"]:
-        require(
-            candidate["active_by_default"] is False,
-            f"candidate {candidate['id']} is active before SD conformity evidence",
-        )
-        require(
-            candidate["central"] is False,
-            f"candidate {candidate['id']} is central before SD conformity evidence",
-        )
-
+    extension_contract = config["future_extension_activation_contract"]
     extension_ids = {
+        row["id"]
+        for row in extension_contract["required_before_activation"]
+    }
+    evidence_registry = extension_contract.get("extension_activation_evidence", {})
+
+    for candidate in structure["candidate_interfaces"]:
+        if candidate["active_by_default"] or candidate["central"]:
+            evidence = evidence_registry.get(candidate["id"])
+            require(
+                isinstance(evidence, dict),
+                f"candidate {candidate['id']} is active/central without SD activation evidence",
+            )
+            require(
+                evidence.get("s1_s10_pass") is True,
+                f"candidate {candidate['id']} lacks PASS evidence for S1-S10",
+            )
+            for gate_id in extension_ids:
+                require(
+                    evidence.get(gate_id) == "PASS",
+                    f"candidate {candidate['id']} lacks PASS evidence for {gate_id}",
+                )
+
         row["id"]
         for row in config["future_extension_activation_contract"]["required_before_activation"]
     }
