@@ -1,0 +1,112 @@
+{
+  "audit_version": "1.0",
+  "audit_date": "2026-09-18",
+  "baseline_commit": "6cbbf12fe3e13fdfda7a9d4b550a183ce1ae2242",
+  "scope": "Primary-source provenance audit only; no model equations, parameters, observations, mappings or retained scientific outputs are changed.",
+  "status_scale": {
+    "PASS": "Primary authority, definition and retained transport/value chain are verified to the stated scope.",
+    "WARNING": "No evidence of a material numerical error was found, but the primary-source transport or equivalence proof is not yet complete.",
+    "BLOCKER": "A provenance defect prevents the scientific input from being accepted at the stated role."
+  },
+  "sources": [
+    {
+      "id": "faostat_food_production_indices",
+      "overall_status": "PASS",
+      "model_role": "central observed food-per-capita target",
+      "authority": "Food and Agriculture Organization of the United Nations (FAO)",
+      "dataset": "FAOSTAT Production indices (Global, National - Annual)",
+      "primary_catalog_url": "https://data.fao.org/catalog/dataset/c978f18c-7f11-4564-a47d-fd92f6353b11",
+      "primary_download_url": "https://bulks-faostat.fao.org/production/Production_Indices_E_All_Data_(Normalized).zip",
+      "frozen_sha256": "04c58034493d91f02e2495570d3864212ac870ec7f829a5f22577d143a6a8a72",
+      "frozen_size_bytes": 16167197,
+      "selection": {
+        "Area": "World",
+        "Item": "Food",
+        "Element": "Gross per capita Production Index Number (2014-2016 = 100)"
+      },
+      "verification": "The clean post-merge reproducibility run fetched the primary FAOSTAT archive from the official FAO URL and accepted it only after exact size and SHA-256 verification. The FAO catalog states base period 2014-2016 and coverage through 2024.",
+      "caveat": "The FAO catalog contains stale supplemental prose mentioning 2004-2006, while its abstract, lineage/base-period field and the selected data element state 2014-2016. EWD explicitly selects the 2014-2016 element.",
+      "required_action": "None for central reproducibility. Preserve the frozen URL, size, hash and explicit element selection."
+    },
+    {
+      "id": "un_wpp2024_population_adapter",
+      "overall_status": "WARNING",
+      "model_role": "external population benchmark and plausibility guardrail; not the central observed population calibration target",
+      "authority": "United Nations, DESA, Population Division",
+      "dataset": "World Population Prospects 2024",
+      "primary_page": "https://population.un.org/wpp",
+      "recommended_primary_bulk_file": "WPP2024_Demographic_Indicators_Medium.csv.gz",
+      "current_transport": "OWID Grapher adapter retained in science/data/raw/bau2_e2026/2026-08-28/un_wpp2024_owid_adapter.csv",
+      "checked_world_anchors_persons": [
+        {"year": 2022, "primary_un": 8021407192, "adapter": 8021407196, "difference": 4},
+        {"year": 2023, "primary_un": 8091734930, "adapter": 8091734933, "difference": 3},
+        {"year": 2024, "primary_un": 8161972573, "adapter": 8161972574, "difference": 1},
+        {"year": 2025, "primary_un": 8231613070, "adapter": 8231613067, "difference": -3}
+      ],
+      "verification": "Checked anchors agree to within four persons on a global population above eight billion. The UN identifies WPP 2024 as the official estimates/projections source and recommends CSV bulk download for advanced use.",
+      "unresolved": "The repository does not retain and hash the official UN bulk file, so full-file primary-to-adapter equivalence is not yet proven.",
+      "required_action": "Freeze the official UN WPP 2024 bulk CSV/GZ, record its checksum and compare the complete World series used by the benchmark against the adapter before replacing or certifying the adapter."
+    },
+    {
+      "id": "undp_hdi_adapter",
+      "overall_status": "WARNING",
+      "model_role": "central observed proxy for World3 Human Welfare Index",
+      "authority": "United Nations Development Programme, Human Development Report Office",
+      "dataset": "HDR 2025 composite indices time series / Table 2 HDI trends",
+      "primary_page": "https://hdr.undp.org/data-center/documentation-and-downloads",
+      "primary_timeseries_url": "https://hdr.undp.org/sites/default/files/2025_HDR/HDR25_Composite_indices_complete_time_series.csv",
+      "current_transport": "OWID Grapher adapter retained in science/data/raw/bau2_e2026/2026-08-28/undp_hdi_owid_adapter.csv",
+      "checked_world_hdi_anchors": [
+        {"year": 1990, "primary_undp": 0.608, "adapter": 0.608},
+        {"year": 2000, "primary_undp": 0.651, "adapter": 0.651},
+        {"year": 2010, "primary_undp": 0.707, "adapter": 0.707},
+        {"year": 2015, "primary_undp": 0.731, "adapter": 0.731},
+        {"year": 2020, "primary_undp": 0.742, "adapter": 0.742},
+        {"year": 2021, "primary_undp": 0.742, "adapter": 0.742},
+        {"year": 2022, "primary_undp": 0.752, "adapter": 0.752},
+        {"year": 2023, "primary_undp": 0.756, "adapter": 0.756}
+      ],
+      "verification": "All World anchor values published in UNDP HDR 2025 Table 2 match the retained adapter exactly.",
+      "unresolved": "The official UNDP full time-series file is linked by UNDP but is not retained/hash-pinned in EWD; full annual primary-to-adapter equivalence has not yet been certified.",
+      "required_action": "Freeze the official UNDP time-series CSV, record checksum and compare the complete World 1990-2023 HDI series. Keep the separate conceptual warning that HDI is a proxy, not a direct observation of the World3 HWI construct."
+    },
+    {
+      "id": "energy_institute_2026",
+      "overall_status": "WARNING",
+      "model_role": "energy diagnostic/candidate evidence; not a central calibration target",
+      "authority": "Energy Institute",
+      "dataset": "Statistical Review of World Energy 2026, consolidated narrow dataset",
+      "primary_page": "https://www.energyinst.org/statistical-review/resources-and-data-downloads",
+      "current_transport": {
+        "repository": "https://github.com/shanewhi/world-energy-data",
+        "commit": "9fc01fc0ae5aea3955968f920e5cd1394fe5ad34",
+        "filename": "Statistical Review of World Energy Narrow format.csv",
+        "sha256": "c19b4922cb08316b45d7024233e8cd9d35e14429ee8cf65ab767e647cefc1f95",
+        "size_bytes": 21056006
+      },
+      "verification": "At the pinned mirror commit, all seven Total World base series used by EWD for 1965-2025 match the processed EWD values exactly; derived fossil/non-fossil totals and shares differ only by output-format rounding (maximum observed absolute difference below 5e-8). The mirror documentation identifies the Energy Institute 2026 consolidated narrow CSV as its input.",
+      "unresolved": "An independent byte-level checksum of a fresh official Energy Institute download has not been obtained, because the official download is mediated by the Energy Institute access flow.",
+      "required_action": "Acquire the official 2026 narrow CSV independently and compare its checksum/content with the pinned transport copy. Do not change the processed series unless a discrepancy is found."
+    },
+    {
+      "id": "global_carbon_project_fossil_co2_2025v15",
+      "overall_status": "WARNING",
+      "model_role": "direct-emissions diagnostic/candidate target; not promoted into the central model",
+      "authority": "Global Carbon Project",
+      "dataset": "The Global Carbon Project's fossil CO2 emissions dataset, version 2025v15",
+      "primary_record": "https://zenodo.org/records/17417124",
+      "primary_doi": "10.5281/zenodo.17417124",
+      "primary_file": "GCB2025v15_MtCO2_flat.csv",
+      "primary_file_md5": "3008e30d913af5926a83d0d0775fb72e",
+      "current_transport": {
+        "repository": "datasets/co2-fossil-global",
+        "path": "data/fuel-breakdown.csv",
+        "blob_sha": "eae66274101af7d15056e25a7bdec7bda5145bc4"
+      },
+      "verification": "The EWD 1990-2024 snapshot is exactly equal to the pinned transport file for every retained year/category. The primary GCP 2025v15 record supplies the underlying MtCO2 flat dataset. The primary 2024 World values for coal, oil, gas, cement, flaring and other round exactly to the one-decimal values in the EWD snapshot.",
+      "boundary": "Only coal + oil + natural gas are used by the direct-combustion diagnostic target; cement, flaring and other remain explicit and excluded.",
+      "unresolved": "A complete row-by-row comparison of the retained 1990-2024 snapshot directly against the primary Zenodo file has not yet been captured by the repository; current all-row proof is mirror-to-EWD plus primary anchor verification.",
+      "required_action": "Record or automate direct primary-file comparison when the Zenodo CSV can be fetched in the audit environment. No central-model change is justified by the evidence currently found."
+    }
+  ]
+}
