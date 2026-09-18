@@ -1,6 +1,12 @@
-# Empirical World3 Dynamics (EWD)
+<p align="center">
+  <img src="assets/icon.png" alt="Empirical World3 Dynamics icon" width="180">
+</p>
 
-![Version: 0.1](https://img.shields.io/badge/version-0.1-blue?style=flat-square)
-![License: MIT](https://img.shields.io/badge/license-MIT-lightgrey?style=flat-square)
+<h1 align="center">Empirical World3 Dynamics (EWD)</h1>
+
+<p align="center">
+  <img alt="Version: 0.1" src="https://img.shields.io/badge/version-0.1-blue?style=flat-square">
+  <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-lightgrey?style=flat-square">
+</p>
 
 Empirical World3 Dynamics (EWD) is an empirical World3 research model combining the system-dynamics engine with observed data, calibration artifacts, backtests, and explicit provenance. The repository contains the model code, source and processed datasets used to construct or calibrate it, retained validation/calibration results, and the scripts required to reproduce those scientific inputs and outputs. It is maintained as a model core without an end-user interface.
