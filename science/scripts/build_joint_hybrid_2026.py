@@ -859,17 +859,12 @@ def output_frame(
     frame = pd.DataFrame({"year": years})
     frame["observed"] = observed.reindex(years).to_numpy(dtype=float)
     frame["original_bau2"] = original_bau2.reindex(years).interpolate().to_numpy(dtype=float)
-    frame["fitted"] = np.where(years <= cutoff, central_values, np.nan)
     frame["original_bau"] = original_bau.reindex(years).interpolate().to_numpy(dtype=float)
-    frame["forecast_median"] = np.where(years >= cutoff, central_values, np.nan)
     # Preserve the actual ensemble quantiles.  The central line is one real
     # coupled World3 run (the medoid of observed targets), so it may legitimately
     # sit outside P10--P90 for a latent diagnostic that did not define the medoid.
     frame["p10"] = np.where(years >= cutoff, low, np.nan)
     frame["p90"] = np.where(years >= cutoff, high, np.nan)
-    frame["alternate_bau"] = np.nan
-    frame["sensitivity_low"] = frame["p10"]
-    frame["sensitivity_high"] = frame["p90"]
     frame["benchmark"] = (
         benchmark.reindex(years).to_numpy(dtype=float) if benchmark is not None else np.nan
     )
@@ -1127,7 +1122,7 @@ def export_outputs(candidates: list[Candidate], indicators: list[Indicator]) -> 
     export_fit_diagnostics(indicators, exported_central)
     manifest = {
         "model": "BAU Hybrid 2026 Joint",
-        "version": "0.10.0",
+        "version": "0.1",
         "scientific_status": "experimental scenario model; not a probabilistic forecast",
         "generated_on": SNAPSHOT_DATE,
         "structural_model": "official World3-03 scenario 2 (BAU2)",
