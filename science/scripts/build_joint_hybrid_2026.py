@@ -24,7 +24,7 @@ from pysd.py_backend.lookups import Lookups
 from scipy.stats import qmc
 import xarray as xr
 
-from build_bau2_e2026 import Indicator, build_indicators
+from world3_empirical.observations import Indicator, build_indicators
 from world3_empirical.world3_03 import _sanitized_model_text, _source_model_path
 
 
