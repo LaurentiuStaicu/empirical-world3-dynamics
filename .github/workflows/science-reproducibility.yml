@@ -1,0 +1,41 @@
+name: Scientific reproducibility
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  reproduce:
+    name: Reproduce retained scientific artifacts
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Install pinned uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          version: '0.11.33'
+
+      - name: Verify frozen input manifest
+        run: |
+          python3 scripts/generate_science_input_manifest.py
+          git diff --exit-code -- science/data/input_manifest.json
+
+      - name: Reproduce retained central scientific artifacts
+        run: |
+          uv run --locked --project science --extra world3-03 python scripts/reproduce_scientific_results.py
+
+      - name: Recheck retained direct-emissions diagnostic
+        run: |
+          uv run --locked --project science --extra world3-03 python science/scripts/evaluate_direct_emissions_prospective.py --check
