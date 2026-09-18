@@ -13,5 +13,25 @@
   },
   "geography": "Total World",
   "output": "data/processed/energy_institute_global_2026.csv",
-  "boundary_note": "These are gross primary-energy supply observations. They constrain the energy mix but do not directly observe EROI or net energy."
+  "boundary_note": "These are gross primary-energy supply observations. They constrain the energy mix but do not directly observe EROI or net energy.",
+  "transport_verification": {
+    "status": "PASS",
+    "scope": "Pinned mirror to processed EWD global series",
+    "checked_years": "1965-2025",
+    "checked_base_variables": [
+      "tes_ej",
+      "oil_tes_ej",
+      "gas_tes_ej",
+      "coal_tes_ej",
+      "nuclear_tes_ej",
+      "hydro_tes_ej",
+      "renewables_tes_ej"
+    ],
+    "maximum_absolute_difference_base_variables": 0,
+    "derived_output_rounding_maximum_absolute_difference": "<5e-8"
+  },
+  "official_source_equivalence": {
+    "status": "OPEN",
+    "note": "The Energy Institute official page publishes a 2026 consolidated narrow CSV, but an independently downloaded official file has not yet been checksum/content-compared with the pinned transport copy."
+  }
 }
