@@ -94,7 +94,7 @@ def parse_data(
 
 
 def fetch_national_accounts(timeout: int = 90) -> tuple[bytes, bytes]:
-    headers = {"User-Agent": "World3-Empirical-reproducibility/0.1"}
+    headers = {"User-Agent": "empirical-world3-dynamics/0.1"}
     request = urllib.request.Request(metadata_url(), headers=headers)
     with urllib.request.urlopen(request, timeout=timeout) as response:
         raw_metadata = response.read()
