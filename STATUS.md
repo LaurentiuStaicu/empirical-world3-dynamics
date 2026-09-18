@@ -6,6 +6,14 @@ Empirical World3 Dynamics (EWD) v0.1.0 is the initial public scientific-core bas
 
 The repository is maintained as a research model core without an end-user interface.
 
+## Canonical modeling paradigm
+
+**Empirical World3 Dynamics (EWD) is an empirical System Dynamics model based on the World3-03 structural core, with a separate empirical calibration, observation, and validation layer.**
+
+The World3-03 reference core is the System Dynamics structure: stocks, flows, auxiliaries, feedback loops, delays, nonlinear lookup functions, and numerical integration. Empirical observation bridges, parameter/candidate selection, production refits, medoid selection, fit diagnostics, sensitivity envelopes, and retrospective/prospective validation procedures are methodological layers applied to that structural model; they are not themselves evidence that the underlying feedback structure has been empirically validated.
+
+This paradigm statement is canonical for the project. Recovery, calibration, provenance work, validation, or future extensions must not silently change the World3-03 stock-flow/feedback paradigm or conflate the empirical layer with the structural SD core. Any proposed paradigm-level change must be explicit, scientifically justified, documented in this file before integration, and accompanied by the relevant boundary, dimensional, structural, extreme-condition, sensitivity, and validation evidence.
+
 ## Current empirical/scenario boundary
 
 The retained BAU Hybrid 2026 Joint manifest labels the central model an **experimental scenario model; not a probabilistic forecast**.
