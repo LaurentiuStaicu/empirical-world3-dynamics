@@ -324,7 +324,7 @@ def main() -> None:
         "production_decision": (
             "eligible_for_future_joint_refit"
             if accepted
-            else "do_not_change_BAU_Hybrid_2026_v0.10.0"
+            else "do_not_change_BAU_Hybrid_2026_v0.1"
         ),
         "lookup_window_start": LOOKUP_WINDOW_START,
         "origins": list(ORIGINS),
