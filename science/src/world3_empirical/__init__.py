@@ -1,4 +1,4 @@
-"""Empirical calibration tools for World3 system dynamics."""
+"""Empirical World3 Dynamics (EWD) scientific core."""
 
 from .model import OUTPUT_VARIABLES, SimulationResult, run_scenario
 from .scenarios import Scenario, load_scenarios
