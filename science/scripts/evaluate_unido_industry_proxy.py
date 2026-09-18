@@ -362,7 +362,7 @@ def main() -> None:
         "calibration_decision": (
             "eligible_for_controlled_future_joint_refit"
             if accepted
-            else "do_not_change_BAU_Hybrid_2026_v0.10.0"
+            else "do_not_change_BAU_Hybrid_2026_v0.1"
         ),
         "central_projection_changed": False,
         "dataset": "UNIDO National Accounts Database",
