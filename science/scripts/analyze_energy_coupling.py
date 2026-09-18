@@ -1,4 +1,4 @@
-"""Audit a conservative EROI feedback against BAU Hybrid 2026 v0.10.0.
+"""Audit a conservative EROI feedback against BAU Hybrid 2026 v0.1.
 
 This script does not replace the production trajectory.  It tests whether an
 energy-quality feedback can be introduced without a discontinuity, without
@@ -240,7 +240,7 @@ def main() -> None:
             "the proposed World3 resource-fraction link failed five-year multi-origin "
             "validation against persistence at primary, final and useful accounting "
             "boundaries. The coupling may inform structural sensitivity but cannot "
-            "replace the v0.10.0 central run."
+            "replace the v0.1 central run."
         ),
         "scenarios": {name: vars(value) for name, value in effective_scenarios.items()},
     }
