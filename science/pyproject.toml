@@ -23,7 +23,6 @@ world3-03 = [
 ]
 
 [project.scripts]
-ewd = "world3_empirical.cli:main"
 world3-empirical = "world3_empirical.cli:main"
 
 [tool.setuptools]
