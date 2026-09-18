@@ -1357,8 +1357,8 @@ wheels = [
 ]
 
 [[package]]
-name = "world3-empirical-2026"
-version = "0.10.0"
+name = "empirical-world3-dynamics"
+version = "0.1"
 source = { editable = "." }
 dependencies = [
     { name = "matplotlib" },
