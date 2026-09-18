@@ -6,7 +6,6 @@ import json
 from pathlib import Path
 
 import matplotlib.pyplot as plt
-import pandas as pd
 
 from world3_empirical.net_energy import SCENARIOS, run_named_scenarios
 
@@ -19,35 +18,6 @@ def main() -> None:
     OUTPUT.mkdir(parents=True, exist_ok=True)
     frame = run_named_scenarios()
     frame.to_csv(OUTPUT / "net_energy_scenarios.csv", index=False, float_format="%.8g")
-
-    # Application-compatible views. The legacy p10/p90 column names are used
-    # only as storage slots; in the UI they are explicitly labelled as a
-    # non-probabilistic structural range across the three named scenarios.
-    indexed = {
-        name: group.set_index("year")
-        for name, group in frame.groupby("scenario", sort=False)
-    }
-    for metric in ("system_eroi", "net_energy_index"):
-        central = indexed["quality_decline"][metric]
-        accelerated = indexed["accelerated_transition"][metric]
-        stress = indexed["fossil_lock_in_stress"][metric]
-        values = pd.concat([central, accelerated, stress], axis=1)
-        app_frame = pd.DataFrame(
-            {
-                "year": central.index.astype(int),
-                "observed": float("nan"),
-                "original_bau2": float("nan"),
-                "fitted": float("nan"),
-                "forecast_median": central.to_numpy(),
-                "p10": values.min(axis=1).to_numpy(),
-                "p90": values.max(axis=1).to_numpy(),
-                "alternate_bau": accelerated.to_numpy(),
-                "sensitivity_low": values.min(axis=1).to_numpy(),
-                "sensitivity_high": values.max(axis=1).to_numpy(),
-                "benchmark": float("nan"),
-            }
-        )
-        app_frame.to_csv(OUTPUT / f"{metric}.csv", index=False, float_format="%.8g")
 
     selected = frame[frame["year"].isin([2025, 2030, 2035, 2050, 2100])]
     summary = selected[
@@ -85,7 +55,7 @@ def main() -> None:
 
     manifest = {
         "module": "net_energy_eroi",
-        "version": "0.5.0",
+        "version": "0.1",
         "status": "scenario_only_not_empirically_calibrated",
         "identity": "net = gross * (1 - 1 / EROI_system)",
         "mixing_rule": "1 / EROI_system = sum(source_share / source_EROI)",
