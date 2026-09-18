@@ -49,7 +49,7 @@ def fetch(relative: str, metadata: dict[str, object], *, check_only: bool) -> No
     try:
         request = urllib.request.Request(
             url,
-            headers={"User-Agent": "World3-Empirical-reproducibility/0.1"},
+            headers={"User-Agent": "empirical-world3-dynamics/0.1"},
         )
         with urllib.request.urlopen(request, timeout=120) as response, temporary.open("wb") as output:
             shutil.copyfileobj(response, output, length=1024 * 1024)
