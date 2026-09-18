@@ -1,27 +1,11 @@
-# Flatpak Builder output
-.flatpak-builder/
-build-dir/
-repo/
 science/outputs/
 .venv/
 science/data/raw/bau2_e2026/2026-08-28/faostat_production_indices.zip
 
-# Web build and generated scientific copies
-web/node_modules/
-web/dist/
-web/public/data/
-web/public/world3.svg
-
-# Generated distributable bundles belong in GitHub Releases
-*.flatpak
-*.flatpakref
-
-# Python caches
 __pycache__/
 *.py[cod]
 *.egg-info/
 
-# Editor and desktop metadata
 .idea/
 .vscode/
 *~
