@@ -310,7 +310,7 @@ def main() -> None:
         "audit": "UNIDO real manufacturing IIP as industrial target",
         "status": "accepted_as_future_refit_candidate" if accepted else "accepted_as_independent_diagnostic_only",
         "data_decision": "add_to_observed_data_registry_as_independent_real_output_benchmark",
-        "calibration_decision": "eligible_for_controlled_future_joint_refit" if accepted else "do_not_change_BAU_Hybrid_2026_v0.10.0",
+        "calibration_decision": "eligible_for_controlled_future_joint_refit" if accepted else "do_not_change_BAU_Hybrid_2026_v0.1",
         "central_projection_changed": False,
         "public_reconstruction_not_official_world_aggregate": True,
         "observation_start": int(iip_per_capita().index.min()),
