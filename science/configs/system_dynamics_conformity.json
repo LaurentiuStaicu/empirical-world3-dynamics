@@ -48,25 +48,82 @@
     "interpretation_rule": "Improved statistical fit or forecast error is evidence about the empirical procedure, not proof that the underlying feedback structure is causally validated."
   },
   "criteria": [
-    {"id": "SD01", "name": "problem_statement_and_purpose"},
-    {"id": "SD02", "name": "system_boundary"},
-    {"id": "SD03", "name": "endogenous_vs_exogenous_variables"},
-    {"id": "SD04", "name": "reference_modes_behavior_over_time"},
-    {"id": "SD05", "name": "stocks"},
-    {"id": "SD06", "name": "inflows_and_outflows"},
-    {"id": "SD07", "name": "auxiliaries"},
-    {"id": "SD08", "name": "closed_feedback_loops"},
-    {"id": "SD09", "name": "reinforcing_and_balancing_loops"},
-    {"id": "SD10", "name": "delays"},
-    {"id": "SD11", "name": "nonlinearities_and_lookup_functions"},
-    {"id": "SD12", "name": "dimensional_consistency"},
-    {"id": "SD13", "name": "conservation_and_accumulation_identities"},
-    {"id": "SD14", "name": "integration_method_and_numerical_error"},
-    {"id": "SD15", "name": "extreme_condition_behavior"},
-    {"id": "SD16", "name": "sensitivity"},
-    {"id": "SD17", "name": "boundary_adequacy"},
-    {"id": "SD18", "name": "behavior_reproduction"},
-    {"id": "SD19", "name": "structural_vs_measurement_model_separation"}
+    {
+      "id": "SD01",
+      "name": "problem_statement_and_purpose"
+    },
+    {
+      "id": "SD02",
+      "name": "system_boundary"
+    },
+    {
+      "id": "SD03",
+      "name": "endogenous_vs_exogenous_variables"
+    },
+    {
+      "id": "SD04",
+      "name": "reference_modes_behavior_over_time"
+    },
+    {
+      "id": "SD05",
+      "name": "stocks"
+    },
+    {
+      "id": "SD06",
+      "name": "inflows_and_outflows"
+    },
+    {
+      "id": "SD07",
+      "name": "auxiliaries"
+    },
+    {
+      "id": "SD08",
+      "name": "closed_feedback_loops"
+    },
+    {
+      "id": "SD09",
+      "name": "reinforcing_and_balancing_loops"
+    },
+    {
+      "id": "SD10",
+      "name": "delays"
+    },
+    {
+      "id": "SD11",
+      "name": "nonlinearities_and_lookup_functions"
+    },
+    {
+      "id": "SD12",
+      "name": "dimensional_consistency"
+    },
+    {
+      "id": "SD13",
+      "name": "conservation_and_accumulation_identities"
+    },
+    {
+      "id": "SD14",
+      "name": "integration_method_and_numerical_error"
+    },
+    {
+      "id": "SD15",
+      "name": "extreme_condition_behavior"
+    },
+    {
+      "id": "SD16",
+      "name": "sensitivity"
+    },
+    {
+      "id": "SD17",
+      "name": "boundary_adequacy"
+    },
+    {
+      "id": "SD18",
+      "name": "behavior_reproduction"
+    },
+    {
+      "id": "SD19",
+      "name": "structural_vs_measurement_model_separation"
+    }
   ],
   "future_extension_activation_contract": {
     "applies_to": [
@@ -77,22 +134,57 @@
       "all other future structural extensions"
     ],
     "required_before_activation": [
-      {"id": "E1", "name": "explicit_causal_mechanism"},
-      {"id": "E2", "name": "clear_stock_flow_location"},
-      {"id": "E3", "name": "identified_feedback_loop"},
-      {"id": "E4", "name": "units_and_dimensional_consistency"},
-      {"id": "E5", "name": "relevant_delays"},
-      {"id": "E6", "name": "empirical_or_theoretical_evidence"},
-      {"id": "E7", "name": "parameterization"},
-      {"id": "E8", "name": "extreme_condition_tests"},
-      {"id": "E9", "name": "sensitivity_analysis"},
-      {"id": "E10", "name": "incremental_validation"}
+      {
+        "id": "E1",
+        "name": "explicit_causal_mechanism"
+      },
+      {
+        "id": "E2",
+        "name": "clear_stock_flow_location"
+      },
+      {
+        "id": "E3",
+        "name": "identified_feedback_loop"
+      },
+      {
+        "id": "E4",
+        "name": "units_and_dimensional_consistency"
+      },
+      {
+        "id": "E5",
+        "name": "relevant_delays"
+      },
+      {
+        "id": "E6",
+        "name": "empirical_or_theoretical_evidence"
+      },
+      {
+        "id": "E7",
+        "name": "parameterization"
+      },
+      {
+        "id": "E8",
+        "name": "extreme_condition_tests"
+      },
+      {
+        "id": "E9",
+        "name": "sensitivity_analysis"
+      },
+      {
+        "id": "E10",
+        "name": "incremental_validation"
+      }
     ],
     "activation_rule": "A candidate mechanism may not become active_by_default or central unless all E1-E10 requirements have explicit PASS evidence and the existing S1-S10 promotion gates also pass.",
-    "correlation_rule": "Availability of data, statistical association, improved fit or lower forecast error is insufficient by itself to justify structural activation."
+    "correlation_rule": "Availability of data, statistical association, improved fit or lower forecast error is insufficient by itself to justify structural activation.",
+    "extension_activation_evidence": {}
   },
   "numerical_convergence_diagnostic": {
-    "time_steps_year": [0.5, 0.25, 0.125],
+    "time_steps_year": [
+      0.5,
+      0.25,
+      0.125
+    ],
     "comparison": "annual outputs for BAU2 at common timestamps",
     "normalized_rmse_scale": "maximum absolute value of the finest-step series",
     "provisional_warning_threshold": 0.005,
