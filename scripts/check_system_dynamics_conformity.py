@@ -144,9 +144,6 @@ def main() -> None:
                     f"candidate {candidate['id']} lacks PASS evidence for {gate_id}",
                 )
 
-        row["id"]
-        for row in config["future_extension_activation_contract"]["required_before_activation"]
-    }
     require(
         extension_ids == {f"E{i}" for i in range(1, 11)},
         "future extension activation contract must contain E1-E10",
