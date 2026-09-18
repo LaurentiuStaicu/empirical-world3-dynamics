@@ -366,7 +366,7 @@ def main() -> None:
         "production_decision": (
             "eligible_for_future_joint_refit"
             if accepted
-            else "do_not_change_BAU_Hybrid_2026_v0.10.0"
+            else "do_not_change_BAU_Hybrid_2026_v0.1"
         ),
         "taxonomy_frozen_before_policy_evaluation": True,
         "mechanisms": list(MECHANISMS),
