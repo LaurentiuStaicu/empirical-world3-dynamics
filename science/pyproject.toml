@@ -3,9 +3,9 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "world3-empirical-2026"
+name = "empirical-world3-dynamics"
 version = "0.1"
-description = "Reproducible World3 empirical model and calibration engine"
+description = "Reproducible Empirical World3 Dynamics model and calibration engine"
 requires-python = ">=3.11"
 dependencies = [
   "numpy>=1.26,<2",
