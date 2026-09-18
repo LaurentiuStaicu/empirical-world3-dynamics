@@ -1,0 +1,26 @@
+# Changelog
+
+All notable public scientific-core releases of Empirical World3 Dynamics (EWD) are recorded here.
+
+## 0.1.0 - 2026-09-18
+
+Initial public scientific-core baseline.
+
+### Included
+
+- World3 system-dynamics reference engine and retained scenario definitions;
+- observed source and processed data used by the scientific core;
+- calibration, backtest and validation artifacts;
+- BAU Hybrid 2026 retained manifests and diagnostics;
+- provenance and scientific-input manifests;
+- conservative extension contracts and promotion gates;
+- reproducibility and validation scripts;
+- standardized EWD project identity and release metadata.
+
+### Scientific status
+
+The retained hybrid model is an experimental scenario model, not a probabilistic forecast. The production trajectory is a post-validation refit rather than an independent holdout forecast. Pointwise P10-P90 ranges are structural sensitivity envelopes, not probability intervals. Several parameters remain weakly identified.
+
+### Scope boundary
+
+This release intentionally excludes the previous end-user product layer. Candidate external mechanisms remain outside the central model unless their declared scientific promotion gates are passed.
