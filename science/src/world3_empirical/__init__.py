@@ -15,4 +15,4 @@ __all__ = [
     "run_world3_03",
 ]
 
-__version__ = "0.1"
+__version__ = "0.1.0"
