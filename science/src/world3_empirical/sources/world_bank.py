@@ -29,7 +29,7 @@ def build_url(indicator: str, country: str = "WLD") -> str:
 
 
 def fetch_world_bank_series(indicator: str, country: str = "WLD", timeout: int = 30) -> tuple[bytes, pd.DataFrame]:
-    request = urllib.request.Request(build_url(indicator, country), headers={"User-Agent": "world3-empirical-2026/0.2"})
+    request = urllib.request.Request(build_url(indicator, country), headers={"User-Agent": "empirical-world3-dynamics/0.1"})
     with urllib.request.urlopen(request, timeout=timeout) as response:
         raw = response.read()
     return raw, parse_world_bank_payload(raw, indicator)
