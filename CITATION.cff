@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use Empirical World3 Dynamics in research, please cite this version."
+type: software
+title: "Empirical World3 Dynamics"
+version: 0.1.0
+date-released: 2026-09-18
+authors:
+  - family-names: "Staicu"
+    given-names: "Laurentiu"
+repository-code: "https://github.com/LaurentiuStaicu/empirical-world3-dynamics"
+url: "https://github.com/LaurentiuStaicu/empirical-world3-dynamics"
+license: MIT
+abstract: "An empirical World3 research model combining the system-dynamics engine with observed data, calibration artifacts, backtests, and explicit provenance."
+keywords:
+  - World3
+  - system dynamics
+  - empirical calibration
+  - scenario modeling
+  - research software
