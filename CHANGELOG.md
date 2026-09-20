@@ -6,6 +6,7 @@ All notable public scientific-core releases of Empirical World3 Dynamics (EWD) a
 
 ### Repository governance
 
+- added workflow-level concurrency so superseded scientific-reproducibility runs on the same branch/PR head are canceled instead of consuming duplicate compute;
 - added EWD-specific contribution and support guidance;
 - added structured reproducibility and scientific/model issue forms;
 - added a pull-request checklist preserving the World3-03 structural core, scenario/non-probabilistic boundary and candidate-extension gates;
