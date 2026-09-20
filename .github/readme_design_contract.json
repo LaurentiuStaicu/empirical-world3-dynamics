@@ -1,0 +1,85 @@
+{
+  "contract_version": "1.0",
+  "frozen_on": "2026-09-20",
+  "implementation_status": "PREVIEW_ONLY_PUBLIC_README_UNCHANGED",
+  "purpose": "Define a professional EWD repository landing page using the shared scientific-model suite shell while preserving the canonical World3-03 System Dynamics paradigm and empirical/scenario interpretation boundaries.",
+  "suite_visual_shell": {
+    "icon_width_px": 112,
+    "title_html": "h2 centered",
+    "badge_style": "flat-square",
+    "palette": [
+      "#333333",
+      "#707070",
+      "#a0a0a0",
+      "white",
+      "black"
+    ],
+    "header_badges": [
+      "release",
+      "Scientific reproducibility",
+      "license"
+    ],
+    "tagline": "one centered sentence",
+    "quick_navigation": "one compact centered row",
+    "body_typography": "normal GitHub Markdown size"
+  },
+  "canonical_identity": {
+    "plain_language_purpose": "EWD combines the World3-03 System Dynamics structure with observed data, reproducible calibration artifacts, validation checks and explicit provenance.",
+    "technical_identity": "An empirical System Dynamics model based on the World3-03 structural core, with separate empirical observation, calibration, selection and validation layers.",
+    "paradigm_boundary": "The World3-03 structural core remains the System Dynamics model. Empirical fitting, production refits, diagnostics and extensions do not silently redefine or validate the feedback structure."
+  },
+  "current_public_state": {
+    "version": "0.1.0",
+    "release_status": "initial public scientific-core baseline",
+    "central_model_status": "experimental scenario model; not a probabilistic forecast",
+    "model_selection_frozen_through": 2018,
+    "production_refit_observations_through": 2025,
+    "admissible_production_candidates": 12,
+    "central_trajectory_rule": "trajectory medoid of admissible production candidates",
+    "holdout_interpretation": "2019-latest belongs to the model-selection procedure; the displayed production trajectory is a separate post-validation refit",
+    "uncertainty_interpretation": "P10-P90 is a pointwise structural sensitivity envelope, not a calibrated probability or confidence interval",
+    "extension_status": "candidate extensions inactive unless explicit promotion gates pass",
+    "weak_identification_examples": [
+      "resources",
+      "industrial output ratio",
+      "industrial capital lifetime",
+      "land yield",
+      "pollution generation",
+      "pollution assimilation"
+    ]
+  },
+  "first_page_order": [
+    "What is EWD?",
+    "Model at a glance",
+    "How EWD is structured",
+    "Scientific status at a glance",
+    "What EWD establishes and does not establish",
+    "Reproduce the retained scientific baseline",
+    "Data and provenance",
+    "Repository map",
+    "Where should I start?",
+    "Documentation",
+    "Support, citation and license"
+  ],
+  "conceptual_figure": {
+    "layout": "World3-03 structural core -> empirical observation/provenance -> calibration and candidate selection -> validation and sensitivity -> candidate extension gates",
+    "prohibited": [
+      "presenting scenario trajectories as probabilities",
+      "drawing inactive candidate extensions as part of the central loop structure",
+      "implying that empirical fit validates every World3 feedback",
+      "presenting P10-P90 as confidence intervals"
+    ],
+    "light_asset": ".github/readme-assets/ewd-concept-overview-light.svg",
+    "dark_asset": ".github/readme-assets/ewd-concept-overview-dark.svg"
+  },
+  "reproducibility_source": ".github/workflows/science-reproducibility.yml",
+  "public_readme_boundary": {
+    "replacement_authorized": false,
+    "diagram_publication_authorized": false,
+    "reason": "This branch is a design/review preview only. Public README and assets remain unchanged until visual/editorial review."
+  },
+  "release_boundary": {
+    "version_bump_required": false,
+    "current_public_version": "0.1.0"
+  }
+}
