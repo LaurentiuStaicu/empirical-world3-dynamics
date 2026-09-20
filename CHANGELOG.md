@@ -2,6 +2,15 @@
 
 All notable public scientific-core releases of Empirical World3 Dynamics (EWD) are recorded here.
 
+## Unreleased
+
+### Repository governance
+
+- added EWD-specific contribution and support guidance;
+- added structured reproducibility and scientific/model issue forms;
+- added a pull-request checklist preserving the World3-03 structural core, scenario/non-probabilistic boundary and candidate-extension gates;
+- deferred security-policy and code-of-conduct adoption until private reporting and enforcement routes are explicitly configured.
+
 ## 0.1.0 - 2026-09-18
 
 Initial public scientific-core baseline.
