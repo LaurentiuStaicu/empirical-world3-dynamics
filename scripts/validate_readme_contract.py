@@ -70,7 +70,7 @@ def main() -> None:
 
     require("experimental scenario model; not a probabilistic forecast" in status, "STATUS forecast boundary mismatch")
     require("frozen through 2018" in status, "STATUS model-selection boundary mismatch")
-    require("observations through 2025" in status, "STATUS production-refit boundary mismatch")
+    require("observations available through 2025" in status, "STATUS production-refit boundary mismatch")
     require("12" in status and "medoid" in status, "STATUS production-candidate/medoid state mismatch")
     require("p10-p90" in status and "not" in status and "probability" in status, "STATUS sensitivity boundary mismatch")
 
