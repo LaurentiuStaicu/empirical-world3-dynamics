@@ -68,7 +68,7 @@ def main() -> None:
     for token in required_readme:
         require(token in lower, f"README scientific boundary missing: {token}")
 
-    require("experimental scenario model, not a probabilistic forecast" in status, "STATUS forecast boundary mismatch")
+    require("experimental scenario model; not a probabilistic forecast" in status, "STATUS forecast boundary mismatch")
     require("frozen through 2018" in status, "STATUS model-selection boundary mismatch")
     require("observations through 2025" in status, "STATUS production-refit boundary mismatch")
     require("12" in status and "medoid" in status, "STATUS production-candidate/medoid state mismatch")
