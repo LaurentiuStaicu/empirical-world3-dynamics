@@ -193,4 +193,4 @@ For reproducible software/reproduction problems or scientific/model concerns, us
 
 If you use EWD in research, cite the exact released version using [CITATION.cff](CITATION.cff).
 
-EWD is maintained by **Laurentiu Staicu**. The repository scientific core is released under the [MIT License](../LICENSE); retained third-party World3/PyWorld3 material remains subject to its own notices and license terms.
+EWD is maintained by **Laurentiu Staicu**. The repository scientific core is released under the [MIT License](LICENSE); retained third-party World3/PyWorld3 material remains subject to its own notices and license terms.
