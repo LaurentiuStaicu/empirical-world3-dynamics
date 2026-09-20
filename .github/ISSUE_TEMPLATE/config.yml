@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: EWD support guidance
+    url: https://github.com/LaurentiuStaicu/empirical-world3-dynamics/blob/main/.github/SUPPORT.md
+    about: Check the support route before opening a general question.

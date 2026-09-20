@@ -1,0 +1,53 @@
+name: Scientific / model issue
+description: Report or discuss a World3 structure, evidence, calibration, validation, sensitivity, or extension concern.
+title: "[Scientific]: "
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: Affected area
+      options:
+        - World3-03 structural core
+        - Data / provenance
+        - Calibration / parameter selection
+        - Validation / holdout / prospective check
+        - Sensitivity / uncertainty presentation
+        - Candidate extension
+        - Documentation
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: statement
+    attributes:
+      label: Issue or proposal
+    validations:
+      required: true
+  - type: textarea
+    id: facts
+    attributes:
+      label: Observed facts
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: Sources / evidence
+    validations:
+      required: true
+  - type: textarea
+    id: interpretation
+    attributes:
+      label: Interpretation
+      description: Keep inference separate from observed facts.
+  - type: checkboxes
+    id: integrity
+    attributes:
+      label: Scientific integrity
+      options:
+        - label: I am not treating a scenario as a probabilistic forecast.
+          required: true
+        - label: I am not treating a candidate envelope as a calibrated probability/confidence interval.
+          required: true
+        - label: I am not treating an inactive extension as part of the central retained model.
+          required: true

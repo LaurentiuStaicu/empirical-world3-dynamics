@@ -1,0 +1,20 @@
+{
+  "contract_version": "1.0",
+  "frozen_on": "2026-09-20",
+  "suite_role": "SCIENTIFIC_MODEL",
+  "canonical_paradigm": "Empirical System Dynamics model based on the World3-03 structural core with separate empirical calibration/observation/validation layers.",
+  "deferred": {
+    "code_of_conduct": "PENDING_GOVERNANCE_DECISION",
+    "security_policy": "PENDING_PRIVATE_REPORTING_ROUTE",
+    "account_level_defaults": "PENDING_PUBLIC_ACCOUNT_LEVEL_DOT_GITHUB_REPOSITORY"
+  },
+  "invariants": [
+    "Do not silently modify the World3-03 structural core.",
+    "Do not present scenarios as probabilistic forecasts.",
+    "Do not present P10-P90 candidate envelopes as calibrated probability/confidence intervals.",
+    "Candidate extensions remain inactive unless promotion gates pass.",
+    "Empirical calibration/validation layers do not by themselves validate the structural feedback architecture."
+  ],
+  "current_public_version": "0.1.0",
+  "version_bump_required": false
+}
