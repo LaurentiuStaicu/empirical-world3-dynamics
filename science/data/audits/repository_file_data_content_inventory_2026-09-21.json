@@ -13,10 +13,10 @@
     "NOT_SCIENTIFICALLY_MATERIAL"
   ],
   "counts": {
-    "PENDING": 102,
+    "PENDING": 87,
     "NOT_SCIENTIFICALLY_MATERIAL": 16,
-    "PASS": 17,
-    "WARNING": 25
+    "PASS": 28,
+    "WARNING": 29
   },
   "entries": [
     {
@@ -175,7 +175,7 @@
       "git_blob_sha": "3a5712b0cfb97d9f83e3e6087c2bd2c6c40f1fbb",
       "role": "release_history",
       "scientific_materiality": "HIGH",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
       "note": null
     },
@@ -185,7 +185,7 @@
       "git_blob_sha": "611ebc0a8110ee881f75c4f5a8a976543e41806a",
       "role": "release_metadata",
       "scientific_materiality": "HIGH",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
       "note": null
     },
@@ -205,9 +205,9 @@
       "git_blob_sha": "01a9ef6d4d6e7d99e679328236b5dac345cf30af",
       "role": "public_repository_description",
       "scientific_materiality": "HIGH",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Public description is concise and consistent with the current non-probabilistic research-core boundary."
     },
     {
       "path": "STATUS.md",
@@ -215,9 +215,9 @@
       "git_blob_sha": "fa2de49db19e01668750023bc6c7126220e3bdf9",
       "role": "canonical_scientific_status",
       "scientific_materiality": "HIGH",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Canonical paradigm and scientific-boundary statements are consistent with the retained implementation and screening findings."
     },
     {
       "path": "assets/icon.png",
@@ -325,7 +325,7 @@
       "git_blob_sha": "4cf076b601bc5a2ac68f9fe4e11f920dbb867a00",
       "role": "release_notes",
       "scientific_materiality": "HIGH",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
       "note": null
     },
@@ -1145,9 +1145,9 @@
       "git_blob_sha": "01de11eaabb1df7158c5c489c089f682fde40cac",
       "role": "scientific_library_support",
       "scientific_materiality": "HIGH",
-      "audit_status": "PENDING",
-      "severity": null,
-      "note": null
+      "audit_status": "WARNING",
+      "severity": "HIGH",
+      "note": "Package top-level exports both the current World3-03 route and the legacy Pyworld3 run_scenario route without distinguishing central vs legacy status."
     },
     {
       "path": "science/src/world3_empirical/__main__.py",
@@ -1165,9 +1165,9 @@
       "git_blob_sha": "6622dc5e08d0cda3bd1a3c871d3d5c94a5d191b1",
       "role": "scientific_library_support",
       "scientific_materiality": "HIGH",
-      "audit_status": "PENDING",
-      "severity": null,
-      "note": null
+      "audit_status": "WARNING",
+      "severity": "HIGH",
+      "note": "Calibration/Monte Carlo utilities call the legacy Pyworld3 run_scenario path and are not the retained Joint 2026 calibration/selection pipeline; module naming can imply otherwise."
     },
     {
       "path": "science/src/world3_empirical/cli.py",
@@ -1265,9 +1265,9 @@
       "git_blob_sha": "fe7ddf9dba29af1ad3351843e6a392317a9f062a",
       "role": "scientific_library_support",
       "scientific_materiality": "HIGH",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Small generic metric helpers; no model-selection semantics are embedded."
     },
     {
       "path": "science/src/world3_empirical/model.py",
@@ -1305,9 +1305,9 @@
       "git_blob_sha": "3f2cb686682599c56416de3e3f71538db707b223",
       "role": "scientific_library_support",
       "scientific_materiality": "HIGH",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Implements conservative inactive candidate interfaces and S1-S10 structural constraints without mutating the central runtime."
     },
     {
       "path": "science/src/world3_empirical/registry.py",
@@ -1315,9 +1315,9 @@
       "git_blob_sha": "3f83e94098290c87e9f365bb1378df95765b7e06",
       "role": "scientific_library_support",
       "scientific_materiality": "HIGH",
-      "audit_status": "PENDING",
-      "severity": null,
-      "note": null
+      "audit_status": "WARNING",
+      "severity": "MEDIUM",
+      "note": "Validates registry schema, uniqueness and year ordering but does not verify completeness against actual observation inputs; current missing FAOSTAT/UNDP/UN-WPP registry rows therefore pass validation."
     },
     {
       "path": "science/src/world3_empirical/scenarios.py",
@@ -1335,7 +1335,7 @@
       "git_blob_sha": "2ee0b2418ae5b214d075601f11ca1704ff9da038",
       "role": "scientific_library_support",
       "scientific_materiality": "HIGH",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
       "note": null
     },
@@ -1375,9 +1375,9 @@
       "git_blob_sha": "4e8cbc3f7c4bad9ff2dac63bfa17f2e27af24562",
       "role": "scientific_library_support",
       "scientific_materiality": "HIGH",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Minimal World Bank adapter with explicit URL construction, parsing and non-empty validation."
     },
     {
       "path": "science/src/world3_empirical/world3_03.py",
@@ -1575,9 +1575,9 @@
       "git_blob_sha": "7fd931234999334a1b521fea47bf65a7cc70e5c4",
       "role": "central_input_fetcher",
       "scientific_materiality": "HIGH",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Remote frozen FAOSTAT input is HTTPS-fetched and checked for both size and SHA-256 before replacement."
     },
     {
       "path": "scripts/generate_science_input_manifest.py",
@@ -1595,9 +1595,9 @@
       "git_blob_sha": "07b412b5a6e8be68c3664ec2e3a7565f1db37489",
       "role": "repository_support",
       "scientific_materiality": "HIGH",
-      "audit_status": "PENDING",
-      "severity": null,
-      "note": null
+      "audit_status": "WARNING",
+      "severity": "MEDIUM",
+      "note": "Implements a narrow error-comparison gate (all recent holdouts and >=2 multi-origin wins) but is not equivalent to overall scientific validation or S1-S10 promotion and is not run by the current reproducibility workflow."
     },
     {
       "path": "scripts/reproduce_scientific_results.py",
@@ -1615,9 +1615,13 @@
       "git_blob_sha": "fb256bdbe6b3223956126a800d8c260f2a89fa1f",
       "role": "repository_support",
       "scientific_materiality": "HIGH",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Reports historical/recent/multi-origin evidence without forcing favorable performance into a build PASS."
     }
+  ],
+  "last_updated": "2026-09-21",
+  "audit_notes": [
+    "High-materiality pass completed for release/status metadata, core utility modules and top-level audit scripts."
   ]
 }
