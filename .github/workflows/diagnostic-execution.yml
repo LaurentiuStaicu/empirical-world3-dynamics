@@ -1,0 +1,62 @@
+name: Diagnostic execution recovery
+
+on:
+  push:
+    paths:
+      - 'science/scripts/evaluate_unido_industry_proxy.py'
+      - 'science/scripts/evaluate_unido_iip_volume.py'
+      - 'science/scripts/evaluate_climate_food_link.py'
+      - 'science/scripts/evaluate_regional_agricultural_stress.py'
+      - 'science/scripts/evaluate_technology_minerals.py'
+      - '.github/workflows/diagnostic-execution.yml'
+  pull_request:
+    paths:
+      - 'science/scripts/evaluate_unido_industry_proxy.py'
+      - 'science/scripts/evaluate_unido_iip_volume.py'
+      - 'science/scripts/evaluate_climate_food_link.py'
+      - 'science/scripts/evaluate_regional_agricultural_stress.py'
+      - 'science/scripts/evaluate_technology_minerals.py'
+      - '.github/workflows/diagnostic-execution.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: diagnostic-execution-${{ github.event.pull_request.head.ref || github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  smoke:
+    name: Rebuild prerequisites and execute recovered diagnostics
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Install pinned uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          version: '0.11.33'
+
+      - name: Reproduce retained central prerequisites
+        run: |
+          uv run --locked --project science --extra world3-03 python scripts/reproduce_scientific_results.py
+
+      - name: Execute recovered diagnostics
+        run: |
+          uv run --locked --project science --extra world3-03 python science/scripts/evaluate_unido_industry_proxy.py
+          uv run --locked --project science --extra world3-03 python science/scripts/evaluate_unido_iip_volume.py
+          uv run --locked --project science --extra world3-03 python science/scripts/evaluate_climate_food_link.py
+          uv run --locked --project science --extra world3-03 python science/scripts/evaluate_regional_agricultural_stress.py
+          uv run --locked --project science --extra world3-03 python science/scripts/evaluate_technology_minerals.py
+
+      - name: Confirm central retained references remain unchanged
+        run: |
+          git diff --exit-code -- data/scenarios
