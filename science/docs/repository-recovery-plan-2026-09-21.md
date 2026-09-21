@@ -102,6 +102,30 @@ Non-change requirement:
 
 No observed value, bridge weight or model target changes in this gate.
 
+### Exact central observation/benchmark reconciliation
+
+The current `world3_empirical.observations` contract can be reconciled to the registry as follows:
+
+| EWD indicator | Current observation source | Actual role | Registry state |
+|---|---|---|---|
+| population | World Bank WDI `SP.POP.TOTL` | fitted empirical target | present |
+| industry_per_capita | World Bank WDI `NV.IND.TOTL.KD / SP.POP.TOTL` | fitted empirical proxy | present through the industry-value-added row |
+| food_per_capita | FAOSTAT World / Food / Gross per capita Production Index | fitted empirical target | **missing** |
+| pollution_pressure | World Bank/EDGAR `EN.GHG.CO2.MT.CE.AR5`, normalized 1990=100 | fitted annual flow observation bridge | present, but current status understates use |
+| human_welfare | UNDP HDR 2025 World HDI | fitted empirical proxy for World3 HWI | **missing** |
+| population benchmark | UN WPP 2024 World total population, estimate then medium projection | benchmark/plausibility guardrail only | **missing** |
+
+The following retained sources remain diagnostics/supporting evidence and should **not** be promoted in the registry simply because they exist:
+
+- Energy Institute primary energy;
+- Aramendia fossil EROI;
+- GISTEMP;
+- regional cereal/climate panel;
+- technology minerals;
+- UNIDO MVA/IIP alternatives.
+
+Registry completeness validation should therefore compare the registry against a small explicit declaration of the active observation/benchmark contract, not against every file in `science/data`.
+
 ## Repair Gate R-FDC-3 — input-manifest scope
 
 Current problem:
