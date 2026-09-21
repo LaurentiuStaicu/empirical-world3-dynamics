@@ -187,7 +187,7 @@ but:
 
 This is a metadata/traceability issue, not a scientific result discrepancy.
 
-### FDC-W05 — World3-03 third-party hash statement requires reconciliation
+### FDC-W05 — World3-03 line-ending hash documentation
 
 `science/THIRD_PARTY_NOTICES.md` records the ingestion SHA-256:
 
@@ -197,7 +197,9 @@ while the current scientific input manifest verifies:
 
 `252e0c7eebff23d3c44344b6801cf3c40aec82d25b356ea8cce16a052249ac4d`.
 
-The repository enforces LF line endings. Line-ending normalization is a plausible explanation, but this audit has not yet obtained the authoritative original bytes needed to prove the relationship. Until then the notice should not be treated as fully reconciled provenance.
+This audit resolved the difference exactly. Reconstructing CRLF line endings from the repository's LF-normalized `.mdl` produces `42b22c...`; the LF representation produces `252e0c...`.
+
+Therefore there is **no model-content divergence**. The remaining issue is documentation precision: the notice should record the authoritative CRLF hash and the repository-normalized LF hash explicitly instead of describing the stored source as byte-for-byte unchanged.
 
 ### FDC-W06 — primary-source closure remains incomplete for central adapters
 
