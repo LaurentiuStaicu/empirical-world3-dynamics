@@ -13,10 +13,11 @@
     "NOT_SCIENTIFICALLY_MATERIAL"
   ],
   "counts": {
-    "PENDING": 79,
+    "PENDING": 44,
     "NOT_SCIENTIFICALLY_MATERIAL": 16,
-    "PASS": 36,
-    "WARNING": 29
+    "PASS": 62,
+    "WARNING": 33,
+    "BLOCKER": 5
   },
   "entries": [
     {
@@ -575,9 +576,9 @@
       "git_blob_sha": "29db12117440d18b56eca817f6a4f0e9186f0ac0",
       "role": "diagnostic_or_supporting_processed_data",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "50-year primary/final/useful fossil EROI series retained separately by accounting boundary; no pooling or direct World3-stock interpretation."
     },
     {
       "path": "science/data/processed/aramendia_global_fossil_eroi_2024.provenance.json",
@@ -585,9 +586,9 @@
       "git_blob_sha": "ea7fe4b09a2081ee604b3207159691e73421a539",
       "role": "diagnostic_or_supporting_processed_data",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Primary article/dataset DOI, Figshare file id/name and published MD5 are recorded; accounting-boundary limitation is explicit."
     },
     {
       "path": "science/data/processed/empirical_model_inputs_2026-08-28.csv",
@@ -665,9 +666,9 @@
       "git_blob_sha": "608b22570ce4a34b2d128b078423958c87391c48",
       "role": "diagnostic_or_supporting_processed_data",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
-      "severity": null,
-      "note": null
+      "audit_status": "WARNING",
+      "severity": "MEDIUM",
+      "note": "Source-faithful mixed-vintage diagnostic, but 1900-2023 history relies on secondary OWID harmonization; 2024-2025 are updated from primary USGS MCS 2026."
     },
     {
       "path": "science/data/processed/technology_mineral_production_2026-09-08.provenance.json",
@@ -675,9 +676,9 @@
       "git_blob_sha": "c626ac1521d462ce65abe58b5457986d3f63e18a",
       "role": "diagnostic_or_supporting_processed_data",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Clearly separates historical and current endpoint sources, hashes, estimates, non-additivity and World3 stock-mapping limits."
     },
     {
       "path": "science/data/processed/technology_mineral_risk_2026-09-08.csv",
@@ -685,9 +686,9 @@
       "git_blob_sha": "95e89953404c20afa0eb22f339b9860bf51742d4",
       "role": "diagnostic_or_supporting_processed_data",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Static supply-risk diagnostic; rare-earth reserve/output value is explicitly excluded where USGS revisions conflict."
     },
     {
       "path": "science/data/processed/unido_iip_world_public_2026-09-08.csv",
@@ -695,9 +696,9 @@
       "git_blob_sha": "45e3491766461153b6bbdb607e5ce0992f56b412",
       "role": "diagnostic_or_supporting_processed_data",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Transparent 101-country balanced public IIP reconstruction with 94.49% 2020 MVA-weight coverage; explicitly not claimed as UNIDO official world aggregate."
     },
     {
       "path": "science/data/processed/unido_iip_world_public_2026-09-08.provenance.json",
@@ -705,9 +706,9 @@
       "git_blob_sha": "1871e87325bf0d06cb180f13356333762a74dd95",
       "role": "diagnostic_or_supporting_processed_data",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Raw hashes, weights, coverage, methodology and interpretation limit are explicit."
     },
     {
       "path": "science/data/processed/unido_national_accounts_world_2026-09-07.csv",
@@ -715,9 +716,9 @@
       "git_blob_sha": "9df7d1981a665440337db695e9bbab00e4fefb22",
       "role": "diagnostic_or_supporting_processed_data",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
-      "severity": null,
-      "note": null
+      "audit_status": "WARNING",
+      "severity": "MEDIUM",
+      "note": "Values are source-faithful, but UNIDO portal metadata conflict between 'constant 2020 USD' label and base_year=2015 remains unresolved."
     },
     {
       "path": "science/data/processed/unido_national_accounts_world_2026-09-07.provenance.json",
@@ -725,9 +726,9 @@
       "git_blob_sha": "72f8290da7046625f5b4cd75beedf1266d107477",
       "role": "diagnostic_or_supporting_processed_data",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Explicitly records the UNIDO unit/base-year metadata conflict instead of silently resolving it."
     },
     {
       "path": "science/data/processed/world_bank_global_snapshot_2026-08-28.csv",
@@ -765,9 +766,9 @@
       "git_blob_sha": "c6141ae13663f988b3ef2cdc422836456822cc02",
       "role": "raw_or_adapter_data",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Primary USGS MCS 2026 source snapshot retained with normalization and official/normalized hashes documented."
     },
     {
       "path": "science/data/raw/minerals/2026-09-08/owid_global_mine_production.csv",
@@ -775,9 +776,9 @@
       "git_blob_sha": "1c79d968f3bbd6f87ac586058ee304fef6673b7a",
       "role": "raw_or_adapter_data",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
-      "severity": null,
-      "note": null
+      "audit_status": "WARNING",
+      "severity": "MEDIUM",
+      "note": "Historical mineral production transport is an OWID harmonization of USGS/BGS rather than a frozen set of all primary source files."
     },
     {
       "path": "science/data/raw/minerals/2026-09-08/owid_global_mine_production.metadata.json",
@@ -785,9 +786,9 @@
       "git_blob_sha": "a0fd3cb1b98cd7398ef6b2cb56a1938945cc52d7",
       "role": "raw_or_adapter_data",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Metadata preserves source citation for the secondary historical harmonization."
     },
     {
       "path": "science/data/raw/unido/2026-09-07/national_accounts_metadata.json",
@@ -795,9 +796,9 @@
       "git_blob_sha": "f34fb385f9128016215b1b9c8b04d7669c97d76c",
       "role": "raw_or_adapter_data",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Frozen official UNIDO metadata response."
     },
     {
       "path": "science/data/raw/unido/2026-09-07/national_accounts_world.json",
@@ -805,9 +806,9 @@
       "git_blob_sha": "2b13e66ab5f3ee24244984912fe7e74c1b379e11",
       "role": "raw_or_adapter_data",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Frozen official UNIDO WORLD National Accounts response."
     },
     {
       "path": "science/data/raw/unido/2026-09-08/iip_annual_data.csv",
@@ -815,9 +816,9 @@
       "git_blob_sha": "dff72b34fd2fa2938a025e8f49b9189488a4792b",
       "role": "raw_or_adapter_data",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Frozen UNIDO IIP public export used for balanced-panel reconstruction."
     },
     {
       "path": "science/data/raw/unido/2026-09-08/iip_country.csv",
@@ -825,9 +826,9 @@
       "git_blob_sha": "18f21b8dbcabd93587db9b12f18fabb9fda5cbbf",
       "role": "raw_or_adapter_data",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Frozen UNIDO IIP country metadata/support file."
     },
     {
       "path": "science/data/raw/unido/2026-09-08/iip_metadata.json",
@@ -835,9 +836,9 @@
       "git_blob_sha": "0509315d41f4ec544d3426ca4ea8e5091ee641a3",
       "role": "raw_or_adapter_data",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Frozen UNIDO IIP metadata response."
     },
     {
       "path": "science/data/raw/unido/2026-09-08/iip_metadata_country.csv",
@@ -845,9 +846,9 @@
       "git_blob_sha": "95d4bc752acd7bfe6e7354871f654c502f64a231",
       "role": "raw_or_adapter_data",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Frozen UNIDO IIP metadata-country support file."
     },
     {
       "path": "science/data/raw/unido/2026-09-08/national_accounts_2020_data.csv",
@@ -855,9 +856,9 @@
       "git_blob_sha": "cba6827dbf2887d05055966ce7ef40af19d674bd",
       "role": "raw_or_adapter_data",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Frozen official UNIDO MVA data used only as 2020 fixed weights for public IIP reconstruction."
     },
     {
       "path": "science/data/raw/unido/2026-09-08/national_accounts_metadata.json",
@@ -865,9 +866,9 @@
       "git_blob_sha": "ed28ae64c7adb8ba858ab0c8405edb25f111bfa5",
       "role": "raw_or_adapter_data",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Frozen UNIDO National Accounts metadata used with IIP reconstruction."
     },
     {
       "path": "science/data/registry.csv",
@@ -945,9 +946,9 @@
       "git_blob_sha": "80c3e16c21b5dbfd5802b6549b6215ea8424c195",
       "role": "diagnostic_extension_code",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
-      "severity": null,
-      "note": null
+      "audit_status": "BLOCKER",
+      "severity": "HIGH",
+      "note": "Cannot run on current main: imports deleted build_bau2_e2026; climate-food diagnostic chain is not currently executable."
     },
     {
       "path": "science/scripts/evaluate_direct_emissions_prospective.py",
@@ -965,9 +966,9 @@
       "git_blob_sha": "1d7c7e9b81d2a4b03bdd8af3a42ee26078fbd2c8",
       "role": "diagnostic_extension_code",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
-      "severity": null,
-      "note": null
+      "audit_status": "WARNING",
+      "severity": "MEDIUM",
+      "note": "Diagnostic is conceptually conservative but hard-codes central candidate id 114 and requires generated candidate_simulations.npz; brittle if baseline candidate changes."
     },
     {
       "path": "science/scripts/evaluate_lookup_domain_guardrail.py",
@@ -995,9 +996,9 @@
       "git_blob_sha": "3aad622345508e86ec6bc47ea5d29e13a24b0450",
       "role": "diagnostic_extension_code",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
-      "severity": null,
-      "note": null
+      "audit_status": "BLOCKER",
+      "severity": "HIGH",
+      "note": "Cannot run on current main: imports deleted build_bau2_e2026; regional agricultural diagnostic chain is not currently executable."
     },
     {
       "path": "science/scripts/evaluate_technology_minerals.py",
@@ -1005,9 +1006,9 @@
       "git_blob_sha": "292334da54aed6fec98685ca3c2c4b04e550b30b",
       "role": "diagnostic_extension_code",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
-      "severity": null,
-      "note": null
+      "audit_status": "BLOCKER",
+      "severity": "HIGH",
+      "note": "Cannot run on current main because it expects removed legacy data/scenarios/industry_total.csv and resources_remaining_pct.csv instead of current generated joint-hybrid outputs."
     },
     {
       "path": "science/scripts/evaluate_unido_iip_volume.py",
@@ -1015,9 +1016,9 @@
       "git_blob_sha": "8b49c8151994ea4c7746983adec63a5cdcc6cd0a",
       "role": "diagnostic_extension_code",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
-      "severity": null,
-      "note": null
+      "audit_status": "BLOCKER",
+      "severity": "HIGH",
+      "note": "Cannot run on current main: imports deleted build_bau2_e2026. Requires repair to current observations module before this audit can be reproduced."
     },
     {
       "path": "science/scripts/evaluate_unido_industry_proxy.py",
@@ -1025,9 +1026,9 @@
       "git_blob_sha": "d9d04891855217d96ee1a3ab71bf9a891fbf6921",
       "role": "diagnostic_extension_code",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
-      "severity": null,
-      "note": null
+      "audit_status": "BLOCKER",
+      "severity": "HIGH",
+      "note": "Cannot run on current main: imports deleted build_bau2_e2026. Scientific intent remains diagnostic-only and central projection unchanged."
     },
     {
       "path": "science/scripts/ingest_aramendia_eroi.py",
@@ -1035,9 +1036,9 @@
       "git_blob_sha": "a8526a3de248b837c653e6aab2a0bf35fbc28481",
       "role": "data_ingestion_code",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Deterministic primary-source extraction checks published MD5 and keeps EROI boundaries separate."
     },
     {
       "path": "science/scripts/ingest_energy_institute_2026.py",
@@ -1075,9 +1076,9 @@
       "git_blob_sha": "e49534264879a813bac7732b4000456e724fb494",
       "role": "data_ingestion_code",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Reproducible stitching and risk-table construction with explicit hashes and no direct calibration of World3 resource stock."
     },
     {
       "path": "science/scripts/ingest_unido_iip.py",
@@ -1085,9 +1086,9 @@
       "git_blob_sha": "39fbf020feba071ce3ffcee7f685fead0a9be5e5",
       "role": "data_ingestion_code",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Deterministic reconstruction from retained raw files and central population snapshot; records all raw hashes."
     },
     {
       "path": "science/scripts/ingest_unido_national_accounts.py",
@@ -1095,9 +1096,9 @@
       "git_blob_sha": "ca30b7c3d4584a4abe9cc62529fc30d655681502",
       "role": "data_ingestion_code",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Deterministic official API snapshot/processing with raw hashes and explicit metadata-conflict note."
     },
     {
       "path": "science/scripts/ingest_world_bank.py",
@@ -1125,9 +1126,9 @@
       "git_blob_sha": "def57b3bdd24247169a6d6f27ba10db761f5fdc8",
       "role": "diagnostic_extension_code",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Scenario-only runner labels parameters as uncalibrated priors; cited IEA 2026 data-centre anchors 485 TWh (2025) and 950 TWh (2030) match the current IEA report and are not used as system-EROI observations."
     },
     {
       "path": "science/scripts/run_world3_03.py",
@@ -1285,9 +1286,9 @@
       "git_blob_sha": "b6314d2c26bf2b6db26ba6362bddc3792906711d",
       "role": "diagnostic_extension_library",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Explicit scenario-only structural priors; module states outputs are sensitivity scenarios rather than forecasts and remains separate from central BAU2 layer."
     },
     {
       "path": "science/src/world3_empirical/observations.py",
@@ -1345,9 +1346,9 @@
       "git_blob_sha": "5cd5bf0dba72fced5f4b58c8e9229a8fe6350458",
       "role": "diagnostic_extension_library",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Parser enforces commodity separation, positive/unique observations and source-specific handling; does not aggregate tonnes across commodities."
     },
     {
       "path": "science/src/world3_empirical/sources/unido.py",
@@ -1355,9 +1356,9 @@
       "git_blob_sha": "da2bd1c56dd59fe198a7df3e1a25835f00cb0f08",
       "role": "diagnostic_extension_library",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Auditable official API adapter validates WORLD aggregate, required variables, uniqueness and dynamic dataset id."
     },
     {
       "path": "science/src/world3_empirical/sources/unido_iip.py",
@@ -1365,9 +1366,9 @@
       "git_blob_sha": "893551b4456a75ffc4d25bfecd3b0fea0a76a06e",
       "role": "diagnostic_extension_library",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Parser validates schema, positive unique country-year data and fixed-weight balanced-panel aggregation."
     },
     {
       "path": "science/src/world3_empirical/sources/world_bank.py",
@@ -1623,6 +1624,8 @@
   "last_updated": "2026-09-21",
   "audit_notes": [
     "High-materiality pass completed for release/status metadata, core utility modules and top-level audit scripts.",
-    "Direct-emissions diagnostic chain audited: file correctness PASS; experiment scientific promotion remains FAIL/diagnostic by design."
+    "Direct-emissions diagnostic chain audited: file correctness PASS; experiment scientific promotion remains FAIL/diagnostic by design.",
+    "EROI/minerals/UNIDO data lineage audited.",
+    "Five diagnostic scripts are currently BLOCKER components after the scientific-core reset: four stale build_bau2_e2026 imports and one stale data/scenarios trajectory dependency."
   ]
 }
