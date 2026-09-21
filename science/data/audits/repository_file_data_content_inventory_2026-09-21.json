@@ -13,11 +13,11 @@
     "NOT_SCIENTIFICALLY_MATERIAL"
   ],
   "counts": {
-    "PENDING": 44,
+    "PASS": 86,
     "NOT_SCIENTIFICALLY_MATERIAL": 16,
-    "PASS": 62,
-    "WARNING": 33,
-    "BLOCKER": 5
+    "WARNING": 42,
+    "BLOCKER": 5,
+    "PENDING": 11
   },
   "entries": [
     {
@@ -26,9 +26,9 @@
       "git_blob_sha": "8bac6a96e1df3528941aca43431bc2643299d961",
       "role": "external_integration_manifest",
       "scientific_materiality": "LOW",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "AtM integration manifest correctly routes canonical, structural, evidence, tabular and implementation material; excludes raw/vendor/.github from ordinary retrieval, without changing scientific behavior."
     },
     {
       "path": ".gitattributes",
@@ -386,9 +386,9 @@
       "git_blob_sha": "735e6fe57d36f14e2df9de4b7eeaeb6306f220b9",
       "role": "diagnostic_energy_audit_data",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Source-stratified 2023 natural-gas accounting diagnostic with explicit eligibility/exclusion counts; correctly not labeled independent prediction validation."
     },
     {
       "path": "science/data/energy_audit/egrid-boundary-reconciliation.json",
@@ -396,9 +396,9 @@
       "git_blob_sha": "5eb55eea3f66303ba6d34e6c01d53cc1b5730e18",
       "role": "diagnostic_energy_audit_data",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Post-hoc plant/unit/generator boundary reconciliation; explicitly records no central-model change and preserves unusual plant-level rates rather than silently filtering them."
     },
     {
       "path": "science/data/energy_audit/egrid-cohort.json.gz",
@@ -406,9 +406,9 @@
       "git_blob_sha": "907aaaaf28b21f95232a43c7c60c451594dfc2bc",
       "role": "diagnostic_energy_audit_data",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Retained deterministic eligible 2023 cohort used by downstream temporal/influence audits; source workbook hash is separately recorded."
     },
     {
       "path": "science/data/energy_audit/egrid-influence.json",
@@ -416,9 +416,9 @@
       "git_blob_sha": "44db3f350b9a7f103c3a0e22d5db549dfbd80c43",
       "role": "diagnostic_energy_audit_data",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Post-hoc error attribution only, with no exclusions or model-selection rule."
     },
     {
       "path": "science/data/energy_audit/egrid-source.json",
@@ -426,9 +426,9 @@
       "git_blob_sha": "9b49de277cc3450ecb250ebf885a9825360c4e74",
       "role": "diagnostic_energy_audit_data",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
-      "severity": null,
-      "note": null
+      "audit_status": "WARNING",
+      "severity": "MEDIUM",
+      "note": "Official EPA eGRID2023 Rev.2 URL/date/hash are recorded, but the 21 MB raw workbook is intentionally not retained; extraction requires re-acquiring the exact hashed revision."
     },
     {
       "path": "science/data/energy_audit/egrid-temporal-audit.json",
@@ -436,9 +436,9 @@
       "git_blob_sha": "4cadc3ae305babe06ede5d7e9d162d6f13318ccf",
       "role": "diagnostic_energy_audit_data",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Release-lagged matched-panel hindcast; explicitly not real-time prospective validation."
     },
     {
       "path": "science/data/energy_audit/egrid2021-audit.json",
@@ -446,9 +446,9 @@
       "git_blob_sha": "75666f8b11fba6343d7c0669b4694bac46834e08",
       "role": "diagnostic_energy_audit_data",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Source-stratified 2021 accounting diagnostic; release-lagged evidence only."
     },
     {
       "path": "science/data/energy_audit/egrid2021-cohort.json.gz",
@@ -456,9 +456,9 @@
       "git_blob_sha": "5e05c1c9edfe8c38ab540418ffcbecac99b3b66d",
       "role": "diagnostic_energy_audit_data",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Retained deterministic eligible 2021 cohort used by downstream diagnostics."
     },
     {
       "path": "science/data/energy_audit/egrid2021-source.json",
@@ -466,9 +466,9 @@
       "git_blob_sha": "b6d2ad17306dfdf7029c895a9476d0ffb7f819b2",
       "role": "diagnostic_energy_audit_data",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
-      "severity": null,
-      "note": null
+      "audit_status": "WARNING",
+      "severity": "MEDIUM",
+      "note": "Official EPA eGRID2021 release URL/date/hash are recorded; raw workbook not retained."
     },
     {
       "path": "science/data/energy_audit/egrid2022-audit.json",
@@ -476,9 +476,9 @@
       "git_blob_sha": "7d5d10689a8f520a91a8252b93497d99ac48947f",
       "role": "diagnostic_energy_audit_data",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Source-stratified 2022 accounting diagnostic; release-lagged evidence only."
     },
     {
       "path": "science/data/energy_audit/egrid2022-cohort.json.gz",
@@ -486,9 +486,9 @@
       "git_blob_sha": "1716390aff1da1446a9550c3c46aa09acfca068d",
       "role": "diagnostic_energy_audit_data",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Retained deterministic eligible 2022 cohort used by downstream diagnostics."
     },
     {
       "path": "science/data/energy_audit/egrid2022-source.json",
@@ -496,9 +496,9 @@
       "git_blob_sha": "4d2b95674554140ebae671c864ff7703fde8dc64",
       "role": "diagnostic_energy_audit_data",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
-      "severity": null,
-      "note": null
+      "audit_status": "WARNING",
+      "severity": "MEDIUM",
+      "note": "Official EPA eGRID2022 release URL/date/hash are recorded; raw workbook not retained."
     },
     {
       "path": "science/data/energy_audit/eia-heat-rate-2024.json",
@@ -506,9 +506,9 @@
       "git_blob_sha": "8d3481a9a92932f5e6b9dff942ba7b71f306458a",
       "role": "diagnostic_energy_audit_data",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "2014-2024 natural-gas and coal average operating heat rates match official EIA Electric Power Annual Table 8.1."
     },
     {
       "path": "science/data/experiments/energy_direct_emissions_predictions_2026-09-17.csv",
@@ -606,9 +606,9 @@
       "git_blob_sha": "be8671ddbf57d1a3ef46f7e1d637f28172b13d1e",
       "role": "diagnostic_or_supporting_processed_data",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "61 annual rows 1965-2025, explicit fuel components/shares and reconciliation residual; processed transform enforces no gaps and <0.1% component-total discrepancy."
     },
     {
       "path": "science/data/processed/energy_institute_global_2026.provenance.json",
@@ -626,9 +626,9 @@
       "git_blob_sha": "e4991fa5f9dd4786026db4a60452ba4ee8247b68",
       "role": "diagnostic_or_supporting_processed_data",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "146 annual observations 1880-2025 with clear 1951-1980 anomaly basis; raw-to-processed checkout-only reproducibility limitation is tracked in provenance/ingest warnings."
     },
     {
       "path": "science/data/processed/nasa_gistemp_global_2026.provenance.json",
@@ -646,9 +646,9 @@
       "git_blob_sha": "75c522e01bdf1716b66f8b97cf8257c29c37d38a",
       "role": "diagnostic_or_supporting_processed_data",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Retained diagnostic panel; ingestion enforces unique country-years and >=90% mapped cereal-production coverage from 1992 onward. Raw input retention limitation is tracked separately."
     },
     {
       "path": "science/data/processed/regional_cereal_climate_panel_2026.provenance.json",
@@ -906,9 +906,9 @@
       "git_blob_sha": "77ecd438f049bde75096939f8648583ed6b81f73",
       "role": "diagnostic_extension_code",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
-      "severity": null,
-      "note": null
+      "audit_status": "WARNING",
+      "severity": "HIGH",
+      "note": "Runs the retained unvalidated EROI feedback experiment and depends on prerequisite generated joint/EROI outputs. Must not be interpreted as eligible central mechanism under current forbidden-coupling contract."
     },
     {
       "path": "science/scripts/analyze_world3_03.py",
@@ -916,9 +916,9 @@
       "git_blob_sha": "209e412ca8c185cf6f092e6f141d5147acc086b2",
       "role": "diagnostic_extension_code",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
-      "severity": null,
-      "note": null
+      "audit_status": "WARNING",
+      "severity": "MEDIUM",
+      "note": "Official World3-03 audit runner is structurally correct, but still includes the excluded-data-quality World Bank food proxy as a plotted/tested diagnostic; labels it excluded_data_quality."
     },
     {
       "path": "science/scripts/build_joint_hybrid_2026.py",
@@ -976,9 +976,9 @@
       "git_blob_sha": "5f979be88c27c1c02fd24b50ff05b51656b7c46b",
       "role": "diagnostic_extension_code",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Temporally constrained diagnostic of lookup-domain candidate filters; explicitly does not alter production model and treats 2018 comparison as reused/not pristine."
     },
     {
       "path": "science/scripts/evaluate_lookup_mechanisms.py",
@@ -986,9 +986,9 @@
       "git_blob_sha": "9e5d5c790d5909073e8e503aeb821dc79a13b2bd",
       "role": "diagnostic_extension_code",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Mechanism-specific lookup diagnostic with predeclared causal taxonomy and development-only policy selection; does not alter production."
     },
     {
       "path": "science/scripts/evaluate_regional_agricultural_stress.py",
@@ -1046,9 +1046,9 @@
       "git_blob_sha": "48ca1e7a567ad2cdb1687c536bafc52d3b979f27",
       "role": "data_ingestion_code",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Deterministic Total World extraction, uniqueness/completeness checks, component reconciliation and provenance hash recording."
     },
     {
       "path": "science/scripts/ingest_gistemp.py",
@@ -1106,9 +1106,9 @@
       "git_blob_sha": "4b66b9070a84c0fb6f3a635b12a6035f959f9658",
       "role": "data_ingestion_code",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
-      "severity": null,
-      "note": null
+      "audit_status": "WARNING",
+      "severity": "MEDIUM",
+      "note": "Deterministic WDI snapshot builder, but it still derives food_per_capita_proxy_index from the known anomalous AG.PRD.FOOD.XD series; current central observations layer does not use that food proxy."
     },
     {
       "path": "science/scripts/run_baselines.py",
@@ -1196,9 +1196,9 @@
       "git_blob_sha": "9ccafee083749fd1cf20b5139cdc40c7e1222ce9",
       "role": "diagnostic_extension_library",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Validates cohort schema, source provenance and physical positivity; reports source-stratified accounting."
     },
     {
       "path": "science/src/world3_empirical/egrid_boundary.py",
@@ -1206,9 +1206,9 @@
       "git_blob_sha": "89e7807625a792f46ac7287bd6a71c725eee7e3f",
       "role": "diagnostic_extension_library",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Deterministic plant/unit/generator mass/accounting boundary reconciliation without causal labeling."
     },
     {
       "path": "science/src/world3_empirical/egrid_influence.py",
@@ -1216,9 +1216,9 @@
       "git_blob_sha": "25c50c9dbe72665496f0c68f36b13ea88c66f8c8",
       "role": "diagnostic_extension_library",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Post-hoc descriptive error influence only; no exclusion/model promotion logic."
     },
     {
       "path": "science/src/world3_empirical/egrid_temporal.py",
@@ -1226,9 +1226,9 @@
       "git_blob_sha": "04ac7c95d799852fa2c8e1e5f262a37efd686c5c",
       "role": "diagnostic_extension_library",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Explicit release-lagged stability analysis; validates consecutive years, physical quantities and source provenance."
     },
     {
       "path": "science/src/world3_empirical/energy_coupling.py",
@@ -1236,9 +1236,9 @@
       "git_blob_sha": "659afc14099353e7ce440a4fd35895dac59011e1",
       "role": "diagnostic_extension_library",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
-      "severity": null,
-      "note": null
+      "audit_status": "WARNING",
+      "severity": "HIGH",
+      "note": "Retained experimental sensitivity code implements an explicitly unvalidated resource-fraction-to-EROI link. Current structural contract forbids this coupling for central promotion; code must remain diagnostic/rejected unless a new E1-E10/S1-S10 review supersedes the prohibition."
     },
     {
       "path": "science/src/world3_empirical/energy_emissions.py",
@@ -1526,9 +1526,9 @@
       "git_blob_sha": "71a6aa1406a71daabbc0107c94fe18cd6a00eb77",
       "role": "diagnostic_audit_tool",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
-      "severity": null,
-      "note": null
+      "audit_status": "WARNING",
+      "severity": "LOW",
+      "note": "Reproducible extraction requires external official EPA workbook matching recorded SHA-256; raw workbook is intentionally absent from checkout."
     },
     {
       "path": "scripts/audit_egrid_boundaries.py",
@@ -1536,9 +1536,9 @@
       "git_blob_sha": "09123422378ef293ec23ac6871b548e6dcaa0c62",
       "role": "diagnostic_extension_library",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
-      "severity": null,
-      "note": null
+      "audit_status": "WARNING",
+      "severity": "LOW",
+      "note": "Boundary audit requires three external official EPA workbooks matching retained hashes; downstream JSON is retained."
     },
     {
       "path": "scripts/audit_egrid_influence.py",
@@ -1546,9 +1546,9 @@
       "git_blob_sha": "edc130f73e9f30df69020a68c3b6106c2941ccec",
       "role": "diagnostic_extension_library",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Fully reproducible from retained compressed cohorts and explicitly post-hoc."
     },
     {
       "path": "scripts/audit_egrid_temporal.py",
@@ -1556,9 +1556,9 @@
       "git_blob_sha": "b0c75827387316fa84e7ae28cfd3b3e60d97c872",
       "role": "diagnostic_extension_library",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Fully reproducible from retained compressed cohorts."
     },
     {
       "path": "scripts/audit_energy_heat_rates.py",
@@ -1566,9 +1566,9 @@
       "git_blob_sha": "1e82632ef68a0e113a929842ca57cbdde5f32f2b",
       "role": "diagnostic_audit_tool",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Diagnostic efficiency transform only; official EIA input table is retained and web-verified."
     },
     {
       "path": "scripts/fetch_science_inputs.py",
@@ -1626,6 +1626,9 @@
     "High-materiality pass completed for release/status metadata, core utility modules and top-level audit scripts.",
     "Direct-emissions diagnostic chain audited: file correctness PASS; experiment scientific promotion remains FAIL/diagnostic by design.",
     "EROI/minerals/UNIDO data lineage audited.",
-    "Five diagnostic scripts are currently BLOCKER components after the scientific-core reset: four stale build_bau2_e2026 imports and one stale data/scenarios trajectory dependency."
+    "Five diagnostic scripts are currently BLOCKER components after the scientific-core reset: four stale build_bau2_e2026 imports and one stale data/scenarios trajectory dependency.",
+    "eGRID/EIA auxiliary energy evidence checked against official EPA/EIA release semantics; release-lagged status is appropriate.",
+    "Lookup guardrail scripts are valid diagnostics but do not validate the underlying feedback structure.",
+    "Legacy EROI coupling code remains explicitly unvalidated/forbidden for central promotion."
   ]
 }
