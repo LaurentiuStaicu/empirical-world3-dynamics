@@ -547,7 +547,7 @@
       "scientific_materiality": "MEDIUM",
       "audit_status": "WARNING",
       "severity": "MEDIUM",
-      "note": "Current-vintage GCB provenance and transport are explicit, but full direct primary-file equivalence and release-as-of-origin vintages remain open."
+      "note": "Official GCB 2025 data page and transport are explicit. The peer-reviewed GCB paper confirms the coal/oil/gas/cement/flaring/other category boundary used by EWD; remaining closure is direct reconstruction and hash/value equality from the official v2025 workbook, plus real-time vintage limitations."
     },
     {
       "path": "science/data/forecasts/eia-steo-2026-09-11.json",
@@ -617,7 +617,7 @@
       "scientific_materiality": "MEDIUM",
       "audit_status": "WARNING",
       "severity": "MEDIUM",
-      "note": "Official EI authority and pinned mirror transport are documented, but independent byte-equivalence to the official EI download remains open."
+      "note": "Official EI 2026 authority and pinned mirror transport are documented. The EI site currently exposes the 2026 workbook and consolidated narrow CSV directly; remaining closure is byte/value equivalence between the pinned mirror and the official primary download."
     },
     {
       "path": "science/data/processed/nasa_gistemp_global_2026.csv",
@@ -747,7 +747,7 @@
       "scientific_materiality": "HIGH",
       "audit_status": "WARNING",
       "severity": "MEDIUM",
-      "note": "Secondary OWID adapter is used for UN WPP population benchmark/guardrail; full official UN primary-file freeze remains open in provenance closure."
+      "note": "Secondary OWID transport is used only for the UN WPP population benchmark/guardrail. Its estimates-through-2023 / medium-projection-from-2024 split matches the official WPP 2024 framework; full primary-file row equality and freeze/hash remain open."
     },
     {
       "path": "science/data/raw/bau2_e2026/2026-08-28/undp_hdi_owid_adapter.csv",
@@ -757,7 +757,7 @@
       "scientific_materiality": "HIGH",
       "audit_status": "WARNING",
       "severity": "HIGH",
-      "note": "Secondary OWID adapter supplies a central HDI observation target; official UNDP full primary-file freeze remains open in provenance closure."
+      "note": "Secondary OWID transport supplies a central HDI proxy. The EWD World values match official UNDP HDR 2025 Table 2 exactly at all published World anchors (1990, 2000, 2010, 2015, 2020-2023). Remaining issue is full primary-file freeze/hash and annual row-by-row closure, not a detected semantic/value disagreement."
     },
     {
       "path": "science/data/raw/minerals/2026-09-08/MCS2026_Commodities_Data.normalized-lf.csv.gz",
@@ -1631,7 +1631,8 @@
     "Legacy EROI coupling code remains explicitly unvalidated/forbidden for central promotion.",
     "Vendored Pyworld3 v1.1 audited against upstream tag: code/tables are content-identical after CRLF-to-LF normalization; license is byte-identical.",
     "Repository-wide first-pass classification now has no PENDING files.",
-    "World3-03 hash discrepancy resolved: CRLF SHA-256 42b22c... converts exactly to repository LF SHA-256 252e0c...; no model-content divergence."
+    "World3-03 hash discrepancy resolved: CRLF SHA-256 42b22c... converts exactly to repository LF SHA-256 252e0c...; no model-content divergence.",
+    "Primary-source follow-up: UNDP World HDI published anchors match the EWD adapter exactly; UN WPP estimate/medium split matches WPP 2024 semantics; EI and GCB official primary downloads are currently available for future byte-level closure."
   ],
   "first_pass_complete": true
 }
