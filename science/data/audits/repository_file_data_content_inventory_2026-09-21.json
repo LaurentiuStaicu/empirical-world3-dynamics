@@ -346,8 +346,8 @@
       "role": "third_party_provenance",
       "scientific_materiality": "HIGH",
       "audit_status": "WARNING",
-      "severity": "HIGH",
-      "note": "Recorded ingestion SHA-256 for World3_03_Scenarios.mdl differs from the SHA-256 enforced by the current scientific input manifest; line-ending normalization is a possible explanation but has not yet been proven."
+      "severity": "LOW",
+      "note": "The recorded SHA-256 is the authoritative CRLF-byte hash. Reconstructing CRLF from the repository LF-normalized model reproduces it exactly; the current manifest hash is the exact LF-normalized hash. Documentation should explicitly record both forms rather than saying only that the source is retained unchanged."
     },
     {
       "path": "science/configs/energy_direct_emissions_boundary.json",
@@ -1630,7 +1630,8 @@
     "Lookup guardrail scripts are valid diagnostics but do not validate the underlying feedback structure.",
     "Legacy EROI coupling code remains explicitly unvalidated/forbidden for central promotion.",
     "Vendored Pyworld3 v1.1 audited against upstream tag: code/tables are content-identical after CRLF-to-LF normalization; license is byte-identical.",
-    "Repository-wide first-pass classification now has no PENDING files."
+    "Repository-wide first-pass classification now has no PENDING files.",
+    "World3-03 hash discrepancy resolved: CRLF SHA-256 42b22c... converts exactly to repository LF SHA-256 252e0c...; no model-content divergence."
   ],
   "first_pass_complete": true
 }
