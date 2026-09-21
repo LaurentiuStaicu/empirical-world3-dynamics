@@ -1,0 +1,1623 @@
+{
+  "schema_version": "1.0",
+  "audit_name": "EWD Repository File–Data–Content Audit",
+  "baseline_branch": "main",
+  "baseline_commit": "795a6b8e42e2a19497f686a89e7c3a6056e6930c",
+  "generated_on": "2026-09-21",
+  "purpose": "Diagnostic inventory. No model or data corrections are performed by this file.",
+  "status_taxonomy": [
+    "PASS",
+    "WARNING",
+    "BLOCKER",
+    "PENDING",
+    "NOT_SCIENTIFICALLY_MATERIAL"
+  ],
+  "counts": {
+    "PENDING": 102,
+    "NOT_SCIENTIFICALLY_MATERIAL": 16,
+    "PASS": 17,
+    "WARNING": 25
+  },
+  "entries": [
+    {
+      "path": ".atm/repository.json",
+      "size_bytes": 1565,
+      "git_blob_sha": "8bac6a96e1df3528941aca43431bc2643299d961",
+      "role": "external_integration_manifest",
+      "scientific_materiality": "LOW",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": ".gitattributes",
+      "size_bytes": 37,
+      "git_blob_sha": "879b3972a97d93cf518916d6131218e3f7d3bb41",
+      "role": "repository_metadata",
+      "scientific_materiality": "LOW",
+      "audit_status": "NOT_SCIENTIFICALLY_MATERIAL",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": ".github/CONTRIBUTING.md",
+      "size_bytes": 1811,
+      "git_blob_sha": "16e0fdd9c661728f156e28594feb95445d532c22",
+      "role": "repository_governance_or_presentation",
+      "scientific_materiality": "LOW",
+      "audit_status": "NOT_SCIENTIFICALLY_MATERIAL",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": ".github/EWD_README_PREVIEW.md",
+      "size_bytes": 11161,
+      "git_blob_sha": "276380b640abd6a538f1401fbd4c60493cc7bd7c",
+      "role": "repository_governance_or_presentation",
+      "scientific_materiality": "LOW",
+      "audit_status": "NOT_SCIENTIFICALLY_MATERIAL",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/bug.yml",
+      "size_bytes": 1107,
+      "git_blob_sha": "6b603e77f3cae51c423fa8c067787e7afcab5fd6",
+      "role": "repository_governance_or_presentation",
+      "scientific_materiality": "LOW",
+      "audit_status": "NOT_SCIENTIFICALLY_MATERIAL",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/config.yml",
+      "size_bytes": 242,
+      "git_blob_sha": "48f04bd5b774ed139a307c95a92cfd06727ee3d7",
+      "role": "repository_governance_or_presentation",
+      "scientific_materiality": "LOW",
+      "audit_status": "NOT_SCIENTIFICALLY_MATERIAL",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/scientific_issue.yml",
+      "size_bytes": 1551,
+      "git_blob_sha": "26089f7211b4541fb8c6fc4fd296c24c5673e163",
+      "role": "repository_governance_or_presentation",
+      "scientific_materiality": "LOW",
+      "audit_status": "NOT_SCIENTIFICALLY_MATERIAL",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": ".github/PULL_REQUEST_TEMPLATE.md",
+      "size_bytes": 953,
+      "git_blob_sha": "acadb698e8b2229d589869515b12e1a6cc92e1d1",
+      "role": "repository_governance_or_presentation",
+      "scientific_materiality": "LOW",
+      "audit_status": "NOT_SCIENTIFICALLY_MATERIAL",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": ".github/SUPPORT.md",
+      "size_bytes": 532,
+      "git_blob_sha": "c5bccfd2bfe2f36c7aa5a88f6bbfbf6918549821",
+      "role": "repository_governance_or_presentation",
+      "scientific_materiality": "LOW",
+      "audit_status": "NOT_SCIENTIFICALLY_MATERIAL",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": ".github/community_health_contract.json",
+      "size_bytes": 978,
+      "git_blob_sha": "6350e1d4db3c56cf5e635eea68a761cb60094214",
+      "role": "repository_governance_or_presentation",
+      "scientific_materiality": "LOW",
+      "audit_status": "NOT_SCIENTIFICALLY_MATERIAL",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": ".github/readme-assets/ewd-concept-overview-dark.svg",
+      "size_bytes": 4610,
+      "git_blob_sha": "bf4433fa7ef729ffa16d9de1bd9d38c12ef81e4a",
+      "role": "repository_governance_or_presentation",
+      "scientific_materiality": "LOW",
+      "audit_status": "NOT_SCIENTIFICALLY_MATERIAL",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": ".github/readme-assets/ewd-concept-overview-light.svg",
+      "size_bytes": 4610,
+      "git_blob_sha": "b8ae0b69f99f559398c399f47d911ec7bf2ef977",
+      "role": "repository_governance_or_presentation",
+      "scientific_materiality": "LOW",
+      "audit_status": "NOT_SCIENTIFICALLY_MATERIAL",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": ".github/readme_design_contract.json",
+      "size_bytes": 3951,
+      "git_blob_sha": "1888dd852e9ed0ebd9440678b6bcaa8f70053d1d",
+      "role": "repository_governance_or_presentation",
+      "scientific_materiality": "LOW",
+      "audit_status": "NOT_SCIENTIFICALLY_MATERIAL",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": ".github/workflows/science-reproducibility.yml",
+      "size_bytes": 1231,
+      "git_blob_sha": "47573b363d144e9952cb73fabfc2761bb00ec6aa",
+      "role": "central_ci_reproducibility",
+      "scientific_materiality": "HIGH",
+      "audit_status": "PASS",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": ".gitignore",
+      "size_bytes": 170,
+      "git_blob_sha": "4c51311c214ac62a8a2896132c85b7e4626b19c3",
+      "role": "repository_metadata",
+      "scientific_materiality": "LOW",
+      "audit_status": "NOT_SCIENTIFICALLY_MATERIAL",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "CHANGELOG.md",
+      "size_bytes": 2090,
+      "git_blob_sha": "3a5712b0cfb97d9f83e3e6087c2bd2c6c40f1fbb",
+      "role": "release_history",
+      "scientific_materiality": "HIGH",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "CITATION.cff",
+      "size_bytes": 697,
+      "git_blob_sha": "611ebc0a8110ee881f75c4f5a8a976543e41806a",
+      "role": "release_metadata",
+      "scientific_materiality": "HIGH",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "LICENSE",
+      "size_bytes": 1074,
+      "git_blob_sha": "1d567321f70c978015e03b851bf233d8e401a381",
+      "role": "repository_metadata",
+      "scientific_materiality": "LOW",
+      "audit_status": "NOT_SCIENTIFICALLY_MATERIAL",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "README.md",
+      "size_bytes": 1451,
+      "git_blob_sha": "01a9ef6d4d6e7d99e679328236b5dac345cf30af",
+      "role": "public_repository_description",
+      "scientific_materiality": "HIGH",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "STATUS.md",
+      "size_bytes": 3580,
+      "git_blob_sha": "fa2de49db19e01668750023bc6c7126220e3bdf9",
+      "role": "canonical_scientific_status",
+      "scientific_materiality": "HIGH",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "assets/icon.png",
+      "size_bytes": 64104,
+      "git_blob_sha": "0bcd0747f5fac11ef914a81b7d11c2c8d2924360",
+      "role": "presentation_asset",
+      "scientific_materiality": "LOW",
+      "audit_status": "NOT_SCIENTIFICALLY_MATERIAL",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "data/scenarios/backtest_2019_latest.csv",
+      "size_bytes": 566,
+      "git_blob_sha": "7a1965270af959adf68a0ee10ee408ad130b36a7",
+      "role": "retained_scientific_result",
+      "scientific_materiality": "HIGH",
+      "audit_status": "PASS",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "data/scenarios/backtest_multi_origin.csv",
+      "size_bytes": 915,
+      "git_blob_sha": "6fac56f38c601621e00304e276d1964ea8568584",
+      "role": "retained_scientific_result",
+      "scientific_materiality": "HIGH",
+      "audit_status": "PASS",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "data/scenarios/bau_hybrid_2026_manifest.json",
+      "size_bytes": 7470,
+      "git_blob_sha": "19579acd8308bf549cf20ad9a160bb07007dab16",
+      "role": "retained_scientific_result",
+      "scientific_materiality": "HIGH",
+      "audit_status": "WARNING",
+      "severity": "LOW",
+      "note": "Retained scientific manifest records version 0.1 while release/package identity is 0.1.0."
+    },
+    {
+      "path": "data/scenarios/bridge_validation.csv",
+      "size_bytes": 892,
+      "git_blob_sha": "83f1abcc8a91b79bf46543f19f2d955d640b5514",
+      "role": "retained_scientific_result",
+      "scientific_materiality": "HIGH",
+      "audit_status": "PASS",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "data/scenarios/candidate_ranking.csv",
+      "size_bytes": 21971,
+      "git_blob_sha": "3615fa8f1c739c333b150de1974f03030fb1297a",
+      "role": "retained_scientific_result",
+      "scientific_materiality": "HIGH",
+      "audit_status": "PASS",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "data/scenarios/fit_diagnostics.csv",
+      "size_bytes": 400,
+      "git_blob_sha": "c0755eca2955f0b28131dbca063f3c6ed8f1f7d8",
+      "role": "retained_scientific_result",
+      "scientific_materiality": "HIGH",
+      "audit_status": "PASS",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "data/scenarios/lookup_extrapolation_audit.csv",
+      "size_bytes": 2546,
+      "git_blob_sha": "ff9a4cfa1f0c20d8d18f91d65f1488068ae23538",
+      "role": "retained_scientific_result",
+      "scientific_materiality": "HIGH",
+      "audit_status": "PASS",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "data/scenarios/parameter_identifiability.csv",
+      "size_bytes": 1145,
+      "git_blob_sha": "eac56edc7099b71651d03d416813a8523ddd4f77",
+      "role": "retained_scientific_result",
+      "scientific_materiality": "HIGH",
+      "audit_status": "PASS",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "data/scenarios/validation_candidate_ranking.csv",
+      "size_bytes": 10824,
+      "git_blob_sha": "a4426f9d2b339c223d9287203901c329da7728fc",
+      "role": "retained_scientific_result",
+      "scientific_materiality": "HIGH",
+      "audit_status": "PASS",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "releases/v0.1.0.md",
+      "size_bytes": 1708,
+      "git_blob_sha": "4cf076b601bc5a2ac68f9fe4e11f920dbb867a00",
+      "role": "release_notes",
+      "scientific_materiality": "HIGH",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/LICENSE",
+      "size_bytes": 1074,
+      "git_blob_sha": "1d567321f70c978015e03b851bf233d8e401a381",
+      "role": "repository_metadata",
+      "scientific_materiality": "LOW",
+      "audit_status": "NOT_SCIENTIFICALLY_MATERIAL",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/THIRD_PARTY_NOTICES.md",
+      "size_bytes": 959,
+      "git_blob_sha": "12758c374bd4e184baa91a068e54604fc36a3053",
+      "role": "third_party_provenance",
+      "scientific_materiality": "HIGH",
+      "audit_status": "WARNING",
+      "severity": "HIGH",
+      "note": "Recorded ingestion SHA-256 for World3_03_Scenarios.mdl differs from the SHA-256 enforced by the current scientific input manifest; line-ending normalization is a possible explanation but has not yet been proven."
+    },
+    {
+      "path": "science/configs/energy_direct_emissions_boundary.json",
+      "size_bytes": 1907,
+      "git_blob_sha": "605af490305d77e64951aba228673b936aaba14b",
+      "role": "diagnostic_extension_library",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/configs/real_model_structure.json",
+      "size_bytes": 12690,
+      "git_blob_sha": "04b86bf4eea5ad7a8630d01b42f6b7fadb513d20",
+      "role": "structural_contract",
+      "scientific_materiality": "HIGH",
+      "audit_status": "PASS",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/configs/scenarios.json",
+      "size_bytes": 700,
+      "git_blob_sha": "8af521d4bdba9721e08fb2562f17a7180e6f3f11",
+      "role": "legacy_alternate_scenario_config",
+      "scientific_materiality": "HIGH",
+      "audit_status": "WARNING",
+      "severity": "HIGH",
+      "note": "Defines a legacy Pyworld3 'bau2_structural_proxy' explicitly not equal to official World3-03 BAU2; separate from current central baseline."
+    },
+    {
+      "path": "science/data/energy_audit/egrid-audit.json",
+      "size_bytes": 1452,
+      "git_blob_sha": "735e6fe57d36f14e2df9de4b7eeaeb6306f220b9",
+      "role": "diagnostic_energy_audit_data",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/data/energy_audit/egrid-boundary-reconciliation.json",
+      "size_bytes": 31928,
+      "git_blob_sha": "5eb55eea3f66303ba6d34e6c01d53cc1b5730e18",
+      "role": "diagnostic_energy_audit_data",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/data/energy_audit/egrid-cohort.json.gz",
+      "size_bytes": 25429,
+      "git_blob_sha": "907aaaaf28b21f95232a43c7c60c451594dfc2bc",
+      "role": "diagnostic_energy_audit_data",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/data/energy_audit/egrid-influence.json",
+      "size_bytes": 27095,
+      "git_blob_sha": "44db3f350b9a7f103c3a0e22d5db549dfbd80c43",
+      "role": "diagnostic_energy_audit_data",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/data/energy_audit/egrid-source.json",
+      "size_bytes": 325,
+      "git_blob_sha": "9b49de277cc3450ecb250ebf885a9825360c4e74",
+      "role": "diagnostic_energy_audit_data",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/data/energy_audit/egrid-temporal-audit.json",
+      "size_bytes": 5064,
+      "git_blob_sha": "4cadc3ae305babe06ede5d7e9d162d6f13318ccf",
+      "role": "diagnostic_energy_audit_data",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/data/energy_audit/egrid2021-audit.json",
+      "size_bytes": 2095,
+      "git_blob_sha": "75666f8b11fba6343d7c0669b4694bac46834e08",
+      "role": "diagnostic_energy_audit_data",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/data/energy_audit/egrid2021-cohort.json.gz",
+      "size_bytes": 23342,
+      "git_blob_sha": "5e05c1c9edfe8c38ab540418ffcbecac99b3b66d",
+      "role": "diagnostic_energy_audit_data",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/data/energy_audit/egrid2021-source.json",
+      "size_bytes": 319,
+      "git_blob_sha": "b6d2ad17306dfdf7029c895a9476d0ffb7f819b2",
+      "role": "diagnostic_energy_audit_data",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/data/energy_audit/egrid2022-audit.json",
+      "size_bytes": 2100,
+      "git_blob_sha": "7d5d10689a8f520a91a8252b93497d99ac48947f",
+      "role": "diagnostic_energy_audit_data",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/data/energy_audit/egrid2022-cohort.json.gz",
+      "size_bytes": 23736,
+      "git_blob_sha": "1716390aff1da1446a9550c3c46aa09acfca068d",
+      "role": "diagnostic_energy_audit_data",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/data/energy_audit/egrid2022-source.json",
+      "size_bytes": 319,
+      "git_blob_sha": "4d2b95674554140ebae671c864ff7703fde8dc64",
+      "role": "diagnostic_energy_audit_data",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/data/energy_audit/eia-heat-rate-2024.json",
+      "size_bytes": 1458,
+      "git_blob_sha": "8d3481a9a92932f5e6b9dff942ba7b71f306458a",
+      "role": "diagnostic_energy_audit_data",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/data/experiments/energy_direct_emissions_predictions_2026-09-17.csv",
+      "size_bytes": 2124,
+      "git_blob_sha": "23efbfca88f03270b34eb5e1123778a6f97f8dfe",
+      "role": "diagnostic_experiment_data",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/data/experiments/energy_direct_emissions_prospective_2026-09-17.json",
+      "size_bytes": 7176,
+      "git_blob_sha": "d563111e18c5c00ba61eb065fe7a634c9adbef71",
+      "role": "diagnostic_experiment_data",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/data/experiments/gcb_direct_fossil_1990_2024.csv",
+      "size_bytes": 1664,
+      "git_blob_sha": "811cb910c66a6ecf05cbc2ef2204fc118280f4dd",
+      "role": "diagnostic_experiment_data",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/data/experiments/gcb_direct_fossil_1990_2024.provenance.json",
+      "size_bytes": 1540,
+      "git_blob_sha": "6db811dbf64aebd5161c5c85c39410109366f157",
+      "role": "diagnostic_experiment_data",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "WARNING",
+      "severity": "MEDIUM",
+      "note": "Current-vintage GCB provenance and transport are explicit, but full direct primary-file equivalence and release-as-of-origin vintages remain open."
+    },
+    {
+      "path": "science/data/forecasts/eia-steo-2026-09-11.json",
+      "size_bytes": 2177,
+      "git_blob_sha": "954a32a1d15fbb7d9f97bef2d4778b73c81feb0f",
+      "role": "diagnostic_forecast_data",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "WARNING",
+      "severity": "MEDIUM",
+      "note": "Forecast values were manually transcribed and original release bytes were not archived; suitable only as limited diagnostic/prospective evidence."
+    },
+    {
+      "path": "science/data/input_manifest.json",
+      "size_bytes": 5009,
+      "git_blob_sha": "334f2a1a56185913ddcd1c67b1bbd171d7c096ec",
+      "role": "scientific_input_inventory",
+      "scientific_materiality": "HIGH",
+      "audit_status": "WARNING",
+      "severity": "HIGH",
+      "note": "Manifest is described as a frozen central-model snapshot dated 2026-08-30 but hashes all retained raw/processed files, including later diagnostic datasets; reproducible hash inventory is valid but scope/date semantics are conflated."
+    },
+    {
+      "path": "science/data/processed/aramendia_global_fossil_eroi_2024.csv",
+      "size_bytes": 4021,
+      "git_blob_sha": "29db12117440d18b56eca817f6a4f0e9186f0ac0",
+      "role": "diagnostic_or_supporting_processed_data",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/data/processed/aramendia_global_fossil_eroi_2024.provenance.json",
+      "size_bytes": 586,
+      "git_blob_sha": "ea7fe4b09a2081ee604b3207159691e73421a539",
+      "role": "diagnostic_or_supporting_processed_data",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/data/processed/empirical_model_inputs_2026-08-28.csv",
+      "size_bytes": 4887,
+      "git_blob_sha": "a78ac7f40a044c6b07ed281b0f3e9303ad323c4c",
+      "role": "central_processed_observation_input",
+      "scientific_materiality": "HIGH",
+      "audit_status": "WARNING",
+      "severity": "MEDIUM",
+      "note": "Contains a derived World Bank food-per-capita proxy based on the anomalous WDI food series; current central observations.py does not use this field for food."
+    },
+    {
+      "path": "science/data/processed/energy_institute_global_2026.csv",
+      "size_bytes": 9546,
+      "git_blob_sha": "be8671ddbf57d1a3ef46f7e1d637f28172b13d1e",
+      "role": "diagnostic_or_supporting_processed_data",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/data/processed/energy_institute_global_2026.provenance.json",
+      "size_bytes": 829,
+      "git_blob_sha": "9bbc8a8abd2b1816b76df40e735da35c5f01689e",
+      "role": "diagnostic_or_supporting_processed_data",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "WARNING",
+      "severity": "MEDIUM",
+      "note": "Official EI authority and pinned mirror transport are documented, but independent byte-equivalence to the official EI download remains open."
+    },
+    {
+      "path": "science/data/processed/nasa_gistemp_global_2026.csv",
+      "size_bytes": 1867,
+      "git_blob_sha": "e4991fa5f9dd4786026db4a60452ba4ee8247b68",
+      "role": "diagnostic_or_supporting_processed_data",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/data/processed/nasa_gistemp_global_2026.provenance.json",
+      "size_bytes": 712,
+      "git_blob_sha": "ce37df3c2172e6e8ffaad7f1af30720a254becde",
+      "role": "diagnostic_or_supporting_processed_data",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "WARNING",
+      "severity": "MEDIUM",
+      "note": "Provenance records a local raw GISTEMP path and hash, but the referenced raw file is not retained in the current checkout; processed snapshot remains hashed."
+    },
+    {
+      "path": "science/data/processed/regional_cereal_climate_panel_2026.csv",
+      "size_bytes": 588859,
+      "git_blob_sha": "75c522e01bdf1716b66f8b97cf8257c29c37d38a",
+      "role": "diagnostic_or_supporting_processed_data",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/data/processed/regional_cereal_climate_panel_2026.provenance.json",
+      "size_bytes": 1795,
+      "git_blob_sha": "de364f6b58f7048de4f1b68030e1a73159920d50",
+      "role": "diagnostic_or_supporting_processed_data",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "WARNING",
+      "severity": "MEDIUM",
+      "note": "Three raw input paths/hashes are documented, but those raw snapshots are not retained in current main; this is diagnostic-only, not central."
+    },
+    {
+      "path": "science/data/processed/technology_mineral_production_2026-09-08.csv",
+      "size_bytes": 63127,
+      "git_blob_sha": "608b22570ce4a34b2d128b078423958c87391c48",
+      "role": "diagnostic_or_supporting_processed_data",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/data/processed/technology_mineral_production_2026-09-08.provenance.json",
+      "size_bytes": 2438,
+      "git_blob_sha": "c626ac1521d462ce65abe58b5457986d3f63e18a",
+      "role": "diagnostic_or_supporting_processed_data",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/data/processed/technology_mineral_risk_2026-09-08.csv",
+      "size_bytes": 1312,
+      "git_blob_sha": "95e89953404c20afa0eb22f339b9860bf51742d4",
+      "role": "diagnostic_or_supporting_processed_data",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/data/processed/unido_iip_world_public_2026-09-08.csv",
+      "size_bytes": 990,
+      "git_blob_sha": "45e3491766461153b6bbdb607e5ce0992f56b412",
+      "role": "diagnostic_or_supporting_processed_data",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/data/processed/unido_iip_world_public_2026-09-08.provenance.json",
+      "size_bytes": 2032,
+      "git_blob_sha": "1871e87325bf0d06cb180f13356333762a74dd95",
+      "role": "diagnostic_or_supporting_processed_data",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/data/processed/unido_national_accounts_world_2026-09-07.csv",
+      "size_bytes": 2310,
+      "git_blob_sha": "9df7d1981a665440337db695e9bbab00e4fefb22",
+      "role": "diagnostic_or_supporting_processed_data",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/data/processed/unido_national_accounts_world_2026-09-07.provenance.json",
+      "size_bytes": 1865,
+      "git_blob_sha": "72f8290da7046625f5b4cd75beedf1266d107477",
+      "role": "diagnostic_or_supporting_processed_data",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/data/processed/world_bank_global_snapshot_2026-08-28.csv",
+      "size_bytes": 19714,
+      "git_blob_sha": "ea8bdbbaa508dd4438cad5d8836065463b8a61bf",
+      "role": "central_source_snapshot",
+      "scientific_materiality": "HIGH",
+      "audit_status": "WARNING",
+      "severity": "MEDIUM",
+      "note": "Contains anomalous AG.PRD.FOOD.XD values (including repeated 100.0 in 2015-2020); this series is explicitly excluded from central food calibration."
+    },
+    {
+      "path": "science/data/raw/bau2_e2026/2026-08-28/un_wpp2024_owid_adapter.csv",
+      "size_bytes": 1172571,
+      "git_blob_sha": "ad628f55c34875afc09b9e82ec6d332fa621efc0",
+      "role": "central_benchmark_adapter",
+      "scientific_materiality": "HIGH",
+      "audit_status": "WARNING",
+      "severity": "MEDIUM",
+      "note": "Secondary OWID adapter is used for UN WPP population benchmark/guardrail; full official UN primary-file freeze remains open in provenance closure."
+    },
+    {
+      "path": "science/data/raw/bau2_e2026/2026-08-28/undp_hdi_owid_adapter.csv",
+      "size_bytes": 217958,
+      "git_blob_sha": "76d09dd116c6bab41be40f35fc9bc28116e1bb8d",
+      "role": "central_observation_adapter",
+      "scientific_materiality": "HIGH",
+      "audit_status": "WARNING",
+      "severity": "HIGH",
+      "note": "Secondary OWID adapter supplies a central HDI observation target; official UNDP full primary-file freeze remains open in provenance closure."
+    },
+    {
+      "path": "science/data/raw/minerals/2026-09-08/MCS2026_Commodities_Data.normalized-lf.csv.gz",
+      "size_bytes": 124928,
+      "git_blob_sha": "c6141ae13663f988b3ef2cdc422836456822cc02",
+      "role": "raw_or_adapter_data",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/data/raw/minerals/2026-09-08/owid_global_mine_production.csv",
+      "size_bytes": 103673,
+      "git_blob_sha": "1c79d968f3bbd6f87ac586058ee304fef6673b7a",
+      "role": "raw_or_adapter_data",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/data/raw/minerals/2026-09-08/owid_global_mine_production.metadata.json",
+      "size_bytes": 3960,
+      "git_blob_sha": "a0fd3cb1b98cd7398ef6b2cb56a1938945cc52d7",
+      "role": "raw_or_adapter_data",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/data/raw/unido/2026-09-07/national_accounts_metadata.json",
+      "size_bytes": 156691,
+      "git_blob_sha": "f34fb385f9128016215b1b9c8b04d7669c97d76c",
+      "role": "raw_or_adapter_data",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/data/raw/unido/2026-09-07/national_accounts_world.json",
+      "size_bytes": 3379,
+      "git_blob_sha": "2b13e66ab5f3ee24244984912fe7e74c1b379e11",
+      "role": "raw_or_adapter_data",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/data/raw/unido/2026-09-08/iip_annual_data.csv",
+      "size_bytes": 466951,
+      "git_blob_sha": "dff72b34fd2fa2938a025e8f49b9189488a4792b",
+      "role": "raw_or_adapter_data",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/data/raw/unido/2026-09-08/iip_country.csv",
+      "size_bytes": 2570,
+      "git_blob_sha": "18f21b8dbcabd93587db9b12f18fabb9fda5cbbf",
+      "role": "raw_or_adapter_data",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/data/raw/unido/2026-09-08/iip_metadata.json",
+      "size_bytes": 18021,
+      "git_blob_sha": "0509315d41f4ec544d3426ca4ea8e5091ee641a3",
+      "role": "raw_or_adapter_data",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/data/raw/unido/2026-09-08/iip_metadata_country.csv",
+      "size_bytes": 25870,
+      "git_blob_sha": "95d4bc752acd7bfe6e7354871f654c502f64a231",
+      "role": "raw_or_adapter_data",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/data/raw/unido/2026-09-08/national_accounts_2020_data.csv",
+      "size_bytes": 79230,
+      "git_blob_sha": "cba6827dbf2887d05055966ce7ef40af19d674bd",
+      "role": "raw_or_adapter_data",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/data/raw/unido/2026-09-08/national_accounts_metadata.json",
+      "size_bytes": 156691,
+      "git_blob_sha": "ed28ae64c7adb8ba858ab0c8405edb25f111bfa5",
+      "role": "raw_or_adapter_data",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/data/registry.csv",
+      "size_bytes": 5438,
+      "git_blob_sha": "8019f5ecf61214642b682e6b7db483f5834d5723",
+      "role": "scientific_data_registry",
+      "scientific_materiality": "HIGH",
+      "audit_status": "WARNING",
+      "severity": "HIGH",
+      "note": "Central FAOSTAT food, UNDP HDI and UN WPP benchmark/guardrail inputs are consumed by observations.py but lack dedicated registry rows; wb_fossil_co2 status also understates its use as a central observation-bridge target."
+    },
+    {
+      "path": "science/data/remote_inputs.json",
+      "size_bytes": 352,
+      "git_blob_sha": "b6dacac27af5aac1c0fa1be71cb92725e71c6102",
+      "role": "central_remote_input_manifest",
+      "scientific_materiality": "HIGH",
+      "audit_status": "PASS",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/pyproject.toml",
+      "size_bytes": 650,
+      "git_blob_sha": "ba1153fd428958a2cf102db571235d1172a13170",
+      "role": "reproducible_environment_metadata",
+      "scientific_materiality": "HIGH",
+      "audit_status": "WARNING",
+      "severity": "LOW",
+      "note": "Project metadata version is 0.1 while package __version__, CITATION and public release are 0.1.0."
+    },
+    {
+      "path": "science/scripts/analyze_energy_coupling.py",
+      "size_bytes": 10078,
+      "git_blob_sha": "77ecd438f049bde75096939f8648583ed6b81f73",
+      "role": "diagnostic_extension_code",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/scripts/analyze_world3_03.py",
+      "size_bytes": 4573,
+      "git_blob_sha": "209e412ca8c185cf6f092e6f141d5147acc086b2",
+      "role": "diagnostic_extension_code",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/scripts/build_joint_hybrid_2026.py",
+      "size_bytes": 53316,
+      "git_blob_sha": "ca77b61fbc3f8532f37d6a3ed399d86b4789386b",
+      "role": "central_empirical_pipeline",
+      "scientific_materiality": "HIGH",
+      "audit_status": "PASS",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/scripts/compare_empirical.py",
+      "size_bytes": 3252,
+      "git_blob_sha": "c6567e5923d0a6ba5132c49c01b76ae4a59661f5",
+      "role": "legacy_alternate_comparison",
+      "scientific_materiality": "HIGH",
+      "audit_status": "WARNING",
+      "severity": "MEDIUM",
+      "note": "Compares observations against the legacy Pyworld3 route; not part of retained central reproduction."
+    },
+    {
+      "path": "science/scripts/evaluate_climate_food_link.py",
+      "size_bytes": 9389,
+      "git_blob_sha": "80c3e16c21b5dbfd5802b6549b6215ea8424c195",
+      "role": "diagnostic_extension_code",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/scripts/evaluate_direct_emissions_prospective.py",
+      "size_bytes": 2031,
+      "git_blob_sha": "719c7861ea4a6b9d43a6a4cf52245faf7f886d80",
+      "role": "diagnostic_extension_code",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/scripts/evaluate_eroi_resource_link.py",
+      "size_bytes": 4713,
+      "git_blob_sha": "1d7c7e9b81d2a4b03bdd8af3a42ee26078fbd2c8",
+      "role": "diagnostic_extension_code",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/scripts/evaluate_lookup_domain_guardrail.py",
+      "size_bytes": 14859,
+      "git_blob_sha": "5f979be88c27c1c02fd24b50ff05b51656b7c46b",
+      "role": "diagnostic_extension_code",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/scripts/evaluate_lookup_mechanisms.py",
+      "size_bytes": 16152,
+      "git_blob_sha": "9e5d5c790d5909073e8e503aeb821dc79a13b2bd",
+      "role": "diagnostic_extension_code",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/scripts/evaluate_regional_agricultural_stress.py",
+      "size_bytes": 14578,
+      "git_blob_sha": "3aad622345508e86ec6bc47ea5d29e13a24b0450",
+      "role": "diagnostic_extension_code",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/scripts/evaluate_technology_minerals.py",
+      "size_bytes": 7174,
+      "git_blob_sha": "292334da54aed6fec98685ca3c2c4b04e550b30b",
+      "role": "diagnostic_extension_code",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/scripts/evaluate_unido_iip_volume.py",
+      "size_bytes": 16335,
+      "git_blob_sha": "8b49c8151994ea4c7746983adec63a5cdcc6cd0a",
+      "role": "diagnostic_extension_code",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/scripts/evaluate_unido_industry_proxy.py",
+      "size_bytes": 17201,
+      "git_blob_sha": "d9d04891855217d96ee1a3ab71bf9a891fbf6921",
+      "role": "diagnostic_extension_code",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/scripts/ingest_aramendia_eroi.py",
+      "size_bytes": 3431,
+      "git_blob_sha": "a8526a3de248b837c653e6aab2a0bf35fbc28481",
+      "role": "data_ingestion_code",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/scripts/ingest_energy_institute_2026.py",
+      "size_bytes": 5350,
+      "git_blob_sha": "48ca1e7a567ad2cdb1687c536bafc52d3b979f27",
+      "role": "data_ingestion_code",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/scripts/ingest_gistemp.py",
+      "size_bytes": 2654,
+      "git_blob_sha": "917ce1a1681ba3dd610ba750411e6faa1eebd24d",
+      "role": "data_ingestion_code",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "WARNING",
+      "severity": "MEDIUM",
+      "note": "Deterministic ingestion exists, but its required local raw GISTEMP snapshot is absent from current main, so raw-to-processed rebuild is not checkout-only reproducible."
+    },
+    {
+      "path": "science/scripts/ingest_regional_agricultural_climate.py",
+      "size_bytes": 8397,
+      "git_blob_sha": "d5a35ed0a22237ce7a8fe28cc0192eb2105cb71b",
+      "role": "data_ingestion_code",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "WARNING",
+      "severity": "MEDIUM",
+      "note": "Deterministic regional panel ingestion exists, but required raw FAOSTAT/OWID climate snapshots are absent from current main."
+    },
+    {
+      "path": "science/scripts/ingest_technology_minerals.py",
+      "size_bytes": 4321,
+      "git_blob_sha": "e49534264879a813bac7732b4000456e724fb494",
+      "role": "data_ingestion_code",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/scripts/ingest_unido_iip.py",
+      "size_bytes": 4516,
+      "git_blob_sha": "39fbf020feba071ce3ffcee7f685fead0a9be5e5",
+      "role": "data_ingestion_code",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/scripts/ingest_unido_national_accounts.py",
+      "size_bytes": 3979,
+      "git_blob_sha": "ca30b7c3d4584a4abe9cc62529fc30d655681502",
+      "role": "data_ingestion_code",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/scripts/ingest_world_bank.py",
+      "size_bytes": 2864,
+      "git_blob_sha": "4b66b9070a84c0fb6f3a635b12a6035f959f9658",
+      "role": "data_ingestion_code",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/scripts/run_baselines.py",
+      "size_bytes": 1607,
+      "git_blob_sha": "1568c4d35ea23143e53e0cb432469f47dff8e455",
+      "role": "legacy_alternate_runner",
+      "scientific_materiality": "HIGH",
+      "audit_status": "WARNING",
+      "severity": "MEDIUM",
+      "note": "Generates baseline outputs from the legacy Pyworld3 route and 'bau2_structural_proxy'; not part of retained central reproduction."
+    },
+    {
+      "path": "science/scripts/run_net_energy_scenarios.py",
+      "size_bytes": 3390,
+      "git_blob_sha": "def57b3bdd24247169a6d6f27ba10db761f5fdc8",
+      "role": "diagnostic_extension_code",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/scripts/run_world3_03.py",
+      "size_bytes": 3192,
+      "git_blob_sha": "84236d44cd73c133d809fa3e9f8c090b9dc2cdf0",
+      "role": "central_structural_runner",
+      "scientific_materiality": "HIGH",
+      "audit_status": "PASS",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/src/world3_empirical/__init__.py",
+      "size_bytes": 456,
+      "git_blob_sha": "01de11eaabb1df7158c5c489c089f682fde40cac",
+      "role": "scientific_library_support",
+      "scientific_materiality": "HIGH",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/src/world3_empirical/__main__.py",
+      "size_bytes": 49,
+      "git_blob_sha": "8f0c1d5f6315c6afe9c6e9e2833ae445325db731",
+      "role": "legacy_public_cli_entry",
+      "scientific_materiality": "HIGH",
+      "audit_status": "WARNING",
+      "severity": "HIGH",
+      "note": "Package execution routes to the legacy CLI rather than the official World3-03 baseline path."
+    },
+    {
+      "path": "science/src/world3_empirical/calibration.py",
+      "size_bytes": 5856,
+      "git_blob_sha": "6622dc5e08d0cda3bd1a3c871d3d5c94a5d191b1",
+      "role": "scientific_library_support",
+      "scientific_materiality": "HIGH",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/src/world3_empirical/cli.py",
+      "size_bytes": 1384,
+      "git_blob_sha": "c9e036c6abf0a3f991faa54e1b736aab83b53091",
+      "role": "legacy_public_cli",
+      "scientific_materiality": "HIGH",
+      "audit_status": "WARNING",
+      "severity": "HIGH",
+      "note": "Public CLI entry point runs the legacy Pyworld3 route by default, which can be mistaken for the current EWD World3-03 scientific baseline."
+    },
+    {
+      "path": "science/src/world3_empirical/direct_emissions_experiment.py",
+      "size_bytes": 15018,
+      "git_blob_sha": "594bc0dc8c62450e45ae67dbc6fbc24509dfd94b",
+      "role": "diagnostic_extension_library",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/src/world3_empirical/egrid_audit.py",
+      "size_bytes": 2553,
+      "git_blob_sha": "9ccafee083749fd1cf20b5139cdc40c7e1222ce9",
+      "role": "diagnostic_extension_library",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/src/world3_empirical/egrid_boundary.py",
+      "size_bytes": 6210,
+      "git_blob_sha": "89e7807625a792f46ac7287bd6a71c725eee7e3f",
+      "role": "diagnostic_extension_library",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/src/world3_empirical/egrid_influence.py",
+      "size_bytes": 2824,
+      "git_blob_sha": "25c50c9dbe72665496f0c68f36b13ea88c66f8c8",
+      "role": "diagnostic_extension_library",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/src/world3_empirical/egrid_temporal.py",
+      "size_bytes": 6612,
+      "git_blob_sha": "04ac7c95d799852fa2c8e1e5f262a37efd686c5c",
+      "role": "diagnostic_extension_library",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/src/world3_empirical/energy_coupling.py",
+      "size_bytes": 11864,
+      "git_blob_sha": "659afc14099353e7ce440a4fd35895dac59011e1",
+      "role": "diagnostic_extension_library",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/src/world3_empirical/energy_emissions.py",
+      "size_bytes": 3688,
+      "git_blob_sha": "510071a97af7499ad9d12de46456794f824b48e9",
+      "role": "diagnostic_extension_library",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/src/world3_empirical/forecast_vintages.py",
+      "size_bytes": 2530,
+      "git_blob_sha": "6dbf0dbef0fe040ba918bde739eb186a8fd4f187",
+      "role": "diagnostic_extension_library",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/src/world3_empirical/metrics.py",
+      "size_bytes": 1072,
+      "git_blob_sha": "fe7ddf9dba29af1ad3351843e6a392317a9f062a",
+      "role": "scientific_library_support",
+      "scientific_materiality": "HIGH",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/src/world3_empirical/model.py",
+      "size_bytes": 2680,
+      "git_blob_sha": "1f79071d8a6481bd2c0af293c9c8488d20069686",
+      "role": "legacy_alternate_world3_wrapper",
+      "scientific_materiality": "HIGH",
+      "audit_status": "WARNING",
+      "severity": "HIGH",
+      "note": "Runs the Pyworld3/1974 implementation rather than the official World3-03 structural core used by the retained EWD baseline."
+    },
+    {
+      "path": "science/src/world3_empirical/net_energy.py",
+      "size_bytes": 7985,
+      "git_blob_sha": "b6314d2c26bf2b6db26ba6362bddc3792906711d",
+      "role": "diagnostic_extension_library",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/src/world3_empirical/observations.py",
+      "size_bytes": 7035,
+      "git_blob_sha": "46b42e24a93b98daa744d139a1059141be6a741a",
+      "role": "central_measurement_layer",
+      "scientific_materiality": "HIGH",
+      "audit_status": "PASS",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/src/world3_empirical/real_model_contract.py",
+      "size_bytes": 8376,
+      "git_blob_sha": "3f2cb686682599c56416de3e3f71538db707b223",
+      "role": "scientific_library_support",
+      "scientific_materiality": "HIGH",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/src/world3_empirical/registry.py",
+      "size_bytes": 1464,
+      "git_blob_sha": "3f83e94098290c87e9f365bb1378df95765b7e06",
+      "role": "scientific_library_support",
+      "scientific_materiality": "HIGH",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/src/world3_empirical/scenarios.py",
+      "size_bytes": 793,
+      "git_blob_sha": "0d845f9c048ca63df56542c037e677eb3ca15e0a",
+      "role": "legacy_alternate_scenario_loader",
+      "scientific_materiality": "HIGH",
+      "audit_status": "WARNING",
+      "severity": "HIGH",
+      "note": "Loads the legacy alternate scenario configuration, not official World3-03 scenario numbers."
+    },
+    {
+      "path": "science/src/world3_empirical/sources/__init__.py",
+      "size_bytes": 236,
+      "git_blob_sha": "2ee0b2418ae5b214d075601f11ca1704ff9da038",
+      "role": "scientific_library_support",
+      "scientific_materiality": "HIGH",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/src/world3_empirical/sources/minerals.py",
+      "size_bytes": 8686,
+      "git_blob_sha": "5cd5bf0dba72fced5f4b58c8e9229a8fe6350458",
+      "role": "diagnostic_extension_library",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/src/world3_empirical/sources/unido.py",
+      "size_bytes": 4135,
+      "git_blob_sha": "da2bd1c56dd59fe198a7df3e1a25835f00cb0f08",
+      "role": "diagnostic_extension_library",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/src/world3_empirical/sources/unido_iip.py",
+      "size_bytes": 4920,
+      "git_blob_sha": "893551b4456a75ffc4d25bfecd3b0fea0a76a06e",
+      "role": "diagnostic_extension_library",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/src/world3_empirical/sources/world_bank.py",
+      "size_bytes": 2038,
+      "git_blob_sha": "4e8cbc3f7c4bad9ff2dac63bfa17f2e27af24562",
+      "role": "scientific_library_support",
+      "scientific_materiality": "HIGH",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/src/world3_empirical/world3_03.py",
+      "size_bytes": 4433,
+      "git_blob_sha": "da26b64be7fc07278b60e78a7aa94a7879e78976",
+      "role": "central_structural_adapter",
+      "scientific_materiality": "HIGH",
+      "audit_status": "PASS",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/uv.lock",
+      "size_bytes": 319370,
+      "git_blob_sha": "2ff7507430e10268679a844fc3857bd16c70e6f2",
+      "role": "reproducible_environment_lock",
+      "scientific_materiality": "HIGH",
+      "audit_status": "WARNING",
+      "severity": "LOW",
+      "note": "Locked project metadata records version 0.1, matching pyproject but not the public 0.1.0 release identity."
+    },
+    {
+      "path": "science/vendor/LICENSE-pyworld3.txt",
+      "size_bytes": 21780,
+      "git_blob_sha": "1338de6f1eaf85d83b4df9aafdc20884150d9f44",
+      "role": "vendored_legacy_engine",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/vendor/pyworld3/__init__.py",
+      "size_bytes": 87,
+      "git_blob_sha": "15d990484500068ddd23c9f0d45d81cbd20268a6",
+      "role": "vendored_legacy_engine",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/vendor/pyworld3/agriculture.py",
+      "size_bytes": 30076,
+      "git_blob_sha": "1ba0846f70f001df2f6368328b6b89061f690d9c",
+      "role": "vendored_legacy_engine",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/vendor/pyworld3/capital.py",
+      "size_bytes": 24281,
+      "git_blob_sha": "1808e1bb0b97ee96c7a1e8571a497043ddd5877d",
+      "role": "vendored_legacy_engine",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/vendor/pyworld3/functions_table_world3.json",
+      "size_bytes": 11922,
+      "git_blob_sha": "72611d715cdf33a6085791b2dcc3765aee20c4ca",
+      "role": "vendored_legacy_engine",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/vendor/pyworld3/pollution.py",
+      "size_bytes": 19020,
+      "git_blob_sha": "04f50809cd45b9dfba77ae099570e6d144ba631c",
+      "role": "vendored_legacy_engine",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/vendor/pyworld3/population.py",
+      "size_bytes": 31918,
+      "git_blob_sha": "61a2a8b57b635811d221c1fbe7b15b5d038827d2",
+      "role": "vendored_legacy_engine",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/vendor/pyworld3/resource.py",
+      "size_bytes": 12127,
+      "git_blob_sha": "2c3360c148c3b90359c7092fce4dfec10735d496",
+      "role": "vendored_legacy_engine",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/vendor/pyworld3/specials.py",
+      "size_bytes": 7940,
+      "git_blob_sha": "1032ebb342614a1c6b19fac522a6289dc24f52fd",
+      "role": "vendored_legacy_engine",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/vendor/pyworld3/utils.py",
+      "size_bytes": 5654,
+      "git_blob_sha": "54ed656cc37472af9965a66e98a257e819f1f667",
+      "role": "vendored_legacy_engine",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/vendor/pyworld3/world3.py",
+      "size_bytes": 15789,
+      "git_blob_sha": "48aaa32412dca44d65bcc1804954751bf8c8f44d",
+      "role": "vendored_legacy_engine",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "science/vendor/world3_03/World3_03_Scenarios.mdl",
+      "size_bytes": 178077,
+      "git_blob_sha": "46d3a5a8a2bebc42fd0f18ef3079c19c974be942",
+      "role": "central_structural_model",
+      "scientific_materiality": "HIGH",
+      "audit_status": "PASS",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "scripts/audit_egrid.py",
+      "size_bytes": 1961,
+      "git_blob_sha": "71a6aa1406a71daabbc0107c94fe18cd6a00eb77",
+      "role": "diagnostic_audit_tool",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "scripts/audit_egrid_boundaries.py",
+      "size_bytes": 2311,
+      "git_blob_sha": "09123422378ef293ec23ac6871b548e6dcaa0c62",
+      "role": "diagnostic_extension_library",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "scripts/audit_egrid_influence.py",
+      "size_bytes": 931,
+      "git_blob_sha": "edc130f73e9f30df69020a68c3b6106c2941ccec",
+      "role": "diagnostic_extension_library",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "scripts/audit_egrid_temporal.py",
+      "size_bytes": 1144,
+      "git_blob_sha": "b0c75827387316fa84e7ae28cfd3b3e60d97c872",
+      "role": "diagnostic_extension_library",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "scripts/audit_energy_heat_rates.py",
+      "size_bytes": 1202,
+      "git_blob_sha": "1e82632ef68a0e113a929842ca57cbdde5f32f2b",
+      "role": "diagnostic_audit_tool",
+      "scientific_materiality": "MEDIUM",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "scripts/fetch_science_inputs.py",
+      "size_bytes": 2825,
+      "git_blob_sha": "7fd931234999334a1b521fea47bf65a7cc70e5c4",
+      "role": "central_input_fetcher",
+      "scientific_materiality": "HIGH",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "scripts/generate_science_input_manifest.py",
+      "size_bytes": 2065,
+      "git_blob_sha": "42303ec6b63cab47e57dcdaf7bbda81accaea42a",
+      "role": "scientific_input_inventory",
+      "scientific_materiality": "HIGH",
+      "audit_status": "WARNING",
+      "severity": "HIGH",
+      "note": "Generator scans all science/data/raw and processed files while hard-coding snapshot_date 2026-08-30 and describing the payload as the central-model snapshot."
+    },
+    {
+      "path": "scripts/promotion_gate.py",
+      "size_bytes": 1461,
+      "git_blob_sha": "07b412b5a6e8be68c3664ec2e3a7565f1db37489",
+      "role": "repository_support",
+      "scientific_materiality": "HIGH",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "scripts/reproduce_scientific_results.py",
+      "size_bytes": 8425,
+      "git_blob_sha": "e47cfca0365c3a9dcd47973dedc99eb9a24c68f1",
+      "role": "central_reproducibility_gate",
+      "scientific_materiality": "HIGH",
+      "audit_status": "PASS",
+      "severity": null,
+      "note": null
+    },
+    {
+      "path": "scripts/validate_science.py",
+      "size_bytes": 2801,
+      "git_blob_sha": "fb256bdbe6b3223956126a800d8c260f2a89fa1f",
+      "role": "repository_support",
+      "scientific_materiality": "HIGH",
+      "audit_status": "PENDING",
+      "severity": null,
+      "note": null
+    }
+  ]
+}
