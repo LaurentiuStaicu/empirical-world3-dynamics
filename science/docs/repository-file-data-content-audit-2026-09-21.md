@@ -127,6 +127,22 @@ Central model impact:
 
 None. Mineral data remain an observed-flow/risk diagnostic and are not used to calibrate the latent World3 resource stock.
 
+## Static dependency follow-up
+
+A second pass checked the current local imports used by every file in `science/scripts`, the package entry points, and the scientific reproducibility workflow.
+
+Confirmed missing local dependencies:
+
+- `evaluate_unido_industry_proxy.py` -> deleted `build_bau2_e2026`;
+- `evaluate_unido_iip_volume.py` -> deleted `build_bau2_e2026`;
+- `evaluate_climate_food_link.py` -> deleted `build_bau2_e2026`;
+- `evaluate_regional_agricultural_stress.py` -> deleted `build_bau2_e2026`;
+- `evaluate_technology_minerals.py` -> removed legacy `data/scenarios` trajectory files.
+
+No sixth missing local-script dependency was identified.
+
+The GitHub Actions reproducibility workflow references existing scripts only. The generic package CLI is not broken, but it remains a scientific-routing warning because it executes the alternate Pyworld3 engine rather than the retained World3-03 baseline.
+
 ## High-priority WARNING register
 
 ### FDC-W01 — empirical registry is not complete with respect to the actual central measurement layer
