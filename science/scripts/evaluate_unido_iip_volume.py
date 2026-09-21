@@ -16,7 +16,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from build_bau2_e2026 import Indicator, build_indicators
+from world3_empirical.observations import Indicator, build_indicators
 from build_joint_hybrid_2026 import (
     CACHE,
     Candidate,
