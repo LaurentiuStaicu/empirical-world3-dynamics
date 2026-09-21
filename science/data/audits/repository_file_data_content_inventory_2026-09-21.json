@@ -13,11 +13,10 @@
     "NOT_SCIENTIFICALLY_MATERIAL"
   ],
   "counts": {
-    "PASS": 86,
+    "PASS": 97,
     "NOT_SCIENTIFICALLY_MATERIAL": 16,
     "WARNING": 42,
-    "BLOCKER": 5,
-    "PENDING": 11
+    "BLOCKER": 5
   },
   "entries": [
     {
@@ -1406,9 +1405,9 @@
       "git_blob_sha": "1338de6f1eaf85d83b4df9aafdc20884150d9f44",
       "role": "vendored_legacy_engine",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Byte-identical to upstream Pyworld3 v1.1 CeCILL license."
     },
     {
       "path": "science/vendor/pyworld3/__init__.py",
@@ -1416,9 +1415,9 @@
       "git_blob_sha": "15d990484500068ddd23c9f0d45d81cbd20268a6",
       "role": "vendored_legacy_engine",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Content-identical to upstream Pyworld3 v1.1 after CRLF-to-LF normalization enforced by repository .gitattributes; retained only as legacy/alternate engine, not the central World3-03 baseline."
     },
     {
       "path": "science/vendor/pyworld3/agriculture.py",
@@ -1426,9 +1425,9 @@
       "git_blob_sha": "1ba0846f70f001df2f6368328b6b89061f690d9c",
       "role": "vendored_legacy_engine",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Content-identical to upstream Pyworld3 v1.1 after CRLF-to-LF normalization enforced by repository .gitattributes; retained only as legacy/alternate engine, not the central World3-03 baseline."
     },
     {
       "path": "science/vendor/pyworld3/capital.py",
@@ -1436,9 +1435,9 @@
       "git_blob_sha": "1808e1bb0b97ee96c7a1e8571a497043ddd5877d",
       "role": "vendored_legacy_engine",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Content-identical to upstream Pyworld3 v1.1 after CRLF-to-LF normalization enforced by repository .gitattributes; retained only as legacy/alternate engine, not the central World3-03 baseline."
     },
     {
       "path": "science/vendor/pyworld3/functions_table_world3.json",
@@ -1446,9 +1445,9 @@
       "git_blob_sha": "72611d715cdf33a6085791b2dcc3765aee20c4ca",
       "role": "vendored_legacy_engine",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Content-identical to upstream Pyworld3 v1.1 after CRLF-to-LF normalization enforced by repository .gitattributes; retained only as legacy/alternate engine, not the central World3-03 baseline."
     },
     {
       "path": "science/vendor/pyworld3/pollution.py",
@@ -1456,9 +1455,9 @@
       "git_blob_sha": "04f50809cd45b9dfba77ae099570e6d144ba631c",
       "role": "vendored_legacy_engine",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Content-identical to upstream Pyworld3 v1.1 after CRLF-to-LF normalization enforced by repository .gitattributes; retained only as legacy/alternate engine, not the central World3-03 baseline."
     },
     {
       "path": "science/vendor/pyworld3/population.py",
@@ -1466,9 +1465,9 @@
       "git_blob_sha": "61a2a8b57b635811d221c1fbe7b15b5d038827d2",
       "role": "vendored_legacy_engine",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Content-identical to upstream Pyworld3 v1.1 after CRLF-to-LF normalization enforced by repository .gitattributes; retained only as legacy/alternate engine, not the central World3-03 baseline."
     },
     {
       "path": "science/vendor/pyworld3/resource.py",
@@ -1476,9 +1475,9 @@
       "git_blob_sha": "2c3360c148c3b90359c7092fce4dfec10735d496",
       "role": "vendored_legacy_engine",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Content-identical to upstream Pyworld3 v1.1 after CRLF-to-LF normalization enforced by repository .gitattributes; retained only as legacy/alternate engine, not the central World3-03 baseline."
     },
     {
       "path": "science/vendor/pyworld3/specials.py",
@@ -1486,9 +1485,9 @@
       "git_blob_sha": "1032ebb342614a1c6b19fac522a6289dc24f52fd",
       "role": "vendored_legacy_engine",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Content-identical to upstream Pyworld3 v1.1 after CRLF-to-LF normalization enforced by repository .gitattributes; retained only as legacy/alternate engine, not the central World3-03 baseline."
     },
     {
       "path": "science/vendor/pyworld3/utils.py",
@@ -1496,9 +1495,9 @@
       "git_blob_sha": "54ed656cc37472af9965a66e98a257e819f1f667",
       "role": "vendored_legacy_engine",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Content-identical to upstream Pyworld3 v1.1 after CRLF-to-LF normalization enforced by repository .gitattributes; retained only as legacy/alternate engine, not the central World3-03 baseline."
     },
     {
       "path": "science/vendor/pyworld3/world3.py",
@@ -1506,9 +1505,9 @@
       "git_blob_sha": "48aaa32412dca44d65bcc1804954751bf8c8f44d",
       "role": "vendored_legacy_engine",
       "scientific_materiality": "MEDIUM",
-      "audit_status": "PENDING",
+      "audit_status": "PASS",
       "severity": null,
-      "note": null
+      "note": "Content-identical to upstream Pyworld3 v1.1 after CRLF-to-LF normalization enforced by repository .gitattributes; retained only as legacy/alternate engine, not the central World3-03 baseline."
     },
     {
       "path": "science/vendor/world3_03/World3_03_Scenarios.mdl",
@@ -1629,6 +1628,9 @@
     "Five diagnostic scripts are currently BLOCKER components after the scientific-core reset: four stale build_bau2_e2026 imports and one stale data/scenarios trajectory dependency.",
     "eGRID/EIA auxiliary energy evidence checked against official EPA/EIA release semantics; release-lagged status is appropriate.",
     "Lookup guardrail scripts are valid diagnostics but do not validate the underlying feedback structure.",
-    "Legacy EROI coupling code remains explicitly unvalidated/forbidden for central promotion."
-  ]
+    "Legacy EROI coupling code remains explicitly unvalidated/forbidden for central promotion.",
+    "Vendored Pyworld3 v1.1 audited against upstream tag: code/tables are content-identical after CRLF-to-LF normalization; license is byte-identical.",
+    "Repository-wide first-pass classification now has no PENDING files."
+  ],
+  "first_pass_complete": true
 }
