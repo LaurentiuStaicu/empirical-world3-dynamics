@@ -1632,7 +1632,8 @@
     "Vendored Pyworld3 v1.1 audited against upstream tag: code/tables are content-identical after CRLF-to-LF normalization; license is byte-identical.",
     "Repository-wide first-pass classification now has no PENDING files.",
     "World3-03 hash discrepancy resolved: CRLF SHA-256 42b22c... converts exactly to repository LF SHA-256 252e0c...; no model-content divergence.",
-    "Primary-source follow-up: UNDP World HDI published anchors match the EWD adapter exactly; UN WPP estimate/medium split matches WPP 2024 semantics; EI and GCB official primary downloads are currently available for future byte-level closure."
+    "Primary-source follow-up: UNDP World HDI published anchors match the EWD adapter exactly; UN WPP estimate/medium split matches WPP 2024 semantics; EI and GCB official primary downloads are currently available for future byte-level closure.",
+    "Static dependency follow-up: all current science/scripts local imports and the reproducibility workflow were rechecked. Exactly four scripts reference the deleted build_bau2_e2026 module; the fifth known blocker is evaluate_technology_minerals.py via removed legacy trajectory paths. No additional missing local-script dependency or missing workflow script reference was identified."
   ],
   "first_pass_complete": true
 }
