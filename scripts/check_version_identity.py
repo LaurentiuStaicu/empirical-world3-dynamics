@@ -67,8 +67,13 @@ if not release_note.is_file():
     fail(f"missing release note {release_note.relative_to(ROOT)}")
 
 status_text = (ROOT / "STATUS.md").read_text(encoding="utf-8")
-if f"EWD v{canonical}" not in status_text:
-    fail(f"STATUS.md does not identify EWD v{canonical}")
+status_version = extract(
+    r"Empirical World3 Dynamics \(EWD\) v([0-9]+\.[0-9]+\.[0-9]+)",
+    status_text,
+    "STATUS.md release version",
+)
+if status_version != canonical:
+    fail(f"STATUS.md identifies {status_version!r}, expected {canonical!r}")
 
 print(f"VERSION_IDENTITY_PASS: {canonical}")
 print("Checked CITATION.cff, package metadata, lockfile, runtime version, Joint builder, retained manifest, release note and STATUS.md")
