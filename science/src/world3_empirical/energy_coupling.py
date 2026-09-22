@@ -1,14 +1,22 @@
-"""Conservative EROI coupling for the official World3-03 model.
+"""Rejected EROI sensitivity experiment for the official World3-03 model.
+
+This module is executable only so the rejected resource-fraction -> fossil-EROI
+hypothesis can remain auditable as a structural sensitivity experiment. It is
+not an accepted EWD extension, is forbidden for central promotion, and must not
+be imported by central execution routes. Executability is not evidence of
+scientific validity or promotion eligibility.
 
 World3 already diverts a fraction of industrial capital to resource
-acquisition.  Adding an independent EROI penalty on top of that fraction would
-double count part of the same physical burden.  This extension therefore uses
+acquisition. Adding an independent EROI penalty on top of that fraction would
+double count part of the same physical burden. The experiment therefore uses
 the larger of the original World3 allocation and an EROI-derived allocation.
 The latter is exactly equal to the World3 floor at the 2025 coupling boundary.
 
-The module is intended for structural sensitivity tests.  EROI parameters are
-priors with heterogeneous empirical support, not a homogeneous observed global
-time series and not probabilities.
+The proposed World3 resource-fraction -> fossil-EROI relationship failed the
+retained five-year multi-origin predictive screen against persistence across
+primary, final, and useful accounting boundaries. EROI parameters in this
+experiment are heterogeneous priors/assumptions, not probabilities and not a
+validated homogeneous global causal series.
 """
 
 from __future__ import annotations
