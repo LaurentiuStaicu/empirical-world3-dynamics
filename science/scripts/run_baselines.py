@@ -1,11 +1,11 @@
-"""Generate baseline CSV files, comparison chart, and peak table."""
+"""Generate legacy/reference Pyworld3 comparison artifacts."""
 
 from pathlib import Path
 
 import matplotlib.pyplot as plt
 import pandas as pd
 
-from world3_empirical import run_scenario
+from world3_empirical import run_legacy_scenario
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -13,7 +13,7 @@ OUTPUT = ROOT / "outputs"
 OUTPUT.mkdir(exist_ok=True)
 
 scenarios = ["world3_standard", "bau2_structural_proxy"]
-results = {name: run_scenario(name) for name in scenarios}
+results = {name: run_legacy_scenario(name) for name in scenarios}
 for name, result in results.items():
     result.annual().to_csv(OUTPUT / f"{name}.csv", index=False)
 
@@ -32,7 +32,7 @@ for axis, variable in zip(axes.flat, variables):
     axis.grid(alpha=0.25)
     axis.legend(fontsize=8)
 axes.flat[-1].axis("off")
-fig.suptitle("World3 standard vs BAU2 structural proxy", fontsize=15)
+fig.suptitle("Legacy Pyworld3 standard vs BAU2 structural proxy", fontsize=15)
 fig.savefig(OUTPUT / "baseline_comparison.png", dpi=180)
 plt.close(fig)
 
