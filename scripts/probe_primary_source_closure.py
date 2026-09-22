@@ -24,7 +24,8 @@ ROOT = Path(__file__).resolve().parents[1]
 SOURCES = {
     "undp": "https://hdr.undp.org/sites/default/files/2025_HDR/HDR25_Composite_indices_complete_time_series.csv",
     "wpp": "https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_Demographic_Indicators_Medium.csv.gz",
-    "wpp_single_age": "https://population.un.org/wpp/assets/Excel%20Files/2_Advanced/CSV_FILES/WPP2024_PopulationBySingleAgeSex_Medium.csv.gz",
+    "wpp_single_age_estimates": "https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_PopulationBySingleAgeSex_Medium_1950-2023.csv.gz",
+    "wpp_single_age_medium": "https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_PopulationBySingleAgeSex_Medium_2024-2100.csv.gz",
     "gcb": "https://zenodo.org/records/17417124/files/GCB2025v15_MtCO2_flat.csv?download=1",
     "ei_page": "https://www.energyinst.org/statistical-review/resources-and-data-downloads",
 }
@@ -270,8 +271,7 @@ def probe_wpp() -> dict[str, Any]:
     return result
 
 
-def probe_wpp_single_age() -> dict[str, Any]:
-    data, meta = fetch(SOURCES["wpp_single_age"])
+def _read_wpp_single_age_world(data: bytes) -> tuple[dict[int, int], dict[str, Any]]:
     decompressed = gzip.decompress(data)
     text, encoding = decode_text(decompressed)
     rows = reader_from_text(text)
@@ -291,8 +291,6 @@ def probe_wpp_single_age() -> dict[str, Any]:
     variant_field = choose("Variant")
     population_field = choose("PopTotal", "Population")
 
-    # Reproduce the OWID route: for each single-age World row, convert
-    # thousands to people and cast to int, then sum ages to "all".
     primary: dict[int, int] = {}
     world_rows = 0
     for row in rows:
@@ -308,30 +306,12 @@ def probe_wpp_single_age() -> dict[str, Any]:
         if year_value is None or value is None:
             continue
         year = int(year_value)
-        variant = str(row.get(variant_field, "")).strip() if variant_field else ""
-        if year <= 2023 and variant and variant != "Estimates":
-            continue
-        if year >= 2024 and variant and variant != "Medium":
-            continue
         world_rows += 1
+        # Match OWID garden processing exactly: scale each single-age row
+        # from thousands to persons, cast each row to int, then sum ages.
         primary[year] = primary.get(year, 0) + int(value * 1000)
 
-    adapter_path = ROOT / "science/data/raw/bau2_e2026/2026-08-28/un_wpp2024_owid_adapter.csv"
-    retained: dict[int, float] = {}
-    with adapter_path.open("r", encoding="utf-8-sig", newline="") as handle:
-        reader = csv.DictReader(handle)
-        for row in reader:
-            if row.get("entity") != "World":
-                continue
-            year = int(float(row["year"]))
-            estimate = parse_float(row.get("population__sex_all__age_all__variant_estimates"))
-            medium = parse_float(row.get("population__sex_all__age_all__variant_medium__projected"))
-            value = estimate if estimate is not None else medium
-            if value is not None:
-                retained[year] = value
-
-    result: dict[str, Any] = {
-        "download": meta,
+    info = {
         "decompressed_size_bytes": len(decompressed),
         "decoded_encoding": encoding,
         "field_count": len(fields),
@@ -345,21 +325,49 @@ def probe_wpp_single_age() -> dict[str, Any]:
             "population": population_field,
         },
         "world_single_age_rows_used": world_rows,
+    }
+    return primary, info
+
+
+def probe_wpp_single_age() -> dict[str, Any]:
+    estimates_data, estimates_meta = fetch(SOURCES["wpp_single_age_estimates"])
+    medium_data, medium_meta = fetch(SOURCES["wpp_single_age_medium"])
+
+    estimates, estimates_info = _read_wpp_single_age_world(estimates_data)
+    medium, medium_info = _read_wpp_single_age_world(medium_data)
+    primary = {**estimates, **medium}
+
+    adapter_path = ROOT / "science/data/raw/bau2_e2026/2026-08-28/un_wpp2024_owid_adapter.csv"
+    retained: dict[int, float] = {}
+    with adapter_path.open("r", encoding="utf-8-sig", newline="") as handle:
+        reader = csv.DictReader(handle)
+        for row in reader:
+            if row.get("entity") != "World":
+                continue
+            year = int(float(row["year"]))
+            estimate = parse_float(row.get("population__sex_all__age_all__variant_estimates"))
+            medium_value = parse_float(row.get("population__sex_all__age_all__variant_medium__projected"))
+            value = estimate if estimate is not None else medium_value
+            if value is not None:
+                retained[year] = value
+
+    comparison = compare_series(primary, retained, tolerance=0.0)
+    return {
+        "estimates_download": estimates_meta,
+        "medium_download": medium_meta,
+        "estimates_parse": estimates_info,
+        "medium_parse": medium_info,
         "primary_world_years": len(primary),
         "retained_world_years": len(retained),
+        "comparison": comparison,
+        "comparison_status": (
+            "EXACT_OWID_ROUTE_PASS"
+            if comparison["mismatch_count"] == 0
+            and not comparison["missing_in_primary"]
+            and not comparison["missing_in_retained"]
+            else "DIFFERENCE_OR_COVERAGE"
+        ),
     }
-    if not primary:
-        result["comparison_status"] = "PARSE_OPEN"
-        return result
-    result["comparison"] = compare_series(primary, retained, tolerance=0.0)
-    result["comparison_status"] = (
-        "EXACT_OWID_ROUTE_PASS"
-        if result["comparison"]["mismatch_count"] == 0
-        and not result["comparison"]["missing_in_primary"]
-        and not result["comparison"]["missing_in_retained"]
-        else "DIFFERENCE_OR_COVERAGE"
-    )
-    return result
 
 
 def probe_gcb() -> dict[str, Any]:
