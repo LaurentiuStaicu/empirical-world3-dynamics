@@ -64,7 +64,7 @@
     },
     {
       "id": "un_wpp2024_population_adapter",
-      "overall_status": "WARNING",
+      "overall_status": "PASS",
       "model_role": "population benchmark and plausibility guardrail; not fitted central population target",
       "evidence_level": "L4",
       "authority": "United Nations, Department of Economic and Social Affairs, Population Division",
@@ -74,9 +74,8 @@
       "primary_bulk_file": "WPP2024_Demographic_Indicators_Medium.csv.gz",
       "primary_bulk_url": "https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_Demographic_Indicators_Medium.csv.gz",
       "current_transport": "science/data/raw/bau2_e2026/2026-08-28/un_wpp2024_owid_adapter.csv",
-      "verified_semantics": "The official WPP 2024 medium bulk file was downloaded directly and all 151 World 1950-2100 rows were compared against the retained adapter. Coverage is complete; the largest absolute difference is 12 persons.",
-      "unresolved": "Full comparison is complete, but the retained secondary transport is not numerically identical to the official bulk file: differences are bounded at 12 persons. The repository has not yet documented the exact transport/precision rule responsible for those nonzero differences.",
-      "required_action": "Explain or independently reproduce the <=12-person adapter differences before promoting this source from WARNING to PASS; do not change the benchmark values merely to force equality.",
+      "verified_semantics": "The official UN WPP single-age estimate and medium-projection files were downloaded directly and the exact OWID aggregation route was reproduced. All 151 retained World population values match exactly.",
+      "required_action": null,
       "primary_file_sha256": "286ac36bb1415e2e1ade03acfef0a29f0e4c087e2f78e38c48f50c5df89082bc",
       "primary_file_md5": "a33419c11b407086db7af94252c5a95d",
       "primary_file_size_bytes": 16557272,
@@ -84,13 +83,45 @@
       "full_comparison": {
         "years": "1950-2100",
         "compared_years": 151,
-        "primary_population_field": "TPopulation1July",
         "missing_in_primary": 0,
         "missing_in_retained": 0,
+        "mismatch_count": 0,
+        "maximum_absolute_difference_persons": 0,
+        "conclusion": "EXACT_OWID_ROUTE_PASS"
+      },
+      "primary_route": {
+        "estimates_1950_2023": {
+          "url": "https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_PopulationBySingleAgeSex_Medium_1950-2023.csv.gz",
+          "size_bytes": 62082217,
+          "md5": "f5e699a447a166783588c8919f18cc8b",
+          "sha256": "f84c75789ccbd385122ad19bac70026d6306878442afbaa24e8e50a23b4bee2f"
+        },
+        "medium_2024_2100": {
+          "url": "https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_PopulationBySingleAgeSex_Medium_2024-2100.csv.gz",
+          "size_bytes": 66954143,
+          "md5": "bd6c57bd4abfaa90d4a67c3505b48e4c",
+          "sha256": "31804a296b663716236cd26c46415271cc9386fb3b2be56aff6467ad32283dc8"
+        }
+      },
+      "owid_lineage": {
+        "repository": "owid/etl",
+        "audited_commit": "157bea70af7cb58518d7464520dac57fddf091ed",
+        "snapshot_metadata": [
+          "snapshots/un/2024-07-12/un_wpp_population_estimates.csv.dvc",
+          "snapshots/un/2024-07-12/un_wpp_population_medium.csv.dvc"
+        ],
+        "meadow_processing": "etl/steps/data/meadow/un/2024-07-12/un_wpp.py",
+        "garden_processing": "etl/steps/data/garden/un/2024-07-12/un_wpp.py",
+        "aggregation_rule": "Read official single-age PopTotal values in thousands; multiply each single-age row by 1000; cast each row to integer persons; sum all ages for sex=all; use estimates through 2023 and medium projections from 2024."
+      },
+      "aggregate_cross_check": {
+        "file": "WPP2024_Demographic_Indicators_Medium.csv.gz",
+        "field": "TPopulation1July",
+        "compared_years": 151,
         "maximum_absolute_difference_persons": 12,
-        "years_exceeding_5_person_difference": 28,
-        "conclusion": "COMPLETE_COMPARISON_WITH_SMALL_NONZERO_DIFFERENCES"
-      }
+        "interpretation": "This separate UN aggregate representation is not the byte/value route used by the OWID adapter. Small differences arise because the adapter route sums integerized single-age rows; they are not a provenance defect."
+      },
+      "closure": "Primary files, file hashes/sizes, OWID source metadata/code path, transformation rule, and complete 1950-2100 equality are recorded."
     },
     {
       "id": "energy_institute_2026",
@@ -154,14 +185,13 @@
   "gate_status": "OPEN",
   "blocking_scientific_change": false,
   "next_closure_priority": [
-    "UN WPP transport discrepancy explanation (complete comparison exists; max difference 12 persons)",
     "Energy Institute official-download equivalence"
   ],
   "verification_run": {
     "workflow": "Primary source byte probe",
-    "run_id": 35733087392,
+    "run_id": 35734370296,
     "conclusion": "success",
     "date": "2026-09-22",
-    "note": "One-off online probe downloaded authoritative UNDP, UN WPP and GCP primary files directly, computed hashes/sizes, and compared them with retained EWD transports/snapshots."
+    "note": "Direct official-source probe verified UNDP, UN WPP and GCP. WPP was reproduced through the same official single-age source and aggregation route used by the OWID adapter."
   }
 }
