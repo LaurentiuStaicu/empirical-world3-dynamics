@@ -1,6 +1,6 @@
 """Empirical World3 Dynamics (EWD) scientific core."""
 
-from .model import OUTPUT_VARIABLES, SimulationResult, run_scenario
+from .model import OUTPUT_VARIABLES, SimulationResult, run_legacy_scenario, run_scenario
 from .scenarios import Scenario, load_scenarios
 from .world3_03 import WORLD3_03_OUTPUTS, World303Result, run_world3_03
 
@@ -11,6 +11,7 @@ __all__ = [
     "WORLD3_03_OUTPUTS",
     "World303Result",
     "load_scenarios",
+    "run_legacy_scenario",
     "run_scenario",
     "run_world3_03",
 ]
