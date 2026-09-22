@@ -79,7 +79,8 @@
       "size_bytes": 14097047,
       "source_record": "science/data/energy_audit/egrid2021-source.json",
       "fetch_target": ".diagnostic_sources/egrid/eGRID2021_data.xlsx",
-      "verification_command": "python3 scripts/audit_egrid.py .diagnostic_sources/egrid/eGRID2021_data.xlsx science/data/energy_audit 2021"
+      "verification_command": "python3 scripts/audit_egrid.py .diagnostic_sources/egrid/eGRID2021_data.xlsx science/data/energy_audit 2021",
+      "remote_source_id": "egrid_2021"
     },
     {
       "id": "egrid_2022",
@@ -91,7 +92,8 @@
       "size_bytes": 15602850,
       "source_record": "science/data/energy_audit/egrid2022-source.json",
       "fetch_target": ".diagnostic_sources/egrid/egrid2022_data.xlsx",
-      "verification_command": "python3 scripts/audit_egrid.py .diagnostic_sources/egrid/egrid2022_data.xlsx science/data/energy_audit 2022"
+      "verification_command": "python3 scripts/audit_egrid.py .diagnostic_sources/egrid/egrid2022_data.xlsx science/data/energy_audit 2022",
+      "remote_source_id": "egrid_2022"
     },
     {
       "id": "egrid_2023_rev2",
@@ -103,7 +105,8 @@
       "size_bytes": 21213301,
       "source_record": "science/data/energy_audit/egrid-source.json",
       "fetch_target": ".diagnostic_sources/egrid/egrid2023_data_rev2.xlsx",
-      "verification_command": "python3 scripts/audit_egrid.py .diagnostic_sources/egrid/egrid2023_data_rev2.xlsx science/data/energy_audit 2023"
+      "verification_command": "python3 scripts/audit_egrid.py .diagnostic_sources/egrid/egrid2023_data_rev2.xlsx science/data/energy_audit 2023",
+      "remote_source_id": "egrid_2023_rev2"
     },
     {
       "id": "aramendia_fossil_eroi_2024",
@@ -117,7 +120,8 @@
       "url": "https://figshare.com/ndownloader/files/46240243",
       "md5": "c3f330ee874e10aca547d73d76cd3cd2",
       "fetch_target": ".diagnostic_sources/eroi/global_erois.csv",
-      "verification_command": "uv run --locked --project science python science/scripts/ingest_aramendia_eroi.py .diagnostic_sources/eroi/global_erois.csv"
+      "verification_command": "uv run --locked --project science python science/scripts/ingest_aramendia_eroi.py .diagnostic_sources/eroi/global_erois.csv",
+      "remote_source_id": "aramendia_fossil_eroi_2024"
     },
     {
       "id": "energy_institute_2026",
@@ -130,7 +134,8 @@
       "fetch_target": ".diagnostic_sources/energy/Statistical Review of World Energy Narrow format.csv",
       "primary_equivalence_record": "science/data/provenance/primary_source_audit_2026-09-22.json",
       "equivalence_scope": "All 427 Total World observations used by EWD match the archived official EI 2026 CSV exactly; whole-file byte identity is explicitly not claimed.",
-      "verification_command": "uv run --locked --project science python science/scripts/ingest_energy_institute_2026.py '.diagnostic_sources/energy/Statistical Review of World Energy Narrow format.csv' --mirror-commit 9fc01fc0ae5aea3955968f920e5cd1394fe5ad34"
+      "verification_command": "uv run --locked --project science python science/scripts/ingest_energy_institute_2026.py '.diagnostic_sources/energy/Statistical Review of World Energy Narrow format.csv' --mirror-commit 9fc01fc0ae5aea3955968f920e5cd1394fe5ad34",
+      "remote_source_id": "energy_institute_2026_transport"
     },
     {
       "id": "gcp_2025v15_direct_emissions",
@@ -142,7 +147,8 @@
       "size_bytes": 3147221,
       "fetch_target": ".diagnostic_sources/gcb/GCB2025v15_MtCO2_flat.csv",
       "primary_equivalence_record": "science/data/provenance/primary_source_audit_2026-09-22.json",
-      "safe_claim": "Primary artifact and complete 1990-2024 six-category equivalence are recorded. The retained compact experiment remains the operational diagnostic snapshot."
+      "safe_claim": "Primary artifact and complete 1990-2024 six-category equivalence are recorded. The retained compact experiment remains the operational diagnostic snapshot.",
+      "remote_source_id": "gcp_2025v15"
     },
     {
       "id": "technology_minerals_2026",
