@@ -30,6 +30,8 @@ The Real Model extension contract keeps candidate mechanisms inactive by default
 
 EROI, climate-water, minerals, and AI are not coupled into the central retained run in this release.
 
+The executable World3 resource-fraction -> fossil-EROI sensitivity experiment is explicitly rejected for central promotion under the current evidence. It remains retained only for auditability and structural sensitivity; executability or a future single backtest PASS cannot by itself make the mechanism eligible for promotion.
+
 ## What v0.1.0 does not claim
 
 - a probabilistic forecast of global outcomes;
