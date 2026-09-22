@@ -1,4 +1,4 @@
-"""Bounded calibration, temporal backtesting, and uncertainty propagation."""
+"""Legacy Pyworld3 calibration/backtesting utilities.\n\nThese functions are not the retained Joint 2026 EWD selection/refit pipeline.\n"""
 
 from __future__ import annotations
 
@@ -11,7 +11,7 @@ from scipy.optimize import least_squares
 from scipy.stats import qmc
 
 from .metrics import direction_accuracy, mape, rmse
-from .model import run_scenario
+from .model import run_legacy_scenario
 
 
 @dataclass(frozen=True)
@@ -37,7 +37,7 @@ def _validate_observations(observations: pd.DataFrame) -> None:
 
 
 def predictions_for(observations: pd.DataFrame, parameters: Mapping[str, float], scenario: str) -> np.ndarray:
-    result = run_scenario(
+    result = run_legacy_scenario(
         scenario,
         year_min=int(np.floor(observations["year"].min())),
         year_max=int(np.ceil(observations["year"].max())),
@@ -126,7 +126,7 @@ def monte_carlo(
     parameter_samples = qmc.scale(design, lower, upper)
     records: list[dict[str, float | int | str]] = []
     for sample_id, values in enumerate(parameter_samples):
-        result = run_scenario(
+        result = run_legacy_scenario(
             scenario,
             year_min=1900,
             year_max=max(years),
