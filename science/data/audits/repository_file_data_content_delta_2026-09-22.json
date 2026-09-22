@@ -79,7 +79,7 @@
     "total": 165
   },
   "central_baseline_status": "PASS",
-  "next_gate": "R-FDC-7 diagnostic raw-data reproducibility policy",
+  "next_gate": null,
   "subsequent_closures": [
     {
       "gate": "R-FDC-2",
@@ -102,14 +102,45 @@
     {
       "gate": "R-FDC-5",
       "status": "CLOSED",
-      "scope": "EWD v0.1.0 versus Joint artifact v0.1 semantics, version regression gate, and World3-03 CRLF/LF hash provenance",
-      "pull_request": 26
+      "pull_request": 26,
+      "scope": "EWD v0.1.0 versus Joint artifact v0.1 semantics, version regression gate, and World3-03 CRLF/LF provenance"
     },
     {
       "gate": "R-FDC-6",
-      "status": "THIS_CHANGE_SET",
+      "status": "CLOSED",
       "pull_request": 27,
-      "scope": "primary-source provenance closure for FAOSTAT, UNDP HDI, UN WPP, Energy Institute and GCP at their declared EWD roles"
+      "scope": "primary-source provenance closure at declared EWD roles"
+    },
+    {
+      "gate": "R-FDC-7",
+      "status": "CLOSED_POLICY",
+      "pull_request": 28,
+      "scope": "diagnostic raw-data reproducibility policy and verified remote materialization"
+    },
+    {
+      "gate": "R-FDC-8",
+      "status": "CLOSED_GOVERNANCE",
+      "pull_request": 29,
+      "scope": "rejected experimental mechanism governance; merge contingent on final CI at audit time"
+    },
+    {
+      "gate": "R-FDC-9",
+      "status": "THIS_CHANGE_SET",
+      "scope": "repository-wide post-recovery audit"
     }
-  ]
+  ],
+  "counts_semantics": "current_counts records the immediate post-R-FDC-1 165-file delta state; it is preserved as historical evidence rather than relabelled as the final repository count.",
+  "post_recovery_summary": {
+    "gate": "R-FDC-9",
+    "status": "CLOSED_AUDIT_CONTINGENT_ON_FINAL_CI",
+    "expected_tracked_files": 188,
+    "historical_nonpass_entries": 47,
+    "resolved_pass": 35,
+    "governed_limitations": 6,
+    "remaining_warnings": 6,
+    "unresolved_blockers": 0,
+    "unexplained_blockers": 0,
+    "source": "science/data/audits/repository_post_recovery_audit_2026-09-22.json"
+  },
+  "next_stage": "After R-FDC-9 final CI and integration, repository recovery is complete. New scientific mechanisms or version milestones require separate decisions."
 }
