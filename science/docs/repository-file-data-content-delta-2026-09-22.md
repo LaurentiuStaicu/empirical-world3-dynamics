@@ -66,15 +66,21 @@ The following remain unchanged:
 
 No previously rejected or diagnostic-only mechanism became central.
 
-## Next gate
+## Subsequent closure status
 
-**R-FDC-2 — empirical registry completeness**
+The recovery sequence continued after this historical R-FDC-1 delta:
 
-This gate should make the registry describe the observation and benchmark inputs actually used by the current central measurement layer:
+| Gate | Status | Closure |
+|---|---|---|
+| R-FDC-2 — empirical registry completeness | CLOSED | PR #23; active observation/benchmark contract and registry completeness gate |
+| R-FDC-3 — input-manifest scope semantics | CLOSED | PR #24; repository-wide retained-input inventory semantics separated from the central-baseline freeze date |
+| R-FDC-4 — public execution routing | CLOSED | PR #25; official World3-03 is the unambiguous public EWD route and Pyworld3 is explicitly legacy/reference |
+| R-FDC-5 — version/provenance identity | THIS CHANGE SET | reconcile v0.1.0 metadata, add version-identity regression protection, and document CRLF/LF World3-03 hash semantics |
 
-- FAOSTAT food;
-- UNDP HDI;
-- UN WPP population benchmark;
-- corrected role wording for the World Bank/EDGAR CO2 observation bridge.
+These later repairs are traceability/routing changes. They do not change observation values, model equations, candidate design, fitted parameters, bridge weights, medoid selection or the scientific interpretation of the retained central trajectory.
 
-No data value, bridge weight or model equation should change in R-FDC-2.
+## Next gate after R-FDC-5
+
+**R-FDC-6 — primary-source provenance closure**
+
+Priority remains the unresolved primary-source boundary identified by the original audit, especially the central UNDP HDI adapter and the UN WPP benchmark transport. This gate should strengthen source freezing/hash-pinning and provenance evidence without changing the current observation definitions or central-model logic.
