@@ -171,6 +171,13 @@ class RealModelContract:
                         f"stock {stock['id']}"
                     )
 
+        declared_forbidden = set(self.payload.get("forbidden_couplings", ()))
+        if declared_forbidden != set(FORBIDDEN_COUPLINGS):
+            raise ValueError(
+                "Top-level forbidden coupling registry must exactly match the "
+                "enforced Real Model contract"
+            )
+
         for candidate in self.payload.get("candidate_interfaces", ()):
             if candidate.get("active_by_default") is not False:
                 raise ValueError(f"Candidate {candidate.get('id')} must start inactive")

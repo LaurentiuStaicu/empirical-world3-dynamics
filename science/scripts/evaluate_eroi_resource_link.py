@@ -114,10 +114,17 @@ def main() -> None:
             "The World3 resource link must beat persistence RMSE at primary, final "
             "and useful accounting boundaries."
         ),
+        "governance_disposition": "rejected_for_central_promotion",
+        "backtest_is_sufficient_for_promotion": False,
         "production_consequence": (
             "Keep EROI/resource coupling outside BAU Hybrid 2026 central projection."
             if not accepted
-            else "Eligible for the next joint calibration stage."
+            else (
+                "This predictive screen passed, but the coupling remains forbidden "
+                "for central promotion. Reconsideration requires a separately "
+                "defined/versioned E1-E10 framework, all S1-S10 promotion gates, "
+                "new prospective evidence, and explicit paradigm-level review."
+            )
         ),
     }
     (OUTPUT / "eroi_resource_link_manifest.json").write_text(

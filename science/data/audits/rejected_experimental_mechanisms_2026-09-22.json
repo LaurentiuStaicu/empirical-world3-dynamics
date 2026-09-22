@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0",
+  "audit_date": "2026-09-22",
+  "gate": "R-FDC-8",
+  "gate_name": "rejected experimental mechanism governance",
+  "gate_status": "CLOSED_GOVERNANCE",
+  "governing_rule": "Executable experimental code is not promotion evidence. A rejected coupling remains forbidden from central EWD routes unless a future explicit governance review supersedes this record.",
+  "mechanisms": [
+    {
+      "id": "world3_resource_fraction_to_fossil_eroi",
+      "disposition": "REJECTED_FOR_CENTRAL_PROMOTION",
+      "scientific_role": "structural_sensitivity_only",
+      "implementation": "science/src/world3_empirical/energy_coupling.py",
+      "predictive_evaluator": "science/scripts/evaluate_eroi_resource_link.py",
+      "structural_sensitivity_runner": "science/scripts/analyze_energy_coupling.py",
+      "current_empirical_result": "The retained five-year multi-origin evaluation does not support the World3 resource-fraction link over persistence at all primary, final, and useful EROI accounting boundaries.",
+      "central_route_status": "FORBIDDEN_AND_NOT_IMPORTED",
+      "enforced_by": [
+        "science/src/world3_empirical/real_model_contract.py",
+        "science/configs/real_model_structure.json",
+        "scripts/check_rejected_mechanism_governance.py"
+      ],
+      "reconsideration_requirements": {
+        "E1_E10": {
+          "state": "UNDEFINED_IN_CURRENT_REPOSITORY",
+          "rule": "No E1-E10 gate may be claimed PASS until a concrete E1-E10 framework is explicitly defined, versioned, reviewed, and committed. This audit does not invent its contents."
+        },
+        "S1_S10": {
+          "state": "REQUIRED_ALL_PASS",
+          "source": "science/configs/real_model_structure.json",
+          "rule": "All existing S1-S10 promotion gates are necessary but not sufficient for reconsideration."
+        },
+        "additional": [
+          "new prospective evidence that directly addresses the rejected causal relationship",
+          "explicit paradigm-level review documented before any central-model change",
+          "central baseline non-regression and reproducibility evidence",
+          "separate approval of any proposed scientific change"
+        ]
+      },
+      "prohibited_shortcuts": [
+        "promotion because the experiment is executable",
+        "promotion because continuity or numerical sensitivity checks pass",
+        "promotion because a single retrospective backtest passes",
+        "promotion through import from a central CLI, package export, Joint builder, or retained reproduction route"
+      ]
+    }
+  ],
+  "next_gate": "R-FDC-9 repository-wide post-recovery audit"
+}

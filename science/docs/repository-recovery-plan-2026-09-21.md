@@ -258,6 +258,10 @@ Recommended handling:
 - require the System Dynamics E1-E10 plus S1-S10 gates before any future reconsideration;
 - avoid language suggesting that mere executability makes it an eligible extension.
 
+Closure decision (2026-09-22): **R-FDC-8 CLOSED_GOVERNANCE**.
+
+The resource-fraction -> fossil-EROI experiment remains executable only for auditability and structural sensitivity. The Real Model forbidden-coupling contract is now cross-checked in CI, central execution routes are scanned for accidental imports, and a retrospective backtest can no longer emit language implying automatic calibration eligibility. S1-S10 remain required. The historical E1-E10 requirement is preserved as explicitly **undefined in the current repository**; no E1-E10 labels or pass states are invented by this repair. Any future reconsideration requires a separately defined/versioned E1-E10 framework, all S1-S10 gates, new prospective evidence and explicit paradigm-level review.
+
 ## Proposed order
 
 1. R-FDC-1 diagnostic execution recovery.
