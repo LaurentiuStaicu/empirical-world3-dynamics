@@ -4,6 +4,11 @@ All notable public scientific-core releases of Empirical World3 Dynamics (EWD) a
 
 ## Unreleased
 
+### Scientific traceability
+
+- reconciled the v0.1.0 identity across package metadata, lockfile, runtime metadata, the Joint 2026 generator and retained manifest, and added a CI regression gate to prevent future version drift;
+- clarified World3-03 source provenance by recording both the original CRLF ingestion SHA-256 and the repository-normalized LF SHA-256, without changing equations or numerical parameters.
+
 ### Repository governance
 
 - prepared a suite-consistent professional EWD landing-page preview with grayscale header, canonical scientific-status boundaries, responsive conceptual figure, reproducibility path, provenance routing and reader navigation; the public README remains unchanged pending visual review;
