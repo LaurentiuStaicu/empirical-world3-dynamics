@@ -183,3 +183,14 @@ No evidence was found that requires changing:
 
 The remaining work is provenance closure, not model recalibration.
 
+## Continuation — 2026-09-22
+
+The provenance work has been converted into a machine-readable R-FDC-6 closure matrix with explicit evidence levels L1-L4:
+
+- `science/data/provenance/primary_source_audit_2026-09-22.json`
+- `science/docs/primary-source-provenance-audit-2026-09-22.md`
+
+The new matrix preserves the conclusions of this follow-up while making the remaining closure boundary testable. FAOSTAT is the only source currently at full L4/PASS closure. UNDP HDI, UN WPP, Energy Institute and Global Carbon Project remain explicitly non-PASS until their complete primary-file lineage is recorded.
+
+A CI validator prevents a source from being marked PASS without L4 evidence and prevents R-FDC-6 from being marked CLOSED while any required source remains non-PASS.
+
