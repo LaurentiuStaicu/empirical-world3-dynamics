@@ -1,0 +1,24 @@
+name: Diagnostic source materialization probe
+
+on:
+  push:
+    branches:
+      - audit/diagnostic-reproducibility-policy-v2
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Validate R-FDC-7 policy
+        run: python3 scripts/check_diagnostic_reproducibility_policy.py
+      - name: Fetch all pinned diagnostic sources
+        run: python3 scripts/fetch_diagnostic_inputs.py
+      - name: Verify cached diagnostic sources offline
+        run: python3 scripts/fetch_diagnostic_inputs.py --check-only
