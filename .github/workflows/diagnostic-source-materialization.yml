@@ -1,0 +1,32 @@
+name: Diagnostic source materialization
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  fetch:
+    name: Fetch and hash-pin diagnostic source inputs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Validate policy contract
+        run: |
+          python3 scripts/check_diagnostic_reproducibility_policy.py
+
+      - name: Materialize all pinned diagnostic sources
+        run: |
+          python3 scripts/fetch_diagnostic_inputs.py
+
+      - name: Recheck materialized cache without network
+        run: |
+          python3 scripts/fetch_diagnostic_inputs.py --check-only
