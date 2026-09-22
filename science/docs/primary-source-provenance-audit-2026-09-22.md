@@ -23,7 +23,7 @@ Only L4 is sufficient for a `PASS` when the repository claims frozen primary-sou
 |---|---|---:|---|---|
 | FAOSTAT Production Indices | central food observation | L4 | PASS | none; official archive is size/hash verified during clean reproduction |
 | UNDP HDR 2025 HDI | central human-welfare proxy | L4 | PASS | none for current transport equivalence; official file hash/size and exact 34-year World equality are recorded |
-| UN WPP 2024 | population benchmark/guardrail | L4 | WARNING | complete 151-year comparison exists, but the retained transport differs from the official bulk file by up to 12 persons; transport precision rule still needs explanation |
+| UN WPP 2024 | population benchmark/guardrail | L4 | PASS | exact 151-year equality reproduced through the official UN single-age files and the documented OWID aggregation route |
 | Energy Institute 2026 | energy diagnostic/candidate evidence | L1 | WARNING | identify a stable official automated download path and compare it with the pinned mirror transport |
 | GCP fossil CO2 2025v15 | direct-emissions diagnostic | L4 | PASS | none for current compact snapshot lineage; all six categories/35 years are primary-source verified within declared one-decimal rounding |
 
@@ -65,18 +65,24 @@ Official bulk file identified for the medium variant:
 
 UN DESA describes WPP 2024 as the official estimates/projections source, with estimates from 1950 to the present and projections to 2100, and explicitly recommends CSV bulk download for advanced users.
 
-The official compressed bulk file was downloaded directly in the 2026-09-22 provenance probe.
+The first direct cross-check used the official `WPP2024_Demographic_Indicators_Medium.csv.gz` and its `TPopulation1July` aggregate. It covered all **151 years, 1950-2100**, with no missing years, but differed from the retained adapter by at most **12 persons**.
 
-Recorded primary-file identity:
+That difference is now explained rather than treated as a data defect. The retained adapter follows the OWID WPP pipeline, whose source metadata points to two different official UN files:
 
-- compressed size: **16,557,272 bytes**
-- decompressed size: **40,819,701 bytes**
-- SHA-256: `286ac36bb1415e2e1ade03acfef0a29f0e4c087e2f78e38c48f50c5df89082bc`
-- MD5: `a33419c11b407086db7af94252c5a95d`
+- estimates 1950-2023: `WPP2024_PopulationBySingleAgeSex_Medium_1950-2023.csv.gz`
+  - size: **62,082,217 bytes**
+  - MD5: `f5e699a447a166783588c8919f18cc8b`
+  - SHA-256: `f84c75789ccbd385122ad19bac70026d6306878442afbaa24e8e50a23b4bee2f`
+- medium projections 2024-2100: `WPP2024_PopulationBySingleAgeSex_Medium_2024-2100.csv.gz`
+  - size: **66,954,143 bytes**
+  - MD5: `bd6c57bd4abfaa90d4a67c3505b48e4c`
+  - SHA-256: `31804a296b663716236cd26c46415271cc9386fb3b2be56aff6467ad32283dc8`
 
-The comparison used the official `TPopulation1July` field and covered all **151 years, 1950-2100**, with no missing years in either source. The retained adapter is extremely close but not numerically identical to the official bulk file: maximum absolute difference **12 persons**; 28 years differ by more than 5 persons.
+The OWID ETL route was audited at commit `157bea70af7cb58518d7464520dac57fddf091ed`. Its garden processing multiplies each single-age `PopTotal` row from thousands to persons, casts each row to integer, then sums all ages. Reproducing that route from the two official UN files gives **exact equality for all 151 World values, 1950-2100**, with maximum absolute difference **0 persons**.
 
-Because the comparison is complete but the exact secondary-transport precision rule has not yet been documented, WPP is now **L4 / WARNING**, not PASS. No benchmark value is changed merely to force equality.
+The earlier <=12-person difference is therefore a representation difference between two official UN-derived routes: direct `TPopulation1July` aggregate versus sum of integerized single-age rows. It is not a provenance defect in the EWD adapter.
+
+WPP therefore reaches **L4 / PASS** for its current benchmark/guardrail role.
 
 ## Energy Institute Statistical Review 2026
 
@@ -141,7 +147,6 @@ Closed in this pass:
 
 Still open:
 
-- UN WPP 2024 — L4/WARNING because all 151 years are compared but the retained transport differs by up to 12 persons and the exact precision/transport rule is not yet documented;
 - Energy Institute 2026 — L1/WARNING because official browser-visible datasets are confirmed but automated primary-byte retrieval returned HTTP 403.
 
-No result here justifies changing observation values, benchmark definitions, model equations or central World3 mechanisms. The next work should explain the WPP transport discrepancy and establish a stable official Energy Institute download path.
+No result here justifies changing observation values, benchmark definitions, model equations or central World3 mechanisms. The WPP discrepancy is now explained and closed. The remaining R-FDC-6 work is to establish a stable official Energy Institute download path and verify official-download equivalence with the retained transport.
