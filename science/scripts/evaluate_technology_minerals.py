@@ -18,7 +18,7 @@ ROOT = Path(__file__).resolve().parents[1]
 PRODUCTION = ROOT / "data" / "processed" / "technology_mineral_production_2026-09-08.csv"
 RISK = ROOT / "data" / "processed" / "technology_mineral_risk_2026-09-08.csv"
 PROVENANCE = PRODUCTION.with_suffix(".provenance.json")
-SCENARIOS = ROOT.parent / "data" / "scenarios"
+JOINT_OUTPUT = ROOT / "outputs" / "joint_hybrid_2026"
 OUTPUT = ROOT / "outputs" / "technology_minerals"
 
 
@@ -32,8 +32,8 @@ def paired_correlation(left: pd.Series, right: pd.Series) -> tuple[int, float]:
 
 
 def diagnostics(production: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
-    industry = pd.read_csv(SCENARIOS / "industry_total.csv").set_index("year")
-    resources = pd.read_csv(SCENARIOS / "resources_remaining_pct.csv").set_index("year")
+    industry = pd.read_csv(JOINT_OUTPUT / "industry_total.csv").set_index("year")
+    resources = pd.read_csv(JOINT_OUTPUT / "resources_remaining_pct.csv").set_index("year")
     industry_growth = log_growth(industry["observed"])
     resource_use = -resources["hybrid_2026"].diff()
     resource_use_growth = log_growth(resource_use.where(resource_use > 0))
