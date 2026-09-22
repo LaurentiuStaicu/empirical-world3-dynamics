@@ -7,6 +7,7 @@ All notable public scientific-core releases of Empirical World3 Dynamics (EWD) a
 ### Repository governance
 
 - prepared a suite-consistent professional EWD landing-page preview with grayscale header, canonical scientific-status boundaries, responsive conceptual figure, reproducibility path, provenance routing and reader navigation; the public README remains unchanged pending visual review;
+- prepared the public EWD landing-page implementation with promoted light/dark assets and an automated README contract checking version, World3-03/scenario interpretation boundaries, sensitivity wording, links and suite visual consistency; merge remains visually review-gated;
 - added workflow-level concurrency so superseded scientific-reproducibility runs on the same branch/PR head are canceled instead of consuming duplicate compute;
 - added EWD-specific contribution and support guidance;
 - added structured reproducibility and scientific/model issue forms;

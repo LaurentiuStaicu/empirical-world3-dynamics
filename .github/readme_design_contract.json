@@ -1,7 +1,7 @@
 {
   "contract_version": "1.0",
   "frozen_on": "2026-09-20",
-  "implementation_status": "PREVIEW_ONLY_PUBLIC_README_UNCHANGED",
+  "implementation_status": "PUBLIC_README_IMPLEMENTATION_PROPOSED_NOT_MERGED",
   "purpose": "Define a professional EWD repository landing page using the shared scientific-model suite shell while preserving the canonical World3-03 System Dynamics paradigm and empirical/scenario interpretation boundaries.",
   "suite_visual_shell": {
     "icon_width_px": 112,
@@ -76,10 +76,18 @@
   "public_readme_boundary": {
     "replacement_authorized": false,
     "diagram_publication_authorized": false,
-    "reason": "This branch is a design/review preview only. Public README and assets remain unchanged until visual/editorial review."
+    "reason": "The professional EWD landing page is implemented on a review branch with promoted light/dark assets and automated scientific-wording/link checks; merge remains visually review-gated.",
+    "public_implementation_proposed": true,
+    "implementation_branch": "docs/professional-ewd-landing-page-2026-09-20"
   },
   "release_boundary": {
     "version_bump_required": false,
     "current_public_version": "0.1.0"
-  }
+  },
+  "public_readme_quality_budget": {
+    "maximum_words": 1700,
+    "maximum_primary_headings": 16,
+    "maximum_primary_header_badges": 3
+  },
+  "public_readme_validation_script": "scripts/validate_readme_contract.py"
 }
