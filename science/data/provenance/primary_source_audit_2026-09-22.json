@@ -1,0 +1,112 @@
+{
+  "audit_version": "2.0",
+  "audit_date": "2026-09-22",
+  "gate": "R-FDC-6",
+  "scope": "Primary-source provenance closure status only. This audit does not change observations, model equations, mappings, fitted parameters, candidate selection, retained trajectories, or scientific claims.",
+  "status_scale": {
+    "PASS": "Primary authority and exact retained input lineage are closed to the declared model role, including frozen/hash-verified primary bytes or an equivalently strong deterministic proof.",
+    "WARNING": "Authority and semantics are identified and no material disagreement is known, but full primary transport/hash/value lineage remains incomplete.",
+    "BLOCKER": "A provenance defect prevents the input from being accepted at its current declared scientific role."
+  },
+  "evidence_levels": {
+    "L1": "authoritative institution/dataset and scientific role identified",
+    "L2": "semantic definition and selected anchor values or boundaries independently reconciled",
+    "L3": "exact primary artifact/version/file identified with immutable checksum metadata where the authority exposes it",
+    "L4": "complete primary-file-to-retained-input byte/value lineage reproduced and recorded"
+  },
+  "resolved_documentation_issue": {
+    "id": "world3_03_line_endings",
+    "status": "PASS",
+    "original_crlf_sha256": "42b22c734a71ee03abc31d80872234fbcd93d3d4fb9a277f606c6d677846731d",
+    "repository_lf_sha256": "252e0c7eebff23d3c44344b6801cf3c40aec82d25b356ea8cce16a052249ac4d",
+    "conclusion": "Hash difference is fully explained by CRLF-to-LF normalization; model content is unchanged."
+  },
+  "sources": [
+    {
+      "id": "faostat_food_production_indices",
+      "overall_status": "PASS",
+      "model_role": "central observed food-per-capita target",
+      "evidence_level": "L4",
+      "authority": "Food and Agriculture Organization of the United Nations (FAO)",
+      "dataset": "FAOSTAT Production Indices",
+      "primary_url": "https://bulks-faostat.fao.org/production/Production_Indices_E_All_Data_(Normalized).zip",
+      "frozen_sha256": "04c58034493d91f02e2495570d3864212ac870ec7f829a5f22577d143a6a8a72",
+      "frozen_size_bytes": 16167197,
+      "current_transport": "science/data/raw/bau2_e2026/2026-08-28/faostat_production_indices.zip via science/data/remote_inputs.json",
+      "closure": "Clean reproduction fetches the official FAO archive and accepts it only after exact size and SHA-256 verification.",
+      "required_action": null
+    },
+    {
+      "id": "undp_hdi_adapter",
+      "overall_status": "WARNING",
+      "model_role": "central observed proxy for World3 Human Welfare Index",
+      "evidence_level": "L2",
+      "authority": "United Nations Development Programme, Human Development Report Office",
+      "dataset": "HDR 2025 all composite indices and components time series (1990-2023)",
+      "primary_page": "https://hdr.undp.org/data-center/documentation-and-downloads",
+      "primary_timeseries_url": "https://hdr.undp.org/sites/default/files/2025_HDR/HDR25_Composite_indices_complete_time_series.csv",
+      "current_transport": "science/data/raw/bau2_e2026/2026-08-28/undp_hdi_owid_adapter.csv",
+      "verified_semantics": "UNDP documentation exposes the complete 1990-2023 series; the retained World HDI adapter already matches all eight published World anchors recorded in the 2026-09-21 follow-up.",
+      "unresolved": "Official CSV bytes are not frozen/hash-pinned in EWD and complete annual World-row equality has not been recorded.",
+      "required_action": "Freeze or deterministically fetch the official UNDP CSV, record byte hash and size, then compare every World HDI observation used by EWD before any transport replacement."
+    },
+    {
+      "id": "un_wpp2024_population_adapter",
+      "overall_status": "WARNING",
+      "model_role": "population benchmark and plausibility guardrail; not fitted central population target",
+      "evidence_level": "L2",
+      "authority": "United Nations, Department of Economic and Social Affairs, Population Division",
+      "dataset": "World Population Prospects 2024",
+      "primary_page": "https://population.un.org/wpp/",
+      "primary_dataset_page": "https://www.un.org/development/desa/pd/content/World-Population-Prospects-2024",
+      "primary_bulk_file": "WPP2024_Demographic_Indicators_Medium.csv.gz",
+      "primary_bulk_url": "https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_Demographic_Indicators_Medium.csv.gz",
+      "current_transport": "science/data/raw/bau2_e2026/2026-08-28/un_wpp2024_owid_adapter.csv",
+      "verified_semantics": "UN WPP 2024 defines estimates through 2023 and projections to 2100, and recommends CSV bulk download for advanced use; this matches the EWD estimate/medium-projection boundary.",
+      "unresolved": "Official bulk-file bytes are not frozen/hash-pinned in EWD and complete World 1950-2100 equality has not been recorded.",
+      "required_action": "Freeze/hash the official bulk CSV/GZ and compare World total population, both sexes/all ages, including the estimate/medium split, across all retained years."
+    },
+    {
+      "id": "energy_institute_2026",
+      "overall_status": "WARNING",
+      "model_role": "energy diagnostic/candidate evidence; not a central calibration target",
+      "evidence_level": "L1",
+      "authority": "Energy Institute",
+      "dataset": "Statistical Review of World Energy 2026",
+      "primary_page": "https://www.energyinst.org/statistical-review/resources-and-data-downloads",
+      "primary_artifacts": [
+        "Statistical Review of World Energy Data workbook",
+        "Consolidated Dataset - Narrow format CSV"
+      ],
+      "current_transport": "Pinned GitHub mirror commit recorded in science/data/processed/energy_institute_global_2026.provenance.json",
+      "verified_semantics": "The official 2026 page exposes the workbook, consolidated narrow CSV, methodology and definitions; the page also warns that historical values may be revised between editions.",
+      "unresolved": "Independent official-download byte/value equivalence with the pinned mirror transport is not recorded.",
+      "required_action": "Acquire the official 2026 narrow CSV/workbook, record checksum and size, and compare the seven Total World base variables used by EWD against the pinned transport."
+    },
+    {
+      "id": "global_carbon_project_2025v15",
+      "overall_status": "WARNING",
+      "model_role": "direct-emissions diagnostic target; not a central World3 state observation",
+      "evidence_level": "L3",
+      "authority": "Global Carbon Project",
+      "dataset": "The Global Carbon Project's fossil CO2 emissions dataset",
+      "version": "2025v15",
+      "primary_record": "https://zenodo.org/records/17417124",
+      "primary_doi": "10.5281/zenodo.17417124",
+      "primary_file": "GCB2025v15_MtCO2_flat.csv",
+      "primary_file_md5": "3008e30d913af5926a83d0d0775fb72e",
+      "current_transport": "Pinned datasets/co2-fossil-global transport used for science/data/experiments/gcb_direct_fossil_1990_2024.csv",
+      "verified_semantics": "The primary Zenodo record exposes the exact 2025v15 file and checksum; the current EWD diagnostic retains coal, oil, gas, cement, flaring and other categories while using coal+oil+gas as its direct-combustion target.",
+      "unresolved": "A complete direct primary-Zenodo-to-EWD 1990-2024 row/category comparison is not yet captured in current main.",
+      "required_action": "Reconstruct the compact snapshot directly from the primary Zenodo file and verify all six categories for every retained year before declaring L4 closure."
+    }
+  ],
+  "gate_status": "OPEN",
+  "blocking_scientific_change": false,
+  "next_closure_priority": [
+    "UNDP HDI because it is a central observation proxy",
+    "UN WPP because it is an active benchmark/guardrail",
+    "Energy Institute official-download equivalence",
+    "Global Carbon Project direct primary-file comparison"
+  ]
+}
