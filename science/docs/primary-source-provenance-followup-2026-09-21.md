@@ -190,7 +190,13 @@ The provenance work has been converted into a machine-readable R-FDC-6 closure m
 - `science/data/provenance/primary_source_audit_2026-09-22.json`
 - `science/docs/primary-source-provenance-audit-2026-09-22.md`
 
-The new matrix preserves the conclusions of this follow-up while making the remaining closure boundary testable. FAOSTAT is the only source currently at full L4/PASS closure. UNDP HDI, UN WPP, Energy Institute and Global Carbon Project remain explicitly non-PASS until their complete primary-file lineage is recorded.
+The new matrix preserves the conclusions of this follow-up while making the closure boundary testable. Subsequent direct-source verification on 2026-09-22 closed all five required provenance targets at L4/PASS for their declared EWD roles:
 
-A CI validator prevents a source from being marked PASS without L4 evidence and prevents R-FDC-6 from being marked CLOSED while any required source remains non-PASS.
+- FAOSTAT through the official hash-verified archive;
+- UNDP HDI through exact 1990-2023 World equality;
+- UN WPP through exact 1950-2100 reproduction of the official single-age-to-OWID aggregation route;
+- Energy Institute through exact equality of all 427 `Total World` observations used by EWD against an archived official-download snapshot;
+- GCP 2025v15 through complete 1990-2024 six-category primary-file comparison under the declared one-decimal rounding boundary.
+
+R-FDC-6 is therefore CLOSED. A CI validator prevents any source from being marked PASS without L4 evidence and prevents a CLOSED gate while any required source remains non-PASS.
 
