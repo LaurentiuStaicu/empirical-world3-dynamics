@@ -38,23 +38,35 @@
     },
     {
       "id": "undp_hdi_adapter",
-      "overall_status": "WARNING",
+      "overall_status": "PASS",
       "model_role": "central observed proxy for World3 Human Welfare Index",
-      "evidence_level": "L2",
+      "evidence_level": "L4",
       "authority": "United Nations Development Programme, Human Development Report Office",
       "dataset": "HDR 2025 all composite indices and components time series (1990-2023)",
       "primary_page": "https://hdr.undp.org/data-center/documentation-and-downloads",
       "primary_timeseries_url": "https://hdr.undp.org/sites/default/files/2025_HDR/HDR25_Composite_indices_complete_time_series.csv",
       "current_transport": "science/data/raw/bau2_e2026/2026-08-28/undp_hdi_owid_adapter.csv",
       "verified_semantics": "UNDP documentation exposes the complete 1990-2023 series; the retained World HDI adapter already matches all eight published World anchors recorded in the 2026-09-21 follow-up.",
-      "unresolved": "Official CSV bytes are not frozen/hash-pinned in EWD and complete annual World-row equality has not been recorded.",
-      "required_action": "Freeze or deterministically fetch the official UNDP CSV, record byte hash and size, then compare every World HDI observation used by EWD before any transport replacement."
+      "required_action": null,
+      "primary_file_sha256": "61ed82e5b66c88dfca8ff9fac775c63981ecab6a254862af97acacc41c143117",
+      "primary_file_md5": "4026e513775f3431488a2d77bc6b6a1d",
+      "primary_file_size_bytes": 2001263,
+      "full_comparison": {
+        "years": "1990-2023",
+        "compared_years": 34,
+        "missing_in_primary": 0,
+        "missing_in_retained": 0,
+        "mismatch_count": 0,
+        "maximum_absolute_difference": 0,
+        "conclusion": "EXACT_PASS"
+      },
+      "closure": "Direct official UNDP CSV download was hash-recorded and every retained World HDI value for 1990-2023 matched exactly."
     },
     {
       "id": "un_wpp2024_population_adapter",
       "overall_status": "WARNING",
       "model_role": "population benchmark and plausibility guardrail; not fitted central population target",
-      "evidence_level": "L2",
+      "evidence_level": "L4",
       "authority": "United Nations, Department of Economic and Social Affairs, Population Division",
       "dataset": "World Population Prospects 2024",
       "primary_page": "https://population.un.org/wpp/",
@@ -62,9 +74,23 @@
       "primary_bulk_file": "WPP2024_Demographic_Indicators_Medium.csv.gz",
       "primary_bulk_url": "https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_Demographic_Indicators_Medium.csv.gz",
       "current_transport": "science/data/raw/bau2_e2026/2026-08-28/un_wpp2024_owid_adapter.csv",
-      "verified_semantics": "UN WPP 2024 defines estimates through 2023 and projections to 2100, and recommends CSV bulk download for advanced use; this matches the EWD estimate/medium-projection boundary.",
-      "unresolved": "Official bulk-file bytes are not frozen/hash-pinned in EWD and complete World 1950-2100 equality has not been recorded.",
-      "required_action": "Freeze/hash the official bulk CSV/GZ and compare World total population, both sexes/all ages, including the estimate/medium split, across all retained years."
+      "verified_semantics": "The official WPP 2024 medium bulk file was downloaded directly and all 151 World 1950-2100 rows were compared against the retained adapter. Coverage is complete; the largest absolute difference is 12 persons.",
+      "unresolved": "Full comparison is complete, but the retained secondary transport is not numerically identical to the official bulk file: differences are bounded at 12 persons. The repository has not yet documented the exact transport/precision rule responsible for those nonzero differences.",
+      "required_action": "Explain or independently reproduce the <=12-person adapter differences before promoting this source from WARNING to PASS; do not change the benchmark values merely to force equality.",
+      "primary_file_sha256": "286ac36bb1415e2e1ade03acfef0a29f0e4c087e2f78e38c48f50c5df89082bc",
+      "primary_file_md5": "a33419c11b407086db7af94252c5a95d",
+      "primary_file_size_bytes": 16557272,
+      "primary_decompressed_size_bytes": 40819701,
+      "full_comparison": {
+        "years": "1950-2100",
+        "compared_years": 151,
+        "primary_population_field": "TPopulation1July",
+        "missing_in_primary": 0,
+        "missing_in_retained": 0,
+        "maximum_absolute_difference_persons": 12,
+        "years_exceeding_5_person_difference": 28,
+        "conclusion": "COMPLETE_COMPARISON_WITH_SMALL_NONZERO_DIFFERENCES"
+      }
     },
     {
       "id": "energy_institute_2026",
@@ -80,14 +106,19 @@
       ],
       "current_transport": "Pinned GitHub mirror commit recorded in science/data/processed/energy_institute_global_2026.provenance.json",
       "verified_semantics": "The official 2026 page exposes the workbook, consolidated narrow CSV, methodology and definitions; the page also warns that historical values may be revised between editions.",
-      "unresolved": "Independent official-download byte/value equivalence with the pinned mirror transport is not recorded.",
-      "required_action": "Acquire the official 2026 narrow CSV/workbook, record checksum and size, and compare the seven Total World base variables used by EWD against the pinned transport."
+      "unresolved": "Independent official-download byte/value equivalence with the pinned mirror transport is not recorded; automated GitHub Actions retrieval of the official page returned HTTP 403.",
+      "required_action": "Identify a stable official direct-download endpoint or documented access method, then record checksum/size and compare the seven Total World base variables used by EWD against the pinned transport.",
+      "automation_probe": {
+        "date": "2026-09-22",
+        "result": "HTTP 403 Forbidden when GitHub Actions attempted direct page retrieval",
+        "implication": "The official page remains authoritative and browser-visible, but automated byte retrieval was not established in this pass."
+      }
     },
     {
       "id": "global_carbon_project_2025v15",
-      "overall_status": "WARNING",
+      "overall_status": "PASS",
       "model_role": "direct-emissions diagnostic target; not a central World3 state observation",
-      "evidence_level": "L3",
+      "evidence_level": "L4",
       "authority": "Global Carbon Project",
       "dataset": "The Global Carbon Project's fossil CO2 emissions dataset",
       "version": "2025v15",
@@ -96,17 +127,41 @@
       "primary_file": "GCB2025v15_MtCO2_flat.csv",
       "primary_file_md5": "3008e30d913af5926a83d0d0775fb72e",
       "current_transport": "Pinned datasets/co2-fossil-global transport used for science/data/experiments/gcb_direct_fossil_1990_2024.csv",
-      "verified_semantics": "The primary Zenodo record exposes the exact 2025v15 file and checksum; the current EWD diagnostic retains coal, oil, gas, cement, flaring and other categories while using coal+oil+gas as its direct-combustion target.",
-      "unresolved": "A complete direct primary-Zenodo-to-EWD 1990-2024 row/category comparison is not yet captured in current main.",
-      "required_action": "Reconstruct the compact snapshot directly from the primary Zenodo file and verify all six categories for every retained year before declaring L4 closure."
+      "verified_semantics": "The exact primary Zenodo file was downloaded; its MD5 matched the authority-published checksum. All six retained categories for 1990-2024 match the primary file within the declared one-decimal snapshot rounding tolerance.",
+      "required_action": null,
+      "primary_file_sha256": "20650c19b394d91b6b31cddff2fbc9508bcdbbed7c3f93660336f2f655f367ff",
+      "primary_file_size_bytes": 3147221,
+      "full_comparison": {
+        "years": "1990-2024",
+        "compared_years_per_category": 35,
+        "categories": [
+          "coal_mt",
+          "oil_mt",
+          "gas_mt",
+          "cement_mt",
+          "flaring_mt",
+          "other_mt"
+        ],
+        "missing_in_primary": 0,
+        "missing_in_retained": 0,
+        "rounding_tolerance_mtco2_per_year": 0.051,
+        "maximum_absolute_difference_mtco2_per_year": 0.049964,
+        "conclusion": "ROUNDING_EQUIVALENT_PASS"
+      },
+      "closure": "Primary artifact identity, authority checksum, file hash/size, complete row/category comparison and retained rounding boundary are all recorded."
     }
   ],
   "gate_status": "OPEN",
   "blocking_scientific_change": false,
   "next_closure_priority": [
-    "UNDP HDI because it is a central observation proxy",
-    "UN WPP because it is an active benchmark/guardrail",
-    "Energy Institute official-download equivalence",
-    "Global Carbon Project direct primary-file comparison"
-  ]
+    "UN WPP transport discrepancy explanation (complete comparison exists; max difference 12 persons)",
+    "Energy Institute official-download equivalence"
+  ],
+  "verification_run": {
+    "workflow": "Primary source byte probe",
+    "run_id": 35733087392,
+    "conclusion": "success",
+    "date": "2026-09-22",
+    "note": "One-off online probe downloaded authoritative UNDP, UN WPP and GCP primary files directly, computed hashes/sizes, and compared them with retained EWD transports/snapshots."
+  }
 }
