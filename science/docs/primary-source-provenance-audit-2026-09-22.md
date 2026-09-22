@@ -1,6 +1,6 @@
 # Primary-source provenance closure matrix — 2026-09-22
 
-Status: **R-FDC-6 OPEN**. This is provenance-only work. No observation value, model equation, mapping, fitted parameter, candidate-selection rule, retained trajectory or scientific claim is changed here.
+Status: **R-FDC-6 CLOSED**. This is provenance-only work. No observation value, model equation, mapping, fitted parameter, candidate-selection rule, retained trajectory or scientific claim is changed here.
 
 Machine-readable companion:
 
@@ -24,7 +24,7 @@ Only L4 is sufficient for a `PASS` when the repository claims frozen primary-sou
 | FAOSTAT Production Indices | central food observation | L4 | PASS | none; official archive is size/hash verified during clean reproduction |
 | UNDP HDR 2025 HDI | central human-welfare proxy | L4 | PASS | none for current transport equivalence; official file hash/size and exact 34-year World equality are recorded |
 | UN WPP 2024 | population benchmark/guardrail | L4 | PASS | exact 151-year equality reproduced through the official UN single-age files and the documented OWID aggregation route |
-| Energy Institute 2026 | energy diagnostic/candidate evidence | L1 | WARNING | identify a stable official automated download path and compare it with the pinned mirror transport |
+| Energy Institute 2026 | energy diagnostic/candidate evidence | L4 | PASS | archived official-download snapshot and pinned mirror are fully identified; all 427 EWD-used Total World observations match exactly |
 | GCP fossil CO2 2025v15 | direct-emissions diagnostic | L4 | PASS | none for current compact snapshot lineage; all six categories/35 years are primary-source verified within declared one-decimal rounding |
 
 ## UNDP HDR 2025
@@ -92,9 +92,32 @@ Official download page:
 
 The 2026 page exposes the data workbook and a consolidated narrow-format CSV, plus methodology and definitions. It also states that historical values can be revised between annual editions.
 
-EWD currently uses a pinned mirror transport. A GitHub Actions probe attempted direct automated retrieval from the official Energy Institute page on 2026-09-22 and received **HTTP 403 Forbidden**. Browser-visible authority and dataset availability are confirmed, but a stable machine-download path has not yet been established.
+The Energy Institute page currently exposes the 2026 consolidated narrow-format CSV. Direct automation against the EI page is blocked by Cloudflare, so the closure uses OWID's public content-addressed snapshot of the CSV that OWID documents as manually downloaded from the official EI page.
 
-The next closure step is not to change the model; it is to identify a documented official download endpoint or access method, record the official bytes/hash, and compare the seven Total World base variables already used by the existing ingestion.
+Archived official-download identity:
+
+- OWID ETL snapshot metadata: `snapshots/energy_institute/2026-06-30/statistical_review_of_world_energy.csv.dvc`
+- OWID ETL audited commit: `157bea70af7cb58518d7464520dac57fddf091ed`
+- publication date: **2026-06-30**
+- OWID access date: **2026-07-02**
+- size: **21,056,126 bytes**
+- MD5: `f25ee66736be97cfab483d26446a71c2`
+- SHA-256: `d197762cfb89012bc4d16ea0ef06766b24cffb37aa47491d391ab8a6d894d1a8`
+
+Pinned EWD mirror identity:
+
+- repository: `shanewhi/world-energy-data`
+- commit: `9fc01fc0ae5aea3955968f920e5cd1394fe5ad34`
+- file: `Statistical Review of World Energy Narrow format.csv`
+- size: **21,056,006 bytes**
+- MD5: `d52c342b5020235490e6c519bbf48979`
+- SHA-256: `c19b4922cb08316b45d7024233e8cd9d35e14429ee8cf65ab767e647cefc1f95`
+
+The two full files are **not byte-identical** and are not globally CSV-semantic-identical. The first detected difference is an unused row for `Other CIS`, 1965, `co2_combust_per_tes_ej`: the archived official file contains `#DIV/0!`, while the mirror contains `0`.
+
+For the declared EWD role, however, the comparison is exact. EWD uses seven `Total World` variables (`tes_ej`, oil, gas, coal, nuclear, hydro and renewables TES) over 1965-2025: **427 year-variable observations**. All 427 are present in both files and match exactly; maximum absolute difference is **0**.
+
+Therefore the mirror is not claimed to be a byte-for-byte copy of the full EI CSV. It is certified as scientifically faithful for the exact EWD extraction boundary. Energy Institute reaches **L4 / PASS** for that declared role.
 
 ## Global Carbon Project 2025v15
 
@@ -137,16 +160,16 @@ The difference is line-ending normalization only; no equation or numerical param
 
 ## Decision
 
-R-FDC-6 remains **OPEN**, but the open set has narrowed substantially.
+R-FDC-6 is **CLOSED**.
 
-Closed in this pass:
+All required provenance targets are now L4/PASS at their declared EWD roles:
 
-- FAOSTAT — L4/PASS;
-- UNDP HDI — L4/PASS with exact 34-year World equality;
-- GCP fossil CO2 2025v15 — L4/PASS with complete six-category comparison under the declared one-decimal rounding boundary.
+- FAOSTAT — official archive size/hash verified in clean reproduction;
+- UNDP HDI — exact 34-year World equality with the official UNDP CSV;
+- UN WPP 2024 — exact 151-year equality through the official UN single-age files and documented OWID aggregation route;
+- Energy Institute 2026 — exact equality for all 427 `Total World` observations used by EWD against an archived official-download snapshot;
+- GCP fossil CO2 2025v15 — complete six-category, 35-year primary-file verification under the declared one-decimal rounding boundary.
 
-Still open:
+No observation value, benchmark definition, model equation, candidate rule, bridge weight, fitted parameter or retained trajectory was changed to obtain this closure.
 
-- Energy Institute 2026 — L1/WARNING because official browser-visible datasets are confirmed but automated primary-byte retrieval returned HTTP 403.
-
-No result here justifies changing observation values, benchmark definitions, model equations or central World3 mechanisms. The WPP discrepancy is now explained and closed. The remaining R-FDC-6 work is to establish a stable official Energy Institute download path and verify official-download equivalence with the retained transport.
+The next repository audit gate is **R-FDC-7 — diagnostic raw-data reproducibility policy**.
