@@ -90,4 +90,8 @@ The machine-readable closure matrix and human-readable audit separate source aut
 
 FAOSTAT, UNDP HDI, UN WPP, Energy Institute and Global Carbon Project are all L4/PASS at their declared EWD roles. The closure required no change to observation values, benchmark definitions, bridge weights, World3-03 equations/parameters, candidate selection, production refit, medoid or retained trajectories.
 
-**Next gate: R-FDC-7 — diagnostic raw-data reproducibility policy.**
+**R-FDC-7 — diagnostic raw-data reproducibility policy — CLOSED_POLICY.**
+
+The repository now distinguishes retained raw, pinned remote, verified transport and processed-snapshot-only diagnostics. External diagnostic materialization is isolated from central Joint reproduction, and offline CI rejects stronger reproducibility claims than the evidence supports.
+
+**Next gate: R-FDC-8 — rejected experimental mechanisms.**
