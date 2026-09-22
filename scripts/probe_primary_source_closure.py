@@ -28,6 +28,8 @@ SOURCES = {
     "wpp_single_age_medium": "https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_PopulationBySingleAgeSex_Medium_2024-2100.csv.gz",
     "gcb": "https://zenodo.org/records/17417124/files/GCB2025v15_MtCO2_flat.csv?download=1",
     "ei_page": "https://www.energyinst.org/statistical-review/resources-and-data-downloads",
+    "ei_official_owid_snapshot": "https://snapshots.owid.io/f2/5ee66736be97cfab483d26446a71c2",
+    "ei_mirror": "https://raw.githubusercontent.com/shanewhi/world-energy-data/9fc01fc0ae5aea3955968f920e5cd1394fe5ad34/Statistical%20Review%20of%20World%20Energy%20Narrow%20format.csv",
 }
 
 
@@ -459,6 +461,105 @@ def probe_gcb() -> dict[str, Any]:
     return result
 
 
+def probe_ei_transport_equivalence() -> dict[str, Any]:
+    official_data, official_meta = fetch(SOURCES["ei_official_owid_snapshot"])
+    mirror_data, mirror_meta = fetch(SOURCES["ei_mirror"])
+
+    official_text, official_encoding = decode_text(official_data)
+    mirror_text, mirror_encoding = decode_text(mirror_data)
+
+    official_rows = list(reader_from_text(official_text))
+    mirror_rows = list(reader_from_text(mirror_text))
+    official_fields = list(official_rows[0].keys()) if official_rows else []
+    mirror_fields = list(mirror_rows[0].keys()) if mirror_rows else []
+
+    def normalized_row(row: dict[str, Any], fields: list[str]) -> tuple[str, ...]:
+        return tuple("" if row.get(field) is None else str(row.get(field)) for field in fields)
+
+    full_semantic_equal = False
+    first_full_mismatch: dict[str, Any] | None = None
+    if official_fields == mirror_fields and len(official_rows) == len(mirror_rows):
+        full_semantic_equal = True
+        for idx, (orow, mrow) in enumerate(zip(official_rows, mirror_rows), start=2):
+            ot = normalized_row(orow, official_fields)
+            mt = normalized_row(mrow, mirror_fields)
+            if ot != mt:
+                full_semantic_equal = False
+                first_full_mismatch = {"csv_line": idx, "official": ot, "mirror": mt}
+                break
+
+    required_vars = {
+        "tes_ej",
+        "oil_tes_ej",
+        "gas_tes_ej",
+        "coal_tes_ej",
+        "nuclear_tes_ej",
+        "hydro_tes_ej",
+        "renewables_tes_ej",
+    }
+
+    def selected(rows: list[dict[str, Any]]) -> dict[tuple[int, str], float]:
+        out: dict[tuple[int, str], float] = {}
+        for row in rows:
+            if row.get("Country") != "Total World":
+                continue
+            variable = str(row.get("Var", ""))
+            if variable not in required_vars:
+                continue
+            year_value = parse_float(row.get("Year"))
+            value = parse_float(row.get("Value"))
+            if year_value is None or value is None:
+                continue
+            out[(int(year_value), variable)] = value
+        return out
+
+    official_selected = selected(official_rows)
+    mirror_selected = selected(mirror_rows)
+    keys = sorted(set(official_selected) | set(mirror_selected))
+    missing_official = [list(key) for key in keys if key not in official_selected]
+    missing_mirror = [list(key) for key in keys if key not in mirror_selected]
+    diffs = []
+    max_diff = 0.0
+    for key in keys:
+        if key not in official_selected or key not in mirror_selected:
+            continue
+        diff = abs(official_selected[key] - mirror_selected[key])
+        max_diff = max(max_diff, diff)
+        if diff != 0:
+            diffs.append({"year": key[0], "var": key[1], "absolute_difference": diff})
+
+    official_lf = official_data.replace(b"\r\n", b"\n")
+    mirror_lf = mirror_data.replace(b"\r\n", b"\n")
+
+    return {
+        "official_download": official_meta,
+        "mirror_download": mirror_meta,
+        "official_encoding": official_encoding,
+        "mirror_encoding": mirror_encoding,
+        "official_row_count": len(official_rows),
+        "mirror_row_count": len(mirror_rows),
+        "official_fields": official_fields,
+        "mirror_fields": mirror_fields,
+        "byte_identical": official_data == mirror_data,
+        "lf_normalized_byte_identical": official_lf == mirror_lf,
+        "full_csv_semantic_equal": full_semantic_equal,
+        "first_full_csv_mismatch": first_full_mismatch,
+        "required_world_variables": sorted(required_vars),
+        "official_selected_observations": len(official_selected),
+        "mirror_selected_observations": len(mirror_selected),
+        "missing_in_official": missing_official,
+        "missing_in_mirror": missing_mirror,
+        "selected_mismatch_count": len(diffs),
+        "selected_maximum_absolute_difference": max_diff,
+        "selected_first_differences": diffs[:20],
+        "comparison_status": (
+            "EXACT_SELECTED_PASS"
+            if not missing_official and not missing_mirror and not diffs
+            else "DIFFERENCE_OR_COVERAGE"
+        ),
+    }
+
+
 def probe_ei_page() -> dict[str, Any]:
     data, meta = fetch(SOURCES["ei_page"])
     text, encoding = decode_text(data)
@@ -516,6 +617,7 @@ def main() -> None:
         ("wpp_single_age_owid_route", probe_wpp_single_age),
         ("gcb", probe_gcb),
         ("energy_institute", probe_ei_page),
+        ("energy_institute_transport", probe_ei_transport_equivalence),
     ]:
         try:
             results["sources"][name] = function()
