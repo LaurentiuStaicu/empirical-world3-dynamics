@@ -79,7 +79,7 @@
       "size_bytes": 14097047,
       "source_record": "science/data/energy_audit/egrid2021-source.json",
       "fetch_target": ".diagnostic_sources/egrid/eGRID2021_data.xlsx",
-      "verification_command": "python3 scripts/audit_egrid.py .diagnostic_sources/egrid/eGRID2021_data.xlsx science/data/energy_audit 2021",
+      "verification_command": "uv run --with openpyxl==3.1.5 --locked --project science python scripts/audit_egrid.py .diagnostic_sources/egrid/eGRID2021_data.xlsx science/data/energy_audit 2021",
       "remote_source_id": "egrid_2021"
     },
     {
@@ -92,7 +92,7 @@
       "size_bytes": 15602850,
       "source_record": "science/data/energy_audit/egrid2022-source.json",
       "fetch_target": ".diagnostic_sources/egrid/egrid2022_data.xlsx",
-      "verification_command": "python3 scripts/audit_egrid.py .diagnostic_sources/egrid/egrid2022_data.xlsx science/data/energy_audit 2022",
+      "verification_command": "uv run --with openpyxl==3.1.5 --locked --project science python scripts/audit_egrid.py .diagnostic_sources/egrid/egrid2022_data.xlsx science/data/energy_audit 2022",
       "remote_source_id": "egrid_2022"
     },
     {
@@ -105,7 +105,7 @@
       "size_bytes": 21213301,
       "source_record": "science/data/energy_audit/egrid-source.json",
       "fetch_target": ".diagnostic_sources/egrid/egrid2023_data_rev2.xlsx",
-      "verification_command": "python3 scripts/audit_egrid.py .diagnostic_sources/egrid/egrid2023_data_rev2.xlsx science/data/energy_audit 2023",
+      "verification_command": "uv run --with openpyxl==3.1.5 --locked --project science python scripts/audit_egrid.py .diagnostic_sources/egrid/egrid2023_data_rev2.xlsx science/data/energy_audit 2023",
       "remote_source_id": "egrid_2023_rev2"
     },
     {
