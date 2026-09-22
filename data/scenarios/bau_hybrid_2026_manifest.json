@@ -1,6 +1,6 @@
 {
   "model": "BAU Hybrid 2026 Joint",
-  "version": "0.1",
+  "version": "0.1.0",
   "scientific_status": "experimental scenario model; not a probabilistic forecast",
   "generated_on": "2026-08-30",
   "structural_model": "official World3-03 scenario 2 (BAU2)",
