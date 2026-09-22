@@ -75,19 +75,19 @@ The recovery sequence continued after this historical R-FDC-1 delta:
 | R-FDC-2 — empirical registry completeness | CLOSED | PR #23; active observation/benchmark contract and registry completeness gate |
 | R-FDC-3 — input-manifest scope semantics | CLOSED | PR #24; repository-wide retained-input inventory semantics separated from the central-baseline freeze date |
 | R-FDC-4 — public execution routing | CLOSED | PR #25; official World3-03 is the unambiguous public EWD route and Pyworld3 is explicitly legacy/reference |
-| R-FDC-5 — version/provenance identity | THIS CHANGE SET | reconcile EWD v0.1.0 software metadata while preserving Joint artifact v0.1, link the two identities explicitly, add regression protection, and document CRLF/LF World3-03 hash semantics |
+| R-FDC-5 — version/provenance identity | CLOSED | PR #26; preserve Joint artifact v0.1, link it to EWD v0.1.0, enforce version semantics, and document CRLF/LF World3-03 hash provenance |
 
 These later repairs are traceability/routing changes. They do not change observation values, model equations, candidate design, fitted parameters, bridge weights, medoid selection or the scientific interpretation of the retained central trajectory.
 
-## Current gate after R-FDC-5
+## Closure after R-FDC-5
 
-**R-FDC-6 — primary-source provenance closure — IN PROGRESS**
+**R-FDC-6 — primary-source provenance closure — CLOSED**
 
-A machine-readable closure matrix and human-readable audit now separate source authority, semantic reconciliation, exact primary-artifact identity and complete primary-file lineage:
+The machine-readable closure matrix and human-readable audit separate source authority, semantic reconciliation, exact primary-artifact identity and complete primary-file lineage:
 
 - `science/data/provenance/primary_source_audit_2026-09-22.json`
 - `science/docs/primary-source-provenance-audit-2026-09-22.md`
 
-FAOSTAT is L4/PASS. UNDP HDI, UN WPP, Energy Institute and Global Carbon Project remain WARNING because their complete primary-file-to-retained-input lineage is not yet recorded.
+FAOSTAT, UNDP HDI, UN WPP, Energy Institute and Global Carbon Project are all L4/PASS at their declared EWD roles. The closure required no change to observation values, benchmark definitions, bridge weights, World3-03 equations/parameters, candidate selection, production refit, medoid or retained trajectories.
 
-The highest-priority remaining closure is the central UNDP HDI adapter, followed by the active UN WPP benchmark. No observation definition or central-model logic should change as part of this gate.
+**Next gate: R-FDC-7 — diagnostic raw-data reproducibility policy.**
