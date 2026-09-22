@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Evaluate, and optionally enforce, the declared central-model promotion rule."""
+"""Evaluate a narrow retained error-comparison gate.
+
+This historical helper is not the Real Model S1-S10 promotion contract and does
+not by itself authorize any scientific or central-model promotion.
+"""
 
 from __future__ import annotations
 
@@ -27,10 +31,11 @@ def main() -> int:
     multi_wins = sum(float(row["bau2_e2026_mape_pct"]) <= float(row["bau2_level_anchored_mape_pct"]) for row in multi)
     passed = recent_wins == len(recent) and multi_wins >= 2
     print(
-        f"Poarta de promovare: {'PASS' if passed else 'FAIL'} · "
+        f"Poarta comparativă istorică: {'PASS' if passed else 'FAIL'} · "
         f"holdouturi recente {recent_wins}/{len(recent)} · multi-origin {multi_wins}/{len(multi)}"
     )
-    print("Regulă declarată: toate holdouturile recente și cel puțin două serii multi-origin mai bune decât BAU2 ancorat.")
+    print("Regulă comparativă: toate holdouturile recente și cel puțin două serii multi-origin mai bune decât BAU2 ancorat.")
+    print("Limită: acest test nu este echivalent cu validarea științifică sau cu porțile S1-S10 și nu autorizează singur promovarea unui mecanism.")
     return 1 if args.enforce and not passed else 0
 
 
