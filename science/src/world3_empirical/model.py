@@ -1,4 +1,4 @@
-"""Stable wrapper around the World3 engine."""
+"""Legacy/reference wrapper around Pyworld3 1.1.\n\nThis module is not the retained EWD World3-03 structural baseline. Use\n``world3_empirical.world3_03.run_world3_03`` for the official World3-03 route.\n"""
 
 from __future__ import annotations
 
@@ -82,3 +82,4 @@ def run_scenario(
         raise RuntimeError("World3 simulation produced non-finite output")
     return SimulationResult(scenario=scenario_obj, frame=frame)
 
+\n\ndef run_scenario(\n    scenario: str | Scenario = "world3_standard",\n    *,\n    year_min: int = 1900,\n    year_max: int = 2100,\n    dt: float = 0.5,\n    extra_constants: Mapping[str, float] | None = None,\n    fast: bool = True,\n) -> SimulationResult:\n    """Backward-compatible alias for the legacy Pyworld3 route.\n\n    The retained EWD structural baseline is World3-03 via ``run_world3_03``.\n    New code should call ``run_legacy_scenario`` explicitly when it intends to\n    use the older Pyworld3/reference implementation.\n    """\n    warnings.warn(\n        "run_scenario() uses the legacy Pyworld3 1.1 reference/proxy route; "\n        "use run_world3_03() for the retained EWD World3-03 baseline or "\n        "run_legacy_scenario() when legacy behavior is intended.",\n        DeprecationWarning,\n        stacklevel=2,\n    )\n    return run_legacy_scenario(\n        scenario,\n        year_min=year_min,\n        year_max=year_max,\n        dt=dt,\n        extra_constants=extra_constants,\n        fast=fast,\n    )\n
