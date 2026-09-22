@@ -125,9 +125,9 @@
     },
     {
       "id": "energy_institute_2026",
-      "overall_status": "WARNING",
+      "overall_status": "PASS",
       "model_role": "energy diagnostic/candidate evidence; not a central calibration target",
-      "evidence_level": "L1",
+      "evidence_level": "L4",
       "authority": "Energy Institute",
       "dataset": "Statistical Review of World Energy 2026",
       "primary_page": "https://www.energyinst.org/statistical-review/resources-and-data-downloads",
@@ -135,15 +135,67 @@
         "Statistical Review of World Energy Data workbook",
         "Consolidated Dataset - Narrow format CSV"
       ],
-      "current_transport": "Pinned GitHub mirror commit recorded in science/data/processed/energy_institute_global_2026.provenance.json",
-      "verified_semantics": "The official 2026 page exposes the workbook, consolidated narrow CSV, methodology and definitions; the page also warns that historical values may be revised between editions.",
-      "unresolved": "Independent official-download byte/value equivalence with the pinned mirror transport is not recorded; automated GitHub Actions retrieval of the official page returned HTTP 403.",
-      "required_action": "Identify a stable official direct-download endpoint or documented access method, then record checksum/size and compare the seven Total World base variables used by EWD against the pinned transport.",
-      "automation_probe": {
-        "date": "2026-09-22",
-        "result": "HTTP 403 Forbidden when GitHub Actions attempted direct page retrieval",
-        "implication": "The official page remains authoritative and browser-visible, but automated byte retrieval was not established in this pass."
-      }
+      "current_transport": {
+        "repository": "shanewhi/world-energy-data",
+        "commit": "9fc01fc0ae5aea3955968f920e5cd1394fe5ad34",
+        "filename": "Statistical Review of World Energy Narrow format.csv",
+        "size_bytes": 21056006,
+        "md5": "d52c342b5020235490e6c519bbf48979",
+        "sha256": "c19b4922cb08316b45d7024233e8cd9d35e14429ee8cf65ab767e647cefc1f95"
+      },
+      "verified_semantics": "The archived official EI 2026 narrow CSV and the pinned EWD mirror contain exactly the same 427 Total World year-variable observations used by EWD.",
+      "required_action": null,
+      "primary_artifact": "Consolidated Dataset - Narrow format (CSV)",
+      "official_archive_evidence": {
+        "archive": "Our World in Data ETL public snapshot of the manually downloaded Energy Institute 2026 official CSV",
+        "owid_repository": "owid/etl",
+        "audited_commit": "157bea70af7cb58518d7464520dac57fddf091ed",
+        "snapshot_metadata_path": "snapshots/energy_institute/2026-06-30/statistical_review_of_world_energy.csv.dvc",
+        "snapshot_ingest_path": "snapshots/energy_institute/2026-06-30/statistical_review_of_world_energy.py",
+        "public_snapshot_url": "https://snapshots.owid.io/f2/5ee66736be97cfab483d26446a71c2",
+        "source_download_note": "OWID documents that the EI files are downloaded manually from the official EI downloads page because Cloudflare prevents plain automated retrieval.",
+        "date_published": "2026-06-30",
+        "date_accessed_by_owid": "2026-07-02",
+        "size_bytes": 21056126,
+        "md5": "f25ee66736be97cfab483d26446a71c2",
+        "sha256": "d197762cfb89012bc4d16ea0ef06766b24cffb37aa47491d391ab8a6d894d1a8"
+      },
+      "full_file_cross_check": {
+        "official_row_count": 299320,
+        "mirror_row_count": 299320,
+        "schema_equal": true,
+        "byte_identical": false,
+        "full_csv_semantic_equal": false,
+        "first_detected_difference": {
+          "csv_line": 235793,
+          "country": "Other CIS",
+          "year": 1965,
+          "variable": "co2_combust_per_tes_ej",
+          "official_value": "#DIV/0!",
+          "mirror_value": "0"
+        },
+        "interpretation": "The public mirror is not byte-for-byte identical to the archived official CSV. The detected whole-file semantic difference is outside the Total World variables used by EWD."
+      },
+      "ewd_role_comparison": {
+        "geography": "Total World",
+        "years": "1965-2025",
+        "variables": [
+          "tes_ej",
+          "oil_tes_ej",
+          "gas_tes_ej",
+          "coal_tes_ej",
+          "nuclear_tes_ej",
+          "hydro_tes_ej",
+          "renewables_tes_ej"
+        ],
+        "observations_compared": 427,
+        "missing_in_official": 0,
+        "missing_in_transport": 0,
+        "mismatch_count": 0,
+        "maximum_absolute_difference": 0,
+        "conclusion": "EXACT_SELECTED_PASS"
+      },
+      "closure": "Authority, official-download archival identity, hashes/sizes, mirror identity, full-file cross-check and exact equality of every EWD-used Total World observation are recorded. The mirror is scientifically faithful for the declared EWD role despite an irrelevant whole-file difference outside that role."
     },
     {
       "id": "global_carbon_project_2025v15",
@@ -182,16 +234,14 @@
       "closure": "Primary artifact identity, authority checksum, file hash/size, complete row/category comparison and retained rounding boundary are all recorded."
     }
   ],
-  "gate_status": "OPEN",
+  "gate_status": "CLOSED",
   "blocking_scientific_change": false,
-  "next_closure_priority": [
-    "Energy Institute official-download equivalence"
-  ],
+  "next_closure_priority": [],
   "verification_run": {
     "workflow": "Primary source byte probe",
-    "run_id": 35734370296,
+    "run_id": 35735781899,
     "conclusion": "success",
     "date": "2026-09-22",
-    "note": "Direct official-source probe verified UNDP, UN WPP and GCP. WPP was reproduced through the same official single-age source and aggregation route used by the OWID adapter."
+    "note": "Direct official-source verification closed UNDP, UN WPP and GCP, and compared the archived official EI 2026 narrow CSV against the exact mirror transport used by EWD."
   }
 }
