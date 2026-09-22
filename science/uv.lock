@@ -1358,7 +1358,7 @@ wheels = [
 
 [[package]]
 name = "empirical-world3-dynamics"
-version = "0.1"
+version = "0.1.0"
 source = { editable = "." }
 dependencies = [
     { name = "matplotlib" },

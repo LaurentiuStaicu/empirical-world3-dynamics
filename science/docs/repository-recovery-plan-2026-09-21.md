@@ -196,6 +196,12 @@ Before changing the Joint manifest, decide whether its field denotes:
 
 Do not silently conflate those two concepts.
 
+Closure decision (2026-09-22): the retained Joint manifest `version` denotes the
+scientific-artifact version and remains `0.1`. The EWD software/repository
+release is recorded separately as `ewd_release_version = 0.1.0`. Automated
+version-identity validation checks both roles without requiring the two version
+numbers to be identical.
+
 ## Repair Gate R-FDC-6 — provenance documentation precision
 
 ### World3-03 line endings

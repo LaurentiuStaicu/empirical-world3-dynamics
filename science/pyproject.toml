@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "empirical-world3-dynamics"
-version = "0.1"
+version = "0.1.0"
 description = "Reproducible Empirical World3 Dynamics model and calibration engine"
 requires-python = ">=3.11"
 dependencies = [

@@ -1123,6 +1123,8 @@ def export_outputs(candidates: list[Candidate], indicators: list[Indicator]) -> 
     manifest = {
         "model": "BAU Hybrid 2026 Joint",
         "version": "0.1",
+        "version_semantics": "retained Joint scientific-artifact version; not the EWD software/repository release version",
+        "ewd_release_version": "0.1.0",
         "scientific_status": "experimental scenario model; not a probabilistic forecast",
         "generated_on": SNAPSHOT_DATE,
         "structural_model": "official World3-03 scenario 2 (BAU2)",

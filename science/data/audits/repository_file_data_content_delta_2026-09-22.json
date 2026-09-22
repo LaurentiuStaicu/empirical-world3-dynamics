@@ -79,5 +79,30 @@
     "total": 165
   },
   "central_baseline_status": "PASS",
-  "next_gate": "R-FDC-2 empirical registry completeness"
+  "next_gate": "R-FDC-6 primary-source provenance closure",
+  "subsequent_closures": [
+    {
+      "gate": "R-FDC-2",
+      "status": "CLOSED",
+      "pull_request": 23,
+      "scope": "empirical registry completeness and active observation/benchmark contract"
+    },
+    {
+      "gate": "R-FDC-3",
+      "status": "CLOSED",
+      "pull_request": 24,
+      "scope": "scientific input-manifest scope and vintage semantics"
+    },
+    {
+      "gate": "R-FDC-4",
+      "status": "CLOSED",
+      "pull_request": 25,
+      "scope": "official World3-03 public execution routing and explicit legacy Pyworld3 route"
+    },
+    {
+      "gate": "R-FDC-5",
+      "status": "THIS_CHANGE_SET",
+      "scope": "preserve Joint scientific-artifact v0.1, record EWD software/repository release v0.1.0 separately, add version regression gate, and document World3-03 CRLF/LF hash provenance"
+    }
+  ]
 }
