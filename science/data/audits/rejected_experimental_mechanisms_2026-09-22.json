@@ -45,5 +45,20 @@
       ]
     }
   ],
-  "next_gate": "R-FDC-9 repository-wide post-recovery audit"
+  "next_gate": "R-FDC-9 repository-wide post-recovery audit",
+  "verification_run": {
+    "workflow": "R-FDC-8 governance probe",
+    "run_id": 35740971345,
+    "conclusion": "success",
+    "date": "2026-09-22",
+    "checks": [
+      "forbidden coupling present in runtime and JSON Real Model contracts",
+      "S1-S10 gate registry intact",
+      "energy and net-energy candidates remain inactive/non-central and forbid the coupling",
+      "central execution paths contain no rejected-coupling imports or routing",
+      "experimental module is explicitly labelled rejected/sensitivity-only",
+      "predictive evaluator states a backtest is insufficient for promotion",
+      "structural sensitivity runner records rejected governance disposition"
+    ]
+  }
 }
