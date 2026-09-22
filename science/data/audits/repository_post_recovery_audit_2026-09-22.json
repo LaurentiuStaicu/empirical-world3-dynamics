@@ -18,7 +18,9 @@
   "post_recovery_scope": {
     "expected_tracked_files_after_this_gate": 188,
     "coverage_rule": "Every tracked file must be covered either by the historical inventory or by new_files_since_historical_baseline.",
-    "scientific_change": false
+    "scientific_change": false,
+    "r_fdc_8_merge_commit": "eddeabbbb4dcdceed1ff02102ea1040e24ed7fa0",
+    "base_for_final_r_fdc_9_review": "main after PR #29"
   },
   "historical_nonpass_resolution": [
     {
