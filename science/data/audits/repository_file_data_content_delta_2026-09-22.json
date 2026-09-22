@@ -102,7 +102,7 @@
     {
       "gate": "R-FDC-5",
       "status": "THIS_CHANGE_SET",
-      "scope": "v0.1.0 identity reconciliation, version regression gate, and World3-03 CRLF/LF hash provenance"
+      "scope": "preserve Joint scientific-artifact v0.1, record EWD software/repository release v0.1.0 separately, add version regression gate, and document World3-03 CRLF/LF hash provenance"
     }
   ]
 }
