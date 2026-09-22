@@ -1,0 +1,62 @@
+{
+  "schema_version": "1.0",
+  "purpose": "Declare the empirical series and benchmark series used by the retained Joint 2026 observation layer so registry completeness can be validated automatically.",
+  "central_observation_series": [
+    {
+      "series_id": "wb_population",
+      "indicator_key": "population",
+      "role": "central_observation_target",
+      "expected_observation_type": "empirical"
+    },
+    {
+      "series_id": "wb_industry_value_added",
+      "indicator_key": "industry_per_capita",
+      "role": "central_observation_proxy_component",
+      "expected_observation_type": "empirical"
+    },
+    {
+      "series_id": "faostat_food_per_capita",
+      "indicator_key": "food_per_capita",
+      "role": "central_observation_target",
+      "expected_observation_type": "empirical"
+    },
+    {
+      "series_id": "wb_fossil_co2",
+      "indicator_key": "pollution_pressure",
+      "role": "central_observation_bridge_target",
+      "expected_observation_type": "empirical"
+    },
+    {
+      "series_id": "undp_world_hdi",
+      "indicator_key": "human_welfare",
+      "role": "central_observation_proxy",
+      "expected_observation_type": "empirical"
+    }
+  ],
+  "benchmark_series": [
+    {
+      "series_id": "un_wpp2024_world_estimates",
+      "indicator_key": "population",
+      "role": "benchmark_guardrail_estimates",
+      "expected_observation_type": "empirical"
+    },
+    {
+      "series_id": "un_wpp2024_world_medium_projection",
+      "indicator_key": "population",
+      "role": "benchmark_guardrail_projection",
+      "expected_observation_type": "scenario_only"
+    }
+  ],
+  "exclusions": [
+    {
+      "series_id": "wb_food_production_index",
+      "reason": "Known data-quality/coverage problem; explicitly excluded from central food calibration."
+    }
+  ],
+  "interpretation_rules": [
+    "Registry inclusion documents use; it does not imply causal validation.",
+    "Benchmark/guardrail series are not fitted central targets.",
+    "HDI is a proxy for World3 human welfare, not a direct observation of the World3 HWI construct.",
+    "Annual CO2 is a flow proxy used by the pollution-pressure observation bridge, not an observation of the persistent-pollution stock."
+  ]
+}
