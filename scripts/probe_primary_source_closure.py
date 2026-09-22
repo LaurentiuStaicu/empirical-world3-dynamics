@@ -28,6 +28,8 @@ SOURCES = {
     "wpp_single_age_medium": "https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_PopulationBySingleAgeSex_Medium_2024-2100.csv.gz",
     "gcb": "https://zenodo.org/records/17417124/files/GCB2025v15_MtCO2_flat.csv?download=1",
     "ei_page": "https://www.energyinst.org/statistical-review/resources-and-data-downloads",
+    "ei_owid_snapshot": "https://snapshots.owid.io/f2/5ee66736be97cfab483d26446a71c2",
+    "ei_mirror": "https://raw.githubusercontent.com/shanewhi/world-energy-data/9fc01fc0ae5aea3955968f920e5cd1394fe5ad34/Statistical%20Review%20of%20World%20Energy%20Narrow%20format.csv",
     "ei_official_owid_snapshot": "https://snapshots.owid.io/f2/5ee66736be97cfab483d26446a71c2",
     "ei_mirror": "https://raw.githubusercontent.com/shanewhi/world-energy-data/9fc01fc0ae5aea3955968f920e5cd1394fe5ad34/Statistical%20Review%20of%20World%20Energy%20Narrow%20format.csv",
 }
@@ -605,6 +607,106 @@ def probe_ei_page() -> dict[str, Any]:
     }
 
 
+def _extract_ei_required(data: bytes) -> tuple[dict[tuple[int, str], float], dict[str, Any]]:
+    text, encoding = decode_text(data)
+    reader = csv.DictReader(io.StringIO(text))
+    fields = reader.fieldnames or []
+    required = {
+        "tes_ej",
+        "oil_tes_ej",
+        "gas_tes_ej",
+        "coal_tes_ej",
+        "nuclear_tes_ej",
+        "hydro_tes_ej",
+        "renewables_tes_ej",
+    }
+    values: dict[tuple[int, str], float] = {}
+    total_rows = 0
+    selected_rows = 0
+    duplicate_keys: list[tuple[int, str]] = []
+    for row in reader:
+        total_rows += 1
+        if row.get("Country") != "Total World":
+            continue
+        var = str(row.get("Var", ""))
+        if var not in required:
+            continue
+        value = parse_float(row.get("Value"))
+        year_value = parse_float(row.get("Year"))
+        if value is None or year_value is None:
+            continue
+        key = (int(year_value), var)
+        if key in values:
+            duplicate_keys.append(key)
+        values[key] = value
+        selected_rows += 1
+    return values, {
+        "encoding": encoding,
+        "fieldnames": fields,
+        "total_rows": total_rows,
+        "selected_rows": selected_rows,
+        "duplicate_keys": duplicate_keys,
+    }
+
+
+def probe_ei_snapshot_vs_mirror() -> dict[str, Any]:
+    official_data, official_meta = fetch(SOURCES["ei_owid_snapshot"])
+    mirror_data, mirror_meta = fetch(SOURCES["ei_mirror"])
+
+    official_values, official_parse = _extract_ei_required(official_data)
+    mirror_values, mirror_parse = _extract_ei_required(mirror_data)
+
+    keys = sorted(set(official_values) | set(mirror_values))
+    missing_official = [list(key) for key in keys if key not in official_values]
+    missing_mirror = [list(key) for key in keys if key not in mirror_values]
+    diffs = []
+    for key in keys:
+        if key not in official_values or key not in mirror_values:
+            continue
+        delta = official_values[key] - mirror_values[key]
+        if delta != 0:
+            diffs.append(
+                {
+                    "year": key[0],
+                    "variable": key[1],
+                    "official": official_values[key],
+                    "mirror": mirror_values[key],
+                    "difference": delta,
+                }
+            )
+    max_diff = max((abs(item["difference"]) for item in diffs), default=0.0)
+
+    official_lines = official_data.splitlines()
+    mirror_lines = mirror_data.splitlines()
+    return {
+        "official_snapshot": official_meta,
+        "mirror_transport": mirror_meta,
+        "byte_identical": official_data == mirror_data,
+        "size_difference_bytes": len(official_data) - len(mirror_data),
+        "official_line_count": len(official_lines),
+        "mirror_line_count": len(mirror_lines),
+        "official_parse": official_parse,
+        "mirror_parse": mirror_parse,
+        "expected_selected_points": 61 * 7,
+        "official_selected_points": len(official_values),
+        "mirror_selected_points": len(mirror_values),
+        "missing_in_official": missing_official,
+        "missing_in_mirror": missing_mirror,
+        "value_mismatch_count": len(diffs),
+        "maximum_absolute_difference": max_diff,
+        "mismatch_sample": diffs[:20],
+        "comparison_status": (
+            "REQUIRED_EWD_SERIES_EXACT_PASS"
+            if len(official_values) == 61 * 7
+            and len(mirror_values) == 61 * 7
+            and not missing_official
+            and not missing_mirror
+            and not diffs
+            else "DIFFERENCE_OR_COVERAGE"
+        ),
+    }
+
+
 def main() -> None:
     results: dict[str, Any] = {
         "probe_date": "2026-09-22",
@@ -617,6 +719,7 @@ def main() -> None:
         ("wpp_single_age_owid_route", probe_wpp_single_age),
         ("gcb", probe_gcb),
         ("energy_institute", probe_ei_page),
+        ("energy_institute_snapshot_vs_mirror", probe_ei_snapshot_vs_mirror),
         ("energy_institute_transport", probe_ei_transport_equivalence),
     ]:
         try:
