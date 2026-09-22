@@ -189,5 +189,27 @@
       "safe_claim": "Source-to-processed reconstruction is checkout-reproducible from retained raw snapshots."
     }
   ],
-  "next_action": "Use the separate diagnostic fetch contract for pinned sources; preserve processed_snapshot_only warnings until an exact archived historical raw snapshot is recovered. Do not burden central Joint reproduction with diagnostic raw downloads."
+  "next_action": "Use the separate diagnostic fetch contract for pinned sources; preserve processed_snapshot_only warnings until an exact archived historical raw snapshot is recovered. Do not burden central Joint reproduction with diagnostic raw downloads.",
+  "verification_run": {
+    "workflow": "Diagnostic source materialization probe",
+    "run_id": 35739416732,
+    "conclusion": "success",
+    "date": "2026-09-22",
+    "materialized_and_hash_verified": [
+      "egrid_2021",
+      "egrid_2022",
+      "egrid_2023_rev2",
+      "aramendia_fossil_eroi_2024",
+      "energy_institute_2026_transport",
+      "gcp_2025v15"
+    ],
+    "exact_retained_artifact_reproduction": [
+      "eGRID 2021 audit/cohort",
+      "eGRID 2022 audit/cohort",
+      "eGRID 2023 rev2 audit/cohort",
+      "Aramendia global fossil EROI 2024 processed snapshot/provenance",
+      "Energy Institute global 2026 processed snapshot/provenance"
+    ],
+    "note": "All listed reconstruction checks completed with git diff = 0. GCP materialization was hash-verified; its primary-to-compact equivalence is already closed under R-FDC-6."
+  }
 }
