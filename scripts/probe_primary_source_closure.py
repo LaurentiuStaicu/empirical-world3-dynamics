@@ -24,7 +24,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SOURCES = {
     "undp": "https://hdr.undp.org/sites/default/files/2025_HDR/HDR25_Composite_indices_complete_time_series.csv",
     "wpp": "https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_Demographic_Indicators_Medium.csv.gz",
-    "wpp_single_age": "https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_PopulationBySingleAgeSex_Medium.csv.gz",
+    "wpp_single_age": "https://population.un.org/wpp/assets/Excel%20Files/2_Advanced/CSV_FILES/WPP2024_PopulationBySingleAgeSex_Medium.csv.gz",
     "gcb": "https://zenodo.org/records/17417124/files/GCB2025v15_MtCO2_flat.csv?download=1",
     "ei_page": "https://www.energyinst.org/statistical-review/resources-and-data-downloads",
 }
