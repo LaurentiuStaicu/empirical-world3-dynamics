@@ -36,6 +36,10 @@ jobs:
           python3 scripts/generate_science_input_manifest.py
           git diff --exit-code -- science/data/input_manifest.json
 
+      - name: Verify empirical registry contract
+        run: |
+          uv run --locked --project science python scripts/check_registry_contract.py
+
       - name: Reproduce retained central scientific artifacts
         run: |
           uv run --locked --project science --extra world3-03 python scripts/reproduce_scientific_results.py
