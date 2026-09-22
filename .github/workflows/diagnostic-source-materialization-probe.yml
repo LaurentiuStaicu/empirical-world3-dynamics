@@ -33,9 +33,9 @@ jobs:
 
       - name: Reproduce eGRID retained audits
         run: |
-          uv run --locked --project science python scripts/audit_egrid.py .diagnostic_sources/egrid/eGRID2021_data.xlsx science/data/energy_audit 2021
-          uv run --locked --project science python scripts/audit_egrid.py .diagnostic_sources/egrid/egrid2022_data.xlsx science/data/energy_audit 2022
-          uv run --locked --project science python scripts/audit_egrid.py .diagnostic_sources/egrid/egrid2023_data_rev2.xlsx science/data/energy_audit 2023
+          uv run --with openpyxl==3.1.5 --locked --project science python scripts/audit_egrid.py .diagnostic_sources/egrid/eGRID2021_data.xlsx science/data/energy_audit 2021
+          uv run --with openpyxl==3.1.5 --locked --project science python scripts/audit_egrid.py .diagnostic_sources/egrid/egrid2022_data.xlsx science/data/energy_audit 2022
+          uv run --with openpyxl==3.1.5 --locked --project science python scripts/audit_egrid.py .diagnostic_sources/egrid/egrid2023_data_rev2.xlsx science/data/energy_audit 2023
           git diff --exit-code --             science/data/energy_audit/egrid2021-audit.json             science/data/energy_audit/egrid2021-cohort.json.gz             science/data/energy_audit/egrid2022-audit.json             science/data/energy_audit/egrid2022-cohort.json.gz             science/data/energy_audit/egrid-audit.json             science/data/energy_audit/egrid-cohort.json.gz
 
       - name: Reproduce Aramendia EROI retained snapshot
