@@ -1,4 +1,5 @@
 {
+  "central_baseline_freeze_date": "2026-08-30",
   "file_count": 34,
   "files": {
     "science/data/processed/aramendia_global_fossil_eroi_2024.csv": "217823d5bcc340620f8f70ae8e533dc251c5bbd1e174bb61a01d6f0abffd2080",
@@ -36,7 +37,10 @@
     "science/vendor/world3_03/World3_03_Scenarios.mdl": "252e0c7eebff23d3c44344b6801cf3c40aec82d25b356ea8cce16a052249ac4d"
   },
   "hash_algorithm": "SHA-256",
-  "manifest_version": "1.1",
+  "local_file_count": 33,
+  "manifest_scope": "retained_scientific_input_inventory",
+  "manifest_version": "1.2",
+  "remote_file_count": 1,
   "remote_files": {
     "science/data/raw/bau2_e2026/2026-08-28/faostat_production_indices.zip": {
       "sha256": "04c58034493d91f02e2495570d3864212ac870ec7f829a5f22577d143a6a8a72",
@@ -44,5 +48,7 @@
       "url": "https://bulks-faostat.fao.org/production/Production_Indices_E_All_Data_(Normalized).zip"
     }
   },
-  "snapshot_date": "2026-08-30"
+  "scope_description": "Hashes retained scientific raw/processed inputs plus the empirical registry, remote-input manifest, and authoritative World3-03 model. The inventory includes both central and diagnostic/supporting inputs and is not a single-vintage dataset snapshot. Per-dataset retrieval and vintage dates belong in filenames, the registry, and provenance sidecars.",
+  "snapshot_date": "2026-08-30",
+  "snapshot_date_semantics": "deprecated compatibility alias for central_baseline_freeze_date; not a per-file retrieval or vintage date"
 }
