@@ -72,11 +72,15 @@ def main() -> None:
         fail("R-FDC-8 may close only as CLOSED_GOVERNANCE")
 
     mechanisms = audit.get("mechanisms")
-    if not isinstance(mechanisms, list) or len(mechanisms) != 1:
-        fail("the current rejected-mechanism registry must contain exactly one mechanism")
-    mechanism = mechanisms[0]
-    if mechanism.get("id") != COUPLING_ID:
+    if not isinstance(mechanisms, list) or not mechanisms:
+        fail("rejected-mechanism registry must be a non-empty list")
+    mechanism_ids = [item.get("id") for item in mechanisms]
+    if any(not item for item in mechanism_ids) or len(mechanism_ids) != len(set(mechanism_ids)):
+        fail("rejected-mechanism IDs must be non-empty and unique")
+    by_id = {item["id"]: item for item in mechanisms}
+    if COUPLING_ID not in by_id:
         fail("rejected coupling ID changed or is missing")
+    mechanism = by_id[COUPLING_ID]
     if mechanism.get("disposition") != "REJECTED_FOR_CENTRAL_PROMOTION":
         fail("coupling is not explicitly rejected for central promotion")
     if mechanism.get("central_route_status") != "FORBIDDEN_AND_NOT_IMPORTED":
