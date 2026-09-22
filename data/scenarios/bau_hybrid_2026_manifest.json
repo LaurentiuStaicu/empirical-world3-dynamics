@@ -1,6 +1,8 @@
 {
   "model": "BAU Hybrid 2026 Joint",
-  "version": "0.1.0",
+  "version": "0.1",
+  "version_semantics": "retained Joint scientific-artifact version; not the EWD software/repository release version",
+  "ewd_release_version": "0.1.0",
   "scientific_status": "experimental scenario model; not a probabilistic forecast",
   "generated_on": "2026-08-30",
   "structural_model": "official World3-03 scenario 2 (BAU2)",
@@ -52,38 +54,38 @@
   "parameter_bounds": {
     "resources": {
       "model_name": "initial nonrenewable resources",
-      "baseline": 2000000000000.0,
-      "lower": 1500000000000.0,
-      "upper": 3500000000000.0
+      "baseline": 2000000000000,
+      "lower": 1500000000000,
+      "upper": 3500000000000
     },
     "industrial_output_ratio": {
       "model_name": "industrial capital output ratio 1",
-      "baseline": 3.0,
+      "baseline": 3,
       "lower": 2.55,
       "upper": 3.45
     },
     "industrial_capital_life": {
       "model_name": "average life of industrial capital 1",
-      "baseline": 14.0,
-      "lower": 11.0,
-      "upper": 18.0
+      "baseline": 14,
+      "lower": 11,
+      "upper": 18
     },
     "land_yield": {
       "model_name": "land yield factor 1",
-      "baseline": 1.0,
+      "baseline": 1,
       "lower": 0.82,
       "upper": 1.18
     },
     "pollution_generation": {
       "model_name": "persistent pollution generation factor 1",
-      "baseline": 1.0,
+      "baseline": 1,
       "lower": 0.65,
       "upper": 1.35
     },
     "pollution_assimilation": {
       "model_name": "assimilation half life in 1970",
       "baseline": 1.5,
-      "lower": 1.0,
+      "lower": 1,
       "upper": 2.3
     },
     "family_size": {
@@ -130,7 +132,7 @@
     ],
     "pollution_pressure": [
       0.3,
-      2.0
+      2
     ],
     "human_welfare": [
       0.5,
@@ -160,8 +162,8 @@
       "selection": "five predeclared weights evaluated with data and rolling validation ending no later than 2018"
     },
     "pollution_pressure": {
-      "world3_persistent_pollution_generation_weight": 0.0,
-      "industrial_throughput_weight": 1.0,
+      "world3_persistent_pollution_generation_weight": 0,
+      "industrial_throughput_weight": 1,
       "form": "annual CO2 activity proxy; persistent pollution stock remains a separate latent World3 diagnostic",
       "selection": "five predeclared weights evaluated with data and rolling validation ending no later than 2018"
     }
