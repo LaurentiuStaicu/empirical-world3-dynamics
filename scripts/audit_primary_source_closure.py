@@ -24,6 +24,8 @@ ROOT = Path(__file__).resolve().parents[1]
 SOURCES = {
     "undp": "https://hdr.undp.org/sites/default/files/2025_HDR/HDR25_Composite_indices_complete_time_series.csv",
     "wpp": "https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_Demographic_Indicators_Medium.csv.gz",
+    "wpp_single_age_estimates": "https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_PopulationBySingleAgeSex_Medium_1950-2023.csv.gz",
+    "wpp_single_age_medium": "https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_PopulationBySingleAgeSex_Medium_2024-2100.csv.gz",
     "gcb": "https://zenodo.org/records/17417124/files/GCB2025v15_MtCO2_flat.csv?download=1",
     "ei_page": "https://www.energyinst.org/statistical-review/resources-and-data-downloads",
 }
@@ -269,6 +271,105 @@ def probe_wpp() -> dict[str, Any]:
     return result
 
 
+def _read_wpp_single_age_world(data: bytes) -> tuple[dict[int, int], dict[str, Any]]:
+    decompressed = gzip.decompress(data)
+    text, encoding = decode_text(decompressed)
+    rows = reader_from_text(text)
+    fields = rows.fieldnames or []
+    normalized = {field.strip().lower(): field for field in fields}
+
+    def choose(*names: str) -> str | None:
+        for name in names:
+            if name.lower() in normalized:
+                return normalized[name.lower()]
+        return None
+
+    location_field = choose("Location", "LocName", "Entity")
+    locid_field = choose("LocID", "LocationID")
+    year_field = choose("Time", "Year", "TimePeriod")
+    age_field = choose("AgeGrp", "Age", "AgeStart")
+    variant_field = choose("Variant")
+    population_field = choose("PopTotal", "Population")
+
+    primary: dict[int, int] = {}
+    world_rows = 0
+    for row in rows:
+        is_world = False
+        if location_field and str(row.get(location_field, "")).strip() == "World":
+            is_world = True
+        if locid_field and str(row.get(locid_field, "")).strip() == "900":
+            is_world = True
+        if not is_world or not year_field or not population_field:
+            continue
+        year_value = parse_float(row.get(year_field))
+        value = parse_float(row.get(population_field))
+        if year_value is None or value is None:
+            continue
+        year = int(year_value)
+        world_rows += 1
+        # Match OWID garden processing exactly: scale each single-age row
+        # from thousands to persons, cast each row to int, then sum ages.
+        primary[year] = primary.get(year, 0) + int(value * 1000)
+
+    info = {
+        "decompressed_size_bytes": len(decompressed),
+        "decoded_encoding": encoding,
+        "field_count": len(fields),
+        "field_sample": fields[:40],
+        "selected_fields": {
+            "location": location_field,
+            "locid": locid_field,
+            "year": year_field,
+            "age": age_field,
+            "variant": variant_field,
+            "population": population_field,
+        },
+        "world_single_age_rows_used": world_rows,
+    }
+    return primary, info
+
+
+def probe_wpp_single_age() -> dict[str, Any]:
+    estimates_data, estimates_meta = fetch(SOURCES["wpp_single_age_estimates"])
+    medium_data, medium_meta = fetch(SOURCES["wpp_single_age_medium"])
+
+    estimates, estimates_info = _read_wpp_single_age_world(estimates_data)
+    medium, medium_info = _read_wpp_single_age_world(medium_data)
+    primary = {**estimates, **medium}
+
+    adapter_path = ROOT / "science/data/raw/bau2_e2026/2026-08-28/un_wpp2024_owid_adapter.csv"
+    retained: dict[int, float] = {}
+    with adapter_path.open("r", encoding="utf-8-sig", newline="") as handle:
+        reader = csv.DictReader(handle)
+        for row in reader:
+            if row.get("entity") != "World":
+                continue
+            year = int(float(row["year"]))
+            estimate = parse_float(row.get("population__sex_all__age_all__variant_estimates"))
+            medium_value = parse_float(row.get("population__sex_all__age_all__variant_medium__projected"))
+            value = estimate if estimate is not None else medium_value
+            if value is not None:
+                retained[year] = value
+
+    comparison = compare_series(primary, retained, tolerance=0.0)
+    return {
+        "estimates_download": estimates_meta,
+        "medium_download": medium_meta,
+        "estimates_parse": estimates_info,
+        "medium_parse": medium_info,
+        "primary_world_years": len(primary),
+        "retained_world_years": len(retained),
+        "comparison": comparison,
+        "comparison_status": (
+            "EXACT_OWID_ROUTE_PASS"
+            if comparison["mismatch_count"] == 0
+            and not comparison["missing_in_primary"]
+            and not comparison["missing_in_retained"]
+            else "DIFFERENCE_OR_COVERAGE"
+        ),
+    }
+
+
 def probe_gcb() -> dict[str, Any]:
     data, meta = fetch(SOURCES["gcb"])
     text, encoding = decode_text(data)
@@ -412,6 +513,7 @@ def main() -> None:
     for name, function in [
         ("undp", probe_undp),
         ("wpp", probe_wpp),
+        ("wpp_single_age_owid_route", probe_wpp_single_age),
         ("gcb", probe_gcb),
         ("energy_institute", probe_ei_page),
     ]:
