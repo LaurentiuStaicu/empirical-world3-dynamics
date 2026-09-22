@@ -243,6 +243,10 @@ Priority examples:
 - regional cereal/climate panel;
 - eGRID raw workbooks.
 
+Closure decision (2026-09-22): **R-FDC-7 CLOSED_POLICY**.
+
+Every audited diagnostic source is assigned one validated mode: `retained_raw`, `pinned_remote`, `verified_transport`, or `processed_snapshot_only`. A separate diagnostic fetch manifest and cache keep external diagnostic availability out of central Joint reproduction. Offline CI rejects unsupported reproducibility claims. GISTEMP and the historical regional cereal/climate source snapshots remain explicitly processed-snapshot-only; their retained processed diagnostics are replayable, but exact historical raw-to-processed reconstruction is not claimed.
+
 ## Repair Gate R-FDC-8 — rejected experimental mechanisms
 
 `energy_coupling.py` contains an executable resource-fraction -> EROI hypothesis that is currently forbidden for central promotion.
