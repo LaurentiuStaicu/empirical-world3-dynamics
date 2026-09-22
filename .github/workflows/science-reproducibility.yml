@@ -36,6 +36,14 @@ jobs:
           python3 scripts/generate_science_input_manifest.py
           git diff --exit-code -- science/data/input_manifest.json
 
+      - name: Check System Dynamics structural conformity
+        run: |
+          python3 scripts/check_system_dynamics_conformity.py
+
+      - name: Check World3 numerical integration convergence
+        run: |
+          uv run --locked --project science --extra world3-03 python science/scripts/audit_sd_numerical_convergence.py
+
       - name: Reproduce retained central scientific artifacts
         run: |
           uv run --locked --project science --extra world3-03 python scripts/reproduce_scientific_results.py
