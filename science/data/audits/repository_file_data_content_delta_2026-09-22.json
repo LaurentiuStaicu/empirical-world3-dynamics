@@ -1,0 +1,83 @@
+{
+  "schema_version": "1.0",
+  "audit_name": "EWD Repository File–Data–Content Post-Recovery Delta",
+  "baseline_commit_before_repair": "795a6b8e42e2a19497f686a89e7c3a6056e6930c",
+  "repair_merge_commit": "dd12af9989b36ad0f77fb0a50f47e0cf8f337cba",
+  "date": "2026-09-22",
+  "scope": "Delta audit only. Original 2026-09-21 inventory remains the historical pre-repair snapshot.",
+  "verification": {
+    "scientific_reproducibility_run": 35689613025,
+    "scientific_reproducibility_conclusion": "success",
+    "diagnostic_execution_run": 35689613026,
+    "diagnostic_execution_conclusion": "success",
+    "committed_central_references_unchanged": true
+  },
+  "blocker_resolution": [
+    {
+      "path": "science/scripts/evaluate_unido_industry_proxy.py",
+      "previous_status": "BLOCKER",
+      "current_status": "PASS",
+      "basis": "Deleted build_bau2_e2026 observation import replaced by the equivalent frozen world3_empirical.observations contract; script executes successfully and remains diagnostic-only."
+    },
+    {
+      "path": "science/scripts/evaluate_unido_iip_volume.py",
+      "previous_status": "BLOCKER",
+      "current_status": "PASS",
+      "basis": "Deleted build_bau2_e2026 observation import replaced by the equivalent frozen world3_empirical.observations contract; script executes successfully and remains diagnostic-only."
+    },
+    {
+      "path": "science/scripts/evaluate_climate_food_link.py",
+      "previous_status": "BLOCKER",
+      "current_status": "PASS",
+      "basis": "Deleted build_bau2_e2026 observation import replaced by the equivalent frozen world3_empirical.observations contract; execution succeeds and integration decision remains keep_outside_bau_hybrid_2026_central_projection."
+    },
+    {
+      "path": "science/scripts/evaluate_regional_agricultural_stress.py",
+      "previous_status": "BLOCKER",
+      "current_status": "PASS",
+      "basis": "Deleted build_bau2_e2026 observation import replaced by the equivalent frozen world3_empirical.observations contract; execution succeeds and accepted remains false."
+    },
+    {
+      "path": "science/scripts/evaluate_technology_minerals.py",
+      "previous_status": "BLOCKER",
+      "current_status": "PASS",
+      "basis": "Stale removed presentation-copy inputs replaced by current generated Joint outputs with textually identical generating definitions; execution succeeds and status remains risk-registry/not central calibration."
+    }
+  ],
+  "new_files_since_original_snapshot": [
+    {
+      "path": ".github/workflows/diagnostic-execution.yml",
+      "status": "PASS",
+      "role": "path-scoped diagnostic regression workflow"
+    },
+    {
+      "path": "science/data/audits/repository_file_data_content_inventory_2026-09-21.json",
+      "status": "PASS",
+      "role": "historical audit inventory"
+    },
+    {
+      "path": "science/docs/repository-file-data-content-audit-2026-09-21.md",
+      "status": "PASS",
+      "role": "historical audit report"
+    },
+    {
+      "path": "science/docs/repository-recovery-plan-2026-09-21.md",
+      "status": "PASS",
+      "role": "recovery plan"
+    },
+    {
+      "path": "science/docs/primary-source-provenance-followup-2026-09-21.md",
+      "status": "PASS",
+      "role": "provenance follow-up"
+    }
+  ],
+  "current_counts": {
+    "PASS": 107,
+    "WARNING": 42,
+    "BLOCKER": 0,
+    "NOT_SCIENTIFICALLY_MATERIAL": 16,
+    "total": 165
+  },
+  "central_baseline_status": "PASS",
+  "next_gate": "R-FDC-2 empirical registry completeness"
+}
