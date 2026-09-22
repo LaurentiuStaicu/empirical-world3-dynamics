@@ -1,8 +1,8 @@
 # Repository Recovery Plan Derived from File–Data–Content Audit
 
 Date: 2026-09-21  
-Status: diagnostic proposal only  
-No repairs are implemented by this document.
+Status: historical recovery plan with closure annotations through 2026-09-22  
+This document originated as a diagnostic proposal. It now records the closure decisions for the implemented R-FDC sequence; the actual repairs remain in their respective commits/PRs and automated gates.
 
 ## Governing rule
 
