@@ -1,0 +1,51 @@
+{
+  "manifest_version": "1.0",
+  "purpose": "Non-central diagnostic raw/source materialization only. These downloads are intentionally separate from science/data/remote_inputs.json so central Joint reproduction does not depend on diagnostic source availability.",
+  "cache_root": ".diagnostic_sources",
+  "sources": {
+    "egrid_2021": {
+      "destination": ".diagnostic_sources/egrid/eGRID2021_data.xlsx",
+      "url": "https://www.epa.gov/system/files/documents/2023-01/eGRID2021_data.xlsx",
+      "hash_algorithm": "sha256",
+      "hash": "0bab3376509c79168ba19dff111e8a5ca7724043229af47af5cb5b6f71465644",
+      "size_bytes": 14097047
+    },
+    "egrid_2022": {
+      "destination": ".diagnostic_sources/egrid/egrid2022_data.xlsx",
+      "url": "https://www.epa.gov/system/files/documents/2024-01/egrid2022_data.xlsx",
+      "hash_algorithm": "sha256",
+      "hash": "c73fdc561aa402d0f6ed3cc35e5d961bee6af6e003c9c035b40f757f8480b76b",
+      "size_bytes": 15602850
+    },
+    "egrid_2023_rev2": {
+      "destination": ".diagnostic_sources/egrid/egrid2023_data_rev2.xlsx",
+      "url": "https://www.epa.gov/system/files/documents/2025-06/egrid2023_data_rev2.xlsx",
+      "hash_algorithm": "sha256",
+      "hash": "895cd81dd8662406189ad8adf5a2578dcb362cdb5cff7cca81b10ee6bd2447c6",
+      "size_bytes": 21213301
+    },
+    "aramendia_fossil_eroi_2024": {
+      "destination": ".diagnostic_sources/eroi/global_erois.csv",
+      "url": "https://figshare.com/ndownloader/files/46240243",
+      "hash_algorithm": "md5",
+      "hash": "c3f330ee874e10aca547d73d76cd3cd2",
+      "immutable_identifier": "Figshare file id 46240243; dataset DOI 10.6084/m9.figshare.25311358"
+    },
+    "energy_institute_2026_transport": {
+      "destination": ".diagnostic_sources/energy/Statistical Review of World Energy Narrow format.csv",
+      "url": "https://raw.githubusercontent.com/shanewhi/world-energy-data/9fc01fc0ae5aea3955968f920e5cd1394fe5ad34/Statistical%20Review%20of%20World%20Energy%20Narrow%20format.csv",
+      "hash_algorithm": "sha256",
+      "hash": "c19b4922cb08316b45d7024233e8cd9d35e14429ee8cf65ab767e647cefc1f95",
+      "size_bytes": 21056006,
+      "primary_equivalence": "science/data/provenance/primary_source_audit_2026-09-22.json"
+    },
+    "gcp_2025v15": {
+      "destination": ".diagnostic_sources/gcb/GCB2025v15_MtCO2_flat.csv",
+      "url": "https://zenodo.org/records/17417124/files/GCB2025v15_MtCO2_flat.csv?download=1",
+      "hash_algorithm": "sha256",
+      "hash": "20650c19b394d91b6b31cddff2fbc9508bcdbbed7c3f93660336f2f655f367ff",
+      "size_bytes": 3147221,
+      "immutable_identifier": "DOI 10.5281/zenodo.17417124; version 2025v15"
+    }
+  }
+}
