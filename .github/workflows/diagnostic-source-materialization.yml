@@ -7,8 +7,8 @@ permissions:
   contents: read
 
 jobs:
-  fetch:
-    name: Materialize and verify diagnostic source inputs
+  verify:
+    name: Fetch and reproduce pinned diagnostic sources
     runs-on: ubuntu-latest
     steps:
       - name: Check out source
