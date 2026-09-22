@@ -1,0 +1,20 @@
+name: R-FDC-8 governance probe
+
+on:
+  push:
+    branches:
+      - audit/rejected-mechanism-governance
+
+permissions:
+  contents: read
+
+jobs:
+  governance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Verify rejected mechanism governance
+        run: python3 scripts/check_rejected_mechanism_governance.py
