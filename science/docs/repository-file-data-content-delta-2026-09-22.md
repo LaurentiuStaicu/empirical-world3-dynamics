@@ -94,4 +94,8 @@ FAOSTAT, UNDP HDI, UN WPP, Energy Institute and Global Carbon Project are all L4
 
 The repository now distinguishes retained raw, pinned remote, verified transport and processed-snapshot-only diagnostics. External diagnostic materialization is isolated from central Joint reproduction, and offline CI rejects stronger reproducibility claims than the evidence supports.
 
-**Next gate: R-FDC-8 — rejected experimental mechanisms.**
+**R-FDC-8 — rejected experimental mechanisms — CLOSED_GOVERNANCE.**
+
+The executable resource-fraction -> fossil-EROI experiment remains rejected and sensitivity-only. CI now enforces the forbidden-coupling registry, absence from central execution routes, and the rule that executability or a single backtest PASS is not promotion evidence. E1-E10 remains explicitly undefined rather than being silently invented.
+
+**Next gate: R-FDC-9 — repository-wide post-recovery audit.**
