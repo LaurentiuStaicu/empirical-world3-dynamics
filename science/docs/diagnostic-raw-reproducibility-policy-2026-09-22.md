@@ -70,7 +70,15 @@ That directory is Git-ignored and is not part of `science/data/remote_inputs.jso
 
 This separation is intentional. A temporary outage, redirect or retirement of an external diagnostic source must not make the retained central Joint 2026 trajectory unreproducible.
 
-The ordinary Scientific reproducibility workflow therefore validates the policy **offline**, while the manual **Diagnostic source materialization** workflow tests external retrieval and hashes.
+The ordinary Scientific reproducibility workflow therefore validates the policy **offline**, while the manual **Diagnostic source materialization** workflow tests external retrieval, hashes, and the deterministic source-to-retained paths that already have ingestion/audit scripts.
+
+Verification run **35739416732** succeeded on 2026-09-22:
+
+- all six pinned remote sources downloaded and passed their declared hashes;
+- eGRID 2021, 2022 and 2023 rev2 regenerated their retained audit/cohort artifacts with `git diff = 0`;
+- Aramendia EROI regenerated its retained processed snapshot and provenance with `git diff = 0`;
+- Energy Institute 2026 regenerated its retained processed snapshot and provenance with `git diff = 0`;
+- GCP 2025v15 passed materialization/hash verification; its primary-to-compact value lineage is already closed by R-FDC-6.
 
 ## Closure rule
 
