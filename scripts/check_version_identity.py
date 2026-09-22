@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Verify that the public EWD release identity is consistent across metadata."""
+"""Verify consistent EWD release identity without conflating artifact versions."""
 
 from __future__ import annotations
 
@@ -25,9 +25,15 @@ def extract(pattern: str, text: str, label: str) -> str:
 
 
 citation = (ROOT / "CITATION.cff").read_text(encoding="utf-8")
-canonical = extract(r"^version:\s*[\"']?([0-9]+\.[0-9]+\.[0-9]+)[\"']?\s*$", citation, "CITATION.cff version")
+canonical = extract(
+    r"^version:\s*[\"']?([0-9]+\.[0-9]+\.[0-9]+)[\"']?\s*$",
+    citation,
+    "CITATION.cff version",
+)
 
-pyproject = tomllib.loads((ROOT / "science/pyproject.toml").read_text(encoding="utf-8"))
+pyproject = tomllib.loads(
+    (ROOT / "science/pyproject.toml").read_text(encoding="utf-8")
+)
 package_version = pyproject["project"]["version"]
 
 lock = tomllib.loads((ROOT / "science/uv.lock").read_text(encoding="utf-8"))
@@ -37,70 +43,39 @@ lock_versions = [
     if package.get("name") == "empirical-world3-dynamics"
 ]
 if len(lock_versions) != 1:
-    fail(f"expected one empirical-world3-dynamics package in uv.lock, found {len(lock_versions)}")
+    fail(
+        "expected one empirical-world3-dynamics package in uv.lock, "
+        f"found {len(lock_versions)}"
+    )
 lock_version = lock_versions[0]
 
-init_text = (ROOT / "science/src/world3_empirical/__init__.py").read_text(encoding="utf-8")
-runtime_version = extract(r'^__version__\s*=\s*[\"\']([^\"\']+)[\"\']\s*$', init_text, "__version__")
+init_text = (
+    ROOT / "science/src/world3_empirical/__init__.py"
+).read_text(encoding="utf-8")
+runtime_version = extract(
+    r'^__version__\s*=\s*[\"\']([^\"\']+)[\"\']\s*$',
+    init_text,
+    "__version__",
+)
 
 manifest_path = ROOT / "data/scenarios/bau_hybrid_2026_manifest.json"
 manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-manifest_release_version = manifest["ewd_release_version"]
 artifact_version = manifest["version"]
+manifest_release_version = manifest["ewd_release_version"]
 artifact_version_semantics = manifest.get("version_semantics", "")
 
-builder_text = (ROOT / "science/scripts/build_joint_hybrid_2026.py").read_text(encoding="utf-8")
-builder_release_version = extract(
-    r'^\s{8}\"ewd_release_version\":\s*\"([^\"]+)\",\s*
-mismatches = {path: value for path, value in observed.items() if value != canonical}
-if mismatches:
-    details = ", ".join(f"{path}={value!r}" for path, value in mismatches.items())
-    fail(f"canonical CITATION.cff version is {canonical!r}; mismatches: {details}")
-
-release_note = ROOT / f"releases/v{canonical}.md"
-if not release_note.is_file():
-    fail(f"missing release note {release_note.relative_to(ROOT)}")
-
-status_text = (ROOT / "STATUS.md").read_text(encoding="utf-8")
-status_version = extract(
-    r"Empirical World3 Dynamics \(EWD\) v([0-9]+\.[0-9]+\.[0-9]+)",
-    status_text,
-    "STATUS.md release version",
-)
-if status_version != canonical:
-    fail(f"STATUS.md identifies {status_version!r}, expected {canonical!r}")
-
-print(f"VERSION_IDENTITY_PASS: {canonical}")
-print("Checked CITATION.cff, package metadata, lockfile, runtime version, EWD release linkage in the Joint builder/manifest, release note and STATUS.md; Joint artifact version is checked separately")
-,
-    builder_text,
-    "Joint builder EWD release version",
-)
+builder_text = (
+    ROOT / "science/scripts/build_joint_hybrid_2026.py"
+).read_text(encoding="utf-8")
 builder_artifact_version = extract(
-    r'^\s{8}\"version\":\s*\"([^\"]+)\",\s*
-mismatches = {path: value for path, value in observed.items() if value != canonical}
-if mismatches:
-    details = ", ".join(f"{path}={value!r}" for path, value in mismatches.items())
-    fail(f"canonical CITATION.cff version is {canonical!r}; mismatches: {details}")
-
-release_note = ROOT / f"releases/v{canonical}.md"
-if not release_note.is_file():
-    fail(f"missing release note {release_note.relative_to(ROOT)}")
-
-status_text = (ROOT / "STATUS.md").read_text(encoding="utf-8")
-status_version = extract(
-    r"Empirical World3 Dynamics \(EWD\) v([0-9]+\.[0-9]+\.[0-9]+)",
-    status_text,
-    "STATUS.md release version",
-)
-if status_version != canonical:
-    fail(f"STATUS.md identifies {status_version!r}, expected {canonical!r}")
-
-print(f"VERSION_IDENTITY_PASS: {canonical}")
-print("Checked CITATION.cff, package metadata, lockfile, runtime version, Joint builder, retained manifest, release note and STATUS.md")
-,
+    r'^\s{8}"version":\s*"([^"]+)",\s*$',
     builder_text,
     "Joint builder artifact version",
+)
+builder_release_version = extract(
+    r'^\s{8}"ewd_release_version":\s*"([^"]+)",\s*$',
+    builder_text,
+    "Joint builder EWD release version",
 )
 
 if artifact_version != builder_artifact_version:
@@ -109,20 +84,34 @@ if artifact_version != builder_artifact_version:
         f"{artifact_version!r} != {builder_artifact_version!r}"
     )
 if "not the EWD software/repository release version" not in artifact_version_semantics:
-    fail("Joint manifest does not explicitly distinguish artifact and EWD release versions")
+    fail(
+        "Joint manifest does not explicitly distinguish scientific-artifact "
+        "and EWD software/repository release versions"
+    )
 
-observed = {
+observed_release_versions = {
     "science/pyproject.toml": package_version,
     "science/uv.lock": lock_version,
     "science/src/world3_empirical/__init__.py": runtime_version,
-    "data/scenarios/bau_hybrid_2026_manifest.json::ewd_release_version": manifest_release_version,
-    "science/scripts/build_joint_hybrid_2026.py::ewd_release_version": builder_release_version,
+    "data/scenarios/bau_hybrid_2026_manifest.json::ewd_release_version":
+        manifest_release_version,
+    "science/scripts/build_joint_hybrid_2026.py::ewd_release_version":
+        builder_release_version,
 }
 
-mismatches = {path: value for path, value in observed.items() if value != canonical}
+mismatches = {
+    path: value
+    for path, value in observed_release_versions.items()
+    if value != canonical
+}
 if mismatches:
-    details = ", ".join(f"{path}={value!r}" for path, value in mismatches.items())
-    fail(f"canonical CITATION.cff version is {canonical!r}; mismatches: {details}")
+    details = ", ".join(
+        f"{path}={value!r}" for path, value in mismatches.items()
+    )
+    fail(
+        f"canonical CITATION.cff version is {canonical!r}; "
+        f"mismatches: {details}"
+    )
 
 release_note = ROOT / f"releases/v{canonical}.md"
 if not release_note.is_file():
@@ -138,4 +127,8 @@ if status_version != canonical:
     fail(f"STATUS.md identifies {status_version!r}, expected {canonical!r}")
 
 print(f"VERSION_IDENTITY_PASS: {canonical}")
-print("Checked CITATION.cff, package metadata, lockfile, runtime version, Joint builder, retained manifest, release note and STATUS.md")
+print(
+    "Checked EWD release identity across citation/package/lock/runtime metadata "
+    "and Joint release linkage; Joint scientific-artifact version is checked "
+    "separately and is not required to equal the EWD release version."
+)
