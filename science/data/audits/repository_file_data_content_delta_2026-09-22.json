@@ -79,7 +79,7 @@
     "total": 165
   },
   "central_baseline_status": "PASS",
-  "next_gate": "R-FDC-6 primary-source provenance closure",
+  "next_gate": "R-FDC-7 diagnostic raw-data reproducibility policy",
   "subsequent_closures": [
     {
       "gate": "R-FDC-2",
@@ -101,8 +101,15 @@
     },
     {
       "gate": "R-FDC-5",
+      "status": "CLOSED",
+      "scope": "EWD v0.1.0 versus Joint artifact v0.1 semantics, version regression gate, and World3-03 CRLF/LF hash provenance",
+      "pull_request": 26
+    },
+    {
+      "gate": "R-FDC-6",
       "status": "THIS_CHANGE_SET",
-      "scope": "preserve Joint scientific-artifact v0.1, record EWD software/repository release v0.1.0 separately, add version regression gate, and document World3-03 CRLF/LF hash provenance"
+      "pull_request": 27,
+      "scope": "primary-source provenance closure for FAOSTAT, UNDP HDI, UN WPP, Energy Institute and GCP at their declared EWD roles"
     }
   ]
 }

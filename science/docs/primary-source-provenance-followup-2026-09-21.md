@@ -183,3 +183,20 @@ No evidence was found that requires changing:
 
 The remaining work is provenance closure, not model recalibration.
 
+## Continuation — 2026-09-22
+
+The provenance work has been converted into a machine-readable R-FDC-6 closure matrix with explicit evidence levels L1-L4:
+
+- `science/data/provenance/primary_source_audit_2026-09-22.json`
+- `science/docs/primary-source-provenance-audit-2026-09-22.md`
+
+The new matrix preserves the conclusions of this follow-up while making the closure boundary testable. Subsequent direct-source verification on 2026-09-22 closed all five required provenance targets at L4/PASS for their declared EWD roles:
+
+- FAOSTAT through the official hash-verified archive;
+- UNDP HDI through exact 1990-2023 World equality;
+- UN WPP through exact 1950-2100 reproduction of the official single-age-to-OWID aggregation route;
+- Energy Institute through exact equality of all 427 `Total World` observations used by EWD against an archived official-download snapshot;
+- GCP 2025v15 through complete 1990-2024 six-category primary-file comparison under the declared one-decimal rounding boundary.
+
+R-FDC-6 is therefore CLOSED. A CI validator prevents any source from being marked PASS without L4 evidence and prevents a CLOSED gate while any required source remains non-PASS.
+

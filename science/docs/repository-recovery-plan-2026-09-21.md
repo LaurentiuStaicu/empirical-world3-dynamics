@@ -226,6 +226,8 @@ Continue the separate provenance audit for:
 
 Do not mix those provenance closures with execution-routing repairs.
 
+Closure decision (2026-09-22): **R-FDC-6 CLOSED**. FAOSTAT, UNDP HDI, UN WPP 2024, Energy Institute 2026 and GCP 2025v15 all reach L4/PASS at their declared EWD roles. Energy Institute closure is role-specific: the archived official CSV and mirror are not byte-identical across the whole file, but all 427 `Total World` observations used by EWD match exactly. No model or retained-result change was required.
+
 ## Repair Gate R-FDC-7 — diagnostic raw-data reproducibility policy
 
 The project should choose and document one policy for non-central diagnostics:
