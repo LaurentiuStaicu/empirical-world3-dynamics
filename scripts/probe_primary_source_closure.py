@@ -24,6 +24,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SOURCES = {
     "undp": "https://hdr.undp.org/sites/default/files/2025_HDR/HDR25_Composite_indices_complete_time_series.csv",
     "wpp": "https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_Demographic_Indicators_Medium.csv.gz",
+    "wpp_single_age": "https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_PopulationBySingleAgeSex_Medium.csv.gz",
     "gcb": "https://zenodo.org/records/17417124/files/GCB2025v15_MtCO2_flat.csv?download=1",
     "ei_page": "https://www.energyinst.org/statistical-review/resources-and-data-downloads",
 }
@@ -269,6 +270,98 @@ def probe_wpp() -> dict[str, Any]:
     return result
 
 
+def probe_wpp_single_age() -> dict[str, Any]:
+    data, meta = fetch(SOURCES["wpp_single_age"])
+    decompressed = gzip.decompress(data)
+    text, encoding = decode_text(decompressed)
+    rows = reader_from_text(text)
+    fields = rows.fieldnames or []
+    normalized = {field.strip().lower(): field for field in fields}
+
+    def choose(*names: str) -> str | None:
+        for name in names:
+            if name.lower() in normalized:
+                return normalized[name.lower()]
+        return None
+
+    location_field = choose("Location", "LocName", "Entity")
+    locid_field = choose("LocID", "LocationID")
+    year_field = choose("Time", "Year", "TimePeriod")
+    age_field = choose("AgeGrp", "Age", "AgeStart")
+    variant_field = choose("Variant")
+    population_field = choose("PopTotal", "Population")
+
+    # Reproduce the OWID route: for each single-age World row, convert
+    # thousands to people and cast to int, then sum ages to "all".
+    primary: dict[int, int] = {}
+    world_rows = 0
+    for row in rows:
+        is_world = False
+        if location_field and str(row.get(location_field, "")).strip() == "World":
+            is_world = True
+        if locid_field and str(row.get(locid_field, "")).strip() == "900":
+            is_world = True
+        if not is_world or not year_field or not population_field:
+            continue
+        year_value = parse_float(row.get(year_field))
+        value = parse_float(row.get(population_field))
+        if year_value is None or value is None:
+            continue
+        year = int(year_value)
+        variant = str(row.get(variant_field, "")).strip() if variant_field else ""
+        if year <= 2023 and variant and variant != "Estimates":
+            continue
+        if year >= 2024 and variant and variant != "Medium":
+            continue
+        world_rows += 1
+        primary[year] = primary.get(year, 0) + int(value * 1000)
+
+    adapter_path = ROOT / "science/data/raw/bau2_e2026/2026-08-28/un_wpp2024_owid_adapter.csv"
+    retained: dict[int, float] = {}
+    with adapter_path.open("r", encoding="utf-8-sig", newline="") as handle:
+        reader = csv.DictReader(handle)
+        for row in reader:
+            if row.get("entity") != "World":
+                continue
+            year = int(float(row["year"]))
+            estimate = parse_float(row.get("population__sex_all__age_all__variant_estimates"))
+            medium = parse_float(row.get("population__sex_all__age_all__variant_medium__projected"))
+            value = estimate if estimate is not None else medium
+            if value is not None:
+                retained[year] = value
+
+    result: dict[str, Any] = {
+        "download": meta,
+        "decompressed_size_bytes": len(decompressed),
+        "decoded_encoding": encoding,
+        "field_count": len(fields),
+        "field_sample": fields[:40],
+        "selected_fields": {
+            "location": location_field,
+            "locid": locid_field,
+            "year": year_field,
+            "age": age_field,
+            "variant": variant_field,
+            "population": population_field,
+        },
+        "world_single_age_rows_used": world_rows,
+        "primary_world_years": len(primary),
+        "retained_world_years": len(retained),
+    }
+    if not primary:
+        result["comparison_status"] = "PARSE_OPEN"
+        return result
+    result["comparison"] = compare_series(primary, retained, tolerance=0.0)
+    result["comparison_status"] = (
+        "EXACT_OWID_ROUTE_PASS"
+        if result["comparison"]["mismatch_count"] == 0
+        and not result["comparison"]["missing_in_primary"]
+        and not result["comparison"]["missing_in_retained"]
+        else "DIFFERENCE_OR_COVERAGE"
+    )
+    return result
+
+
 def probe_gcb() -> dict[str, Any]:
     data, meta = fetch(SOURCES["gcb"])
     text, encoding = decode_text(data)
@@ -412,6 +505,7 @@ def main() -> None:
     for name, function in [
         ("undp", probe_undp),
         ("wpp", probe_wpp),
+        ("wpp_single_age_owid_route", probe_wpp_single_age),
         ("gcb", probe_gcb),
         ("energy_institute", probe_ei_page),
     ]:
