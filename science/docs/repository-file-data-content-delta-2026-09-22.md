@@ -75,7 +75,7 @@ The recovery sequence continued after this historical R-FDC-1 delta:
 | R-FDC-2 — empirical registry completeness | CLOSED | PR #23; active observation/benchmark contract and registry completeness gate |
 | R-FDC-3 — input-manifest scope semantics | CLOSED | PR #24; repository-wide retained-input inventory semantics separated from the central-baseline freeze date |
 | R-FDC-4 — public execution routing | CLOSED | PR #25; official World3-03 is the unambiguous public EWD route and Pyworld3 is explicitly legacy/reference |
-| R-FDC-5 — version/provenance identity | THIS CHANGE SET | reconcile v0.1.0 metadata, add version-identity regression protection, and document CRLF/LF World3-03 hash semantics |
+| R-FDC-5 — version/provenance identity | THIS CHANGE SET | reconcile EWD v0.1.0 software metadata while preserving Joint artifact v0.1, link the two identities explicitly, add regression protection, and document CRLF/LF World3-03 hash semantics |
 
 These later repairs are traceability/routing changes. They do not change observation values, model equations, candidate design, fitted parameters, bridge weights, medoid selection or the scientific interpretation of the retained central trajectory.
 
