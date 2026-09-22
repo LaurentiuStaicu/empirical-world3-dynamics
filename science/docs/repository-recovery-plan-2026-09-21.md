@@ -275,6 +275,12 @@ The resource-fraction -> fossil-EROI experiment remains executable only for audi
 9. rerun repository-wide audit and require zero unexplained BLOCKER findings.
 10. only then reconsider new scientific mechanisms or milestone/version changes.
 
+Closure decision (2026-09-22): **R-FDC-9 CLOSED_AUDIT**, contingent on the final branch/PR Scientific reproducibility run.
+
+The post-recovery audit covers every tracked file through the historical 160-file inventory plus explicit classification of every file added since that baseline. All 47 historical WARNING/BLOCKER entries are reconciled: 35 RESOLVED_PASS, 6 GOVERNED_LIMITATION and 6 REMAINING_WARNING. The five historical BLOCKER findings remain resolved and the unexplained/unresolved BLOCKER count is zero. Remaining warnings are explicit non-central limitations and do not alter the retained World3-03/Joint 2026 scientific path.
+
+The recovery sequence is therefore complete at the repository-integrity, provenance, routing, reproducibility and governance level once final CI is green. This closure does not itself authorize a new scientific mechanism or determine a release-version change.
+
 ## Versioning implication
 
 This audit does not decide the next version number.
