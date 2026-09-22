@@ -15,6 +15,7 @@ import io
 import json
 import re
 import urllib.request
+import urllib.parse
 from pathlib import Path
 from typing import Any
 
@@ -24,6 +25,7 @@ SOURCES = {
     "undp": "https://hdr.undp.org/sites/default/files/2025_HDR/HDR25_Composite_indices_complete_time_series.csv",
     "wpp": "https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_Demographic_Indicators_Medium.csv.gz",
     "gcb": "https://zenodo.org/records/17417124/files/GCB2025v15_MtCO2_flat.csv?download=1",
+    "ei_page": "https://www.energyinst.org/statistical-review/resources-and-data-downloads",
 }
 
 
@@ -356,6 +358,51 @@ def probe_gcb() -> dict[str, Any]:
     return result
 
 
+def probe_ei_page() -> dict[str, Any]:
+    data, meta = fetch(SOURCES["ei_page"])
+    text, encoding = decode_text(data)
+    hrefs = re.findall(r'''href=["']([^"']+)["']''', text, flags=re.IGNORECASE)
+    candidates: list[str] = []
+    for href in hrefs:
+        absolute = urllib.parse.urljoin(SOURCES["ei_page"], href)
+        low = absolute.lower()
+        if (
+            low.endswith(".csv")
+            or ".csv?" in low
+            or low.endswith(".xlsx")
+            or ".xlsx?" in low
+            or "narrow" in low
+            or "statistical-review" in low and ("download" in low or "__data/assets" in low)
+        ):
+            if absolute not in candidates:
+                candidates.append(absolute)
+
+    downloads: list[dict[str, Any]] = []
+    for url in candidates:
+        low = url.lower()
+        if not (".csv" in low or "narrow" in low):
+            continue
+        try:
+            candidate_data, candidate_meta = fetch(url)
+            candidate_meta["url"] = url
+            candidate_meta["looks_like_csv"] = b"," in candidate_data[:4096] and b"\n" in candidate_data[:4096]
+            downloads.append(candidate_meta)
+        except Exception as error:
+            downloads.append({
+                "url": url,
+                "probe_status": "ERROR",
+                "error_type": type(error).__name__,
+                "error": str(error),
+            })
+
+    return {
+        "page_download": meta,
+        "decoded_encoding": encoding,
+        "candidate_links": candidates,
+        "candidate_downloads": downloads,
+    }
+
+
 def main() -> None:
     results: dict[str, Any] = {
         "probe_date": "2026-09-22",
@@ -366,6 +413,7 @@ def main() -> None:
         ("undp", probe_undp),
         ("wpp", probe_wpp),
         ("gcb", probe_gcb),
+        ("energy_institute", probe_ei_page),
     ]:
         try:
             results["sources"][name] = function()
