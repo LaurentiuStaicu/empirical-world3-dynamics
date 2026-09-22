@@ -1,9 +1,10 @@
-"""Audit a conservative EROI feedback against BAU Hybrid 2026 v0.1.
+"""Audit a rejected EROI sensitivity experiment against BAU Hybrid 2026 v0.1.
 
-This script does not replace the production trajectory.  It tests whether an
-energy-quality feedback can be introduced without a discontinuity, without
-double counting the resource-capital burden already present in World3, and
-with interpretable scenario ordering.
+This script does not replace, modify, or qualify for promotion into the
+production trajectory. It keeps the rejected resource-fraction -> fossil-EROI
+hypothesis executable only for structural sensitivity and auditability. It
+tests continuity, double-counting controls, and scenario ordering; passing such
+checks is not evidence that the causal mechanism is empirically valid.
 """
 
 from __future__ import annotations
@@ -204,6 +205,18 @@ def main() -> None:
         "version": "0.11.0-development-audit",
         "status": "structural_sensitivity_not_empirically_calibrated",
         "production_decision": "not_accepted_into_central_projection",
+        "governance_disposition": "rejected_for_central_promotion",
+        "executability_is_not_promotion_evidence": True,
+        "reconsideration_requires": {
+            "E1_E10": (
+                "The repository currently has no defined/versioned E1-E10 framework; "
+                "one must be explicitly specified before reconsideration."
+            ),
+            "S1_S10": "all promotion gates must pass",
+            "additional": (
+                "new prospective evidence and explicit paradigm-level review"
+            ),
+        },
         "central_candidate_id": central_id,
         "resource_fraction_reference_2025": resource_reference,
         "observed_fossil_share_2025": EROI_SCENARIOS[
