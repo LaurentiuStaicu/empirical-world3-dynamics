@@ -50,15 +50,28 @@ Energy Institute 2026 uses the pinned `shanewhi/world-energy-data` transport. R-
 
 ### Processed snapshot only
 
-Three historical source snapshots cannot currently be reconstructed byte-for-byte:
+Four historical raw source inputs, grouped across three diagnostic components, cannot currently be reconstructed byte-for-byte:
 
 1. NASA GISTEMP snapshot dated 2026-08-31;
 2. FAOSTAT Production Crops/Livestock archive used by the regional cereal/climate panel;
-3. OWID/ERA5 regional temperature and precipitation downloads dated 2026-08-31.
+3. OWID/ERA5 regional temperature download dated 2026-08-31;
+4. OWID/ERA5 regional precipitation download dated 2026-08-31.
 
 Their upstream endpoints are living datasets. The historical raw hashes are preserved in provenance, but the exact historical raw files are not retained and current endpoints must not be treated as proof of those old bytes.
 
 For these cases the safe claim is deliberately narrower: **downstream diagnostic execution from the retained processed snapshot is reproducible; historical raw-to-processed reconstruction is not currently reproducible.**
+
+## Materialization verification
+
+A dedicated GitHub Actions probe on 2026-09-22 validated the policy operationally:
+
+- all six pinned remote sources downloaded successfully and matched their declared hashes;
+- a second offline pass revalidated the materialized cache without network access;
+- eGRID 2021, 2022 and 2023 retained audit/cohort artifacts were regenerated with zero Git diff;
+- the retained Aramendia fossil EROI CSV and provenance were regenerated with zero Git diff;
+- the retained Energy Institute 2026 processed CSV and provenance were regenerated with zero Git diff.
+
+The eGRID reconstruction requires `openpyxl`; the verification invokes `openpyxl==3.1.5` explicitly through `uv --with` so this diagnostic-only dependency does not expand the central science environment.
 
 ## Separation from central Joint reproduction
 
