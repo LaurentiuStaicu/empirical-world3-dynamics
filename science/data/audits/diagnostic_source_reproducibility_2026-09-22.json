@@ -211,5 +211,25 @@
       "Energy Institute global 2026 processed snapshot/provenance"
     ],
     "note": "All listed reconstruction checks completed with git diff = 0. GCP materialization was hash-verified; its primary-to-compact equivalence is already closed under R-FDC-6."
+  },
+  "materialization_verification": {
+    "date": "2026-09-22",
+    "github_actions_run_id": 35739416732,
+    "conclusion": "success",
+    "remote_sources_verified": 6,
+    "verified_sources": [
+      "egrid_2021",
+      "egrid_2022",
+      "egrid_2023_rev2",
+      "aramendia_fossil_eroi_2024",
+      "energy_institute_2026_transport",
+      "gcp_2025v15"
+    ],
+    "source_to_processed_reproductions": {
+      "egrid_2021_2023": "PASS; retained audit/cohort artifacts reproduced with zero git diff",
+      "aramendia_fossil_eroi_2024": "PASS; retained CSV and provenance reproduced with zero git diff",
+      "energy_institute_2026": "PASS; retained processed CSV and provenance reproduced with zero git diff"
+    },
+    "environment_note": "eGRID reconstruction uses explicit openpyxl==3.1.5 via uv --with; this dependency is diagnostic-only and is not added to the central science environment."
   }
 }
