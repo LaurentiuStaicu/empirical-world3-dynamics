@@ -6,7 +6,7 @@ All notable public scientific-core releases of Empirical World3 Dynamics (EWD) a
 
 ### Scientific traceability
 
-- added a machine-readable R-FDC-6 primary-source closure matrix with L1-L4 evidence levels and CI validation that prevents unsupported provenance PASS/CLOSED states;
+- closed R-FDC-6 primary-source provenance with a machine-readable L1-L4 evidence matrix and CI validation; FAOSTAT, UNDP HDI, UN WPP, Energy Institute and GCP now have L4/PASS lineage at their declared EWD roles, without changing retained scientific values;
 - reconciled the v0.1.0 software/repository identity across package metadata, lockfile and runtime metadata; preserved the Joint scientific-artifact version as 0.1, linked it explicitly to EWD release 0.1.0 via a separate field, and added a CI regression gate to prevent future semantic/version drift;
 - clarified World3-03 source provenance by recording both the original CRLF ingestion SHA-256 and the repository-normalized LF SHA-256, without changing equations or numerical parameters.
 
