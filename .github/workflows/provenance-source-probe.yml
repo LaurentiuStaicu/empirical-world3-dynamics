@@ -1,0 +1,39 @@
+name: Primary source byte probe
+
+on:
+  push:
+    branches:
+      - audit/primary-source-byte-probe
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  probe:
+    name: Probe authoritative primary files
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Download, hash and compare primary sources
+        run: |
+          python3 scripts/probe_primary_source_closure.py | tee primary-source-probe.log
+
+      - name: Upload probe report
+        uses: actions/upload-artifact@v4
+        with:
+          name: primary-source-probe
+          path: |
+            primary-source-probe.json
+            primary-source-probe.log
