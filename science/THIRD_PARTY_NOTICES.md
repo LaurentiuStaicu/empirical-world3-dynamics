@@ -13,8 +13,17 @@ The directory `vendor/world3_03` contains the official Vensim sample model
 
 https://www.vensim.com/documentation/Models/Sample/WRLD3-03/World3_03_Scenarios.mdl
 
-The file's SHA-256 digest at ingestion was
+The upstream file's SHA-256 digest at ingestion, with its original CRLF line
+endings, was
 `42b22c734a71ee03abc31d80872234fbcd93d3d4fb9a277f606c6d677846731d`.
-The source file is retained unchanged. At runtime, the adapter removes one
-Vensim help-link metadata directive from a temporary copy because PySD does
-not parse that directive; no equation or numerical parameter is altered.
+
+Git normalizes the retained repository copy to LF line endings. The SHA-256
+digest of that repository-normalized representation is
+`252e0c7eebff23d3c44344b6801cf3c40aec82d25b356ea8cce16a052249ac4d`,
+which is the digest verified by the scientific input manifest. Reconstructing
+CRLF line endings from the retained LF representation reproduces the ingestion
+digest above; the difference is line-ending normalization, not model content.
+
+At runtime, the adapter removes one Vensim help-link metadata directive from a
+temporary copy because PySD does not parse that directive; no equation or
+numerical parameter is altered.
