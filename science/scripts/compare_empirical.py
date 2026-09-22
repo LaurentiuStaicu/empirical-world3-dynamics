@@ -1,4 +1,4 @@
-"""Compare observed series with World3 without fitting parameters."""
+"""Legacy/reference Pyworld3 empirical comparison without fitting parameters."""
 
 from pathlib import Path
 
@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-from world3_empirical import run_scenario
+from world3_empirical import run_legacy_scenario
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -22,7 +22,7 @@ def normalize(series: pd.Series, years: pd.Series, base_year: int = 2010) -> pd.
 def main() -> None:
     empirical = pd.read_csv(DATA)
     empirical = empirical.loc[empirical["year"].between(1960, 2024)].copy()
-    model = run_scenario("world3_standard", year_min=1900, year_max=2024).annual().copy()
+    model = run_legacy_scenario("world3_standard", year_min=1900, year_max=2024).annual().copy()
     model = model.loc[model["year"].between(1960, 2024)].copy()
 
     comparisons = [
@@ -41,7 +41,7 @@ def main() -> None:
         observed_index = normalize(observed[observed_name], observed["year"], base_year)
         modeled_index = normalize(modeled[model_name], modeled["year"], base_year)
         axis.plot(observed["year"], observed_index, label="observed proxy", linewidth=2)
-        axis.plot(modeled["year"], modeled_index, label="World3 standard", linewidth=2)
+        axis.plot(modeled["year"], modeled_index, label="Legacy Pyworld3 standard", linewidth=2)
         axis.axvspan(2010, 2018, alpha=0.08, color="green", label="calibration window")
         axis.axvspan(2019, 2024, alpha=0.08, color="orange", label="test window")
         axis.set_title(label)
@@ -61,7 +61,7 @@ def main() -> None:
                     "difference": float(predicted_value - actual_value),
                 }
             )
-    fig.suptitle("Uncalibrated empirical comparison: World3 standard", fontsize=15)
+    fig.suptitle("Legacy Pyworld3 uncalibrated empirical comparison", fontsize=15)
     fig.savefig(OUTPUT / "uncalibrated_empirical_comparison.png", dpi=180)
     pd.DataFrame(records).to_csv(OUTPUT / "uncalibrated_holdout_differences.csv", index=False)
     print(f"Saved empirical comparison to {OUTPUT}")
