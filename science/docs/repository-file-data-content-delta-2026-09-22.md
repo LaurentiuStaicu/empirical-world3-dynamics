@@ -79,8 +79,15 @@ The recovery sequence continued after this historical R-FDC-1 delta:
 
 These later repairs are traceability/routing changes. They do not change observation values, model equations, candidate design, fitted parameters, bridge weights, medoid selection or the scientific interpretation of the retained central trajectory.
 
-## Next gate after R-FDC-5
+## Current gate after R-FDC-5
 
-**R-FDC-6 — primary-source provenance closure**
+**R-FDC-6 — primary-source provenance closure — IN PROGRESS**
 
-Priority remains the unresolved primary-source boundary identified by the original audit, especially the central UNDP HDI adapter and the UN WPP benchmark transport. This gate should strengthen source freezing/hash-pinning and provenance evidence without changing the current observation definitions or central-model logic.
+A machine-readable closure matrix and human-readable audit now separate source authority, semantic reconciliation, exact primary-artifact identity and complete primary-file lineage:
+
+- `science/data/provenance/primary_source_audit_2026-09-22.json`
+- `science/docs/primary-source-provenance-audit-2026-09-22.md`
+
+FAOSTAT is L4/PASS. UNDP HDI, UN WPP, Energy Institute and Global Carbon Project remain WARNING because their complete primary-file-to-retained-input lineage is not yet recorded.
+
+The highest-priority remaining closure is the central UNDP HDI adapter, followed by the active UN WPP benchmark. No observation definition or central-model logic should change as part of this gate.
