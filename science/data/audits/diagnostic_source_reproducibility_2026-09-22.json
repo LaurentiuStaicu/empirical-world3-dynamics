@@ -1,0 +1,187 @@
+{
+  "schema_version": "1.0",
+  "audit_date": "2026-09-22",
+  "gate": "R-FDC-7",
+  "gate_name": "diagnostic raw-data reproducibility policy",
+  "gate_status": "CLOSED_POLICY",
+  "meaning_of_gate_status": "Every audited non-central diagnostic source has an explicit, validated materialization policy. CLOSED_POLICY does not mean every historical raw source can still be reconstructed.",
+  "policy_modes": {
+    "retained_raw": "Exact raw artifact is retained in the repository scientific-input inventory.",
+    "pinned_remote": "Exact raw artifact is not committed, but an immutable/versioned remote identity plus checksum and deterministic fetch route are recorded.",
+    "verified_transport": "A pinned transport copy is used; primary-source equivalence for the exact EWD extraction boundary is independently recorded.",
+    "processed_snapshot_only": "The exact historical raw bytes are not currently rematerializable. The retained processed snapshot can reproduce downstream diagnostic execution, but source-to-processed reconstruction remains unavailable."
+  },
+  "claims": {
+    "checkout_diagnostic_execution": "PASS_WITH_RETAINED_PROCESSED_INPUTS",
+    "source_to_processed_reconstruction": "PARTIAL",
+    "rule": "Documentation and UI must not call a processed_snapshot_only diagnostic source-to-processed or checkout-only reproducible."
+  },
+  "sources": [
+    {
+      "id": "nasa_gistemp_2026_08_31",
+      "diagnostic_role": "global climate-to-food screening",
+      "mode": "processed_snapshot_only",
+      "policy_status": "COMPLIANT",
+      "processed_artifact": "science/data/processed/nasa_gistemp_global_2026.csv",
+      "provenance": "science/data/processed/nasa_gistemp_global_2026.provenance.json",
+      "historical_raw_path": "science/data/raw/climate/GISTEMP_v4_2026-08-31.csv",
+      "historical_raw_sha256": "6cfa44e7bbacd9b12cb10bdd64b3182c2735fa3f3a95688e1f7bc8e5dfcece93",
+      "upstream_url": "https://data.giss.nasa.gov/gistemp/tabledata_v4/GLB.Ts+dSST.csv",
+      "limitation": "The raw 2026-08-31 file is not retained in Git and the upstream GISTEMP URL is a living monthly dataset that incorporates late reports and corrections. The current URL must not be assumed to reproduce the historical hash.",
+      "safe_claim": "Downstream diagnostic execution is reproducible from the retained processed snapshot; source-to-processed reconstruction of the 2026-08-31 raw snapshot is not currently reproducible."
+    },
+    {
+      "id": "regional_cereal_faostat_2025",
+      "diagnostic_role": "regional agricultural-stress panel",
+      "mode": "processed_snapshot_only",
+      "policy_status": "COMPLIANT",
+      "processed_artifact": "science/data/processed/regional_cereal_climate_panel_2026.csv",
+      "provenance": "science/data/processed/regional_cereal_climate_panel_2026.provenance.json",
+      "historical_raw_path": "science/data/raw/faostat/Production_Crops_Livestock_E_All_Data_Normalized_2025.zip",
+      "historical_raw_sha256": "c5835418c18f9322e7decbd6800f93a216eaae3cdfa31acb08f0518c0c6d6853",
+      "upstream_url": "https://bulks-faostat.fao.org/production/Production_Crops_Livestock_E_All_Data_(Normalized).zip",
+      "limitation": "The exact historical archive is not retained. FAOSTAT production data are revised on an annual release cycle, so the generic bulk URL is not treated as an immutable identifier for the 2025-vintage bytes.",
+      "safe_claim": "The retained regional panel is reproducible for downstream diagnostics; the exact historical FAOSTAT raw archive is not currently guaranteed rematerializable."
+    },
+    {
+      "id": "regional_temperature_owid_era5_2026_08_31",
+      "diagnostic_role": "regional agricultural-stress panel",
+      "mode": "processed_snapshot_only",
+      "policy_status": "COMPLIANT",
+      "processed_artifact": "science/data/processed/regional_cereal_climate_panel_2026.csv",
+      "provenance": "science/data/processed/regional_cereal_climate_panel_2026.provenance.json",
+      "historical_raw_path": "science/data/raw/regional_climate/annual-temperature-anomalies_2026-08-31.csv",
+      "historical_raw_sha256": "b49073e5e3e174a9474999af366a3ec36e8479fae6fc764e2a90a0875e2d5a33",
+      "upstream_url": "https://ourworldindata.org/grapher/annual-temperature-anomalies.csv",
+      "limitation": "The raw file is absent from Git. OWID's Grapher endpoint is a living dataset and now reports a later 2026 update, so the current URL is not an immutable reconstruction of the 2026-08-31 bytes.",
+      "safe_claim": "The retained processed panel supports diagnostic replay; exact source-to-panel reconstruction of this historical OWID snapshot remains unavailable."
+    },
+    {
+      "id": "regional_precipitation_owid_era5_2026_08_31",
+      "diagnostic_role": "regional agricultural-stress panel",
+      "mode": "processed_snapshot_only",
+      "policy_status": "COMPLIANT",
+      "processed_artifact": "science/data/processed/regional_cereal_climate_panel_2026.csv",
+      "provenance": "science/data/processed/regional_cereal_climate_panel_2026.provenance.json",
+      "historical_raw_path": "science/data/raw/regional_climate/global-precipitation-anomaly_2026-08-31.csv",
+      "historical_raw_sha256": "18f0b94aea8aef4f8e55cc2a04596ac3020c6020af80954fc525d9096f60fa54",
+      "upstream_url": "https://ourworldindata.org/grapher/global-precipitation-anomaly.csv",
+      "limitation": "The raw file is absent from Git and the OWID Grapher endpoint is mutable. The current endpoint is not treated as proof of the 2026-08-31 byte snapshot.",
+      "safe_claim": "The retained processed panel supports diagnostic replay; exact historical source-to-panel reconstruction remains unavailable."
+    },
+    {
+      "id": "egrid_2021",
+      "diagnostic_role": "release-lagged energy/accounting diagnostic",
+      "mode": "pinned_remote",
+      "policy_status": "COMPLIANT",
+      "url": "https://www.epa.gov/system/files/documents/2023-01/eGRID2021_data.xlsx",
+      "sha256": "0bab3376509c79168ba19dff111e8a5ca7724043229af47af5cb5b6f71465644",
+      "size_bytes": 14097047,
+      "source_record": "science/data/energy_audit/egrid2021-source.json",
+      "fetch_target": ".diagnostic_sources/egrid/eGRID2021_data.xlsx",
+      "verification_command": "python3 scripts/audit_egrid.py .diagnostic_sources/egrid/eGRID2021_data.xlsx science/data/energy_audit 2021"
+    },
+    {
+      "id": "egrid_2022",
+      "diagnostic_role": "release-lagged energy/accounting diagnostic",
+      "mode": "pinned_remote",
+      "policy_status": "COMPLIANT",
+      "url": "https://www.epa.gov/system/files/documents/2024-01/egrid2022_data.xlsx",
+      "sha256": "c73fdc561aa402d0f6ed3cc35e5d961bee6af6e003c9c035b40f757f8480b76b",
+      "size_bytes": 15602850,
+      "source_record": "science/data/energy_audit/egrid2022-source.json",
+      "fetch_target": ".diagnostic_sources/egrid/egrid2022_data.xlsx",
+      "verification_command": "python3 scripts/audit_egrid.py .diagnostic_sources/egrid/egrid2022_data.xlsx science/data/energy_audit 2022"
+    },
+    {
+      "id": "egrid_2023_rev2",
+      "diagnostic_role": "release-lagged energy/accounting diagnostic",
+      "mode": "pinned_remote",
+      "policy_status": "COMPLIANT",
+      "url": "https://www.epa.gov/system/files/documents/2025-06/egrid2023_data_rev2.xlsx",
+      "sha256": "895cd81dd8662406189ad8adf5a2578dcb362cdb5cff7cca81b10ee6bd2447c6",
+      "size_bytes": 21213301,
+      "source_record": "science/data/energy_audit/egrid-source.json",
+      "fetch_target": ".diagnostic_sources/egrid/egrid2023_data_rev2.xlsx",
+      "verification_command": "python3 scripts/audit_egrid.py .diagnostic_sources/egrid/egrid2023_data_rev2.xlsx science/data/energy_audit 2023"
+    },
+    {
+      "id": "aramendia_fossil_eroi_2024",
+      "diagnostic_role": "EROI/resource diagnostic",
+      "mode": "pinned_remote",
+      "policy_status": "COMPLIANT",
+      "authority": "Figshare data record accompanying Aramendia et al. 2024",
+      "dataset_doi": "10.6084/m9.figshare.25311358",
+      "file_id": 46240243,
+      "filename": "global_erois.csv",
+      "url": "https://figshare.com/ndownloader/files/46240243",
+      "md5": "c3f330ee874e10aca547d73d76cd3cd2",
+      "fetch_target": ".diagnostic_sources/eroi/global_erois.csv",
+      "verification_command": "uv run --locked --project science python science/scripts/ingest_aramendia_eroi.py .diagnostic_sources/eroi/global_erois.csv"
+    },
+    {
+      "id": "energy_institute_2026",
+      "diagnostic_role": "energy diagnostic/candidate evidence",
+      "mode": "verified_transport",
+      "policy_status": "COMPLIANT",
+      "transport_url": "https://raw.githubusercontent.com/shanewhi/world-energy-data/9fc01fc0ae5aea3955968f920e5cd1394fe5ad34/Statistical%20Review%20of%20World%20Energy%20Narrow%20format.csv",
+      "transport_sha256": "c19b4922cb08316b45d7024233e8cd9d35e14429ee8cf65ab767e647cefc1f95",
+      "transport_size_bytes": 21056006,
+      "fetch_target": ".diagnostic_sources/energy/Statistical Review of World Energy Narrow format.csv",
+      "primary_equivalence_record": "science/data/provenance/primary_source_audit_2026-09-22.json",
+      "equivalence_scope": "All 427 Total World observations used by EWD match the archived official EI 2026 CSV exactly; whole-file byte identity is explicitly not claimed.",
+      "verification_command": "uv run --locked --project science python science/scripts/ingest_energy_institute_2026.py '.diagnostic_sources/energy/Statistical Review of World Energy Narrow format.csv' --mirror-commit 9fc01fc0ae5aea3955968f920e5cd1394fe5ad34"
+    },
+    {
+      "id": "gcp_2025v15_direct_emissions",
+      "diagnostic_role": "direct-emissions diagnostic",
+      "mode": "pinned_remote",
+      "policy_status": "COMPLIANT",
+      "url": "https://zenodo.org/records/17417124/files/GCB2025v15_MtCO2_flat.csv?download=1",
+      "sha256": "20650c19b394d91b6b31cddff2fbc9508bcdbbed7c3f93660336f2f655f367ff",
+      "size_bytes": 3147221,
+      "fetch_target": ".diagnostic_sources/gcb/GCB2025v15_MtCO2_flat.csv",
+      "primary_equivalence_record": "science/data/provenance/primary_source_audit_2026-09-22.json",
+      "safe_claim": "Primary artifact and complete 1990-2024 six-category equivalence are recorded. The retained compact experiment remains the operational diagnostic snapshot."
+    },
+    {
+      "id": "technology_minerals_2026",
+      "diagnostic_role": "technology-mineral risk registry",
+      "mode": "retained_raw",
+      "policy_status": "COMPLIANT",
+      "retained_paths": [
+        "science/data/raw/minerals/2026-09-08/MCS2026_Commodities_Data.normalized-lf.csv.gz",
+        "science/data/raw/minerals/2026-09-08/owid_global_mine_production.csv",
+        "science/data/raw/minerals/2026-09-08/owid_global_mine_production.metadata.json"
+      ],
+      "safe_claim": "Source-to-processed reconstruction is checkout-reproducible from retained raw snapshots."
+    },
+    {
+      "id": "unido_iip_2026",
+      "diagnostic_role": "industrial-output proxy diagnostic",
+      "mode": "retained_raw",
+      "policy_status": "COMPLIANT",
+      "retained_paths": [
+        "science/data/raw/unido/2026-09-08/iip_annual_data.csv",
+        "science/data/raw/unido/2026-09-08/iip_country.csv",
+        "science/data/raw/unido/2026-09-08/iip_metadata.json",
+        "science/data/raw/unido/2026-09-08/iip_metadata_country.csv",
+        "science/data/raw/unido/2026-09-08/national_accounts_2020_data.csv",
+        "science/data/raw/unido/2026-09-08/national_accounts_metadata.json"
+      ],
+      "safe_claim": "Source-to-processed reconstruction is checkout-reproducible from retained raw snapshots."
+    },
+    {
+      "id": "unido_national_accounts_2026",
+      "diagnostic_role": "manufacturing-value-added proxy diagnostic",
+      "mode": "retained_raw",
+      "policy_status": "COMPLIANT",
+      "retained_paths": [
+        "science/data/raw/unido/2026-09-07/national_accounts_metadata.json",
+        "science/data/raw/unido/2026-09-07/national_accounts_world.json"
+      ],
+      "safe_claim": "Source-to-processed reconstruction is checkout-reproducible from retained raw snapshots."
+    }
+  ],
+  "next_action": "Use the separate diagnostic fetch contract for pinned sources; preserve processed_snapshot_only warnings until an exact archived historical raw snapshot is recovered. Do not burden central Joint reproduction with diagnostic raw downloads."
+}
