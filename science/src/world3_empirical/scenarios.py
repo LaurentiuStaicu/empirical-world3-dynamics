@@ -1,4 +1,4 @@
-"""Scenario definitions with explicit evidence labels."""
+"""Shared project paths plus legacy/reference Pyworld3 scenario definitions."""
 
 from __future__ import annotations
 
