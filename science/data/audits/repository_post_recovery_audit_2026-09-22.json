@@ -1,0 +1,639 @@
+{
+  "schema_version": "1.0",
+  "audit_date": "2026-09-22",
+  "gate": "R-FDC-9",
+  "gate_name": "repository-wide post-recovery audit",
+  "gate_status": "CLOSED_AUDIT",
+  "historical_baseline": {
+    "branch": "main",
+    "commit": "795a6b8e42e2a19497f686a89e7c3a6056e6930c",
+    "total_files": 160,
+    "counts": {
+      "PASS": 97,
+      "NOT_SCIENTIFICALLY_MATERIAL": 16,
+      "WARNING": 42,
+      "BLOCKER": 5
+    }
+  },
+  "post_recovery_scope": {
+    "expected_tracked_files_after_this_gate": 188,
+    "coverage_rule": "Every tracked file must be covered either by the historical inventory or by new_files_since_historical_baseline.",
+    "scientific_change": false,
+    "r_fdc_8_merge_commit": "eddeabbbb4dcdceed1ff02102ea1040e24ed7fa0",
+    "base_for_final_r_fdc_9_review": "main after PR #29"
+  },
+  "historical_nonpass_resolution": [
+    {
+      "path": "data/scenarios/bau_hybrid_2026_manifest.json",
+      "previous_status": "WARNING",
+      "current_disposition": "RESOLVED_PASS",
+      "gate": "R-FDC-5",
+      "rationale": "The historical warning condition is now explicitly corrected or machine-governed at its declared role."
+    },
+    {
+      "path": "science/THIRD_PARTY_NOTICES.md",
+      "previous_status": "WARNING",
+      "current_disposition": "RESOLVED_PASS",
+      "gate": "R-FDC-5",
+      "rationale": "The historical warning condition is now explicitly corrected or machine-governed at its declared role."
+    },
+    {
+      "path": "science/configs/scenarios.json",
+      "previous_status": "WARNING",
+      "current_disposition": "RESOLVED_PASS",
+      "gate": "R-FDC-4",
+      "rationale": "The historical warning condition is now explicitly corrected or machine-governed at its declared role."
+    },
+    {
+      "path": "science/data/energy_audit/egrid-source.json",
+      "previous_status": "WARNING",
+      "current_disposition": "RESOLVED_PASS",
+      "gate": "R-FDC-7",
+      "rationale": "The historical warning condition is now explicitly corrected or machine-governed at its declared role."
+    },
+    {
+      "path": "science/data/energy_audit/egrid2021-source.json",
+      "previous_status": "WARNING",
+      "current_disposition": "RESOLVED_PASS",
+      "gate": "R-FDC-7",
+      "rationale": "The historical warning condition is now explicitly corrected or machine-governed at its declared role."
+    },
+    {
+      "path": "science/data/energy_audit/egrid2022-source.json",
+      "previous_status": "WARNING",
+      "current_disposition": "RESOLVED_PASS",
+      "gate": "R-FDC-7",
+      "rationale": "The historical warning condition is now explicitly corrected or machine-governed at its declared role."
+    },
+    {
+      "path": "science/data/experiments/gcb_direct_fossil_1990_2024.provenance.json",
+      "previous_status": "WARNING",
+      "current_disposition": "RESOLVED_PASS",
+      "gate": "R-FDC-6/R-FDC-7",
+      "rationale": "The historical warning condition is now explicitly corrected or machine-governed at its declared role."
+    },
+    {
+      "path": "science/data/forecasts/eia-steo-2026-09-11.json",
+      "previous_status": "WARNING",
+      "current_disposition": "REMAINING_WARNING",
+      "gate": null,
+      "rationale": "Manual transcription; original release bytes were not archived. Diagnostic/prospective evidence only."
+    },
+    {
+      "path": "science/data/input_manifest.json",
+      "previous_status": "WARNING",
+      "current_disposition": "RESOLVED_PASS",
+      "gate": "R-FDC-3",
+      "rationale": "The historical warning condition is now explicitly corrected or machine-governed at its declared role."
+    },
+    {
+      "path": "science/data/processed/empirical_model_inputs_2026-08-28.csv",
+      "previous_status": "WARNING",
+      "current_disposition": "REMAINING_WARNING",
+      "gate": null,
+      "rationale": "Contains the excluded World Bank food proxy; central food observation uses frozen FAOSTAT instead."
+    },
+    {
+      "path": "science/data/processed/energy_institute_global_2026.provenance.json",
+      "previous_status": "WARNING",
+      "current_disposition": "RESOLVED_PASS",
+      "gate": "R-FDC-6/R-FDC-7",
+      "rationale": "The historical warning condition is now explicitly corrected or machine-governed at its declared role."
+    },
+    {
+      "path": "science/data/processed/nasa_gistemp_global_2026.provenance.json",
+      "previous_status": "WARNING",
+      "current_disposition": "GOVERNED_LIMITATION",
+      "gate": "R-FDC-7: processed_snapshot_only",
+      "rationale": "The underlying limitation remains real, but scope and permitted reproducibility/scientific claims are explicit and guarded."
+    },
+    {
+      "path": "science/data/processed/regional_cereal_climate_panel_2026.provenance.json",
+      "previous_status": "WARNING",
+      "current_disposition": "GOVERNED_LIMITATION",
+      "gate": "R-FDC-7: processed_snapshot_only",
+      "rationale": "The underlying limitation remains real, but scope and permitted reproducibility/scientific claims are explicit and guarded."
+    },
+    {
+      "path": "science/data/processed/technology_mineral_production_2026-09-08.csv",
+      "previous_status": "WARNING",
+      "current_disposition": "REMAINING_WARNING",
+      "gate": null,
+      "rationale": "1900-2023 history relies on secondary OWID harmonization; 2024-2025 use primary USGS."
+    },
+    {
+      "path": "science/data/processed/unido_national_accounts_world_2026-09-07.csv",
+      "previous_status": "WARNING",
+      "current_disposition": "REMAINING_WARNING",
+      "gate": null,
+      "rationale": "UNIDO portal metadata conflict between constant-2020-USD label and base_year=2015 remains unresolved."
+    },
+    {
+      "path": "science/data/processed/world_bank_global_snapshot_2026-08-28.csv",
+      "previous_status": "WARNING",
+      "current_disposition": "REMAINING_WARNING",
+      "gate": null,
+      "rationale": "AG.PRD.FOOD.XD anomaly remains in source-faithful snapshot and is excluded from central food calibration."
+    },
+    {
+      "path": "science/data/raw/bau2_e2026/2026-08-28/un_wpp2024_owid_adapter.csv",
+      "previous_status": "WARNING",
+      "current_disposition": "RESOLVED_PASS",
+      "gate": "R-FDC-6",
+      "rationale": "The historical warning condition is now explicitly corrected or machine-governed at its declared role."
+    },
+    {
+      "path": "science/data/raw/bau2_e2026/2026-08-28/undp_hdi_owid_adapter.csv",
+      "previous_status": "WARNING",
+      "current_disposition": "RESOLVED_PASS",
+      "gate": "R-FDC-6",
+      "rationale": "The historical warning condition is now explicitly corrected or machine-governed at its declared role."
+    },
+    {
+      "path": "science/data/raw/minerals/2026-09-08/owid_global_mine_production.csv",
+      "previous_status": "WARNING",
+      "current_disposition": "REMAINING_WARNING",
+      "gate": null,
+      "rationale": "Historical mineral series remains a secondary OWID harmonization of USGS/BGS."
+    },
+    {
+      "path": "science/data/registry.csv",
+      "previous_status": "WARNING",
+      "current_disposition": "RESOLVED_PASS",
+      "gate": "R-FDC-2",
+      "rationale": "The historical warning condition is now explicitly corrected or machine-governed at its declared role."
+    },
+    {
+      "path": "science/pyproject.toml",
+      "previous_status": "WARNING",
+      "current_disposition": "RESOLVED_PASS",
+      "gate": "R-FDC-5",
+      "rationale": "The historical warning condition is now explicitly corrected or machine-governed at its declared role."
+    },
+    {
+      "path": "science/scripts/analyze_energy_coupling.py",
+      "previous_status": "WARNING",
+      "current_disposition": "RESOLVED_PASS",
+      "gate": "R-FDC-8",
+      "rationale": "The historical warning condition is now explicitly corrected or machine-governed at its declared role."
+    },
+    {
+      "path": "science/scripts/analyze_world3_03.py",
+      "previous_status": "WARNING",
+      "current_disposition": "GOVERNED_LIMITATION",
+      "gate": "excluded_data_quality proxy remains explicitly labelled",
+      "rationale": "The underlying limitation remains real, but scope and permitted reproducibility/scientific claims are explicit and guarded."
+    },
+    {
+      "path": "science/scripts/compare_empirical.py",
+      "previous_status": "WARNING",
+      "current_disposition": "RESOLVED_PASS",
+      "gate": "R-FDC-4",
+      "rationale": "The historical warning condition is now explicitly corrected or machine-governed at its declared role."
+    },
+    {
+      "path": "science/scripts/evaluate_climate_food_link.py",
+      "previous_status": "BLOCKER",
+      "current_disposition": "RESOLVED_PASS",
+      "gate": "R-FDC-1",
+      "rationale": "Recovered diagnostic execution is regression-tested and central retained references remain unchanged."
+    },
+    {
+      "path": "science/scripts/evaluate_eroi_resource_link.py",
+      "previous_status": "WARNING",
+      "current_disposition": "RESOLVED_PASS",
+      "gate": "R-FDC-8/R-FDC-9",
+      "rationale": "The historical warning condition is now explicitly corrected or machine-governed at its declared role."
+    },
+    {
+      "path": "science/scripts/evaluate_regional_agricultural_stress.py",
+      "previous_status": "BLOCKER",
+      "current_disposition": "RESOLVED_PASS",
+      "gate": "R-FDC-1",
+      "rationale": "Recovered diagnostic execution is regression-tested and central retained references remain unchanged."
+    },
+    {
+      "path": "science/scripts/evaluate_technology_minerals.py",
+      "previous_status": "BLOCKER",
+      "current_disposition": "RESOLVED_PASS",
+      "gate": "R-FDC-1",
+      "rationale": "Recovered diagnostic execution is regression-tested and central retained references remain unchanged."
+    },
+    {
+      "path": "science/scripts/evaluate_unido_iip_volume.py",
+      "previous_status": "BLOCKER",
+      "current_disposition": "RESOLVED_PASS",
+      "gate": "R-FDC-1",
+      "rationale": "Recovered diagnostic execution is regression-tested and central retained references remain unchanged."
+    },
+    {
+      "path": "science/scripts/evaluate_unido_industry_proxy.py",
+      "previous_status": "BLOCKER",
+      "current_disposition": "RESOLVED_PASS",
+      "gate": "R-FDC-1",
+      "rationale": "Recovered diagnostic execution is regression-tested and central retained references remain unchanged."
+    },
+    {
+      "path": "science/scripts/ingest_gistemp.py",
+      "previous_status": "WARNING",
+      "current_disposition": "GOVERNED_LIMITATION",
+      "gate": "R-FDC-7: processed_snapshot_only",
+      "rationale": "The underlying limitation remains real, but scope and permitted reproducibility/scientific claims are explicit and guarded."
+    },
+    {
+      "path": "science/scripts/ingest_regional_agricultural_climate.py",
+      "previous_status": "WARNING",
+      "current_disposition": "GOVERNED_LIMITATION",
+      "gate": "R-FDC-7: processed_snapshot_only",
+      "rationale": "The underlying limitation remains real, but scope and permitted reproducibility/scientific claims are explicit and guarded."
+    },
+    {
+      "path": "science/scripts/ingest_world_bank.py",
+      "previous_status": "WARNING",
+      "current_disposition": "GOVERNED_LIMITATION",
+      "gate": "anomalous WDI food proxy retained only as excluded/non-central derived evidence",
+      "rationale": "The underlying limitation remains real, but scope and permitted reproducibility/scientific claims are explicit and guarded."
+    },
+    {
+      "path": "science/scripts/run_baselines.py",
+      "previous_status": "WARNING",
+      "current_disposition": "RESOLVED_PASS",
+      "gate": "R-FDC-4",
+      "rationale": "The historical warning condition is now explicitly corrected or machine-governed at its declared role."
+    },
+    {
+      "path": "science/src/world3_empirical/__init__.py",
+      "previous_status": "WARNING",
+      "current_disposition": "RESOLVED_PASS",
+      "gate": "R-FDC-4",
+      "rationale": "The historical warning condition is now explicitly corrected or machine-governed at its declared role."
+    },
+    {
+      "path": "science/src/world3_empirical/__main__.py",
+      "previous_status": "WARNING",
+      "current_disposition": "RESOLVED_PASS",
+      "gate": "R-FDC-4",
+      "rationale": "The historical warning condition is now explicitly corrected or machine-governed at its declared role."
+    },
+    {
+      "path": "science/src/world3_empirical/calibration.py",
+      "previous_status": "WARNING",
+      "current_disposition": "RESOLVED_PASS",
+      "gate": "R-FDC-4",
+      "rationale": "The historical warning condition is now explicitly corrected or machine-governed at its declared role."
+    },
+    {
+      "path": "science/src/world3_empirical/cli.py",
+      "previous_status": "WARNING",
+      "current_disposition": "RESOLVED_PASS",
+      "gate": "R-FDC-4",
+      "rationale": "The historical warning condition is now explicitly corrected or machine-governed at its declared role."
+    },
+    {
+      "path": "science/src/world3_empirical/energy_coupling.py",
+      "previous_status": "WARNING",
+      "current_disposition": "RESOLVED_PASS",
+      "gate": "R-FDC-8",
+      "rationale": "The historical warning condition is now explicitly corrected or machine-governed at its declared role."
+    },
+    {
+      "path": "science/src/world3_empirical/model.py",
+      "previous_status": "WARNING",
+      "current_disposition": "RESOLVED_PASS",
+      "gate": "R-FDC-4",
+      "rationale": "The historical warning condition is now explicitly corrected or machine-governed at its declared role."
+    },
+    {
+      "path": "science/src/world3_empirical/registry.py",
+      "previous_status": "WARNING",
+      "current_disposition": "RESOLVED_PASS",
+      "gate": "R-FDC-2",
+      "rationale": "The historical warning condition is now explicitly corrected or machine-governed at its declared role."
+    },
+    {
+      "path": "science/src/world3_empirical/scenarios.py",
+      "previous_status": "WARNING",
+      "current_disposition": "RESOLVED_PASS",
+      "gate": "R-FDC-4",
+      "rationale": "The historical warning condition is now explicitly corrected or machine-governed at its declared role."
+    },
+    {
+      "path": "science/uv.lock",
+      "previous_status": "WARNING",
+      "current_disposition": "RESOLVED_PASS",
+      "gate": "R-FDC-5",
+      "rationale": "The historical warning condition is now explicitly corrected or machine-governed at its declared role."
+    },
+    {
+      "path": "scripts/audit_egrid.py",
+      "previous_status": "WARNING",
+      "current_disposition": "RESOLVED_PASS",
+      "gate": "R-FDC-7",
+      "rationale": "The historical warning condition is now explicitly corrected or machine-governed at its declared role."
+    },
+    {
+      "path": "scripts/audit_egrid_boundaries.py",
+      "previous_status": "WARNING",
+      "current_disposition": "RESOLVED_PASS",
+      "gate": "R-FDC-7",
+      "rationale": "The historical warning condition is now explicitly corrected or machine-governed at its declared role."
+    },
+    {
+      "path": "scripts/generate_science_input_manifest.py",
+      "previous_status": "WARNING",
+      "current_disposition": "RESOLVED_PASS",
+      "gate": "R-FDC-3",
+      "rationale": "The historical warning condition is now explicitly corrected or machine-governed at its declared role."
+    },
+    {
+      "path": "scripts/promotion_gate.py",
+      "previous_status": "WARNING",
+      "current_disposition": "RESOLVED_PASS",
+      "gate": "R-FDC-9",
+      "rationale": "The historical warning condition is now explicitly corrected or machine-governed at its declared role."
+    }
+  ],
+  "resolution_counts": {
+    "RESOLVED_PASS": 35,
+    "REMAINING_WARNING": 6,
+    "GOVERNED_LIMITATION": 6
+  },
+  "remaining_warnings": [
+    {
+      "path": "science/data/forecasts/eia-steo-2026-09-11.json",
+      "status": "WARNING",
+      "central_model_impact": false,
+      "rationale": "Manual transcription; original release bytes were not archived. Diagnostic/prospective evidence only."
+    },
+    {
+      "path": "science/data/processed/empirical_model_inputs_2026-08-28.csv",
+      "status": "WARNING",
+      "central_model_impact": false,
+      "rationale": "Contains the excluded World Bank food proxy; central food observation uses frozen FAOSTAT instead."
+    },
+    {
+      "path": "science/data/processed/technology_mineral_production_2026-09-08.csv",
+      "status": "WARNING",
+      "central_model_impact": false,
+      "rationale": "1900-2023 history relies on secondary OWID harmonization; 2024-2025 use primary USGS."
+    },
+    {
+      "path": "science/data/processed/unido_national_accounts_world_2026-09-07.csv",
+      "status": "WARNING",
+      "central_model_impact": false,
+      "rationale": "UNIDO portal metadata conflict between constant-2020-USD label and base_year=2015 remains unresolved."
+    },
+    {
+      "path": "science/data/processed/world_bank_global_snapshot_2026-08-28.csv",
+      "status": "WARNING",
+      "central_model_impact": false,
+      "rationale": "AG.PRD.FOOD.XD anomaly remains in source-faithful snapshot and is excluded from central food calibration."
+    },
+    {
+      "path": "science/data/raw/minerals/2026-09-08/owid_global_mine_production.csv",
+      "status": "WARNING",
+      "central_model_impact": false,
+      "rationale": "Historical mineral series remains a secondary OWID harmonization of USGS/BGS."
+    }
+  ],
+  "governed_limitations": [
+    {
+      "path": "science/data/processed/nasa_gistemp_global_2026.provenance.json",
+      "status": "GOVERNED_LIMITATION",
+      "central_model_impact": false,
+      "governance": "R-FDC-7: processed_snapshot_only"
+    },
+    {
+      "path": "science/data/processed/regional_cereal_climate_panel_2026.provenance.json",
+      "status": "GOVERNED_LIMITATION",
+      "central_model_impact": false,
+      "governance": "R-FDC-7: processed_snapshot_only"
+    },
+    {
+      "path": "science/scripts/analyze_world3_03.py",
+      "status": "GOVERNED_LIMITATION",
+      "central_model_impact": false,
+      "governance": "excluded_data_quality proxy remains explicitly labelled"
+    },
+    {
+      "path": "science/scripts/ingest_gistemp.py",
+      "status": "GOVERNED_LIMITATION",
+      "central_model_impact": false,
+      "governance": "R-FDC-7: processed_snapshot_only"
+    },
+    {
+      "path": "science/scripts/ingest_regional_agricultural_climate.py",
+      "status": "GOVERNED_LIMITATION",
+      "central_model_impact": false,
+      "governance": "R-FDC-7: processed_snapshot_only"
+    },
+    {
+      "path": "science/scripts/ingest_world_bank.py",
+      "status": "GOVERNED_LIMITATION",
+      "central_model_impact": false,
+      "governance": "anomalous WDI food proxy retained only as excluded/non-central derived evidence"
+    }
+  ],
+  "new_files_since_historical_baseline": [
+    {
+      "path": ".github/workflows/diagnostic-execution.yml",
+      "status": "PASS",
+      "role": "repository_governance_or_ci"
+    },
+    {
+      "path": ".github/workflows/diagnostic-source-materialization.yml",
+      "status": "PASS",
+      "role": "repository_governance_or_ci"
+    },
+    {
+      "path": ".github/workflows/primary-source-provenance.yml",
+      "status": "PASS",
+      "role": "repository_governance_or_ci"
+    },
+    {
+      "path": "science/configs/active_observation_contract.json",
+      "status": "PASS",
+      "role": "active_observation_contract"
+    },
+    {
+      "path": "science/data/audits/diagnostic_source_reproducibility_2026-09-22.json",
+      "status": "PASS",
+      "role": "machine_readable_audit"
+    },
+    {
+      "path": "science/data/audits/rejected_experimental_mechanisms_2026-09-22.json",
+      "status": "PASS",
+      "role": "machine_readable_audit"
+    },
+    {
+      "path": "science/data/audits/repository_file_data_content_delta_2026-09-22.json",
+      "status": "PASS",
+      "role": "machine_readable_audit"
+    },
+    {
+      "path": "science/data/audits/repository_file_data_content_inventory_2026-09-21.json",
+      "status": "PASS",
+      "role": "machine_readable_audit"
+    },
+    {
+      "path": "science/data/audits/repository_post_recovery_audit_2026-09-22.json",
+      "status": "PASS",
+      "role": "machine_readable_audit"
+    },
+    {
+      "path": "science/data/diagnostic_remote_inputs.json",
+      "status": "PASS",
+      "role": "diagnostic_remote_input_manifest"
+    },
+    {
+      "path": "science/data/provenance/primary_source_audit_2026-09-22.json",
+      "status": "PASS",
+      "role": "provenance_audit"
+    },
+    {
+      "path": "science/docs/diagnostic-raw-reproducibility-policy-2026-09-22.md",
+      "status": "PASS",
+      "role": "scientific_governance_documentation"
+    },
+    {
+      "path": "science/docs/primary-source-provenance-audit-2026-09-22.md",
+      "status": "PASS",
+      "role": "scientific_governance_documentation"
+    },
+    {
+      "path": "science/docs/primary-source-provenance-followup-2026-09-21.md",
+      "status": "PASS",
+      "role": "scientific_governance_documentation"
+    },
+    {
+      "path": "science/docs/rejected-experimental-mechanism-governance-2026-09-22.md",
+      "status": "PASS",
+      "role": "scientific_governance_documentation"
+    },
+    {
+      "path": "science/docs/repository-file-data-content-audit-2026-09-21.md",
+      "status": "PASS",
+      "role": "scientific_governance_documentation"
+    },
+    {
+      "path": "science/docs/repository-file-data-content-delta-2026-09-22.md",
+      "status": "PASS",
+      "role": "scientific_governance_documentation"
+    },
+    {
+      "path": "science/docs/repository-post-recovery-audit-2026-09-22.md",
+      "status": "PASS",
+      "role": "scientific_governance_documentation"
+    },
+    {
+      "path": "science/docs/repository-recovery-plan-2026-09-21.md",
+      "status": "PASS",
+      "role": "scientific_governance_documentation"
+    },
+    {
+      "path": "scripts/audit_primary_source_closure.py",
+      "status": "PASS",
+      "role": "audit_or_reproducibility_guard"
+    },
+    {
+      "path": "scripts/check_diagnostic_reproducibility_policy.py",
+      "status": "PASS",
+      "role": "audit_or_reproducibility_guard"
+    },
+    {
+      "path": "scripts/check_execution_routing.py",
+      "status": "PASS",
+      "role": "audit_or_reproducibility_guard"
+    },
+    {
+      "path": "scripts/check_primary_source_audit.py",
+      "status": "PASS",
+      "role": "audit_or_reproducibility_guard"
+    },
+    {
+      "path": "scripts/check_registry_contract.py",
+      "status": "PASS",
+      "role": "audit_or_reproducibility_guard"
+    },
+    {
+      "path": "scripts/check_rejected_mechanism_governance.py",
+      "status": "PASS",
+      "role": "audit_or_reproducibility_guard"
+    },
+    {
+      "path": "scripts/check_repository_post_recovery_audit.py",
+      "status": "PASS",
+      "role": "audit_or_reproducibility_guard"
+    },
+    {
+      "path": "scripts/check_version_identity.py",
+      "status": "PASS",
+      "role": "audit_or_reproducibility_guard"
+    },
+    {
+      "path": "scripts/fetch_diagnostic_inputs.py",
+      "status": "PASS",
+      "role": "audit_or_reproducibility_guard"
+    }
+  ],
+  "blocker_summary": {
+    "historical_blockers": 5,
+    "unresolved_blockers": 0,
+    "unexplained_blockers": []
+  },
+  "recovery_gates": [
+    {
+      "gate": "R-FDC-1",
+      "status": "CLOSED",
+      "scope": "diagnostic execution recovery"
+    },
+    {
+      "gate": "R-FDC-2",
+      "status": "CLOSED",
+      "scope": "empirical registry completeness"
+    },
+    {
+      "gate": "R-FDC-3",
+      "status": "CLOSED",
+      "scope": "input-manifest scope semantics"
+    },
+    {
+      "gate": "R-FDC-4",
+      "status": "CLOSED",
+      "scope": "unambiguous World3 execution routing"
+    },
+    {
+      "gate": "R-FDC-5",
+      "status": "CLOSED",
+      "scope": "version/provenance identity"
+    },
+    {
+      "gate": "R-FDC-6",
+      "status": "CLOSED",
+      "scope": "primary-source provenance closure"
+    },
+    {
+      "gate": "R-FDC-7",
+      "status": "CLOSED_POLICY",
+      "scope": "diagnostic raw-data reproducibility policy"
+    },
+    {
+      "gate": "R-FDC-8",
+      "status": "CLOSED_GOVERNANCE",
+      "scope": "rejected experimental mechanism governance"
+    },
+    {
+      "gate": "R-FDC-9",
+      "status": "CLOSED_AUDIT",
+      "scope": "repository-wide post-recovery audit"
+    }
+  ],
+  "completion_rule": {
+    "requires_zero_unexplained_blockers": true,
+    "requires_all_historical_nonpass_entries_classified": true,
+    "requires_all_current_tracked_files_covered": true,
+    "permits_explicit_remaining_warnings": true,
+    "does_not_imply_new_scientific_mechanism_or_version_bump": true
+  },
+  "conclusion": "Recovery sequence is complete at the repository-integrity/governance level when the R-FDC-9 validator and retained scientific reproduction both pass. Remaining warnings are explicit limitations outside the central retained model and are not silently converted to PASS."
+}

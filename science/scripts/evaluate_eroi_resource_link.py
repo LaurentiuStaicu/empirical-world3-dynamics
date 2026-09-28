@@ -49,9 +49,12 @@ def resource_prediction(
 
 def main() -> None:
     observed = pd.read_csv(DATA).set_index("year")
-    simulations = np.load(OUTPUT.parent / "joint_hybrid_2026" / "candidate_simulations.npz")
+    joint_output = OUTPUT.parent / "joint_hybrid_2026"
+    manifest = json.loads((joint_output / "manifest.json").read_text(encoding="utf-8"))
+    central_candidate_id = int(manifest["central_candidate_id"])
+    simulations = np.load(joint_output / "candidate_simulations.npz")
     resources = pd.Series(
-        simulations["series_resources_remaining_pct"][114] / 100.0,
+        simulations["series_resources_remaining_pct"][central_candidate_id] / 100.0,
         index=YEARS.astype(int),
     )
     records = []
@@ -109,6 +112,7 @@ def main() -> None:
         "test": "world3_resource_fraction_to_fossil_eroi",
         "origins": list(ORIGINS),
         "horizon_years": HORIZON,
+        "central_candidate_id": central_candidate_id,
         "accepted": accepted,
         "acceptance_rule": (
             "The World3 resource link must beat persistence RMSE at primary, final "

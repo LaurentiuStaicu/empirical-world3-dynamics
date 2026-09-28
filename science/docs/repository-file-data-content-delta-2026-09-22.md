@@ -98,4 +98,8 @@ The repository now distinguishes retained raw, pinned remote, verified transport
 
 The executable resource-fraction -> fossil-EROI experiment remains rejected and sensitivity-only. CI now enforces the forbidden-coupling registry, absence from central execution routes, and the rule that executability or a single backtest PASS is not promotion evidence. E1-E10 remains explicitly undefined rather than being silently invented.
 
-**Next gate: R-FDC-9 — repository-wide post-recovery audit.**
+**R-FDC-9 — repository-wide post-recovery audit — CLOSED_AUDIT**, contingent on final CI.
+
+The final audit reconciles all 47 historical non-PASS entries, requires exact tracked-file coverage, preserves six explicit remaining warnings and six governed limitations, and requires zero unresolved or unexplained BLOCKER findings.
+
+**Recovery sequence status: R-FDC-1 through R-FDC-9 complete at repository-integrity/governance level once the final Scientific reproducibility run is green.**

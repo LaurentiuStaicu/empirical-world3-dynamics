@@ -6,6 +6,7 @@ All notable public scientific-core releases of Empirical World3 Dynamics (EWD) a
 
 ### Scientific traceability
 
+- closed R-FDC-9 repository-wide post-recovery audit: all 47 historical non-PASS entries are reconciled, every tracked file is covered, six non-central warnings remain explicit, and zero unresolved/unexplained BLOCKER findings remain;
 - closed R-FDC-8 rejected experimental mechanism governance: the resource-fraction -> fossil-EROI experiment remains executable only for sensitivity/audit purposes, is CI-forbidden from central routes, and cannot become promotion-eligible from executability or a single backtest result;
 - closed the R-FDC-7 diagnostic raw-data reproducibility policy with isolated diagnostic source materialization, offline policy validation, and explicit processed-snapshot-only warnings for historical raw sources that cannot currently be rematerialized exactly;
 - closed R-FDC-6 primary-source provenance with a machine-readable L1-L4 evidence matrix and CI validation; FAOSTAT, UNDP HDI, UN WPP, Energy Institute and GCP now have L4/PASS lineage at their declared EWD roles, without changing retained scientific values;

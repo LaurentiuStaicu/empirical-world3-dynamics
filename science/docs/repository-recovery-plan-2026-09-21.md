@@ -1,8 +1,8 @@
 # Repository Recovery Plan Derived from File–Data–Content Audit
 
 Date: 2026-09-21  
-Status: diagnostic proposal only  
-No repairs are implemented by this document.
+Status: historical recovery plan with closure annotations through 2026-09-22  
+This document originated as a diagnostic proposal. It now records the closure decisions for the implemented R-FDC sequence; the actual repairs remain in their respective commits/PRs and automated gates.
 
 ## Governing rule
 
@@ -274,6 +274,12 @@ The resource-fraction -> fossil-EROI experiment remains executable only for audi
 8. R-FDC-8 rejected-mechanism governance.
 9. rerun repository-wide audit and require zero unexplained BLOCKER findings.
 10. only then reconsider new scientific mechanisms or milestone/version changes.
+
+Closure decision (2026-09-22): **R-FDC-9 CLOSED_AUDIT**, contingent on the final branch/PR Scientific reproducibility run.
+
+The post-recovery audit covers every tracked file through the historical 160-file inventory plus explicit classification of every file added since that baseline. All 47 historical WARNING/BLOCKER entries are reconciled: 35 RESOLVED_PASS, 6 GOVERNED_LIMITATION and 6 REMAINING_WARNING. The five historical BLOCKER findings remain resolved and the unexplained/unresolved BLOCKER count is zero. Remaining warnings are explicit non-central limitations and do not alter the retained World3-03/Joint 2026 scientific path.
+
+The recovery sequence is therefore complete at the repository-integrity, provenance, routing, reproducibility and governance level once final CI is green. This closure does not itself authorize a new scientific mechanism or determine a release-version change.
 
 ## Versioning implication
 
