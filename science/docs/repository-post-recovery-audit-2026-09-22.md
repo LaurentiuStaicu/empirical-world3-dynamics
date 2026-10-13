@@ -135,7 +135,7 @@ R-FDC-9 also removes two avoidable ambiguities without changing current scientif
 
 ## Repository-wide coverage
 
-After the three R-FDC-9 audit artifacts are added, the tracked repository contains **188 files**.
+After the three R-FDC-9 audit artifacts were added, the tracked repository contained **188 files**. The public README implementation adds three non-scientific files (a standard-library content/link validator and the light/dark conceptual SVG assets); the current candidate explicitly classifies each and sets the expected tracked-file count to **191**.
 
 The validator requires exact set equality between:
 
