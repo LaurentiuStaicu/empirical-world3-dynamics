@@ -26,6 +26,9 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Validate public README contract
+        run: python3 scripts/validate_readme_contract.py
+
       - name: Install pinned uv
         uses: astral-sh/setup-uv@v7
         with:
