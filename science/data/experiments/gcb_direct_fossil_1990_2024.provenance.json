@@ -27,5 +27,32 @@
     "repository": "datasets/co2-fossil-global"
   },
   "units": "MtCO2/year",
-  "vintage_limitation": "This is a current GCB 2025 vintage snapshot. It is not an archived release-as-of-origin series for the 2010-2024 validation origins."
+  "vintage_limitation": "This is a current GCB 2025 vintage snapshot. It is not an archived release-as-of-origin series for the 2010-2024 validation origins.",
+  "primary_source": {
+    "authority": "Global Carbon Project",
+    "dataset": "The Global Carbon Project's fossil CO2 emissions dataset",
+    "version": "2025v15",
+    "record_url": "https://zenodo.org/records/17417124",
+    "doi": "10.5281/zenodo.17417124",
+    "file": "GCB2025v15_MtCO2_flat.csv",
+    "file_md5": "3008e30d913af5926a83d0d0775fb72e"
+  },
+  "transform": {
+    "geography": "Global",
+    "categories": {
+      "coal_mt": "Coal",
+      "oil_mt": "Oil",
+      "gas_mt": "Gas",
+      "cement_mt": "Cement",
+      "flaring_mt": "Flaring",
+      "other_mt": "Other"
+    },
+    "years": "1990-2024",
+    "output_precision": "one decimal MtCO2/year"
+  },
+  "verification": {
+    "transport_to_snapshot": "PASS: all retained 1990-2024 year/category values exactly match the pinned transport blob",
+    "primary_anchor": "PASS: the GCP 2025v15 primary 2024 World category values round exactly to the EWD one-decimal snapshot",
+    "direct_primary_full_file": "OPEN: complete primary-Zenodo-to-EWD row comparison not yet captured in repository automation"
+  }
 }
